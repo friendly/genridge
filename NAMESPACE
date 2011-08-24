@@ -1,0 +1,7 @@
+export(ridge, coef.ridge, print.ridge, plot.ridge, pairs.ridge, traceplot, trans.colors)
+
+S3method(coef, ridge)
+S3method(print, ridge)
+S3method(plot, ridge)
+S3method(pairs, ridge)
+
