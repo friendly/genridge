@@ -6,6 +6,8 @@ function(x, variables, radius=1, lwd=1, lty=1,
 		fill=FALSE, fill.alpha=0.3, ...) {
 
 	panel.label <- function(x, ...) {
+		op <- par(xpd=TRUE)
+		on.exit(par(op))
 		plot(c(min, max),c(min, max), type="n", axes=FALSE)
 		text(0.5, 0.5, vars[i], cex=diag.cex)
 		text(1, 0, signif(range[1, i], digits=digits), adj=c(1, 0))

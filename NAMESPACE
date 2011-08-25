@@ -1,4 +1,4 @@
-export(ridge, coef.ridge, print.ridge, plot.ridge, pairs.ridge, traceplot, trans.colors)
+export(ridge, coef.ridge, print.ridge, plot.ridge, pairs.ridge, traceplot, trans.colors, pca.ridge)
 
 S3method(coef, ridge)
 S3method(print, ridge)
