@@ -37,6 +37,12 @@ function(x,
 
 	matplot(X, coef, 	type="b", xlim=xlim, ylim=ylim, ylab=ylab, xlab=xlab, col=col, pch=pch, ...)
 	abline(h=0, lty=3)
+	if (X=="lambda") {
+		abline(v=x$kHKB, col="gray", lty=2)
+		text(x$kHKB, ylim[1], "HKB", pos=3)
+		abline(v=x$kLW, col="gray", lty=2)
+		text(x$kLW, ylim[1], "LW", pos=3)
+	}
 	vnames <- colnames(coef)
 	text(labx, laby, colnames(coef), pos=c(2,4)[1+(labels=="right")])
 }

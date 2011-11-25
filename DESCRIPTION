@@ -1,8 +1,8 @@
 Package: genridge
 Type: Package
 Title: Generalized ridge trace plots for ridge regression
-Version: 0.5-1
-Date: 2011-09-12
+Version: 0.5-2
+Date: 2011-11-25
 Author: Michael Friendly
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"))
 Maintainer: Michael Friendly <friendly@yorku.ca>
@@ -15,3 +15,5 @@ Description:
 	coefficients, rather than just the estimates themselves.
 License: GPL (>= 2)
 LazyLoad: yes
+LazyData: yes
+
