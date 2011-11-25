@@ -76,3 +76,7 @@ function(x, digits = max(5, getOption("digits") - 5),...) {
   }
   invisible(x)
 }
+
+vcov.ridge <- function(object,  ...) {
+	object$cov
+}

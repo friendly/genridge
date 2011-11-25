@@ -2,6 +2,7 @@
 \alias{ridge}
 \alias{coef.ridge}
 \alias{print.ridge}
+\alias{vcov.ridge}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Ridge Regression Estimates
@@ -18,6 +19,8 @@ ridge(y, X, lambda = 0, df, svd = TRUE)
 \method{print}{ridge}(x, digits = max(5, getOption("digits") - 5), ...)
 
 \method{coef}{ridge}(object, ...)
+
+\method{vcov}{ridge}(object, ...)
 
 }
 %- maybe also 'usage' for other objects documented here.
