@@ -7,8 +7,8 @@ function(x,
 	xlab, ylab="Coefficient", 
 	xlim, ylim, ... ) {
 
-	X <- match.arg(X)
-	if (X=="lambda") {
+	type <- X <- match.arg(X)
+	if (type=="lambda") {
 		X <- x$lambda
 		if (missing(xlab)) xlab <- "Ridge constant"
 		labels <- "left"
@@ -37,7 +37,7 @@ function(x,
 
 	matplot(X, coef, 	type="b", xlim=xlim, ylim=ylim, ylab=ylab, xlab=xlab, col=col, pch=pch, ...)
 	abline(h=0, lty=3)
-	if (X=="lambda") {
+	if (type=="lambda") {
 		abline(v=x$kHKB, col="gray", lty=2)
 		text(x$kHKB, ylim[1], "HKB", pos=3)
 		abline(v=x$kLW, col="gray", lty=2)
