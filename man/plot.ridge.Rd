@@ -19,7 +19,7 @@ precision of the estimates as a function of the ridge tuning constant.
 \usage{
 \method{plot}{ridge}(x, variables = 1:2, radius = 1, lwd = 2, lty = 1, xlim, ylim, 
    col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
-   center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3, ...)
+   center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3, ref=TRUE, ref.col=gray(.70), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -55,6 +55,12 @@ Logical vector: Should the covariance ellipsoids be filled?  Recycled as necessa
   \item{fill.alpha}{
 Numeric vector: alpha transparency value(s) for filled ellipsoids. Recycled as necessary.
 }
+  \item{ref}{
+Logical: whether to draw horizontal and vertical reference lines at 0.
+}
+  \item{ref.col}{
+Color of reference lines.
+}
   \item{\dots}{
 Other arguments passed down
 }
@@ -68,7 +74,7 @@ Other arguments passed down
 \references{
 Friendly, M. (2011).
 The Generalized Ridge Trace Plot: Visualizing Bias and Precision.
-In preparation.
+Under review.
 }
 \author{
 Michael Friendly
@@ -113,5 +119,5 @@ if (require("ElemStatLearn")) {
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{hplot }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

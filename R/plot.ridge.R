@@ -2,7 +2,7 @@ plot.ridge <-
 function(x, variables=1:2, radius=1, lwd=2, lty=1, xlim, ylim,
 		col = c("black", "red", "darkgreen", "blue","darkcyan","magenta", "brown","darkgray"), 
 		center.pch = 16, center.cex=1.5,
-		fill=FALSE, fill.alpha=0.3, ...) {
+		fill=FALSE, fill.alpha=0.3, ref=TRUE, ref.col=gray(.70), ...) {
 
 	ell <- function(center, shape, radius, segments=60) {
 		angles <- (0:segments)*2*pi/segments
@@ -27,8 +27,11 @@ function(x, variables=1:2, radius=1, lwd=2, lty=1, xlim, ylim,
 					length(vnames), " predictor variables.")
 		vars <- vnames[variables]
 	}
-
-  lambda <- x$lambda
+	if(length(variables)>2) {
+		warning("Only two variables will be plotted")
+		variables <- variables[1:2]
+	}
+	lambda <- x$lambda
 	coef <- x$coef[,variables]
 	cov <- x$cov
 	n.ell <- length(lambda)
@@ -53,6 +56,7 @@ function(x, variables=1:2, radius=1, lwd=2, lty=1, xlim, ylim,
 	fill.col <- ifelse(fill, fill.col, NA)
 
 	plot(coef, type='b', pch=center.pch, cex=center.cex, col=col, xlim=xlim, ylim=ylim, ...)
+	if (ref) abline(v=0, h=0, col=ref.col)
 	for (i in 1:n.ell) {
 #		lines(ells[[i]], col=col[i], lwd=lwd[i], lty=lty[i])
 		polygon(ells[[i]], col=fill.col[i], border=col[i],  lty=lty[i], lwd=lwd[i])
