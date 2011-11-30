@@ -1,5 +1,11 @@
-export(ridge, coef.ridge, print.ridge, plot.ridge, pairs.ridge, traceplot, trans.colors, pca.ridge,
-	vcov.ridge, precision, precision.ridge, precision.lm
+#exportPattern("*\\.ridge")
+
+export(ridge, 
+	coef.ridge, print.ridge, plot.ridge, pairs.ridge, traceplot, 
+	trans.colors, pca.ridge,
+	vcov.ridge, 
+	precision, precision.ridge, precision.lm, 
+	vif.ridge
 )
 
 S3method(coef, ridge)
@@ -9,4 +15,6 @@ S3method(pairs, ridge)
 S3method(vcov, ridge)
 S3method(precision, ridge)
 S3method(precision, lm)
+S3method(vif, ridge)
 
+importFrom(car, vif)

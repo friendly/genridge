@@ -14,8 +14,8 @@ The genridge package introduces generalizations of the standard univariate
 \tabular{ll}{
 Package: \tab genridge\cr
 Type: \tab Package\cr
-Version: \tab 0.5-2\cr
-Date: \tab 2011-11-25\cr
+Version: \tab 0.5-3\cr
+Date: \tab 2011-11-30\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -36,6 +36,8 @@ This provides the support for the main plotting functions in the package:
 
 \code{\link{traceplot}}: Traditional univariate ridge trace plots
 
+In addition, the functions \code{\link{precision}} and \code{\link{vif.ridge}}
+provide other useful measures an plots.
 }
 
 \author{
