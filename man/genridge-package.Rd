@@ -8,7 +8,7 @@ Generalized ridge trace plots for ridge regression
 \description{
 The genridge package introduces generalizations of the standard univariate
 	ridge trace plot used in ridge regression and related methods.  These graphical methods
-	show both bias and precision, by plotting the covariance ellipsoids of the estimated
+	show both bias (actually, shrinkage) and precision, by plotting the covariance ellipsoids of the estimated
 	coefficients, rather than just the estimates themselves.}
 \details{
 \tabular{ll}{
@@ -46,7 +46,7 @@ Maintainer: Michael Friendly <friendly@yorku.ca>
 \references{
 Friendly, M. (2011).
 The Generalized Ridge Trace Plot: Visualizing Bias and Precision.
-In preparation.
+Submitted, JCGS.
 
 Arthur E. Hoerl and Robert W. Kennard (1970).
 Ridge Regression: Biased Estimation for Nonorthogonal Problems,

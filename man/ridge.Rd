@@ -34,7 +34,7 @@ A matrix of predictor variables. NA's not allowed. Should not include a column o
 for the intercept
 }
   \item{lambda}{
-A scalar or vector of ridge constants
+A scalar or vector of ridge constants. A value of 0 corresponds to ordinary least squares.
 }
   \item{df}{
 A scalar or vector of effective degrees of freedom corresponding to \code{lambda}
@@ -107,6 +107,8 @@ Michael Friendly
  for other implementations of ridge regression
 
 \code{\link{plot.ridge}}, \code{\link{pairs.ridge}}, \code{\link{traceplot}} for plotting methods
+
+\code{\link{precision.ridge}}
 
 }
 \examples{

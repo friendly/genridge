@@ -1,6 +1,7 @@
 Version 0.5-2 (2011-11-25)
 o Added Acetylene data
 o Added vcov.ridge() method
+o Added precision.ridge() method for measures of precision and shrinkage
 
 Version 0.5-1 (2011-08-22)
 o Fixed Authors@R in DESCRIPTION
