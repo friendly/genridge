@@ -61,7 +61,24 @@ lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 lridge <- ridge(longley.y, longley.X, lambda=lambda)
 coef(lridge)
 
-vif(lridge)
+
+vridge <- vif(lridge)
+vridge
+
+# plot VIFs
+pch <- c(15:18, 7, 9)
+clr <- c("black", rainbow(5, start=.6, end=.1))
+
+matplot(rownames(vridge), vridge, type='b', 
+	xlab='Ridge constant (k)', ylab="Variance Inflation", 
+	xlim=c(0, 0.08), 
+	col=clr, pch=pch, cex=1.2)
+text(0.0, vridge[1,], colnames(vridge), pos=4)
+
+matplot(lridge$df, vridge, type='b', 
+	xlab='Degrees of freedom', ylab="Variance Inflation", 
+	col=clr, pch=pch, cex=1.2)
+text(6, vridge[1,], colnames(vridge), pos=2)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
