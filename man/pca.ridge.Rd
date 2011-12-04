@@ -28,7 +28,7 @@ pca.ridge(x, ...)
 A \code{ridge} object, as fit by \code{\link{ridge}}
 }
   \item{\dots}{
-Other arguments passed down
+Other arguments passed down. Not presently used in this implementation.
 }
 }
 %\details{
@@ -68,7 +68,10 @@ lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 lridge <- ridge(longley.y, longley.X, lambda=lambda)
 
 plridge <- pca.ridge(lridge)
+traceplot(plridge)
 pairs(plridge)
+# view in space of smallest singular values
+plot(plridge, variables=5:6)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

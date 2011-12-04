@@ -1,3 +1,6 @@
+Version 0.6-0 (2011-12-04)
+o Added plot3d.ridge() using rgl, completing the main stages in visualization methods for ridge-like problems
+
 Version 0.5-3 (2011-11-30)
 o Added precision.ridge() method for measures of precision and shrinkage
 o Added vif.ridge() method, extending the car S3 generic for ridge objects

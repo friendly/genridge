@@ -31,7 +31,9 @@ Predictors in the model to be displayed in the plot: an integer or character
 vector of length 2, giving the indices or names of the variables.
 }
   \item{radius}{
-Radius of the ellipse-generating circle for the covariance ellipsoids.  
+Radius of the ellipse-generating circle for the covariance ellipsoids.
+The default, \code{radius=1} gives a standard \dQuote{unit} ellipsoid.
+Typically, \code{radius<1} gives less cluttered displays.  
 }
   \item{lwd, lty}{
 Line width and line type for the covariance ellipsoids. Recycled as necessary.
@@ -88,7 +90,7 @@ Michael Friendly
 \seealso{
 \code{\link{ridge}} for details on ridge regression as implemented here
 
-\code{\link{pairs.ridge}}, \code{\link{traceplot}} for other plotting methods
+\code{\link{pairs.ridge}}, \code{\link{traceplot}} and \code{\link{plot3d.ridge}} for other plotting methods
 }
 \examples{
 longley.y <- longley[, "Employed"]
@@ -99,7 +101,6 @@ lambdaf <- c("", ".005", ".01", ".02", ".04", ".08")
 lridge <- ridge(longley.y, longley.X, lambda=lambda)
 
 op <- par(mfrow=c(2,2), mar=c(4, 4, 1, 1)+ 0.1)
-
 for (i in 2:5) {
 	plot.ridge(lridge, variables=c(1,i), radius=0.5, cex.lab=1.5)
 	text(lridge$coef[1,1], lridge$coef[1,i], expression(~widehat(beta)^OLS), cex=1.5, pos=4, offset=.1)
