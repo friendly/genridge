@@ -39,7 +39,7 @@ Typically, \code{radius<1} gives less cluttered displays.
 Line width and line type for the covariance ellipsoids. Recycled as necessary.
 }
   \item{xlim, ylim}{
-X, Y limits for the plot.  If missing, the range of the covariance ellipsoids is used.
+X, Y limits for the plot, each a vector of length 2.  If missing, the range of the covariance ellipsoids is used.
 }
   \item{col}{
 A numeric or character vector giving the colors used to plot the covariance ellipsoids.
