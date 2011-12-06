@@ -1,5 +1,6 @@
 \name{plot.ridge}
 \alias{plot.ridge}
+\alias{plot.pcaridge}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Bivariate Ridge Trace Plots
@@ -20,6 +21,8 @@ precision of the estimates as a function of the ridge tuning constant.
 \method{plot}{ridge}(x, variables = 1:2, radius = 1, lwd = 2, lty = 1, xlim, ylim, 
    col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
    center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3, ref=TRUE, ref.col=gray(.70), ...)
+
+\method{plot}{pcaridge}(x, variables = (p-1):p, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +32,9 @@ A \code{ridge} object, as fit by \code{\link{ridge}}
   \item{variables}{
 Predictors in the model to be displayed in the plot: an integer or character
 vector of length 2, giving the indices or names of the variables.
+Defaults to the first two predictors for \code{ridge} objects or the
+\emph{last} two dimensions for \code{pcaridge} objects.
+
 }
   \item{radius}{
 Radius of the ellipse-generating circle for the covariance ellipsoids.
