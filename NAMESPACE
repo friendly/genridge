@@ -1,24 +1,28 @@
-#exportPattern("*\\.ridge")
-#exportPattern("precision\\.*")
+exportPattern("*\\.ridge")
+exportPattern("*\\.pcaridge")
+exportPattern("precision\\.*")
 # also:
-#export(ridge,  traceplot)
+export(plot3d, ridge,  traceplot, trans.colors)
 
-export(ridge, 
-	coef.ridge, print.ridge, plot.ridge, pairs.ridge, traceplot, 
-	trans.colors, pca.ridge,
-	vcov.ridge, 
-	precision, precision.ridge, precision.lm, 
-	vif.ridge, plot3d.ridge
-)
+#export(ridge, 
+#	traceplot, trans.colors, 
+#	coef.ridge, print.ridge, plot.ridge, pairs.ridge,  
+#	pca.ridge, vcov.ridge, 
+#	precision, precision.ridge, precision.lm, 
+#	vif.ridge, plot3d.ridge, plot3d.pcaridge
+#)
 
 S3method(coef, ridge)
 S3method(print, ridge)
 S3method(plot, ridge)
+S3method(plot, pcaridge)
 S3method(pairs, ridge)
 S3method(vcov, ridge)
 S3method(precision, ridge)
 S3method(precision, lm)
 S3method(vif, ridge)
+S3method(plot3d, ridge)
+S3method(plot3d, pcaridge)
 
 importFrom(car, vif)
 # to make plot3d.ridge an S3 method; but this requires Depends: rgl

@@ -1,5 +1,7 @@
 \name{plot3d.ridge}
+\alias{plot3d}
 \alias{plot3d.ridge}
+\alias{plot3d.pcaridge}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 3D Ridge Trace Plots
@@ -16,7 +18,9 @@ The size and shapes of the covariance ellipsoids show directly the effect on
 precision of the estimates as a function of the ridge tuning constant.
 }
 \usage{
-plot3d.ridge(x, variables = 1:3, radius = 1, lwd = 1, lty = 1, 
+plot3d(x, ...)
+
+\method{plot3d}{ridge}(x, variables = 1:3, radius = 1, lwd = 1, lty = 1, 
 	xlim, ylim, zlim, 
 	xlab, ylab, zlab, 
 	col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
@@ -25,15 +29,22 @@ plot3d.ridge(x, variables = 1:3, radius = 1, lwd = 1, lty = 1,
 	segments = 40, shade = TRUE, shade.alpha = 0.1, 
 	wire = FALSE, aspect=1, add = FALSE, ...)
 
+\method{plot3d}{pcaridge}(x, variables = (p-2):p, ...)
+
 }
+
+
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-A \code{ridge} object, as fit by \code{\link{ridge}}
+A \code{ridge} object, as fit by \code{\link{ridge}} or a \code{pcaridge} object
+as transformed by \code{\link{pca.ridge}}
 }
   \item{variables}{
 Predictors in the model to be displayed in the plot: an integer or character
 vector of length 3, giving the indices or names of the variables.
+Defaults to the first three predictors for \code{ridge} objects or the
+\emph{last} three dimensions for \code{pcaridge} objects.
 }
   \item{radius}{
 Radius of the ellipse-generating circle for the covariance ellipsoids. 

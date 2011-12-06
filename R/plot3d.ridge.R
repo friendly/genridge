@@ -1,3 +1,16 @@
+plot3d <-
+		function (x, ...) {
+	UseMethod("plot3d")
+}
+
+# for pcaridge objects, default to last 3 variables
+plot3d.pcaridge <-
+		function(x, variables=(p-2):p, ...) {
+	p <- dim(coef(x))[2]
+	plot3d.ridge(x, variables, ...)
+}
+
+
 plot3d.ridge <-
 function(x, variables=1:3, radius=1, lwd=1, lty=1, 
 		xlim, ylim, zlim,
@@ -24,6 +37,8 @@ function(x, variables=1:3, radius=1, lwd=1, lty=1,
 		ecoord2 <- function(p) c(cos(p[1])*sin(p[2]), sin(p[1])*sin(p[2]), cos(p[2]))
 		v <- t(apply(expand.grid(degvec,degvec), 1, ecoord2))
 
+		warn <- options(warn=-1)
+		on.exit(options(warn))
 		Q <- chol(shape, pivot=TRUE)
 		order <- order(attr(Q, "pivot"))
 		v <- center + radius * t(v %*% Q[, order])

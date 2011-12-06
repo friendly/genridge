@@ -1,3 +1,10 @@
+# for pcaridge objects, default to last 2 variables
+plot.pcaridge <-
+		function(x, variables=(p-1):p, ...) {
+	p <- dim(coef(x))[2]
+	plot.ridge(x, variables, ...)
+}
+
 plot.ridge <-
 function(x, variables=1:2, radius=1, lwd=2, lty=1, xlim, ylim,
 		col = c("black", "red", "darkgreen", "blue","darkcyan","magenta", "brown","darkgray"), 

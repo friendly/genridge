@@ -9,6 +9,6 @@ pca.ridge <- function(x, ...) {
 	result <- x	
 	result$coef <- result$coef %*% result$svd.V
 	result$cov <- lapply(result$cov, rot,  t(result$svd.V))
-	class(result) <- c(class(x), "pcaridge")
+	class(result) <- c("pcaridge", class(x))
 	result
 }
