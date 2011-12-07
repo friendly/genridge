@@ -23,6 +23,7 @@ S3method(precision, lm)
 S3method(vif, ridge)
 S3method(plot3d, ridge)
 S3method(plot3d, pcaridge)
+S3method(biplot, pcaridge)
 
 importFrom(car, vif)
 # to make plot3d.ridge an S3 method; but this requires Depends: rgl

@@ -31,7 +31,7 @@ function(y, X, lambda=0, df, svd=TRUE){
     else {
         fun <- function(df, lambda) df - sum(dd^2/(dd^2 + lambda))
         lambda <- sapply(df, FUN = function(df) uniroot(f = function(lambda) fun(df, 
-            lambda), lower = -1e-06, upper = 1000, maxiter = 10000)$root)
+            lambda), lower = 0, upper = 1000, maxiter = 10000)$root)
     }
 
 	# prepare output    
