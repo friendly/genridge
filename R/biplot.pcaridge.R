@@ -3,14 +3,21 @@
 
 # Thx: Uwe Ligges for the code for calculating scale...
 
-biplot.pcaridge <- function(x, variables=(p-1):p, asp=1, origin, scale, ...) {
-
+biplot.pcaridge <- function(x, variables=(p-1):p, asp=1, 
+		origin, scale, 
+		var.lab=rownames(V), 
+		var.lwd=1, var.col="black", var.cex=1,
+		xlab, ylab,      # override prefix/suffix?
+		prefix = "Dim ", # prefix for labels of PCA dimensions
+		suffix = TRUE,   # add label suffix with PCA % ?
+		...) {
+	
 	# more convenient versions of arrows() and text()
 	Arrows <- function(xy, lenxy, length, angle, col, lwd=1) {
-		arrows(xy[1], xy[2], xy[1]+lenxy[,1], xy[2]+lenxy[,2], length=length, angle=angle)
+		arrows(xy[1], xy[2], xy[1]+lenxy[,1], xy[2]+lenxy[,2], length=length, angle=angle, lwd=lwd, col=col)
 	}
-	Text <- function(xy, lenxy, text, col="black") {
-		text(xy[1]+lenxy[,1], xy[2]+lenxy[,2], text, col=col)
+	Text <- function(xy, lenxy, text, col="black", cex=1) {
+		text(xy[1]+lenxy[,1], xy[2]+lenxy[,2], text, col=col, cex=cex)
 	}
 	
 	coef <- coef(x)
@@ -18,21 +25,28 @@ biplot.pcaridge <- function(x, variables=(p-1):p, asp=1, origin, scale, ...) {
 	if(is.null(x$svd.V)) stop("x must have an svd.V component")
 	V <- x$svd.V[,variables]
 	
-	plot(x, variables=variables, asp=asp, ...)
+	# add
+	pct <- 100*x$svd.D^2 /(sum(x$svd.D^2))
+	if (is.logical(suffix) & suffix)
+		suffix <- paste( " (", round(pct[variables],3), "%)", sep="" ) else suffix <- NULL
+	dimlab <- paste(prefix, variables, suffix, sep="")
+	if (missing(xlab)) xlab=dimlab[1]
+	if (missing(ylab)) ylab=dimlab[2]
+	
+	plot(x, variables=variables, asp=asp, xlab=xlab, ylab=ylab, ...)
 	
 	bbox <- matrix(par("usr"), 2, 2, dimnames=list(c("min", "max"),c("x", "y")))
 	if(missing(origin)) origin <- colMeans(bbox)
-
+	
 	# plot variable vectors
 	if(missing(scale)) {
 		scale <- c(sapply(bbox[,"x"] - origin[1], function(dist) dist/V[,1]),
-		           sapply(bbox[,"y"] - origin[2], function(dist) dist/V[,2]))
+				sapply(bbox[,"y"] - origin[2], function(dist) dist/V[,2]))
 		scale <- 0.95* min(scale[scale > 0])
 		cat("Vector scale factor set to ", scale, "\n")
 	}
-
-	Arrows(origin, scale*V, angle=8, length=.1)
-	Text(origin, scale*V, rownames(V))
 	
+	Arrows(origin, scale*V, angle=8, length=.1, col=var.col, lwd=var.lwd)
+	Text(origin, 1.01*scale*V, var.lab, col=var.col, cex=var.cex)
 }
 

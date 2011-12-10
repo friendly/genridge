@@ -16,12 +16,16 @@ of the original predictors, and vectors representing the predictors
 projected into this space.
 }
 \usage{
-\method{biplot}{pcaridge}(x, variables = (p - 1):p, asp = 1, origin, scale, ...)
+\method{biplot}{pcaridge}(x, variables = (p - 1):p, asp = 1, 
+	origin, scale, 
+	var.lab = rownames(V), var.lwd = 1, var.col = "black", var.cex = 1, 
+	xlab, ylab, prefix = "Dim ", suffix = TRUE, ...)
+
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-A \code{pcaridge} object
+A \code{pcaridge} object computed by \code{\link{pca.ridge}}
 }
   \item{variables}{
 The dimensions to be shown in the the plot.  By default, the
@@ -33,10 +37,32 @@ Aspect ratio for the plot. The default value, \code{asp=1}
 helps ensure that lengths and angles are preserved in these plots.
 }
   \item{origin}{
-The origin for the variable vectors in this plot.
+The origin for the variable vectors in this plot, a vector of length 2. If
+  not specified, the function calculates one to make the variable vectors 
+  approximately centered in  the plot window. 
 }
   \item{scale}{
-The scale factor for variable vectors in this plot.
+The scale factor for variable vectors in this plot. If
+  not specified, the function calculates one to make the variable vectors 
+  approximately fill the plot window.  
+}
+  \item{var.lab}{
+Labels for variable vectors. The default is the names of the predictor variables.
+}
+  \item{var.lwd, var.col, var.cex}{
+Line width, color and character size used to draw and label the arrows representing the variables
+in this plot.
+}
+   \item{xlab, ylab}{
+Labels for the plot dimensions.  If not specified, \code{prefix} and \code{suffix} are used to
+construct informative dimension labels.
+}
+  \item{prefix}{
+ Prefix for labels of the plot dimensions.
+}
+  \item{suffix}{
+Suffix for labels of the plot dimensions. If \code{suffix=TRUE}
+  the percent of variance accounted for by each dimension is added to the axis label.
 }
   \item{\dots}{
 Other arguments, passed to \code{\link{plot.pcaridge}}
@@ -81,9 +107,11 @@ lridge <- ridge(longley.y, longley.X, lambda=lambda)
 plridge <- pca.ridge(lridge)
 
 plot(plridge, radius=0.5)
+
 # same, with variable vectors
 biplot(plridge, radius=0.5)
-
+# add some other options
+biplot(plridge, radius=0.5, var.col="brown", var.lwd=2, var.cex=1.2, prefix="Dimension ")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
