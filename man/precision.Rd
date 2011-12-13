@@ -58,7 +58,7 @@ A data.frame with the following columns
   \item{det}{The \code{det.fun} function of the determinant of the covariance matrix}
   \item{trace}{The trace of the covariance matrix}
   \item{max.eig}{Maximum eigen value of the covariance matrix}
-  \item{norm.beta}{The root mean square of the estimated coefficients}
+  \item{norm.beta}{The root mean square of the estimated coefficients, possibly normalized}
 %% ...
 }
 %\references{
@@ -87,7 +87,14 @@ lridge <- ridge(longley.y, longley.X, lambda=lambda)
 coef(lridge)
 
 (pdat <- precision(lridge))
-with(pdat, plot(norm.beta, det, type="b"))
+with(pdat, {
+	plot(norm.beta, det, type="b", 
+	cex.lab=1.25, pch=16, cex=1.5, col=clr, lwd=2,
+	xlab='shrinkage: ||b|| / max(||b||)',
+	ylab='variance: log |Var(b)|')
+	text(norm.beta, det, lambda, cex=1.25, pos=c(rep(2,length(lambda)-1),4))
+	text(min(norm.beta), max(det), "Variance vs. Shrinkage", cex=1.5, pos=4)
+	})
 
 
 }
