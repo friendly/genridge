@@ -20,11 +20,12 @@ precision of the estimates as a function of the ridge tuning constant.
 \usage{
 plot3d(x, ...)
 
-\method{plot3d}{ridge}(x, variables = 1:3, radius = 1, lwd = 1, lty = 1, 
+\method{plot3d}{ridge}(x, variables = 1:3, radius = 1,  which.lambda=1:length(x$lambda),
+	lwd = 1, lty = 1, 
 	xlim, ylim, zlim, 
 	xlab, ylab, zlab, 
 	col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
-	labels = x$lambda, 
+	labels = lambda, 
 	ref = TRUE, ref.col = gray(0.7), 
 	segments = 40, shade = TRUE, shade.alpha = 0.1, 
 	wire = FALSE, aspect=1, add = FALSE, ...)
@@ -50,6 +51,10 @@ Defaults to the first three predictors for \code{ridge} objects or the
 Radius of the ellipse-generating circle for the covariance ellipsoids. 
 The default, \code{radius=1} gives a standard \dQuote{unit} ellipsoid.
 Typically, \code{radius<1} gives less cluttered displays.
+}
+  \item{which.lambda}{
+A vector of indices used to select the values of \code{lambda} for which ellipsoids are plotted.
+The default is to plot ellipsoids for all values of \code{lambda} in the \code{ridge} object.
 }
   \item{lwd, lty}{
 Line width and line type for the covariance ellipsoids. Recycled as necessary.
@@ -98,7 +103,8 @@ Other arguments passed down
 }
 }
 \details{
-None yet.
+\code{plot3d.ridge} and \code{plot3d.pcaridge} differ only in the defaults for the variables
+plotted.
 }
 \value{
 None

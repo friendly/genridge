@@ -73,6 +73,9 @@ A list with the following components:
 \item{scales}{scalings used on the X matrix}
 \item{kHKB}{HKB estimate of the ridge constant}
 \item{kLW}{L-W estimate of the ridge constant}
+\item{GCV}{vector of GCV values} 	
+\item{kGCV}{value of \code{lambda} with the minimum GCV} 	
+
 
 If \code{svd==TRUE}, the following are also included:
 

@@ -18,7 +18,8 @@ precision of the estimates as a function of the ridge tuning constant.
 
 }
 \usage{
-\method{plot}{ridge}(x, variables = 1:2, radius = 1, lwd = 2, lty = 1, xlim, ylim, 
+\method{plot}{ridge}(x, variables = 1:2, radius = 1, which.lambda=1:length(x$lambda),
+   lwd = 2, lty = 1, xlim, ylim, 
    col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
    center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3, ref=TRUE, ref.col=gray(.70), ...)
 
@@ -39,7 +40,11 @@ Defaults to the first two predictors for \code{ridge} objects or the
   \item{radius}{
 Radius of the ellipse-generating circle for the covariance ellipsoids.
 The default, \code{radius=1} gives a standard \dQuote{unit} ellipsoid.
-Typically, \code{radius<1} gives less cluttered displays.  
+Typically, values \code{radius<1} gives less cluttered displays.  
+}
+  \item{which.lambda}{
+A vector of indices used to select the values of \code{lambda} for which ellipses are plotted.
+The default is to plot ellipses for all values of \code{lambda} in the \code{ridge} object.
 }
   \item{lwd, lty}{
 Line width and line type for the covariance ellipsoids. Recycled as necessary.
@@ -96,7 +101,7 @@ Michael Friendly
 \seealso{
 \code{\link{ridge}} for details on ridge regression as implemented here
 
-\code{\link{pairs.ridge}}, \code{\link{traceplot}} and \code{\link{plot3d.ridge}} for other plotting methods
+\code{\link{pairs.ridge}}, \code{\link{traceplot}}, \code{\link{biplot.pcaridge}} and \code{\link{plot3d.ridge}} for other plotting methods
 }
 \examples{
 longley.y <- longley[, "Employed"]
