@@ -51,6 +51,7 @@ function(x, variables, radius=1, lwd=1, lty=1,
 				diag.panel(x)
       else {
         plot.ridge(x, variables=c(vars[j], vars[i]), radius=radius,
+			labels=NULL,
         	col=col, lwd=lwd, lty=lty, center.cex=center.cex,
         	axes=FALSE,
           fill=fill, fill.alpha=fill.alpha, ...)

@@ -19,6 +19,7 @@ precision of the estimates as a function of the ridge tuning constant.
 }
 \usage{
 \method{plot}{ridge}(x, variables = 1:2, radius = 1, which.lambda=1:length(x$lambda),
+   labels=lambda, pos=3, cex=1.2,
    lwd = 2, lty = 1, xlim, ylim, 
    col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
    center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3, ref=TRUE, ref.col=gray(.70), ...)
@@ -45,6 +46,14 @@ Typically, values \code{radius<1} gives less cluttered displays.
   \item{which.lambda}{
 A vector of indices used to select the values of \code{lambda} for which ellipses are plotted.
 The default is to plot ellipses for all values of \code{lambda} in the \code{ridge} object.
+}
+  \item{labels}{
+A vector of character strings or expressions used as labels for the ellipses.
+Use \code{labels=NULL} to suppress these.
+}
+  \item{pos, cex}{
+Scalars or vectors of positions (relative to the ellipse centers)
+and character size used to label the ellipses
 }
   \item{lwd, lty}{
 Line width and line type for the covariance ellipsoids. Recycled as necessary.

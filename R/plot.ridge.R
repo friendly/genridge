@@ -7,6 +7,7 @@ plot.pcaridge <-
 
 plot.ridge <-
 function(x, variables=1:2, radius=1, which.lambda=1:length(x$lambda), 
+		labels=lambda, pos=3, cex=1.2,
 		lwd=2, lty=1, xlim, ylim,
 		col = c("black", "red", "darkgreen", "blue","darkcyan","magenta", "brown","darkgray"), 
 		center.pch = 16, center.cex=1.5,
@@ -69,5 +70,6 @@ function(x, variables=1:2, radius=1, which.lambda=1:length(x$lambda),
 #		lines(ells[[i]], col=col[i], lwd=lwd[i], lty=lty[i])
 		polygon(ells[[i]], col=fill.col[i], border=col[i],  lty=lty[i], lwd=lwd[i])
 	}
+	if(!is.null(labels)) text(coef, labels=labels, pos=pos, cex=cex)
 }
 

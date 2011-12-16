@@ -5,6 +5,7 @@ o Added biplot.pcaridge() to draw variable vectors on a plot.pcaridge() plot
 o Added options to precision.* for greater flexibility
 o Added GCV computation to ridge()
 o Added which.lambda to select ellipses in plot.ridge(), plot3d.ridge() etc.
+o Added labels argument to plot.ridge() and fixed pairs.ridge for this.
 
 Version 0.6-0 (2011-12-04)
 o Added plot3d.ridge() using rgl, completing the main stages in visualization methods for ridge-like problems
