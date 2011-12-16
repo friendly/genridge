@@ -1,8 +1,8 @@
 # for pcaridge objects, default to last 2 variables
 plot.pcaridge <-
-		function(x, variables=(p-1):p, ...) {
+		function(x, variables=(p-1):p, labels=NULL, ...) {
 	p <- dim(coef(x))[2]
-	plot.ridge(x, variables, ...)
+	plot.ridge(x, variables, labels=labels, ...)
 }
 
 plot.ridge <-

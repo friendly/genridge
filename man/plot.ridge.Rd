@@ -24,7 +24,7 @@ precision of the estimates as a function of the ridge tuning constant.
    col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
    center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3, ref=TRUE, ref.col=gray(.70), ...)
 
-\method{plot}{pcaridge}(x, variables = (p-1):p, ...)
+\method{plot}{pcaridge}(x, variables = (p-1):p, labels=NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
