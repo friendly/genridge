@@ -11,7 +11,7 @@ ridge.formula <-
 	
 	#code from MASS:::lm.ridge
 	m <- match.call(expand.dots = FALSE)
-	m$model <- m$x <- m$y <- m$contrasts <- m$... <- m$lambda <- NULL
+	m$model <- m$x <- m$y <- m$contrasts <- m$... <- m$lambda <-m$df <- NULL
 	m[[1L]] <- as.name("model.frame")
 	m <- eval.parent(m)
 	Terms <- attr(m, "terms")
