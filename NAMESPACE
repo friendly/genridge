@@ -1,6 +1,7 @@
 exportPattern("*\\.ridge")
 exportPattern("*\\.pcaridge")
 exportPattern("precision\\.*")
+exportPattern("ridge\\.*")
 # also:
 export(plot3d, ridge,  traceplot, trans.colors)
 
@@ -24,6 +25,8 @@ S3method(vif, ridge)
 S3method(plot3d, ridge)
 S3method(plot3d, pcaridge)
 S3method(biplot, pcaridge)
+S3method(ridge, default)
+S3method(ridge, formula)
 
 importFrom(car, vif)
 # to make plot3d.ridge an S3 method; but this requires Depends: rgl

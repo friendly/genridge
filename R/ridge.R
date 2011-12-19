@@ -2,8 +2,39 @@
 
 ## TODO: add formula interface
 
-ridge <-
-		function(y, X, lambda=0, df, svd=TRUE){
+ridge <- function(y, ...) {
+	UseMethod("ridge")
+}
+
+ridge.formula <-
+		function(formula, data, lambda=0, df, svd=TRUE, ...){
+	
+	#code from MASS:::lm.ridge
+	m <- match.call(expand.dots = FALSE)
+	m$model <- m$x <- m$y <- m$contrasts <- m$... <- m$lambda <- NULL
+	m[[1L]] <- as.name("model.frame")
+	m <- eval.parent(m)
+	Terms <- attr(m, "terms")
+	Y <- model.response(m)
+	X <- model.matrix(Terms, m, contrasts)
+	n <- nrow(X)
+	p <- ncol(X)
+	offset <- model.offset(m)
+	if (!is.null(offset)) 
+		Y <- Y - offset
+	if (Inter <- attr(Terms, "intercept")) {
+		Xm <- colMeans(X[, -Inter])
+		Ym <- mean(Y)
+		p <- p - 1
+		X <- X[, -Inter] - rep(Xm, rep(n, p))
+		Y <- Y - Ym
+	}
+	ridge.default(Y, X, lambda=lambda, df=df, svd=svd)
+}
+
+
+ridge.default <-
+		function(y, X, lambda=0, df, svd=TRUE, ...){
 	#dimensions	
 	n <- nrow(X)
 	p <- ncol(X)

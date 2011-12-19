@@ -3,7 +3,7 @@
 
 # Thx: Uwe Ligges for the code for calculating scale...
 
-biplot.pcaridge <- function(x, variables=(p-1):p, asp=1, 
+biplot.pcaridge <- function(x, variables=(p-1):p, labels=NULL, asp=1, 
 		origin, scale, 
 		var.lab=rownames(V), 
 		var.lwd=1, var.col="black", var.cex=1,
@@ -33,7 +33,7 @@ biplot.pcaridge <- function(x, variables=(p-1):p, asp=1,
 	if (missing(xlab)) xlab=dimlab[1]
 	if (missing(ylab)) ylab=dimlab[2]
 	
-	plot(x, variables=variables, asp=asp, xlab=xlab, ylab=ylab, ...)
+	plot(x, variables=variables, labels=labels, asp=asp, xlab=xlab, ylab=ylab, ...)
 	
 	bbox <- matrix(par("usr"), 2, 2, dimnames=list(c("min", "max"),c("x", "y")))
 	if(missing(origin)) origin <- colMeans(bbox)

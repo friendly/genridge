@@ -16,7 +16,7 @@ of the original predictors, and vectors representing the predictors
 projected into this space.
 }
 \usage{
-\method{biplot}{pcaridge}(x, variables = (p - 1):p, asp = 1, 
+\method{biplot}{pcaridge}(x, variables = (p - 1):p, labels=NULL, asp = 1, 
 	origin, scale, 
 	var.lab = rownames(V), var.lwd = 1, var.col = "black", var.cex = 1, 
 	xlab, ylab, prefix = "Dim ", suffix = TRUE, ...)
@@ -31,6 +31,10 @@ A \code{pcaridge} object computed by \code{\link{pca.ridge}}
 The dimensions to be shown in the the plot.  By default, the
 \emph{last} two dimensions, corresponding to the smallest
 singular values, are plotted
+}
+  \item{labels}{
+A vector of character strings or expressions used as labels for the ellipses.
+Use \code{labels=NULL} to suppress these.
 }
   \item{asp}{
 Aspect ratio for the plot. The default value, \code{asp=1}

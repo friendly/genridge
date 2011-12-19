@@ -1,5 +1,7 @@
 \name{ridge}
 \alias{ridge}
+\alias{ridge.default}
+\alias{ridge.formula}
 \alias{coef.ridge}
 \alias{print.ridge}
 \alias{vcov.ridge}
@@ -14,7 +16,11 @@ the plotting methods in this package.
 }
 \usage{
 
-ridge(y, X, lambda = 0, df, svd = TRUE)
+ridge(y, ...)
+
+\method{ridge}{default}(y, X, lambda = 0, df, svd = TRUE, ...)
+
+\method{ridge}{formula}(formula, data, lambda = 0, df, svd = TRUE, ...)
 
 \method{print}{ridge}(x, digits = max(5, getOption("digits") - 5), ...)
 
@@ -33,6 +39,16 @@ A numeric vector containing the response variable. NAs not allowed.
 A matrix of predictor variables. NA's not allowed. Should not include a column of 1's
 for the intercept
 }
+
+  \item{formula}{
+For the \code{formula} method, a two-sided formula
+}
+
+  \item{data}{
+For the \code{formula} method, data frame within which to evaluate the formula
+}
+
+
   \item{lambda}{
 A scalar or vector of ridge constants. A value of 0 corresponds to ordinary least squares.
 }
