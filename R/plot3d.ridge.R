@@ -1,3 +1,5 @@
+# tweaked labels
+
 plot3d <-
 		function (x, ...) {
 	UseMethod("plot3d")
@@ -57,6 +59,7 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		if(wire) wire3d(ellips, col=col, size=lwd, lit=FALSE)
 
 		if (!is.null(label) && label !="")
+			if(is.numeric(label)) label <- signif(label, 3)
 			texts3d(center, adj=0.5, texts=label, color=col, lit=FALSE)
 		bbox <- matrix(par3d("bbox"), nrow=2)
 		rownames(bbox) <- c("min", "max")
@@ -84,9 +87,10 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 	}
 	vnames <- vnames[variables]
 	lambda <- x$lambda[which.lambda]
-	coef <- x$coef[which.lambda,variables]
-	cov <- x$cov[which.lambda]
-	n.ell <- length(lambda)
+	df <- x$df[which.lambda]                       # allow use of labels=df
+	coef <- x$coef[which.lambda,variables]         # extract coefficients
+	cov <- x$cov[which.lambda]                     # extract covariance matrices
+	n.ell <- length(lambda)                        # number of ellipsoids to plot
 	if (missing(xlab)) xlab <- vars[1]
 	if (missing(ylab)) ylab <- vars[2]
 	if (missing(zlab)) zlab <- vars[3]
@@ -119,7 +123,6 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 	points3d(coef, size=5)
 	aspect3d(aspect)		
 	
-#browser()
 	max <- apply(sapply(ells, function(X) apply(X, 2, max)), 1, max)
 	min <- apply(sapply(ells, function(X) apply(X, 2, min)), 1, min)
 	xlim <- if(missing(xlim)) c(min[1], max[1]) else xlim
@@ -143,7 +146,5 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 	frame <- c(frame, axis3d("z-", col="black"), tick=FALSE, ntick=0)
 	frame <- c(frame, mtext3d(zlab, "z-", col="black", line=1.5))
 	frame <- c(frame, box3d(col="black"))
-
-
 
 }
