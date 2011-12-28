@@ -1,4 +1,5 @@
 # tweaked labels
+# axis3s(... nticks ...)
 
 plot3d <-
 		function (x, ...) {
@@ -139,11 +140,11 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		decorate3d(xlim=xlim, ylim=ylim, zlim=zlim, box=FALSE, axes=FALSE, xlab=NULL, ylab=NULL, zlab=NULL, top=FALSE)
 	}
 #	decorate3d(xlab=xlab, ylab=ylab, zlab=zlab, box=FALSE, axes=FALSE)
-	frame <- axis3d("x-", col="black", tick=FALSE, ntick=0)
+	frame <- axis3d("x-", col="black", tick=FALSE, nticks=0)
 	frame <- c(frame, mtext3d(xlab, "x-", col="black", line=1.5))
-	frame <- c(frame, axis3d("y-", col="black"), tick=FALSE, ntick=0)
+	frame <- c(frame, axis3d("y-", col="black"), tick=FALSE, nticks=0)
 	frame <- c(frame, mtext3d(ylab, "y-", col="black", line=1.5))
-	frame <- c(frame, axis3d("z-", col="black"), tick=FALSE, ntick=0)
+	frame <- c(frame, axis3d("z-", col="black"), tick=FALSE, nticks=0)
 	frame <- c(frame, mtext3d(zlab, "z-", col="black", line=1.5))
 	frame <- c(frame, box3d(col="black"))
 

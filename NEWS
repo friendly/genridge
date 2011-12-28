@@ -1,3 +1,6 @@
+Version 0.6-3 (2011-12-28)
+o Minor tweaks to plot3d.ridge
+
 Version 0.6-2 (2011-12-19)
 o Made ridge() an S3 generic with formula and default methods
 o Fixed labels problems in biplot.pcaridge and plot3d.ridge
