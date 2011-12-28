@@ -1,5 +1,6 @@
 \name{biplot.pcaridge}
 \alias{biplot.pcaridge}
+\alias{biplot.ridge}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Biplot of Ridge Regression Trace Plot in SVD Space
@@ -21,6 +22,7 @@ projected into this space.
 	var.lab = rownames(V), var.lwd = 1, var.col = "black", var.cex = 1, 
 	xlab, ylab, prefix = "Dim ", suffix = TRUE, ...)
 
+\method{biplot}{ridge}(x, variables = 1:2, ...}
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,7 +32,8 @@ A \code{pcaridge} object computed by \code{\link{pca.ridge}}
   \item{variables}{
 The dimensions to be shown in the the plot.  By default, the
 \emph{last} two dimensions, corresponding to the smallest
-singular values, are plotted
+singular values, are plotted for \code{class("pcaridge")} objects
+or the \emph{first} two dimensions for \code{class("ridge")} objects.
 }
   \item{labels}{
 A vector of character strings or expressions used as labels for the ellipses.
@@ -73,7 +76,7 @@ Other arguments, passed to \code{\link{plot.pcaridge}}
 }
 }
 \details{
-None yet.
+\code{class("ridge")} objects are first transformed to PCA/SVD space before plotting.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
