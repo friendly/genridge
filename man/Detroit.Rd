@@ -92,7 +92,9 @@ plot3d(dridge, radius=0.5, labels=dridge$df)
 dpridge <- pca.ridge(dridge)
 # not so paradoxical in PCA space
 traceplot(dpridge, X="df")
-biplot(dpridge, radius=0.5)
+biplot(dpridge, radius=0.5, labels=dpridge$df)
 
+# show PCA vectors in variable space
+biplot(dridge, radius=0.5, labels=dridge$df)
 }
 \keyword{datasets}

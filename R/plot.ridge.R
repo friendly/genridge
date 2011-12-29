@@ -44,6 +44,7 @@ function(x, variables=1:2, radius=1, which.lambda=1:length(x$lambda),
 	coef <- x$coef[which.lambda,variables]
 	cov <- x$cov[which.lambda]
 	n.ell <- length(lambda)
+	lambda <- signif(lambda, 3)   # avoid many decimals when used as labels
 
 	ells <- as.list(rep(0, n.ell))
 # generate the ellipses for each lambda, to get xlim & ylim

@@ -3,15 +3,14 @@
 
 # Thx: Uwe Ligges for the code for calculating scale...
 
-# for ridge objects, default to first 2 dimensions in PCA space
+# for ridge objects, default to first 2 variables
 # and show PCA vectors in variable space....
 biplot.ridge <-
-		function(x, variables=1:2, ...) {
-#	x <- pca.ridge(x)
+		function(x, variables=1:2, xlab, ylab, ...) {
 	x$svd.V <- t(x$svd.V)
 	vnames <- colnames(coef(x))[variables]
-	xlab=vnames[1]
-	ylab=vnames[2]
+	if(missing(xlab)) xlab=vnames[1]
+	if(missing(ylab)) ylab=vnames[2]
 	
 	biplot.pcaridge(x, variables, xlab=xlab, ylab=ylab, ...)
 }

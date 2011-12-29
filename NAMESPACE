@@ -25,6 +25,7 @@ S3method(vif, ridge)
 S3method(plot3d, ridge)
 S3method(plot3d, pcaridge)
 S3method(biplot, pcaridge)
+S3method(biplot, ridge)
 S3method(ridge, default)
 S3method(ridge, formula)
 
