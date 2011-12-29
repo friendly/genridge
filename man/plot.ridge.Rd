@@ -75,7 +75,7 @@ Size of the plotting character for the bivariate ridge estimates
 Logical vector: Should the covariance ellipsoids be filled?  Recycled as necessary.
 }
   \item{fill.alpha}{
-Numeric vector: alpha transparency value(s) for filled ellipsoids. Recycled as necessary.
+Numeric vector: alpha transparency value(s) in the range (0, 1) for filled ellipsoids. Recycled as necessary.
 }
   \item{ref}{
 Logical: whether to draw horizontal and vertical reference lines at 0.
@@ -84,7 +84,8 @@ Logical: whether to draw horizontal and vertical reference lines at 0.
 Color of reference lines.
 }
   \item{\dots}{
-Other arguments passed down
+Other arguments passed down to \code{\link[graphics]{plot.default}}, e.g., \code{xlab}, \code{ylab}, 
+and other graphic parameters.
 }
 }
 %\details{
