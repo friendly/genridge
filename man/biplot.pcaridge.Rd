@@ -11,6 +11,10 @@ covariance ellipsoids for a ridge regression problem in PCA/SVD
 space with labeled arrows showing the contributions of the
 original variables to the dimensions plotted.
 
+The biplot view showing the dimensions corresponding to the two
+\emph{smallest} singular values is particularly useful for understanding
+how the predictors contribute to shrinkage in ridge regression.
+
 This is only a biplot in the loose sense that results are shown
 in two spaces simultaneously -- the transformed PCA/SVD space
 of the original predictors, and vectors representing the predictors
@@ -32,6 +36,7 @@ plotted variables.
 \arguments{
   \item{x}{
 A \code{pcaridge} object computed by \code{\link{pca.ridge}}
+or a \code{ridge} object.
 }
   \item{variables}{
 The dimensions or variables to be shown in the the plot.  By default, the
@@ -46,15 +51,16 @@ Use \code{labels=NULL} to suppress these.
   \item{asp}{
 Aspect ratio for the plot. The default value, \code{asp=1}
 helps ensure that lengths and angles are preserved in these plots.
+Use \code{asp=NA} to override this.
 }
   \item{origin}{
 The origin for the variable vectors in this plot, a vector of length 2. If
-  not specified, the function calculates one to make the variable vectors 
+  not specified, the function calculates an origin to make the variable vectors 
   approximately centered in  the plot window. 
 }
   \item{scale}{
 The scale factor for variable vectors in this plot. If
-  not specified, the function calculates one to make the variable vectors 
+  not specified, the function calculates a scale factor to make the variable vectors 
   approximately fill the plot window.  
 }
   \item{var.lab}{
@@ -80,7 +86,8 @@ Other arguments, passed to \code{\link{plot.pcaridge}}
 }
 }
 \details{
-\code{class("ridge")} objects use the transpose, \code{t(x$svd.V)} for the dimension weights.
+\code{class("ridge")} objects use the transpose of the right singular vectors, \code{t(x$svd.V)} for the dimension weights
+plotted as vectors. 
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
@@ -124,9 +131,10 @@ biplot(plridge, radius=0.5)
 # add some other options
 biplot(plridge, radius=0.5, var.col="brown", var.lwd=2, var.cex=1.2, prefix="Dimension ")
 
-# biplots for ridge objects
+# biplots for ridge objects, showing PCA vectors
 plot(lridge, radius=0.5)
 biplot(lridge, radius=0.5)
+biplot(lridge, radius=0.5, asp=NA)
 
 
 }
