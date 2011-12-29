@@ -96,8 +96,10 @@ A list with the following components:
 If \code{svd==TRUE}, the following are also included:
 
 \item{svd.D}{Singular values of the \code{svd} of the scaled X matrix}
-\item{svd.U}{Left singular vectors of the \code{svd} of the scaled X matrix}
-\item{svd.V}{Right singular vectors of the \code{svd} of the scaled X matrix}
+\item{svd.U}{Left singular vectors of the \code{svd} of the scaled X matrix. Rows correspond to observations
+and columns to dimensions.}
+\item{svd.V}{Right singular vectors of the \code{svd} of the scaled X matrix. Rows correspond to variables
+and columns to dimensions.}
 %% ...
 }
 
@@ -125,18 +127,25 @@ Michael Friendly
  \code{\link[ElemStatLearn]{simple.ridge}}
  for other implementations of ridge regression
 
-\code{\link{plot.ridge}}, \code{\link{pairs.ridge}}, \code{\link{traceplot}} for plotting methods
+\code{\link{traceplot}}, \code{\link{plot.ridge}}, \code{\link{pairs.ridge}}, \code{\link{plot3d.ridge}}, for 1D, 2D, 3D plotting methods
 
-\code{\link{precision.ridge}}
+\code{\link{pca.ridge}}, \code{\link{biplot.ridge}}, \code{\link{biplot.pcaridge}} for views in PCA/SVD space
+
+\code{\link{precision.ridge}} for measures of shrinkage and precision
 
 }
 \examples{
+# Longley data, using number Employed as response
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
 
 lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 lridge <- ridge(longley.y, longley.X, lambda=lambda)
 coef(lridge)
+traceplot(lridge)
+traceplot(lridge, X="df")
+pairs(lridge, radius=0.5)
+
 
 if (require("ElemStatLearn")) {
 	py <- prostate[, "lpsa"]
@@ -148,6 +157,37 @@ if (require("ElemStatLearn")) {
 	pairs(pridge)
 	traceplot(pridge)
 	traceplot(pridge, X="df")
+}
+
+# Hospital manpower data from Table 3.8 of Myers (1990) and bestglm package
+if (require("bestglm")) {
+	data(manpower)
+	str(manpower)
+	
+	mmod <- lm(Hours ~ ., data=manpower)
+	vif(mmod)
+	# ridge regression models, specified in terms of equivalent df
+	mridge <- ridge(Hours ~ ., data=manpower, df=seq(5, 3.75, -.25))
+	vif(mridge)
+	
+	# univariate ridge trace plots
+	traceplot(mridge)
+	traceplot(mridge, X="df")
+	
+	# bivariate ridge trace plots
+	plot(mridge, radius=0.25, labels=mridge$df)
+	pairs(mridge, radius=0.25)
+	
+	# 3D views
+	# ellipsoids for Load, Xray & BedDays are nearly 2D
+	plot3d(mridge, radius=0.2, labels=mridge$df)
+	# variables in model selected by AIC & BIC
+	plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
+	
+	# plots in PCA/SVD space
+	mpridge <- pca.ridge(mridge)
+	traceplot(mpridge, X="df")
+	biplot(mpridge, radius=0.25)
 }
 
 }

@@ -1,6 +1,8 @@
 Version 0.6-3 (2011-12-28)
 o Minor tweaks to plot3d.ridge
 o Added biplot.ridge method for symmetry, showing the PCA vectors in variable space
+o Added examples to ridge.Rd using data(manpower, package="bestglm")
+o Added Manpower data
 
 Version 0.6-2 (2011-12-19)
 o Made ridge() an S3 generic with formula and default methods

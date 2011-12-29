@@ -7,7 +7,7 @@ Author: Michael Friendly
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"))
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.11.1), car
-Suggests: MASS, ElemStatLearn, rgl
+Suggests: MASS, ElemStatLearn, rgl, bestglm
 Description: 
 	The genridge package introduces generalizations of the standard univariate
 	ridge trace plot used in ridge regression and related methods.  These graphical methods
