@@ -159,36 +159,34 @@ if (require("ElemStatLearn")) {
 	traceplot(pridge, X="df")
 }
 
-# Hospital manpower data from Table 3.8 of Myers (1990) and bestglm package
-if (require("bestglm")) {
-	data(manpower)
-	str(manpower)
-	
-	mmod <- lm(Hours ~ ., data=manpower)
-	vif(mmod)
-	# ridge regression models, specified in terms of equivalent df
-	mridge <- ridge(Hours ~ ., data=manpower, df=seq(5, 3.75, -.25))
-	vif(mridge)
-	
-	# univariate ridge trace plots
-	traceplot(mridge)
-	traceplot(mridge, X="df")
-	
-	# bivariate ridge trace plots
-	plot(mridge, radius=0.25, labels=mridge$df)
-	pairs(mridge, radius=0.25)
-	
-	# 3D views
-	# ellipsoids for Load, Xray & BedDays are nearly 2D
-	plot3d(mridge, radius=0.2, labels=mridge$df)
-	# variables in model selected by AIC & BIC
-	plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
-	
-	# plots in PCA/SVD space
-	mpridge <- pca.ridge(mridge)
-	traceplot(mpridge, X="df")
-	biplot(mpridge, radius=0.25)
-}
+# Hospital manpower data from Table 3.8 of Myers (1990) 
+data(Manpower)
+str(Manpower)
+
+mmod <- lm(Hours ~ ., data=Manpower)
+vif(mmod)
+# ridge regression models, specified in terms of equivalent df
+mridge <- ridge(Hours ~ ., data=Manpower, df=seq(5, 3.75, -.25))
+vif(mridge)
+
+# univariate ridge trace plots
+traceplot(mridge)
+traceplot(mridge, X="df")
+
+# bivariate ridge trace plots
+plot(mridge, radius=0.25, labels=mridge$df)
+pairs(mridge, radius=0.25)
+
+# 3D views
+# ellipsoids for Load, Xray & BedDays are nearly 2D
+plot3d(mridge, radius=0.2, labels=mridge$df)
+# variables in model selected by AIC & BIC
+plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
+
+# plots in PCA/SVD space
+mpridge <- pca.ridge(mridge)
+traceplot(mpridge, X="df")
+biplot(mpridge, radius=0.25)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
