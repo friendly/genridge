@@ -7,7 +7,7 @@ Generalized ridge trace plots for ridge regression
 }
 \description{
 The genridge package introduces generalizations of the standard univariate
-	ridge trace plot used in ridge regression and related methods.  These graphical methods
+	ridge trace plot used in ridge regression and related methods (Friendly, 2012).  These graphical methods
 	show both bias (actually, shrinkage) and precision, by plotting the covariance ellipsoids of the estimated
 	coefficients, rather than just the estimates themselves.
 	2D and 3D plotting methods are provided,
@@ -22,6 +22,8 @@ Date: \tab 2011-12-28\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
+This package provides computational support
+for the graphical methods described in Friendly (2012).
 Ridge regression models may be fit using the function \code{\link{ridge}},
 which incorporates features of  \code{\link[MASS]{lm.ridge}} and
  \code{\link[ElemStatLearn]{simple.ridge}}.  In particular, the shrinkage
@@ -30,7 +32,9 @@ the constant added to the diagonal of \eqn{X^T X} matrix (\code{lambda}),
 or the equivalent number of degrees of freedom.  
 
 More importantly, the  \code{\link{ridge}} function also calculates and
-returns the associated covariance matrices of each of the ridge estimates.
+returns the associated covariance matrices of each of the ridge estimates,
+allowing precision to be studied and displayed graphically.
+
 This provides the support for the main plotting functions in the package:
 
 \code{\link{plot.ridge}}: Bivariate ridge trace plots
@@ -46,7 +50,7 @@ and covariance matrices of a \code{ridge} object from predictor space to the
 equivalent, but more interesting space of the PCA of \eqn{X^T X} or the
 SVD of \bold{X}.  
 The main plotting functions also work for these objects,
-of class \code{c("ridge", "pcaridge")}.
+of class \code{c("ridge", "pcaridge")}. 
 
 Finally, the functions \code{\link{precision}} and \code{\link{vif.ridge}}
 provide other useful measures and plots.
@@ -58,9 +62,9 @@ Michael Friendly
 Maintainer: Michael Friendly <friendly@yorku.ca>
 }
 \references{
-Friendly, M. (2011).
+Friendly, M. (2012).
 The Generalized Ridge Trace Plot: Visualizing Bias and Precision.
-Submitted, JCGS.
+In press, \emph{Journal of Computational and Graphical Statistics}, 21.
 
 Arthur E. Hoerl and Robert W. Kennard (1970).
 Ridge Regression: Biased Estimation for Nonorthogonal Problems,

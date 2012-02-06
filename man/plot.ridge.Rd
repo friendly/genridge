@@ -95,9 +95,9 @@ and other graphic parameters.
 	None. Used for its side effect of plotting.
 }
 \references{
-Friendly, M. (2011).
+Friendly, M. (2012).
 The Generalized Ridge Trace Plot: Visualizing Bias and Precision.
-Under review.
+In press, \emph{Journal of Computational and Graphical Statistics}, 21.
 }
 \author{
 Michael Friendly

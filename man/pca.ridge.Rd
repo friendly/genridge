@@ -43,9 +43,9 @@ components as the original \code{ridge} object.
 %% ...
 }
 \references{
-Friendly, M. (2011).
+Friendly, M. (2012).
 The Generalized Ridge Trace Plot: Visualizing Bias and Precision.
-In preparation.
+In press, \emph{Journal of Computational and Graphical Statistics}, 21.
 
 }
 \author{

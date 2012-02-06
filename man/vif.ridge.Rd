@@ -47,7 +47,7 @@ Michael Friendly
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link[car]{vif}}, ~~~
+\code{\link[car]{vif}}, \code{\link{precision}}
 }
 \examples{
 data(longley)
@@ -79,6 +79,19 @@ matplot(lridge$df, vridge, type='b',
 	xlab='Degrees of freedom', ylab="Variance Inflation", 
 	col=clr, pch=pch, cex=1.2)
 text(6, vridge[1,], colnames(vridge), pos=2)
+
+# more useful to plot VIF on the sqrt scale
+
+matplot(rownames(vridge), sqrt(vridge), type='b', 
+	xlab='Ridge constant (k)', ylab=expression(sqrt(VIF)), 
+	xlim=c(-0.01, 0.08), 
+	col=clr, pch=pch, cex=1.2, cex.lab=1.25)
+text(-0.01, sqrt(vridge[1,]), colnames(vridge), pos=4, cex=1.2)
+
+matplot(lridge$df, sqrt(vridge), type='b', 
+	xlab='Degrees of freedom', ylab=expression(sqrt(VIF)), 
+	col=clr, pch=pch, cex=1.2, cex.lab=1.25)
+text(6, sqrt(vridge[1,]), colnames(vridge), pos=2, cex=1.2)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

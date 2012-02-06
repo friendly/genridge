@@ -99,9 +99,9 @@ None
 %% ...
 }
 \references{
-Friendly, M. (2011).
+Friendly, M. (2012).
 The Generalized Ridge Trace Plot: Visualizing Bias and Precision.
-Submitted, JCGS.
+In press, \emph{Journal of Computational and Graphical Statistics}, 21.
 }
 \author{
 Michael Friendly, with contributions by Uwe Ligges

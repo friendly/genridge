@@ -56,6 +56,10 @@ variable names.
 	None. Used for its side effect of plotting.
 }
 \references{
+Friendly, M. (2012).
+The Generalized Ridge Trace Plot: Visualizing Bias and Precision.
+In press, \emph{Journal of Computational and Graphical Statistics}, 21.
+
 Hoerl, A. E.  and  Kennard R. W. (1970).
 "Ridge Regression: Applications to Nonorthogonal Problems",
 \emph{Technometrics},

@@ -78,7 +78,8 @@ Ridge regression shrinkage can be parameterized in several ways.
 If a vector of \code{lambda} values is supplied, these are used directly in 
 the ridge regression computations. Otherwise, if a vector \code{df} is supplied
 the equivalent values of \code{lambda}.  In either case, both \code{lambda} and
-\code{df} are returned in the \code{ridge} object.
+\code{df} are returned in the \code{ridge} object, but the rownames of the coefficients
+are given in terms of \code{lambda}.
 }
 \value{
 A list with the following components:
@@ -141,6 +142,12 @@ longley.X <- data.matrix(longley[, c(2:6,1)])
 
 lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 lridge <- ridge(longley.y, longley.X, lambda=lambda)
+
+# same, using formula interface
+lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, 
+		data=longley, lambda=lambda)
+
+
 coef(lridge)
 traceplot(lridge)
 traceplot(lridge, X="df")
