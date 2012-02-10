@@ -4,6 +4,7 @@ exportPattern("precision\\.*")
 exportPattern("ridge\\.*")
 # also:
 export(plot3d, ridge,  traceplot, trans.colors)
+export(contourf)
 
 #export(ridge, 
 #	traceplot, trans.colors, 
