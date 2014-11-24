@@ -13,7 +13,7 @@ vif.ridge <- function(mod, ...) {
 		res
 	}
 
-	if(!require("car")) stop("Requires the car package for the vif generic")
+#	if(!require("car")) stop("Requires the car package for the vif generic")
 	V <- vcov(mod)
 	res <- t(sapply(V, Vif))
 	colnames(res) <- colnames(coef(mod))
