@@ -24,7 +24,8 @@ plot3d(x, ...)
 	lwd = 1, lty = 1, 
 	xlim, ylim, zlim, 
 	xlab, ylab, zlab, 
-	col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
+	col = c("black", "red", "darkgreen", "blue", 
+	        "darkcyan", "magenta", "brown", "darkgray"), 
 	labels = lambda, 
 	ref = TRUE, ref.col = gray(0.7), 
 	segments = 40, shade = TRUE, shade.alpha = 0.1, 
@@ -132,7 +133,8 @@ This is an initial implementation.  The details and arguments are subject to cha
 \code{\link{plot.ridge}}, \code{\link{pairs.ridge}}, \code{\link{pca.ridge}}
 }
 \examples{
-lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, data=longley)
+lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + 
+                      Year + GNP.deflator, data=longley)
 longley.y <- longley[, "Employed"]
 longley.X <- model.matrix(lmod)[,-1]
 

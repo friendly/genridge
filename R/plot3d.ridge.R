@@ -53,15 +53,15 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		i3 <- (i1 + segments - 1) %% segments^2 + 1
 		i4 <- (i2 + segments - 1) %% segments^2 + 1
 		i <- rbind(i1, i2, i4, i3)
-		x <- asEuclidean(t(v))
-		ellips <- qmesh3d(v, i)
+		x <- rgl::asEuclidean(t(v))
+		ellips <- rgl::qmesh3d(v, i)
 
-		if(shade) shade3d(ellips, col=col, alpha=alpha, lit=TRUE)
-		if(wire) wire3d(ellips, col=col, size=lwd, lit=FALSE)
+		if(shade) rgl::shade3d(ellips, col=col, alpha=alpha, lit=TRUE)
+		if(wire) rgl::wire3d(ellips, col=col, size=lwd, lit=FALSE)
 
 		if (!is.null(label) && label !="")
 			if(is.numeric(label)) label <- signif(label, 3)
-			texts3d(center, adj=0.5, texts=label, color=col, lit=FALSE)
+			rgl::texts3d(center, adj=0.5, texts=label, color=col, lit=FALSE)
 		bbox <- matrix(par3d("bbox"), nrow=2)
 		rownames(bbox) <- c("min", "max")
 		return(bbox)
@@ -99,7 +99,7 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 #	fogtype <- match.arg(fogtype)
 #	bg.col <- match.arg(bg.col)    
 	if (!add){ 
-		open3d()   
+		rgl::open3d()   
 #		rgl.clear()
 #		rgl.viewpoint(fov=fov)
 #		rgl.bg(col=bg.col, fogtype=fogtype)    
@@ -120,9 +120,9 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 			col=col[i], lwd=lwd, shade=shade[i], alpha=shade.alpha[i], wire=wire[i])
 	}
 
-	lines3d(coef, color="black")
-	points3d(coef, size=5)
-	aspect3d(aspect)		
+	rgl::lines3d(coef, color="black")
+	rgl::points3d(coef, size=5)
+	rgl::aspect3d(aspect)		
 	
 	max <- apply(sapply(ells, function(X) apply(X, 2, max)), 1, max)
 	min <- apply(sapply(ells, function(X) apply(X, 2, min)), 1, min)
@@ -133,19 +133,19 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 	# handle xlim, ylim, zlim
 	## enforce that the specified limits are at least as large as the bbox
 	if (!missing(xlim) | !missing(ylim) | !missing(zlim)) {
-		bbox <- matrix(par3d("bbox"),3,2,byrow=TRUE)
+		bbox <- matrix(rgl::par3d("bbox"),3,2,byrow=TRUE)
 		xlim <- if(missing(xlim)) bbox[1,] else c(min(xlim[1],bbox[1,1]), max(xlim[2],bbox[1,2]))
 		ylim <- if(missing(ylim)) bbox[2,] else c(min(ylim[1],bbox[2,1]), max(ylim[2],bbox[2,2]))
 		zlim <- if(missing(zlim)) bbox[3,] else c(min(zlim[1],bbox[3,1]), max(zlim[2],bbox[3,2]))
 		decorate3d(xlim=xlim, ylim=ylim, zlim=zlim, box=FALSE, axes=FALSE, xlab=NULL, ylab=NULL, zlab=NULL, top=FALSE)
 	}
 #	decorate3d(xlab=xlab, ylab=ylab, zlab=zlab, box=FALSE, axes=FALSE)
-	frame <- axis3d("x-", col="black", tick=FALSE, nticks=0)
-	frame <- c(frame, mtext3d(xlab, "x-", col="black", line=1.5))
-	frame <- c(frame, axis3d("y-", col="black"), tick=FALSE, nticks=0)
-	frame <- c(frame, mtext3d(ylab, "y-", col="black", line=1.5))
-	frame <- c(frame, axis3d("z-", col="black"), tick=FALSE, nticks=0)
-	frame <- c(frame, mtext3d(zlab, "z-", col="black", line=1.5))
-	frame <- c(frame, box3d(col="black"))
+	frame <- rgl::axis3d("x-", col="black", tick=FALSE, nticks=0)
+	frame <- c(frame, rgl::mtext3d(xlab, "x-", col="black", line=1.5))
+	frame <- c(frame, rgl::axis3d("y-", col="black"), tick=FALSE, nticks=0)
+	frame <- c(frame, rgl::mtext3d(ylab, "y-", col="black", line=1.5))
+	frame <- c(frame, rgl::axis3d("z-", col="black"), tick=FALSE, nticks=0)
+	frame <- c(frame, rgl::mtext3d(zlab, "z-", col="black", line=1.5))
+	frame <- c(frame, rgl::box3d(col="black"))
 
 }

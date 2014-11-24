@@ -21,8 +21,10 @@ precision of the estimates as a function of the ridge tuning constant.
 \method{plot}{ridge}(x, variables = 1:2, radius = 1, which.lambda=1:length(x$lambda),
    labels=lambda, pos=3, cex=1.2,
    lwd = 2, lty = 1, xlim, ylim, 
-   col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
-   center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3, ref=TRUE, ref.col=gray(.70), ...)
+   col = c("black", "red", "darkgreen", "blue", 
+           "darkcyan", "magenta", "brown", "darkgray"), 
+   center.pch = 16, center.cex = 1.5, fill = FALSE, fill.alpha = 0.3,
+    ref=TRUE, ref.col=gray(.70), ...)
 
 \method{plot}{pcaridge}(x, variables = (p-1):p, labels=NULL, ...)
 }
@@ -124,7 +126,8 @@ lridge <- ridge(longley.y, longley.X, lambda=lambda)
 op <- par(mfrow=c(2,2), mar=c(4, 4, 1, 1)+ 0.1)
 for (i in 2:5) {
 	plot.ridge(lridge, variables=c(1,i), radius=0.5, cex.lab=1.5)
-	text(lridge$coef[1,1], lridge$coef[1,i], expression(~widehat(beta)^OLS), cex=1.5, pos=4, offset=.1)
+	text(lridge$coef[1,1], lridge$coef[1,i], expression(~widehat(beta)^OLS), 
+	     cex=1.5, pos=4, offset=.1)
 	if (i==2) text(lridge$coef[-1,1:2], lambdaf[-1], pos=3, cex=1.25)
 }
 par(op)

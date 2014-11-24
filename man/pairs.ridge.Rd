@@ -9,7 +9,8 @@ Displays all possible pairs of bivariate ridge trace plots for a given set of pr
 }
 \usage{
 \method{pairs}{ridge}(x, variables, radius = 1, lwd = 1, lty = 1, 
-   col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
+   col = c("black", "red", "darkgreen", "blue", 
+           "darkcyan", "magenta", "brown", "darkgray"), 
    center.pch = 16, center.cex = 1.25, digits = getOption("digits") - 3, 
    diag.cex = 2, diag.panel = panel.label, fill = FALSE, fill.alpha = 0.3, ...)
 }

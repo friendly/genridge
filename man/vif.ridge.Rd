@@ -51,7 +51,8 @@ Michael Friendly
 }
 \examples{
 data(longley)
-lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, data=longley)
+lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + 
+                      Year + GNP.deflator, data=longley)
 vif(lmod)
 
 longley.y <- longley[, "Employed"]

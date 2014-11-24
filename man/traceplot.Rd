@@ -12,7 +12,8 @@ for ridge regresssion provided in the \code{plot} method for
 }
 \usage{
 traceplot(x, X = c("lambda", "df"), 
-   col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown", "darkgray"), 
+   col = c("black", "red", "darkgreen", "blue", 
+           "darkcyan", "magenta", "brown", "darkgray"), 
    pch = c(15:18, 7, 9, 12, 13), xlab, ylab = "Coefficient", xlim, ylim, ...)
 }
 %- maybe also 'usage' for other objects documented here.
