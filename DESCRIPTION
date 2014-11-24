@@ -1,6 +1,6 @@
 Package: genridge
 Type: Package
-Title: Generalized ridge trace plots for ridge regression
+Title: Generalized Ridge Trace Plots for Ridge Regression
 Version: 0.6-5
 Date: 2014-11-24
 Author: Michael Friendly [aut, cre]
