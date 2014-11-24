@@ -62,7 +62,7 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		if (!is.null(label) && label !="")
 			if(is.numeric(label)) label <- signif(label, 3)
 			rgl::texts3d(center, adj=0.5, texts=label, color=col, lit=FALSE)
-		bbox <- matrix(par3d("bbox"), nrow=2)
+		bbox <- matrix(rgl::par3d("bbox"), nrow=2)
 		rownames(bbox) <- c("min", "max")
 		return(bbox)
 	}
@@ -137,7 +137,7 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		xlim <- if(missing(xlim)) bbox[1,] else c(min(xlim[1],bbox[1,1]), max(xlim[2],bbox[1,2]))
 		ylim <- if(missing(ylim)) bbox[2,] else c(min(ylim[1],bbox[2,1]), max(ylim[2],bbox[2,2]))
 		zlim <- if(missing(zlim)) bbox[3,] else c(min(zlim[1],bbox[3,1]), max(zlim[2],bbox[3,2]))
-		decorate3d(xlim=xlim, ylim=ylim, zlim=zlim, box=FALSE, axes=FALSE, xlab=NULL, ylab=NULL, zlab=NULL, top=FALSE)
+		rgl::decorate3d(xlim=xlim, ylim=ylim, zlim=zlim, box=FALSE, axes=FALSE, xlab=NULL, ylab=NULL, zlab=NULL, top=FALSE)
 	}
 #	decorate3d(xlab=xlab, ylab=ylab, zlab=zlab, box=FALSE, axes=FALSE)
 	frame <- rgl::axis3d("x-", col="black", tick=FALSE, nticks=0)
