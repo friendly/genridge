@@ -31,5 +31,13 @@ S3method(ridge, default)
 S3method(ridge, formula)
 
 importFrom(car, vif)
+importFrom("grDevices", "col2rgb", "colorRampPalette", "contourLines",
+           "gray", "rgb")
+importFrom("graphics", "abline", "arrows", "barplot", "box", "contour",
+           "matplot", "par", "plot", "polygon", "text")
+importFrom("stats", "coef", "coefficients", "contrasts", "cov2cor",
+           "lm.fit", "model.matrix", "model.offset", "model.response",
+           "uniroot", "vcov")
+
 # to make plot3d.ridge an S3 method; but this requires Depends: rgl
 #importFrom(rgl, plot3d)
