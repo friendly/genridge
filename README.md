@@ -50,7 +50,6 @@ The development version can be installed to your R library directly from this re
      install_github("friendly/genridge")
 
 
-
 ## References
 
 Friendly, M. (2013).
