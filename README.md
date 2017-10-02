@@ -19,7 +19,7 @@ predictors.
 
 ### Details
 
-This package provides computational support for the graphical methods described in Friendly (2013). Ridge regression models may be fit using the function `ridge`, which incorporates features of `MASS::lm.ridge` and `ElemStatLearn::simple.ridge`. In particular, the shrinkage factors in ridge regression may be specified either in terms of the constant added to the diagonal of $X^T X$ matrix (lambda), or the equivalent number of degrees of freedom.
+This package provides computational support for the graphical methods described in Friendly (2013). Ridge regression models may be fit using the function `ridge`, which incorporates features of `MASS::lm.ridge` and `ElemStatLearn::simple.ridge`. In particular, the shrinkage factors in ridge regression may be specified either in terms of the constant ($\lambda$) added to the diagonal of $X^T X$ matrix, or the equivalent number of degrees of freedom.
 
 More importantly, the `ridge` function also calculates and returns the associated covariance matrices of each of the ridge estimates, allowing precision to be studied and displayed graphically.
 
