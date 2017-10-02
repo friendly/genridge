@@ -1,3 +1,6 @@
+Version 0.6-6 (2017-10-01)
+o bump package version, preparing to move to Github
+
 Version 0.6-5 (2014-11-24)
 o Use rgl:: in calls to rgl package for CRAN
 o Fixed long lines in .Rd files
