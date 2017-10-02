@@ -88,6 +88,7 @@ pairs(dridge, radius=0.5)
 
 plot3d(dridge, radius=0.5, labels=dridge$df)
 
+\donttest{
 # transform to PCA/SVD space
 dpridge <- pca.ridge(dridge)
 # not so paradoxical in PCA space
@@ -96,5 +97,7 @@ biplot(dpridge, radius=0.5, labels=dpridge$df)
 
 # show PCA vectors in variable space
 biplot(dridge, radius=0.5, labels=dridge$df)
+}
+
 }
 \keyword{datasets}
