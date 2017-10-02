@@ -1,3 +1,5 @@
 .project
 ^.*\.Rproj$
 ^\.Rproj\.user$
+README.md
+
