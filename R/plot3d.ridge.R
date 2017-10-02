@@ -67,7 +67,8 @@ function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		return(bbox)
 	}
 
-	if (!require(rgl)) stop("rgl package is required.")    
+#	if (!require(rgl)) stop("rgl package is required.")
+	if (!requireNamespace("rgl", quietly = TRUE)) stop("rgl package is required.")
 
 	vnames <- dimnames(x$coef)[[2]]
 	if (!is.numeric(variables)) {
