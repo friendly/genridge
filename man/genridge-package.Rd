@@ -23,7 +23,7 @@ License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
 This package provides computational support
-for the graphical methods described in Friendly (2012).
+for the graphical methods described in Friendly (2013).
 Ridge regression models may be fit using the function \code{\link{ridge}},
 which incorporates features of  \code{\link[MASS]{lm.ridge}} and
  \code{\link[ElemStatLearn]{simple.ridge}}.  In particular, the shrinkage
