@@ -55,5 +55,5 @@ The development version can be installed to your R library directly from this re
 Friendly, M. (2013).
 The Generalized Ridge Trace Plot: Visualizing Bias *and* Precision.
 *Journal of Computational and Graphical Statistics*, **22**(1), 50-68,
-[doi](http://dx.doi.org/10.1080/10618600.2012.681237),
+[doi link](http://dx.doi.org/10.1080/10618600.2012.681237), Preprint:
 [genridge.pdf](http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf)
