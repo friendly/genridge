@@ -2,4 +2,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 README.md
+cran-comments.md
 
