@@ -62,6 +62,7 @@ traceplot(mridge, X="df")
 plot(mridge, radius=0.25, labels=mridge$df)
 pairs(mridge, radius=0.25)
 
+\donttest{
 # 3D views
 # ellipsoids for Load, Xray & BedDays are nearly 2D
 plot3d(mridge, radius=0.2, labels=mridge$df)
@@ -72,6 +73,7 @@ plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
 mpridge <- pca.ridge(mridge)
 traceplot(mpridge, X="df")
 biplot(mpridge, radius=0.25)
+}
 
 }
 \keyword{datasets}
