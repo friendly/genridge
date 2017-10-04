@@ -20,4 +20,4 @@ When I run the **all** the code in the example, I get:
 
 
 ## Comments
-This is a minor release, ...
+This is a minor release, occasioned by a move of the package to Github.

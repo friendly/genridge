@@ -18,4 +18,5 @@ Description:
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
+BugReports: https://github.com/friendly/genridge/issues
 
