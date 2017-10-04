@@ -146,9 +146,11 @@ lridge <- ridge(longley.y, longley.X, lambda=lambda)
 
 plot3d(lridge, var=c(1,4,5), radius=0.5)
 
+\donttest{
 # view in SVD/PCA space
 plridge <- pca.ridge(lridge)
 plot3d(plridge, radius=0.5)
+}
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
