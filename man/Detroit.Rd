@@ -86,9 +86,9 @@ traceplot(dridge, X="df")
 vif(dridge)
 pairs(dridge, radius=0.5)
 
+\donttest{
 plot3d(dridge, radius=0.5, labels=dridge$df)
 
-\donttest{
 # transform to PCA/SVD space
 dpridge <- pca.ridge(dridge)
 # not so paradoxical in PCA space
