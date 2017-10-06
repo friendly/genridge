@@ -137,7 +137,7 @@ Michael Friendly
 }
 \examples{
 
-\donttest{
+#\donttest{
 # Longley data, using number Employed as response
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
@@ -154,8 +154,9 @@ coef(lridge)
 traceplot(lridge)
 traceplot(lridge, X="df")
 pairs(lridge, radius=0.5)
-}
+#}
 
+\donttest{
 if (require("ElemStatLearn")) {
 	py <- prostate[, "lpsa"]
 	pX <- data.matrix(prostate[, 1:8])
@@ -166,6 +167,7 @@ if (require("ElemStatLearn")) {
 	pairs(pridge)
 	traceplot(pridge)
 	traceplot(pridge, X="df")
+}
 }
 
 # Hospital manpower data from Table 3.8 of Myers (1990) 
@@ -182,6 +184,7 @@ vif(mridge)
 traceplot(mridge)
 traceplot(mridge, X="df")
 
+\donttest{
 # bivariate ridge trace plots
 plot(mridge, radius=0.25, labels=mridge$df)
 pairs(mridge, radius=0.25)
@@ -196,6 +199,7 @@ plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
 mpridge <- pca.ridge(mridge)
 traceplot(mpridge, X="df")
 biplot(mpridge, radius=0.25)
+}
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
