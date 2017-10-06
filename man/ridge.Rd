@@ -137,7 +137,7 @@ Michael Friendly
 }
 \examples{
 
-\donttest{
+#\donttest{
 # Longley data, using number Employed as response
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
@@ -154,7 +154,7 @@ coef(lridge)
 traceplot(lridge)
 traceplot(lridge, X="df")
 pairs(lridge, radius=0.5)
-}
+#}
 
 \donttest{
 if (require("ElemStatLearn")) {
