@@ -144,9 +144,9 @@ lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 lambdaf <- c("0", ".005", ".01", ".02", ".04", ".08")
 lridge <- ridge(longley.y, longley.X, lambda=lambda)
 
+\donttest{
 plot3d(lridge, var=c(1,4,5), radius=0.5)
 
-\donttest{
 # view in SVD/PCA space
 plridge <- pca.ridge(lridge)
 plot3d(plridge, radius=0.5)
