@@ -25,8 +25,8 @@ LazyLoad: \tab yes\cr
 This package provides computational support
 for the graphical methods described in Friendly (2013).
 Ridge regression models may be fit using the function \code{\link{ridge}},
-which incorporates features of  \code{\link[MASS]{lm.ridge}} and
- \code{\link[ElemStatLearn]{simple.ridge}}.  In particular, the shrinkage
+which incorporates features of  \code{\link[MASS]{lm.ridge}}.
+ In particular, the shrinkage
 factors in ridge regression may be specified either in terms of
 the constant added to the diagonal of \eqn{X^T X} matrix (\code{lambda}),
 or the equivalent number of degrees of freedom.  
@@ -81,8 +81,7 @@ Ridge Regression: Applications to Nonorthogonal Problems
 \keyword{ package }
 \seealso{
 %~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
- \code{\link[MASS]{lm.ridge}},
- \code{\link[ElemStatLearn]{simple.ridge}}
+ \code{\link[MASS]{lm.ridge}}
  
 }
 \examples{
