@@ -124,8 +124,7 @@ Michael Friendly
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- \code{\link[MASS]{lm.ridge}},
- \code{\link[ElemStatLearn]{simple.ridge}}
+ \code{\link[MASS]{lm.ridge}}
  for other implementations of ridge regression
 
 \code{\link{traceplot}}, \code{\link{plot.ridge}}, \code{\link{pairs.ridge}}, \code{\link{plot3d.ridge}}, for 1D, 2D, 3D plotting methods
@@ -157,17 +156,16 @@ pairs(lridge, radius=0.5)
 #}
 
 \donttest{
-if (require("ElemStatLearn")) {
-	py <- prostate[, "lpsa"]
-	pX <- data.matrix(prostate[, 1:8])
-	pridge <- ridge(py, pX, df=8:1)
-	pridge
-	
-	plot(pridge)
-	pairs(pridge)
-	traceplot(pridge)
-	traceplot(pridge, X="df")
-}
+data(prostate)
+py <- prostate[, "lpsa"]
+pX <- data.matrix(prostate[, 1:8])
+pridge <- ridge(py, pX, df=8:1)
+pridge
+
+plot(pridge)
+pairs(pridge)
+traceplot(pridge)
+traceplot(pridge, X="df")
 }
 
 # Hospital manpower data from Table 3.8 of Myers (1990) 
