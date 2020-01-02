@@ -134,14 +134,13 @@ for (i in 2:5) {
 }
 par(op)
 
-if (require("ElemStatLearn")) {
-	py <- prostate[, "lpsa"]
-	pX <- data.matrix(prostate[, 1:8])
-	pridge <- ridge(py, pX, df=8:1)
-	
-	plot(pridge)
-	plot(pridge, fill=c(TRUE, rep(FALSE,7)))
-}
+data(prostate)
+py <- prostate[, "lpsa"]
+pX <- data.matrix(prostate[, 1:8])
+pridge <- ridge(py, pX, df=8:1)
+
+plot(pridge)
+plot(pridge, fill=c(TRUE, rep(FALSE,7)))
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
