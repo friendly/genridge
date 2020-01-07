@@ -34,8 +34,7 @@ contourf <- function(
   if (!is.null(fill.col)) {
     if (!is.na(fill.alpha)) {
       if (is.numeric(fill.alpha) && fill.alpha >= 0 && fill.alpha <= 1)
-        fill.alpha { <-
-        } as.hexmode(round(255 * fill.alpha))
+      fill.alpha  <- as.hexmode(round(255 * fill.alpha))
       fill.col <- paste(fill.col, fill.alpha, sep = "")
     }
 
