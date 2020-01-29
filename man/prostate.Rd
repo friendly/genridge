@@ -25,7 +25,7 @@
   }
 }
 \details{
-  This data set came originally froem the ElemStatLearn package.
+  This data set came originally from the (now defunct) ElemStatLearn package.
   
   The last column indicates which 67 observations were used as the 
   "training set" and which 30 as the test set, as described on page 48
@@ -37,7 +37,7 @@ the book. As of version 2012.04-0 this was corrected.}
 \source{ Stamey, T., Kabalin, J., McNeal, J., Johnstone, I.,
     Freiha, F., Redwine, E. and Yang, N (1989) Prostate specific antigen
     in the diagnosis and treatment of adenocarcinoma of the prostate
-    II. Radical prostatectomy treted patients, Journall of Urology 16: 1076--1083.
+    II. Radical prostatectomy treated patients, Journal of Urology 16: 1076--1083.
 }
 \examples{
 str( prostate )
