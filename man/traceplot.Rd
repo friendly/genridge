@@ -6,7 +6,7 @@ Univariate ridge trace plots
 }
 \description{
 The \code{traceplot} function extends and simplifies the univariate ridge trace plots
-for ridge regresssion provided in the \code{plot} method for
+for ridge regression provided in the \code{plot} method for
 \code{\link[MASS]{lm.ridge}} 
 
 }
