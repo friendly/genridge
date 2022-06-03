@@ -1,6 +1,6 @@
+[![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/genridge)](https://cran.r-project.org/package=genridge)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
-[![Rdoc](http://www.rdocumentation.org/badges/version/genridge)](http://www.rdocumentation.org/packages/genridge)
 
 # genridge
 
