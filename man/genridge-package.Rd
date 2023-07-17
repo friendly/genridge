@@ -17,8 +17,8 @@ The genridge package introduces generalizations of the standard univariate
 \tabular{ll}{
 Package: \tab genridge\cr
 Type: \tab Package\cr
-Version: \tab 0.6-7\cr
-Date: \tab 2020-01-07\cr
+Version: \tab 0.6-8\cr
+Date: \tab 2023-07-17\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }

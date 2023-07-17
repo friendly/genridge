@@ -6,7 +6,7 @@
 
 ## Generalized Ridge Trace Plots for Ridge Regression
 
-Version 0.6-7
+Version 0.6-8
 
 ### Overview
 
