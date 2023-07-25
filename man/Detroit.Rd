@@ -42,7 +42,7 @@ in multivariate views.
 }
 
 \details{
-The data were orginally collected and discussed by Fisher (1976) but the complete dataset first 
+The data were originally collected and discussed by Fisher (1976) but the complete dataset first 
 appeared in Gunst and Mason (1980, Appendix A). 
 Miller (2002) discusses this dataset throughout his book, but doesn't state clearly
 which variables he used as predictors and
