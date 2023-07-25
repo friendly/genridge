@@ -117,8 +117,7 @@ lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year +
 ### Univariate trace plots
 
 A standard, univariate, trace plot simply plots the estimated
-coefficients for each predicator against the shrinkage factor,
-$\lambda$.
+coefficients for each predictor against the shrinkage factor, $\lambda$.
 
 ``` r
 traceplot(lridge)
@@ -137,9 +136,9 @@ traceplot(lridge, X="df")
 ![](man/figures/README-longley-tp2-1.png)<!-- -->
 
 These plots show the trends in increased bias associated with larger
-$\lambda$, but they do not show the accomaning decrease in variance. For
-that, we need to consider the variances and covariances of the estimated
-coefficients.
+$\lambda$, but they do not show the accompaning decrease in variance.
+For that, we need to consider the variances and covariances of the
+estimated coefficients.
 
 ### Bivariate trace plots
 
