@@ -40,8 +40,25 @@ the book. As of version 2012.04-0 this was corrected.}
     II. Radical prostatectomy treated patients, Journal of Urology 16: 1076--1083.
 }
 \examples{
+data(prostate)
 str( prostate )
 cor( prostate[,1:8] )
+prostate <- prostate[, -10]
+
+prostate.mod <- lm(lpsa ~ ., data=prostate)
+vif(prostate.mod)
+
+py <- prostate[, "lpsa"]
+pX <- data.matrix(prostate[, 1:8])
+pridge <- ridge(py, pX, df=8:1)
+pridge
+
+plot(pridge)
+pairs(pridge)
+traceplot(pridge)
+traceplot(pridge, X="df")
+
+
 }
 \keyword{datasets}
 
