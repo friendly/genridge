@@ -6,7 +6,7 @@ Hospital manpower data
 }
 \description{
 The hospital manpower data, taken from Myers (1990), table 3.8,
-are a well-known example of highly collinear data to which
+are a well-known example of highly colinear data to which
 ridge regression and various shrinkage and selection methods
 are often applied.
 
