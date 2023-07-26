@@ -7,7 +7,7 @@
 [![](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
 <!-- badges: end -->
 
-# genridge
+# genridge <img src="man/figures/logo.png" style="float:right; height:200px;" />
 
 ## Generalized Ridge Trace Plots for Ridge Regression
 
@@ -15,7 +15,7 @@ Version 0.6-8
 
 ### Overview
 
-The genridge package introduces generalizations of the standard
+The `genridge` package introduces generalizations of the standard
 univariate ridge trace plot used in ridge regression and related methods
 (Friendly, 2013) These graphical methods show both bias (actually,
 shrinkage) and precision, by plotting the covariance ellipsoids of the
@@ -40,35 +40,30 @@ precision to be studied and displayed graphically.
 This provides the support for the main plotting functions in the
 package:
 
-- `plot.ridge`: Bivariate ridge trace plots
-
-- `pairs.ridge`: All pairwise bivariate ridge trace plots
-
-- `plot3d.ridge`: 3D ridge trace plots
-
 - `traceplot`: Traditional univariate ridge trace plots
+- `plot.ridge`: Bivariate ridge trace plots, showing the covariance
+  ellipse of the estimated coefficients.
+- `pairs.ridge`: All pairwise bivariate ridge trace plots
+- `plot3d.ridge`: 3D ridge trace plots
 
 In addition, the function `pca.ridge` transforms the coefficients and
 covariance matrices of a ridge object from predictor space to the
 equivalent, but more interesting space of the PCA of $X^T X$ or the SVD
-of X. The main plotting functions also work for these objects, of class
-`c("ridge", "pcaridge")`.
+of $X$. The main plotting functions also work for these objects, of
+class `c("ridge", "pcaridge")`.
+
+- `biplot.pcaridge`: Adds variable vectors to the bivariate plots of
+  coefficients in PCA space
 
 Finally, the functions `precision` and `vif.ridge` provide other useful
 measures and plots.
 
 ## Installation
 
-Get the *released* version from CRAN:
-
-     install.packages("genridge")
-
-The *development* version can be installed to your R library directly
-from this repo via:
-
-     if (!require(devtools)) install.packages("devtools")
-     library(devtools)
-     install_github("friendly/genridge")
+|                     |                                                |
+|---------------------|------------------------------------------------|
+| CRAN version        | `install.packages("genridge")`                 |
+| Development version | `remotes::install_github("friendly/genridge")` |
 
 ## Examples
 
@@ -78,13 +73,20 @@ consisting of 7 economic variables, observed yearly from 1947 to 1962
 `Employed` from `GNP`, `Unemployed`, `Armed.Forces`, `Population`,
 `Year`, `GNP.deflator`.
 
+These data are perverse, in that:
+
+- each variable is a time series so that there is clearly a lack of
+  independence
+- there is also some *structural colinearity* among the variables `GNP`,
+  `Year`, `GNP.deflator`, `Population`.
+
 ``` r
 data(longley)
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
 ```
 
-Shrinkage values, can be specified using either `\lambda` (where
+Shrinkage values, can be specified using either $\lambda$ (where
 $\lambda = 0$ corresponds to ordinary least squares (OLS)), or
 equivalent effective degrees of freedom. This quantifies the tradeoff
 between bias and variance for predictive modeling, where OLS has low
@@ -120,7 +122,7 @@ lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year +
 all values of the ridge constant. You can see that for OLS
 ($\lambda = 0$), nearly all VIF values are dangeroulsly high. With a
 ridge factor of 0.04 or greater, variance inflation has been
-considerably reduced.
+considerably reduced for a number of predictors.
 
 ``` r
 vif(lridge)
@@ -226,6 +228,33 @@ plot(plridge, variables=5:6, fill = TRUE, fill.alpha=0.2)
 ```
 
 ![](man/figures/README-pca-dim56-1.png)<!-- -->
+
+## Biplot view
+
+Finally, we can project the predictor variables into the PCA space of
+the smallest dimensions where the shrinkage action is.
+
+`biplot.pcaridge` supplements the standard display of the covariance
+ellipsoids for a ridge regression problem in PCA/SVD space with labeled
+arrows showing the contributions of the original variables to the
+dimensions plotted.
+
+The biplot view showing the dimensions corresponding to the two smallest
+singular values is particularly useful for understanding how the
+predictors contribute to shrinkage in ridge regression.
+
+``` r
+op <- par(mar=c(4, 4, 1, 1) + 0.2)
+biplot(plridge, radius=0.5, 
+       ref=FALSE, asp=1, 
+       var.cex=1.15, cex.lab=1.3, col=clr,
+       fill=TRUE, fill.alpha=0.2, prefix="Dimension ")
+#> Vector scale factor set to  5.246566
+text(plridge$coef[,5:6], lambdaf, pos=2, cex=1.3)
+par(op)
+```
+
+![](man/figures/README-biplot-1.png)<!-- -->
 
 ## References
 
