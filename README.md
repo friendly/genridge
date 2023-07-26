@@ -48,7 +48,7 @@ package:
 
 - `traceplot`: Traditional univariate ridge trace plots
 
-In addition, the function pca.ridge transforms the coefficients and
+In addition, the function `pca.ridge` transforms the coefficients and
 covariance matrices of a ridge object from predictor space to the
 equivalent, but more interesting space of the PCA of $X^T X$ or the SVD
 of X. The main plotting functions also work for these objects, of class
@@ -114,6 +114,25 @@ lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year +
         data=longley, lambda=lambda)
 ```
 
+## Variance Inflation Factors
+
+`vif()` for a `"ridge"` object calculates variance inflation factors for
+all values of the ridge constant. You can see that for OLS
+($\lambda = 0$), nearly all VIF values are dangeroulsly high. With a
+ridge factor of 0.04 or greater, variance inflation has been
+considerably reduced.
+
+``` r
+vif(lridge)
+#>              GNP Unemployed Armed.Forces Population      Year GNP.deflator
+#> 0.000 1788.51348  33.618891     3.588930  399.15102 758.98060    135.53244
+#> 0.005  540.04391  12.118058     2.920757  193.29890 336.15377     90.62954
+#> 0.010  258.99935   7.284398     2.732975  134.42069 218.84254     74.78548
+#> 0.020  101.11696   4.572957     2.577977   87.29189 128.82070     58.93518
+#> 0.040   34.42567   3.422139     2.440659   52.22396  66.31015     43.55638
+#> 0.080   11.28144   2.994018     2.301110   28.59266  28.82089     29.52231
+```
+
 ### Univariate trace plots
 
 A standard, univariate, trace plot simply plots the estimated
@@ -127,7 +146,8 @@ traceplot(lridge)
 
 It is sometimes easier to interpret the plot when coefficients are
 plotted against the equivalent degrees of freedom, where $\lambda = 0$
-corresponds to 6 degrees of freedom in the parameter space.
+corresponds to 6 degrees of freedom in the parameter space of six
+predictors.
 
 ``` r
 traceplot(lridge, X="df")
@@ -164,6 +184,48 @@ par(op)
 ```
 
 <img src="man/figures/README-longley-plot-ridge-1.png" width="100%" />
+The `pairs` method for `ridge` objects shows this in scatterplot matrix
+form.
+
+``` r
+pairs(lridge, radius=0.5)
+```
+
+<img src="man/figures/README-longley-pairs-1.png" width="100%" />
+
+## Low-rank views
+
+Just as principal components analysis gives low-dimensional views of a
+data set, PCA can be useful to understand ridge regression.
+
+The function `pca.ridge` transforms a `ridge` object from parameter
+space, where the estimated coefficients are $\beta_k$ with covariance
+matrices $\Sigma_k$, to the principal component space defined by the
+right singular vectors, $V$, of the singular value decomposition of the
+scaled predictor matrix, $X$.
+
+``` r
+plridge <- pca.ridge(lridge)
+traceplot(plridge)
+```
+
+![](man/figures/README-pca-traceplot-1.png)<!-- -->
+
+what is perhaps surprising is that the coefficients for the first 4
+components are not shrunk at all. Rather, the effect of ridge regression
+is seen only on the last two dimensions.
+
+``` r
+pairs(plridge)
+```
+
+<img src="man/figures/README-pca-pairs-1.png" width="100%" />
+
+``` r
+plot(plridge, variables=5:6, fill = TRUE, fill.alpha=0.2)
+```
+
+![](man/figures/README-pca-dim56-1.png)<!-- -->
 
 ## References
 

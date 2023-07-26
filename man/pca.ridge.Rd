@@ -9,7 +9,7 @@ The function \code{pca.ridge} transforms a \code{ridge} object
 from parameter space, where the estimated coefficients are
 \eqn{\beta_k} with covariance matrices \eqn{\Sigma_k}, to the
 principal component space defined by the right singular vectors, \eqn{V},
-of the singular value decomposition of the scaled predictor matrix, X.
+of the singular value decomposition of the scaled predictor matrix, \eqn{X}.
 
 In this space, the transformed coefficients are \eqn{V \beta_k},
 with covariance matrices

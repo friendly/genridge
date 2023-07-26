@@ -47,7 +47,7 @@ More importantly, the `ridge` function also calculates and returns the associate
 
 This provides the support for the main plotting functions in the package:
 
-* `plot.ridge`: Bivariate ridge trace plots
+* `plot.ridge`: Bivariate ridge trace plots, showing the covariance ellipse of the estimated coefficients.
 
 * `pairs.ridge`: All pairwise bivariate ridge trace plots
 
@@ -55,7 +55,7 @@ This provides the support for the main plotting functions in the package:
 
 * `traceplot`: Traditional univariate ridge trace plots
 
-In addition, the function pca.ridge transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of $X^T X$ or the SVD of X. The main plotting functions also work for these objects, of class `c("ridge", "pcaridge")`.
+In addition, the function `pca.ridge` transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of $X^T X$ or the SVD of X. The main plotting functions also work for these objects, of class `c("ridge", "pcaridge")`.
 
 Finally, the functions `precision` and `vif.ridge` provide other useful measures and plots.
 
@@ -76,6 +76,10 @@ The _development_ version can be installed to your R library directly from this 
 The classic example for ridge regression is Longley's (1967) data, consisting of 7 economic variables, observed yearly from 1947 to 1962 (n=16), in the data frame `datasets::longley`.
 The goal is to predict `Employed` from `GNP`, `Unemployed`, `Armed.Forces`, `Population`, `Year`,
 `GNP.deflator`.
+
+These data are perverse, in that 
+* each variable is a time series so that there is clearly a lack of independence
+* there is also some _structural colinearity_ among the variables `GNP`, `Year`, `GNP.deflator`, `Population`.
 
 ```{r longley1}
 data(longley)
@@ -102,6 +106,17 @@ lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year +
 		data=longley, lambda=lambda)
 ```
 
+## Variance Inflation Factors
+
+`vif()` for a `"ridge"` object calculates variance inflation factors for all
+values of the ridge constant. You can see that for OLS ($\lambda = 0$), nearly all VIF values
+are dangeroulsly high. With a ridge factor of 0.04 or greater, variance inflation has been
+considerably reduced.
+
+```{r vif}
+vif(lridge)
+```
+
 
 ### Univariate trace plots
 
@@ -113,7 +128,7 @@ traceplot(lridge)
 
 It is sometimes easier to interpret the plot when coefficients are plotted against the equivalent
 degrees of freedom, where $\lambda = 0$ corresponds to 6 degrees of freedom in the parameter
-space.
+space of six predictors.
 ```{r longley-tp2}
 traceplot(lridge, X="df")
 ```
@@ -145,6 +160,41 @@ for (i in 2:5) {
 	text(lridge$coef[-1,c(1,i)], lambdaf[-1], pos=3, cex=1.3)
 }
 par(op)
+```
+The `pairs` method for `ridge` objects shows this in scatterplot matrix form.
+
+```{r longley-pairs}
+#| out.width = "100%"
+pairs(lridge, radius=0.5)
+```
+
+
+## Low-rank views
+
+Just as principal components analysis gives low-dimensional views of a data set, PCA can
+be useful to understand ridge regression.
+
+The function `pca.ridge` transforms a `ridge` object
+from parameter space, where the estimated coefficients are
+$\beta_k$ with covariance matrices $\Sigma_k$, to the
+principal component space defined by the right singular vectors, $V$,
+of the singular value decomposition of the scaled predictor matrix, $X$.
+
+```{r pca-traceplot}
+plridge <- pca.ridge(lridge)
+traceplot(plridge)
+```
+
+what is perhaps surprising is that the coefficients for the first 4 components are not shrunk at all.
+Rather, the effect of ridge regression is seen only on the last two dimensions.
+
+```{r pca-pairs}
+#| out.width = "100%"
+pairs(plridge)
+```
+
+```{r pca-dim56}
+plot(plridge, variables=5:6, fill = TRUE, fill.alpha=0.2)
 ```
 
 
