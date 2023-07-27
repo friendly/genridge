@@ -252,7 +252,10 @@ coefficients on the estimated sampling variance. See: `help(precision)` for deta
 precision(lridge)
 ```
 
-`norm.beta` is a measure of shrinkage, and `det` is a measure of variance.
+`norm.beta`, $||\mathbf{\beta}|| / \max{||\mathbf{\beta}||}$ is a measure of shrinkage, and `det`,
+$\log{| \text{Var}(\mathbf{\beta}) |}$,
+is a measure of variance. Plotting these against
+each other gives a direct view of the tradeoff.
 
 ```{r precision-plot}
 #' fig.show = "hold"

@@ -298,19 +298,14 @@ precision(lridge)
 #> 0.080  0.080 4.128 -21.05  0.5873  0.2599    0.3373
 ```
 
-`norm.beta` is a measure of shrinkage, and `det` is a measure of
-variance.
+`norm.beta`, $||\mathbf{\beta}|| / \max{||\mathbf{\beta}||}$ is a
+measure of shrinkage, and `det`, $\log{| \text{Var}(\mathbf{\beta}) |}$,
+is a measure of variance. Plotting these against each other gives a
+direct view of the tradeoff.
 
 ``` r
 #' fig.show = "hold"
-(pdat <- precision(lridge))
-#>       lambda    df    det   trace max.eig norm.beta
-#> 0.000  0.000 6.000 -12.93 18.1190 15.4191    1.0000
-#> 0.005  0.005 5.415 -14.41  6.8209  4.6065    0.7406
-#> 0.010  0.010 5.135 -15.41  4.0423  2.1807    0.6365
-#> 0.020  0.020 4.818 -16.83  2.2180  1.0255    0.5282
-#> 0.040  0.040 4.478 -18.70  1.1647  0.5808    0.4233
-#> 0.080  0.080 4.128 -21.05  0.5873  0.2599    0.3373
+pdat <- precision(lridge)
 op <- par(mar=c(4, 4, 1, 1) + 0.2)
 library(splines)
 with(pdat, {
