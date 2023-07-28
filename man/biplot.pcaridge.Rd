@@ -24,13 +24,12 @@
 )
 }
 \arguments{
-\item{x}{A \code{pcaridge} object computed by \code{\link{pca.ridge}} or a
-\code{ridge} object.}
+\item{x}{A \code{pcaridge} object computed by \code{\link{pca.ridge}} or a \code{ridge} object.}
 
 \item{variables}{The dimensions or variables to be shown in the the plot.
 By default, the \emph{last} two dimensions, corresponding to the smallest
 singular values, are plotted for \code{class("pcaridge")} objects or the
-\emph{first} two variables for \code{class("ridge")} objects.}
+ \emph{first} two variables for \code{class("ridge")} objects.}
 
 \item{labels}{A vector of character strings or expressions used as labels
 for the ellipses. Use \code{labels=NULL} to suppress these.}
@@ -66,7 +65,7 @@ is added to the axis label.}
 \item{\dots}{Other arguments, passed to \code{\link{plot.pcaridge}}}
 }
 \value{
-
+None
 }
 \description{
 \code{biplot.pcaridge} supplements the standard display of the covariance
@@ -89,8 +88,7 @@ adding vectors showing the relation of the PCA/SVD dimensions to the plotted
 variables.
 
 \code{class("ridge")} objects use the transpose of the right singular
-vectors, \code{t(x$svd.V)} for the dimension weights plotted as vectors.  %%
-~~ If necessary, more details than the description above ~~
+vectors, \code{t(x$svd.V)} for the dimension weights plotted as vectors.
 }
 \examples{
 
@@ -115,12 +113,13 @@ biplot(lridge, radius=0.5)
 biplot(lridge, radius=0.5, asp=NA)
 
 
-
 }
 \references{
-Friendly, M. (2012). The Generalized Ridge Trace Plot:
-Visualizing Bias and Precision. In press, \emph{Journal of Computational and
-Graphical Statistics}, 21.
+Friendly, M. (2013). The Generalized Ridge Trace Plot:
+Visualizing Bias \emph{and} Precision. 
+\emph{Journal of Computational and Graphical Statistics}, \bold{22}(1), 50-68,
+\doi{10.1080/10618600.2012.681237},
+\url{http://datavis.ca/papers/genridge-jcgs.pdf}
 }
 \seealso{
 \code{\link{plot.ridge}}, \code{\link{pca.ridge}}

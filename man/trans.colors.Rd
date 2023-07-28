@@ -7,11 +7,9 @@
 trans.colors(col, alpha = 0.5, names = NULL)
 }
 \arguments{
-\item{col}{A character vector of colors, either as color names or rgb hex
-values}
+\item{col}{A character vector of colors, either as color names or rgb hex values}
 
-\item{alpha}{alpha transparency value(s) to apply to each color (0 means
-fully transparent and 1 means opaque)}
+\item{alpha}{alpha transparency value(s) to apply to each color (0 means fully transparent and 1 means opaque)}
 
 \item{names}{optional character vector of names for the colors}
 }
@@ -46,7 +44,6 @@ trans.colors("red", alpha=seq(0,1, length=5), names=paste("red", 1:5, sep=""))
 
 }
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
 \code{\link[grDevices]{col2rgb}}, \code{\link[grDevices]{rgb}},
 }
 \author{

@@ -6,14 +6,13 @@
 #' Colors (\code{col}) and \code{alpha} need not be of the same length. The
 #' shorter one is replicated to make them of the same length.
 #' 
-#' @param col A character vector of colors, either as color names or rgb hex
-#' values
-#' @param alpha alpha transparency value(s) to apply to each color (0 means
-#' fully transparent and 1 means opaque)
+#' @param col A character vector of colors, either as color names or rgb hex values
+#' @param alpha alpha transparency value(s) to apply to each color (0 means fully transparent and 1 means opaque)
 #' @param names optional character vector of names for the colors
 #' @return A vector of color values of the form \code{"#rrggbbaa"}
 #' @author Michael Friendly
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @export
+#' @seealso 
 #' \code{\link[grDevices]{col2rgb}}, \code{\link[grDevices]{rgb}},
 #' @keywords color
 #' @examples

@@ -84,9 +84,9 @@ values, giving the alpha transparency for ellipsoids rendered with
 should be rendered with \code{\link[rgl]{wire3d}}. Recycled as necessary.}
 
 \item{aspect}{a scalar or vector of length 3, or the character string "iso",
-indicating the ratios of the x, y, and z axes of the bounding box.  The
-default, \code{aspect=1} makes the bounding box display as a cube
-approximately filling the display. See \code{\link[rgl]{aspect3d}} for
+ indicating the ratios of the x, y, and z axes of the bounding box.  The
+ default, \code{aspect=1} makes the bounding box display as a cube
+ approximately filling the display. See \code{\link[rgl]{aspect3d}} for
 details.}
 
 \item{add}{if \code{TRUE}, add to the current \code{rgl} plot; the default
@@ -95,7 +95,7 @@ is \code{FALSE}.}
 \item{\dots}{Other arguments passed down}
 }
 \value{
-
+None
 }
 \description{
 The 3D ridge trace plot displays 3D projections of the covariance ellipsoids

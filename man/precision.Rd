@@ -38,12 +38,15 @@ function does. ~~
 Three measures of (inverse) precision based on the \dQuote{size} of the
 covariance matrix of the parameters are calculated. Let \eqn{V_k} be the
 covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i= 1,
-\dots p} be its eigenvalues \enumerate{ \item \eqn{\log | V_k | = \log \prod
-\lambda} or \eqn{|V_k|^{1/p} =(\prod \lambda)^{1/p}} measures the linearized
-volume of the covariance ellipsoid and corresponds conceptually to Wilks'
-Lambda criterion \item \eqn{ trace( V_k ) = \sum \lambda} corresponds
-conceptually to Pillai's trace criterion \item \eqn{ \lambda_1 = max
-(\lambda)} corresponds to Roy's largest root criterion.  }
+\dots p} be its eigenvalues 
+\enumerate{ 
+  \item \eqn{\log | V_k | = \log \prod \lambda} or \eqn{|V_k|^{1/p} =(\prod \lambda)^{1/p}} 
+       measures the linearized
+       volume of the covariance ellipsoid and corresponds conceptually to Wilks'
+       Lambda criterion 
+  \item \eqn{ trace( V_k ) = \sum \lambda} corresponds conceptually to Pillai's trace criterion 
+  \item \eqn{ \lambda_1 = max (\lambda)} corresponds to Roy's largest root criterion.  
+}
 }
 \note{
 Models fit by \code{lm} and \code{ridge} use a different scaling for

@@ -1,7 +1,3 @@
-# variance inflation factors for ridge regression objects
-
-
-
 #' Variance Inflation Factors for Ridge Regression
 #' 
 #' The function \code{vif.ridge} calculates variance inflation factors for the
@@ -14,11 +10,12 @@
 #' @param mod A \code{ridge} object
 #' @param \dots Other arguments (unused)
 #' @return Returns a matrix of variance inflation factors of the same size and
-#' shape as \code{coef{mod}}. The columns correspond to the predictors in the
-#' model and the rows correspond to the values of \code{lambda} in ridge
-#' estimation. %% If it is a LIST, use %% \item{comp1 }{Description of 'comp1'}
-#' %% \item{comp2 }{Description of 'comp2'} %% ...
+#'         shape as \code{coef{mod}}. The columns correspond to the predictors in the
+#'         model and the rows correspond to the values of \code{lambda} in ridge
+#'         estimation. 
 #' @author Michael Friendly
+#' @export
+#' @importFrom car vif
 #' @seealso \code{\link[car]{vif}}, \code{\link{precision}}
 #' @references Fox, J. and Monette, G. (1992). Generalized collinearity
 #' diagnostics. \emph{JASA}, \bold{87}, 178-183

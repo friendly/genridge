@@ -6,38 +6,40 @@
 #' 
 #' @param x A \code{ridge} object, as fit by \code{\link{ridge}}
 #' @param variables Predictors in the model to be displayed in the plot: an
-#' integer or character vector, giving the indices or names of the variables.
+#'        integer or character vector, giving the indices or names of the variables.
 #' @param radius Radius of the ellipse-generating circle for the covariance
-#' ellipsoids.
+#'        ellipsoids.
 #' @param lwd,lty Line width and line type for the covariance ellipsoids.
-#' Recycled as necessary.
+#'        Recycled as necessary.
 #' @param col A numeric or character vector giving the colors used to plot the
-#' covariance ellipsoids.  Recycled as necessary.
+#'        covariance ellipsoids.  Recycled as necessary.
 #' @param center.pch Plotting character used to show the bivariate ridge
-#' estimates. Recycled as necessary.
+#'        estimates. Recycled as necessary.
 #' @param center.cex Size of the plotting character for the bivariate ridge
-#' estimates
+#'        estimates
 #' @param fill Logical vector: Should the covariance ellipsoids be filled?
-#' Recycled as necessary.
+#'        Recycled as necessary.
 #' @param fill.alpha Numeric vector: alpha transparency value(s) for filled
-#' ellipsoids. Recycled as necessary.
+#'        ellipsoids. Recycled as necessary.
 #' @param digits Number of digits to be displayed as the (min, max) values in
-#' the diagonal panels
+#'        the diagonal panels
 #' @param diag.cex Character size for predictor labels in diagonal panels
 #' @param diag.panel Function to draw diagonal panels.  Not yet implemented:
-#' just uses internal \code{panel.label} to write the variable name and ranges.
+#'        just uses internal \code{panel.label} to write the variable name and ranges.
 #' @param \dots Other arguments passed down
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
-#' @seealso \code{\link{ridge}} for details on ridge regression as implemented
-#' here
+#' @export
+#' @seealso \code{\link{ridge}} for details on ridge regression as implemented here
 #' 
 #' \code{\link{plot.ridge}}, \code{\link{traceplot}} for other plotting methods
+#' 
 #' @references Friendly, M. (2013). The Generalized Ridge Trace Plot:
 #' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 #' Graphical Statistics}, \bold{22}(1), 50-68,
 #' doi:10.1080/10618600.2012.681237,
 #' \url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
+#' 
 #' @keywords hplot
 #' @examples
 #' 

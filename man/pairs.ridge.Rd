@@ -92,8 +92,7 @@ doi:10.1080/10618600.2012.681237,
 \url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
 }
 \seealso{
-\code{\link{ridge}} for details on ridge regression as implemented
-here
+\code{\link{ridge}} for details on ridge regression as implemented here
 
 \code{\link{plot.ridge}}, \code{\link{traceplot}} for other plotting methods
 }

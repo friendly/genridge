@@ -38,21 +38,23 @@ is returned in the \code{ridge} object.}
 \item{digits}{For the \code{print} method, the number of digits to print.}
 }
 \value{
-A list with the following components: %% If it is a LIST, use
-\item{lambda}{The vector of ridge constants} \item{df}{The vector of
-effective degrees of freedom corresponding to \code{lambda}} \item{coef}{The
-matrix of estimated ridge regression coefficients} \item{scales}{scalings
-used on the X matrix} \item{kHKB}{HKB estimate of the ridge constant}
-\item{kLW}{L-W estimate of the ridge constant} \item{GCV}{vector of GCV
-values} \item{kGCV}{value of \code{lambda} with the minimum GCV}
+A list with the following components: 
+\item{lambda}{The vector of ridge constants} 
+\item{df}{The vector of effective degrees of freedom corresponding to \code{lambda}} 
+\item{coef}{The matrix of estimated ridge regression coefficients} 
+\item{scales}{scalings used on the X matrix} 
+\item{kHKB}{HKB estimate of the ridge constant}
+\item{kLW}{L-W estimate of the ridge constant} 
+\item{GCV}{vector of GCV values} 
+\item{kGCV}{value of \code{lambda} with the minimum GCV}
 
 If \code{svd==TRUE}, the following are also included:
 
 \item{svd.D}{Singular values of the \code{svd} of the scaled X matrix}
 \item{svd.U}{Left singular vectors of the \code{svd} of the scaled X matrix.
-Rows correspond to observations and columns to dimensions.}
+      Rows correspond to observations and columns to dimensions.}
 \item{svd.V}{Right singular vectors of the \code{svd} of the scaled X
-matrix. Rows correspond to variables and columns to dimensions.} %% ...
+      matrix. Rows correspond to variables and columns to dimensions.} %% ...
 }
 \description{
 The function \code{ridge} fits linear models by ridge regression, returning
@@ -148,8 +150,7 @@ Regression Estimators," \emph{Communications in Statistics}, 5, 307-323.
 regression
 
 \code{\link{traceplot}}, \code{\link{plot.ridge}},
-\code{\link{pairs.ridge}}, \code{\link{plot3d.ridge}}, for 1D, 2D, 3D
-plotting methods
+\code{\link{pairs.ridge}}, \code{\link{plot3d.ridge}}, for 1D, 2D, 3D plotting methods
 
 \code{\link{pca.ridge}}, \code{\link{biplot.ridge}},
 \code{\link{biplot.pcaridge}} for views in PCA/SVD space

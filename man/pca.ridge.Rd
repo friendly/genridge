@@ -13,7 +13,8 @@ pca.ridge(x, ...)
 implementation.}
 }
 \value{
-
+An object of class \code{c("ridge", "pcaridge")}, with the same
+components as the original \code{ridge} object.
 }
 \description{
 The function \code{pca.ridge} transforms a \code{ridge} object from
@@ -21,8 +22,7 @@ parameter space, where the estimated coefficients are \eqn{\beta_k} with
 covariance matrices \eqn{\Sigma_k}, to the principal component space defined
 by the right singular vectors, \eqn{V}, of the singular value decomposition
 of the scaled predictor matrix, \eqn{X}.
-}
-\details{
+
 In this space, the transformed coefficients are \eqn{V \beta_k}, with
 covariance matrices \deqn{V \Sigma_k V^T}
 

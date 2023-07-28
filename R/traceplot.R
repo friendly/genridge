@@ -1,4 +1,4 @@
-#' Univariate ridge trace plots
+#' Univariate Ridge Trace Plots
 #' 
 #' The \code{traceplot} function extends and simplifies the univariate ridge
 #' trace plots for ridge regression provided in the \code{plot} method for
@@ -10,23 +10,24 @@
 #' variable is extended slightly to accommodate the variable names.
 #' 
 #' @param x A \code{ridge} object, as fit by \code{\link{ridge}}
-#' @param X What to plot as the horizontal coordinate, one of \code{c("lambda",
-#' "df")}
+#' @param X What to plot as the horizontal coordinate, one of \code{c("lambda", "df")}
 #' @param col A numeric or character vector giving the colors used to plot the
-#' ridge trace curves.  Recycled as necessary.
+#'        ridge trace curves.  Recycled as necessary.
 #' @param pch Vector of plotting characters used to plot the ridge trace
-#' curves.  Recycled as necessary.
+#'        curves.  Recycled as necessary.
 #' @param xlab Label for horizontal axis
 #' @param ylab Label for vertical axis
 #' @param xlim,ylim x, y limits for the plot
 #' @param \dots Other arguments passed to \code{\link[graphics]{matplot}}
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @export
+#' @seealso 
 #' \code{\link{ridge}} for details on ridge regression as implemented here
 #' 
 #' \code{\link{plot.ridge}}, \code{\link{pairs.ridge}} for other plotting
 #' methods
+#' 
 #' @references Friendly, M. (2013). The Generalized Ridge Trace Plot:
 #' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 #' Graphical Statistics}, \bold{22}(1), 50-68,

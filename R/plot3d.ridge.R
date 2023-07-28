@@ -33,47 +33,48 @@ plot3d.pcaridge <-
 #' 
 #' @aliases plot3d plot3d.ridge plot3d.pcaridge
 #' @param x A \code{ridge} object, as fit by \code{\link{ridge}} or a
-#' \code{pcaridge} object as transformed by \code{\link{pca.ridge}}
+#'        \code{pcaridge} object as transformed by \code{\link{pca.ridge}}
 #' @param variables Predictors in the model to be displayed in the plot: an
-#' integer or character vector of length 3, giving the indices or names of the
-#' variables. Defaults to the first three predictors for \code{ridge} objects
-#' or the \emph{last} three dimensions for \code{pcaridge} objects.
+#'        integer or character vector of length 3, giving the indices or names of the
+#'        variables. Defaults to the first three predictors for \code{ridge} objects
+#'        or the \emph{last} three dimensions for \code{pcaridge} objects.
 #' @param radius Radius of the ellipse-generating circle for the covariance
-#' ellipsoids.  The default, \code{radius=1} gives a standard \dQuote{unit}
-#' ellipsoid. Typically, \code{radius<1} gives less cluttered displays.
+#'        ellipsoids.  The default, \code{radius=1} gives a standard \dQuote{unit}
+#'        ellipsoid. Typically, \code{radius<1} gives less cluttered displays.
 #' @param which.lambda A vector of indices used to select the values of
-#' \code{lambda} for which ellipsoids are plotted. The default is to plot
-#' ellipsoids for all values of \code{lambda} in the \code{ridge} object.
+#'        \code{lambda} for which ellipsoids are plotted. The default is to plot
+#'        ellipsoids for all values of \code{lambda} in the \code{ridge} object.
 #' @param lwd,lty Line width and line type for the covariance ellipsoids.
-#' Recycled as necessary.
+#'        Recycled as necessary.
 #' @param xlim,ylim,zlim X, Y, Z limits for the plot, each a vector of length
-#' 2.  If missing, the range of the covariance ellipsoids is used.
+#'        2.  If missing, the range of the covariance ellipsoids is used.
 #' @param xlab,ylab,zlab Labels for the X, Y, Z variables in the plot. If
-#' missing, the names of the predictors given in \code{variables} is used.
+#'        missing, the names of the predictors given in \code{variables} is used.
 #' @param col A numeric or character vector giving the colors used to plot the
-#' covariance ellipsoids.  Recycled as necessary.
+#'        covariance ellipsoids.  Recycled as necessary.
 #' @param labels A numeric or character vector giving the labels to be drawn at
-#' the centers of the covariance ellipsoids.
+#'        the centers of the covariance ellipsoids.
 #' @param ref Logical: whether to draw horizontal and vertical reference lines
-#' at 0. This is not yet implemented.
+#'        at 0. This is not yet implemented.
 #' @param ref.col Color of reference lines.
 #' @param segments Number of line segments used in drawing each dimension of a
-#' covariance ellipsoid.
+#'        covariance ellipsoid.
 #' @param shade a logical scalar or vector, indicating whether the ellipsoids
-#' should be rendered with \code{\link[rgl]{shade3d}}. Recycled as necessary.
+#'        should be rendered with \code{\link[rgl]{shade3d}}. Recycled as necessary.
 #' @param shade.alpha a numeric value in the range [0,1], or a vector of such
-#' values, giving the alpha transparency for ellipsoids rendered with
-#' \code{shade=TRUE}.
+#'        values, giving the alpha transparency for ellipsoids rendered with
+#'        \code{shade=TRUE}.
 #' @param wire a logical scalar or vector, indicating whether the ellipsoids
-#' should be rendered with \code{\link[rgl]{wire3d}}. Recycled as necessary.
+#'        should be rendered with \code{\link[rgl]{wire3d}}. Recycled as necessary.
 #' @param aspect a scalar or vector of length 3, or the character string "iso",
-#' indicating the ratios of the x, y, and z axes of the bounding box.  The
-#' default, \code{aspect=1} makes the bounding box display as a cube
-#' approximately filling the display. See \code{\link[rgl]{aspect3d}} for
-#' details.
+#'        indicating the ratios of the x, y, and z axes of the bounding box.  The
+#'        default, \code{aspect=1} makes the bounding box display as a cube
+#'        approximately filling the display. See \code{\link[rgl]{aspect3d}} for
+#'       details.
 #' @param add if \code{TRUE}, add to the current \code{rgl} plot; the default
-#' is \code{FALSE}.
+#'        is \code{FALSE}.
 #' @param \dots Other arguments passed down
+#' @export
 #' @return None 
 #' 
 #' @note This is an initial implementation.  The details and arguments are

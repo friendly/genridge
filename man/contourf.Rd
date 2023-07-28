@@ -61,7 +61,9 @@ mentioned above, as well as additional graphical parameters passed by
 \code{\link[graphics]{contour.default}} to more basic functions.}
 }
 \value{
-
+Returns invisibly the list of contours lines, with components
+       \code{levels}, \code{x}, \code{y}. See
+       \code{\link[grDevices]{contourLines}}.
 }
 \description{
 This is an enhancement to \code{\link[graphics]{contour}}, written as a

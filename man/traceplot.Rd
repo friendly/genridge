@@ -2,7 +2,7 @@
 % Please edit documentation in R/traceplot.R
 \name{traceplot}
 \alias{traceplot}
-\title{Univariate ridge trace plots}
+\title{Univariate Ridge Trace Plots}
 \usage{
 traceplot(
   x,
@@ -20,8 +20,7 @@ traceplot(
 \arguments{
 \item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
 
-\item{X}{What to plot as the horizontal coordinate, one of \code{c("lambda",
-"df")}}
+\item{X}{What to plot as the horizontal coordinate, one of \code{c("lambda", "df")}}
 
 \item{col}{A numeric or character vector giving the colors used to plot the
 ridge trace curves.  Recycled as necessary.}
@@ -80,7 +79,6 @@ Hoerl, A. E.  and Kennard R. W. (1970). "Ridge Regression: Applications to
 Nonorthogonal Problems", \emph{Technometrics}, 12(1), 69-82.
 }
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
 \code{\link{ridge}} for details on ridge regression as implemented here
 
 \code{\link{plot.ridge}}, \code{\link{pairs.ridge}} for other plotting

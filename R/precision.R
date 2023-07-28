@@ -1,7 +1,3 @@
-## Measures of precision and bias for ridge regression
-## 
-
-
 
 #' Measures of Precision and Shrinkage for Ridge Regression
 #' 
@@ -13,12 +9,15 @@
 #' Three measures of (inverse) precision based on the \dQuote{size} of the
 #' covariance matrix of the parameters are calculated. Let \eqn{V_k} be the
 #' covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i= 1,
-#' \dots p} be its eigenvalues \enumerate{ \item \eqn{\log | V_k | = \log \prod
-#' \lambda} or \eqn{|V_k|^{1/p} =(\prod \lambda)^{1/p}} measures the linearized
-#' volume of the covariance ellipsoid and corresponds conceptually to Wilks'
-#' Lambda criterion \item \eqn{ trace( V_k ) = \sum \lambda} corresponds
-#' conceptually to Pillai's trace criterion \item \eqn{ \lambda_1 = max
-#' (\lambda)} corresponds to Roy's largest root criterion.  }
+#' \dots p} be its eigenvalues 
+#' \enumerate{ 
+#'   \item \eqn{\log | V_k | = \log \prod \lambda} or \eqn{|V_k|^{1/p} =(\prod \lambda)^{1/p}} 
+#'        measures the linearized
+#'        volume of the covariance ellipsoid and corresponds conceptually to Wilks'
+#'        Lambda criterion 
+#'   \item \eqn{ trace( V_k ) = \sum \lambda} corresponds conceptually to Pillai's trace criterion 
+#'   \item \eqn{ \lambda_1 = max (\lambda)} corresponds to Roy's largest root criterion.  
+#' }
 #' 
 #' @aliases precision precision.ridge precision.lm
 #' @param object An object of class \code{ridge} or \code{lm}
@@ -38,6 +37,7 @@
 #' the predictors, so the results of \code{precision} for an \code{lm} model
 #' will not correspond to those for \code{ridge} with ridge constant = 0.
 #' @author Michael Friendly
+#' @export
 #' @seealso \code{\link{ridge}},
 #' @keywords regression models
 #' @examples
