@@ -1,0 +1,43 @@
+exportPattern("*\\.ridge")
+exportPattern("*\\.pcaridge")
+exportPattern("precision\\.*")
+exportPattern("ridge\\.*")
+# also:
+export(plot3d, ridge,  traceplot, trans.colors)
+export(contourf)
+
+#export(ridge, 
+#	traceplot, trans.colors, 
+#	coef.ridge, print.ridge, plot.ridge, pairs.ridge,  
+#	pca.ridge, vcov.ridge, 
+#	precision, precision.ridge, precision.lm, 
+#	vif.ridge, plot3d.ridge, plot3d.pcaridge
+#)
+
+S3method(coef, ridge)
+S3method(print, ridge)
+S3method(plot, ridge)
+S3method(plot, pcaridge)
+S3method(pairs, ridge)
+S3method(vcov, ridge)
+S3method(precision, ridge)
+S3method(precision, lm)
+S3method(vif, ridge)
+S3method(plot3d, ridge)
+S3method(plot3d, pcaridge)
+S3method(biplot, pcaridge)
+S3method(biplot, ridge)
+S3method(ridge, default)
+S3method(ridge, formula)
+
+importFrom(car, vif)
+importFrom("grDevices", "col2rgb", "colorRampPalette", "contourLines",
+           "gray", "rgb")
+importFrom("graphics", "abline", "arrows", "barplot", "box", "contour",
+           "matplot", "par", "plot", "polygon", "text")
+importFrom("stats", "coef", "coefficients", "contrasts", "cov2cor",
+           "lm.fit", "model.matrix", "model.offset", "model.response",
+           "uniroot", "vcov")
+
+# to make plot3d.ridge an S3 method; but this requires Depends: rgl
+#importFrom(rgl, plot3d)
