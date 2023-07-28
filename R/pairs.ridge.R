@@ -29,6 +29,7 @@
 #' @param \dots Other arguments passed down
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
+#' @importFrom graphics par text box barplot
 #' @export
 #' @seealso \code{\link{ridge}} for details on ridge regression as implemented here
 #' 

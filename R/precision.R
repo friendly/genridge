@@ -25,17 +25,20 @@
 #' matrices, one of \code{c("log","root")}.
 #' @param normalize If \code{TRUE} the length of the coefficient vector is
 #' normalized to a maximum of 1.0.
+#' 
 #' @param \dots Other arguments (currently unused)
-#' @return A data.frame with the following columns %% If it is a LIST, use
-#' \item{lambda}{The ridge constant} \item{df}{The equivalent effective degrees
-#' of freedom} \item{det}{The \code{det.fun} function of the determinant of the
-#' covariance matrix} \item{trace}{The trace of the covariance matrix}
+#' @return A data.frame with the following columns 
+#' \item{lambda}{The ridge constant} 
+#' \item{df}{The equivalent effective degrees of freedom} 
+#' \item{det}{The \code{det.fun} function of the determinant of the covariance matrix} 
+#' \item{trace}{The trace of the covariance matrix}
 #' \item{max.eig}{Maximum eigen value of the covariance matrix}
-#' \item{norm.beta}{The root mean square of the estimated coefficients,
-#' possibly normalized} %% ...
+#' \item{norm.beta}{The root mean square of the estimated coefficients, possibly normalized} 
+#' 
 #' @note Models fit by \code{lm} and \code{ridge} use a different scaling for
 #' the predictors, so the results of \code{precision} for an \code{lm} model
 #' will not correspond to those for \code{ridge} with ridge constant = 0.
+#' 
 #' @author Michael Friendly
 #' @export
 #' @seealso \code{\link{ridge}},
@@ -72,11 +75,13 @@
 #' 	})
 #' 
 #' 
+
 precision <- function(object, ...) {
 	UseMethod("precision")
 }
 
 # DONE:  allow choice of log.det or det()^{1/p}
+
 precision.ridge <- function(object, det.fun=c("log","root"), normalize=TRUE, ...) {
 	tr <- function(x) sum(diag(x))
 	maxeig <- function(x) max(eigen(x)$values)

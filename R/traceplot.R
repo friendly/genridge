@@ -21,6 +21,7 @@
 #' @param \dots Other arguments passed to \code{\link[graphics]{matplot}}
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
+#' @importFrom graphics matplot
 #' @export
 #' @seealso 
 #' \code{\link{ridge}} for details on ridge regression as implemented here

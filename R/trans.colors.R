@@ -11,6 +11,7 @@
 #' @param names optional character vector of names for the colors
 #' @return A vector of color values of the form \code{"#rrggbbaa"}
 #' @author Michael Friendly
+#' @importFrom grDevices col2rgb rgb
 #' @export
 #' @seealso 
 #' \code{\link[grDevices]{col2rgb}}, \code{\link[grDevices]{rgb}},

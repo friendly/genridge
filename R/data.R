@@ -15,10 +15,10 @@
 #' @docType data
 #' @format A data frame with 16 observations on the following 4 variables.
 #' \describe{ 
-#'  \item{list("yield")}{conversion percentage yield of acetylene}
-#'  \item{list("temp")}{reactor temperature (celsius)} 
-#'  \item{list("ratio")}{H2 to N-heptone ratio} 
-#'  \item{list("time")}{contact time (sec)} 
+#'  \item{\code{yield}}{conversion percentage yield of acetylene}
+#'  \item{\code{temp}}{reactor temperature (celsius)} 
+#'  \item{\code{ratio}}{H2 to N-heptone ratio} 
+#'  \item{\code{time}}{contact time (sec)} 
 #' }
 #' @references 
 #' Marquardt, D.W., and Snee, R.D. (1975), "Ridge Regression in
@@ -87,20 +87,20 @@ NULL
 #' @docType data
 #' @format A data frame with 13 observations on the following 14 variables.
 #' \describe{ 
-#'  \item{list("Police")}{Full-time police per 100,000 population}
-#'  \item{list("Unemp")}{Percent unemployed in the population}
-#'  \item{list("MfgWrk")}{Number of manufacturing workers in thousands}
-#'  \item{list("GunLic")}{Number of handgun licences per 100,000 population}
-#'  \item{list("GunReg")}{Number of handgun registrations per 100,000 population} 
-#'  \item{list("HClear")}{Percent of homicides cleared by arrests}
-#'  \item{list("WhMale")}{Number of white males in the population}
-#'  \item{list("NmfgWrk")}{Number of non-manufacturing workers in thousands}
-#'  \item{list("GovWrk")}{Number of government workers in thousands}
-#'  \item{list("HrEarn")}{Average hourly earnings} 
-#'  \item{list("WkEarn")}{Average weekly earnings} 
-#'  \item{list("Accident")}{Death rate in accidents per 100,000 population} 
-#'  \item{list("Assaults")}{Number of assaults per 100,000 population} 
-#'  \item{list("Homicide")}{Number of homicides per 100,000 of population} 
+#'  \item{\code{Police}}{Full-time police per 100,000 population}
+#'  \item{\code{Unemp}}{Percent unemployed in the population}
+#'  \item{\code{MfgWrk}}{Number of manufacturing workers in thousands}
+#'  \item{\code{GunLic}}{Number of handgun licences per 100,000 population}
+#'  \item{\code{GunReg}}{Number of handgun registrations per 100,000 population} 
+#'  \item{\code{HClear}}{Percent of homicides cleared by arrests}
+#'  \item{\code{WhMale}}{Number of white males in the population}
+#'  \item{\code{NmfgWrk}}{Number of non-manufacturing workers in thousands}
+#'  \item{\code{GovWrk}}{Number of government workers in thousands}
+#'  \item{\code{HrEarn}}{Average hourly earnings} 
+#'  \item{\code{WkEarn}}{Average weekly earnings} 
+#'  \item{\code{Accident}}{Death rate in accidents per 100,000 population} 
+#'  \item{\code{Assaults}}{Number of assaults per 100,000 population} 
+#'  \item{\code{Homicide}}{Number of homicides per 100,000 of population} 
 #' }
 #' 
 #' @references 
@@ -173,12 +173,12 @@ NULL
 #' @docType data
 #' @format A data frame with 17 observations on the following 6 variables.
 #' \describe{ 
-#'  \item{list("Hours")}{monthly man hours (response variable)}
-#'  \item{list("Load")}{average daily patient load} 
-#'  \item{list("Xray")}{monthly X-ray exposures} 
-#'  \item{list("BedDays")}{monthly occupied bed days}
-#'  \item{list("AreaPop")}{eligible population in the area in thousands}
-#'  \item{list("Stay")}{average length of patient's stay in days} 
+#'  \item{\code{Hours}}{monthly man hours (response variable)}
+#'  \item{\code{Load}}{average daily patient load} 
+#'  \item{\code{Xray}}{monthly X-ray exposures} 
+#'  \item{\code{BedDays}}{monthly occupied bed days}
+#'  \item{\code{AreaPop}}{eligible population in the area in thousands}
+#'  \item{\code{Stay}}{average length of patient's stay in days} 
 #' }
 #' @seealso \code{\link[bestglm]{manpower}} for the same data, and other
 #' analyses

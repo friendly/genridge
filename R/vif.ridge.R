@@ -16,6 +16,7 @@
 #' @author Michael Friendly
 #' @export
 #' @importFrom car vif
+#' @importFrom stats coef cov2cor vcov
 #' @seealso \code{\link[car]{vif}}, \code{\link{precision}}
 #' @references Fox, J. and Monette, G. (1992). Generalized collinearity
 #' diagnostics. \emph{JASA}, \bold{87}, 178-183

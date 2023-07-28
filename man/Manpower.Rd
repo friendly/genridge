@@ -7,12 +7,12 @@
 \format{
 A data frame with 17 observations on the following 6 variables.
 \describe{ 
- \item{list("Hours")}{monthly man hours (response variable)}
- \item{list("Load")}{average daily patient load} 
- \item{list("Xray")}{monthly X-ray exposures} 
- \item{list("BedDays")}{monthly occupied bed days}
- \item{list("AreaPop")}{eligible population in the area in thousands}
- \item{list("Stay")}{average length of patient's stay in days} 
+ \item{\code{Hours}}{monthly man hours (response variable)}
+ \item{\code{Load}}{average daily patient load} 
+ \item{\code{Xray}}{monthly X-ray exposures} 
+ \item{\code{BedDays}}{monthly occupied bed days}
+ \item{\code{AreaPop}}{eligible population in the area in thousands}
+ \item{\code{Stay}}{average length of patient's stay in days} 
 }
 }
 \source{

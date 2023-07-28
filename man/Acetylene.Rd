@@ -7,10 +7,10 @@
 \format{
 A data frame with 16 observations on the following 4 variables.
 \describe{ 
- \item{list("yield")}{conversion percentage yield of acetylene}
- \item{list("temp")}{reactor temperature (celsius)} 
- \item{list("ratio")}{H2 to N-heptone ratio} 
- \item{list("time")}{contact time (sec)} 
+ \item{\code{yield}}{conversion percentage yield of acetylene}
+ \item{\code{temp}}{reactor temperature (celsius)} 
+ \item{\code{ratio}}{H2 to N-heptone ratio} 
+ \item{\code{time}}{contact time (sec)} 
 }
 }
 \source{

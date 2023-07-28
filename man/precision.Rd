@@ -20,13 +20,13 @@ matrices, one of \code{c("log","root")}.}
 normalized to a maximum of 1.0.}
 }
 \value{
-A data.frame with the following columns %% If it is a LIST, use
-\item{lambda}{The ridge constant} \item{df}{The equivalent effective degrees
-of freedom} \item{det}{The \code{det.fun} function of the determinant of the
-covariance matrix} \item{trace}{The trace of the covariance matrix}
+A data.frame with the following columns 
+\item{lambda}{The ridge constant} 
+\item{df}{The equivalent effective degrees of freedom} 
+\item{det}{The \code{det.fun} function of the determinant of the covariance matrix} 
+\item{trace}{The trace of the covariance matrix}
 \item{max.eig}{Maximum eigen value of the covariance matrix}
-\item{norm.beta}{The root mean square of the estimated coefficients,
-possibly normalized} %% ...
+\item{norm.beta}{The root mean square of the estimated coefficients, possibly normalized}
 }
 \description{
 Calculates measures of precision based on the size of the estimated

@@ -51,6 +51,8 @@
 #'        other graphic parameters.
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
+#' @importFrom graphics abline polygon text
+#' @importFrom grDevices gray
 #' @export
 #' @seealso \code{\link{ridge}} for details on ridge regression as implemented
 #' here

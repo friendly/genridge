@@ -51,7 +51,9 @@
 #' @return Returns invisibly the list of contours lines, with components
 #'        \code{levels}, \code{x}, \code{y}. See
 #'        \code{\link[grDevices]{contourLines}}. 
-#' 
+#'
+#' @importFrom grDevices colorRampPalette contourLines 
+#' @importFrom graphics polygon par contour
 #' @author Michael Friendly
 #' @seealso \code{\link[graphics]{contour}},
 #' \code{\link[grDevices]{contourLines}}

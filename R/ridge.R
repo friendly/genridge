@@ -47,6 +47,7 @@
 #' \item{svd.V}{Right singular vectors of the \code{svd} of the scaled X
 #'       matrix. Rows correspond to variables and columns to dimensions.} %% ...
 #' @author Michael Friendly
+#' @importFrom stats coef coefficients contrasts lm.fit model.matrix model.offset model.response uniroot vcov
 #' @export
 #' @seealso \code{\link[MASS]{lm.ridge}} for other implementations of ridge
 #' regression

@@ -2,6 +2,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 README.md
+README.Rmd
+NAMESPACE-old
 cran-comments.md
-
 ^CRAN-SUBMISSION$

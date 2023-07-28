@@ -71,6 +71,8 @@
 #' \doi{10.1080/10618600.2012.681237},
 #' \url{http://datavis.ca/papers/genridge-jcgs.pdf}
 #'
+#' @importFrom graphics arrows
+#' @importFrom stats coef
 #' @export
 #' @keywords hplot
 #' @examples
