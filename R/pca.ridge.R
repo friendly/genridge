@@ -1,6 +1,9 @@
 
 #' Transform Ridge Estimates to PCA Space
 #'
+#' @name pca
+#' @aliases pca pca.ridge
+#' 
 #' @description  
 #' The function \code{pca.ridge} transforms a \code{ridge} object from
 #' parameter space, where the estimated coefficients are \eqn{\beta_k} with
@@ -19,7 +22,7 @@
 #' @param \dots Other arguments passed down. Not presently used in this
 #'        implementation.
 #' @return An object of class \code{c("ridge", "pcaridge")}, with the same
-#' components as the original \code{ridge} object. 
+#'        components as the original \code{ridge} object. 
 #' 
 #' @author Michael Friendly
 #' @seealso \code{\link{ridge}}
@@ -29,7 +32,7 @@
 #' Graphical Statistics}, \bold{22}(1), 50-68,
 #' doi:10.1080/10618600.2012.681237,
 #' \url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
-#' @export
+#' @export 
 #' @keywords dplot multivariate
 #' @examples
 #' 
@@ -46,6 +49,11 @@
 #' plot(plridge, variables=5:6)
 #' 
 #' 
+pca <- function(x, ...){
+  UseMethod("pca")
+}
+
+#' @export
 pca.ridge <- function(x, ...) {
 	if (is.null(x$svd.V)) stop("ridge object must contain svd.V")
 	

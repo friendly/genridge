@@ -1,23 +1,13 @@
 # tweaked labels
 # axis3s(... nticks ...)
 
-plot3d <-
-		function (x, ...) {
-	UseMethod("plot3d")
-}
-
-# for pcaridge objects, default to last 3 variables
-plot3d.pcaridge <-
-		function(x, variables=(p-2):p, ...) {
-	p <- dim(coef(x))[2]
-	plot3d.ridge(x, variables, ...)
-}
-
-
-
 
 #' 3D Ridge Trace Plots
 #' 
+#' @name plot3d
+#' @aliases plot3d plot3d.ridge plot3d.pcaridge
+#' 
+#' @description
 #' The 3D ridge trace plot displays 3D projections of the covariance ellipsoids
 #' for a set of ridge regression estimates indexed by a ridge tuning constant.
 #' 
@@ -31,7 +21,6 @@ plot3d.pcaridge <-
 #' \code{plot3d.ridge} and \code{plot3d.pcaridge} differ only in the defaults
 #' for the variables plotted.
 #' 
-#' @aliases plot3d plot3d.ridge plot3d.pcaridge
 #' @param x A \code{ridge} object, as fit by \code{\link{ridge}} or a
 #'        \code{pcaridge} object as transformed by \code{\link{pca.ridge}}
 #' @param variables Predictors in the model to be displayed in the plot: an
@@ -108,6 +97,22 @@ plot3d.pcaridge <-
 #' }
 #' 
 #' 
+
+plot3d <-
+  function (x, ...) {
+    UseMethod("plot3d")
+  }
+
+# for pcaridge objects, default to last 3 variables
+#' @exportS3Method 
+plot3d.pcaridge <-
+  function(x, variables=(p-2):p, ...) {
+    p <- dim(coef(x))[2]
+    plot3d.ridge(x, variables, ...)
+  }
+
+
+#' @exportS3Method 
 plot3d.ridge <-
 function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		lwd=1, lty=1, 

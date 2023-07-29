@@ -1,6 +1,10 @@
 
 #' Ridge Regression Estimates
 #' 
+#' @name ridge
+#' @aliases ridge ridge.default ridge.formula coef.ridge print.ridge vcov.ridge
+#'
+#' @description  
 #' The function \code{ridge} fits linear models by ridge regression, returning
 #' an object of class \code{ridge} designed to be used with the plotting
 #' methods in this package.
@@ -12,7 +16,6 @@
 #' \code{df} are returned in the \code{ridge} object, but the rownames of the
 #' coefficients are given in terms of \code{lambda}.
 #' 
-#' @aliases ridge ridge.default ridge.formula coef.ridge print.ridge vcov.ridge
 #' @param y A numeric vector containing the response variable. NAs not allowed.
 #' @param X A matrix of predictor variables. NA's not allowed. Should not
 #'        include a column of 1's for the intercept
@@ -134,10 +137,12 @@
 #' }
 #' 
 #' 
+#' @export
 ridge <- function(y, ...) {
 	UseMethod("ridge")
 }
 
+#' @exportS3Method 
 ridge.formula <-
 		function(formula, data, lambda=0, df, svd=TRUE, ...){
 	
@@ -165,6 +170,7 @@ ridge.formula <-
 }
 
 
+#' @exportS3Method 
 ridge.default <-
 		function(y, X, lambda=0, df, svd=TRUE, ...){
 	#dimensions	
@@ -241,11 +247,13 @@ ridge.default <-
 
 
 
+#' @exportS3Method 
 coef.ridge <-
 function(object, ...) {
 	object$coef
 }
 
+#' @exportS3Method 
 print.ridge <-
 function(x, digits = max(5, getOption("digits") - 5),...) {
   if (length(coef(x))) {
@@ -256,6 +264,7 @@ function(x, digits = max(5, getOption("digits") - 5),...) {
   invisible(x)
 }
 
+#' @exportS3Method 
 vcov.ridge <- function(object,  ...) {
 	object$cov
 }

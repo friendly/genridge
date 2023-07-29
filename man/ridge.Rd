@@ -60,8 +60,7 @@ If \code{svd==TRUE}, the following are also included:
 The function \code{ridge} fits linear models by ridge regression, returning
 an object of class \code{ridge} designed to be used with the plotting
 methods in this package.
-}
-\details{
+
 Ridge regression shrinkage can be parameterized in several ways. If a vector
 of \code{lambda} values is supplied, these are used directly in the ridge
 regression computations. Otherwise, if a vector \code{df} is supplied the

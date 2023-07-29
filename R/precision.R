@@ -1,6 +1,10 @@
 
 #' Measures of Precision and Shrinkage for Ridge Regression
 #' 
+#' @name precision
+#' @aliases precision precision.ridge precision.lm
+#'
+#' @description
 #' Calculates measures of precision based on the size of the estimated
 #' covariance matrices of the parameters and shrinkage of the parameters in a
 #' ridge regression model. %% ~~ A concise (1-5 lines) description of what the
@@ -19,14 +23,13 @@
 #'   \item \eqn{ \lambda_1 = max (\lambda)} corresponds to Roy's largest root criterion.  
 #' }
 #' 
-#' @aliases precision precision.ridge precision.lm
 #' @param object An object of class \code{ridge} or \code{lm}
 #' @param det.fun Function to be applied to the determinants of the covariance
-#' matrices, one of \code{c("log","root")}.
+#'        matrices, one of \code{c("log","root")}.
 #' @param normalize If \code{TRUE} the length of the coefficient vector is
-#' normalized to a maximum of 1.0.
-#' 
+#'        normalized to a maximum of 1.0.
 #' @param \dots Other arguments (currently unused)
+#' 
 #' @return A data.frame with the following columns 
 #' \item{lambda}{The ridge constant} 
 #' \item{df}{The equivalent effective degrees of freedom} 
@@ -76,13 +79,16 @@
 #' 
 #' 
 
-precision <- function(object, ...) {
+precision <- function(object, det.fun, normalize, ...) {
 	UseMethod("precision")
 }
 
 # DONE:  allow choice of log.det or det()^{1/p}
 
-precision.ridge <- function(object, det.fun=c("log","root"), normalize=TRUE, ...) {
+#' @exportS3Method 
+precision.ridge <- function(object, 
+                            det.fun=c("log","root"), 
+                            normalize=TRUE, ...) {
 	tr <- function(x) sum(diag(x))
 	maxeig <- function(x) max(eigen(x)$values)
 	
@@ -95,9 +101,15 @@ precision.ridge <- function(object, det.fun=c("log","root"), normalize=TRUE, ...
 	meig <- unlist(lapply(V, maxeig))	
 	norm <- sqrt(rowMeans(coef(object)^2))
 	if (normalize) norm <- norm / max(norm)
-	data.frame(lambda=object$lambda, df=object$df, det=ldet, trace=trace, max.eig=meig, norm.beta=norm)
+	data.frame(lambda=object$lambda, 
+	           df=object$df, 
+	           det=ldet, 
+	           trace=trace, 
+	           max.eig=meig, 
+	           norm.beta=norm)
 }
 
+#' @exportS3Method 
 precision.lm <- function(object, det.fun=c("log","root"), normalize=TRUE, ...) {
 	V <- vcov(object)
 	beta <- coefficients(object)
@@ -114,6 +126,10 @@ precision.lm <- function(object, det.fun=c("log","root"), normalize=TRUE, ...) {
 	meig <- max(eigen(V)$values)
 	norm <- sqrt(mean(beta^2))
 	if (normalize) norm <- norm / max(norm)
-	res <- list(df=length(beta), det=ldet, trace=trace, max.eig=meig, norm.beta=norm)
+	res <- list(df=length(beta), 
+	            det=ldet, 
+	            trace=trace, 
+	            max.eig=meig, 
+	            norm.beta=norm)
 	unlist(res)
 }

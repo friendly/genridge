@@ -6,18 +6,18 @@
 \alias{precision.lm}
 \title{Measures of Precision and Shrinkage for Ridge Regression}
 \usage{
-precision(object, ...)
+precision(object, det.fun, normalize, ...)
 }
 \arguments{
 \item{object}{An object of class \code{ridge} or \code{lm}}
-
-\item{\dots}{Other arguments (currently unused)}
 
 \item{det.fun}{Function to be applied to the determinants of the covariance
 matrices, one of \code{c("log","root")}.}
 
 \item{normalize}{If \code{TRUE} the length of the coefficient vector is
 normalized to a maximum of 1.0.}
+
+\item{\dots}{Other arguments (currently unused)}
 }
 \value{
 A data.frame with the following columns 
@@ -33,8 +33,7 @@ Calculates measures of precision based on the size of the estimated
 covariance matrices of the parameters and shrinkage of the parameters in a
 ridge regression model. %% ~~ A concise (1-5 lines) description of what the
 function does. ~~
-}
-\details{
+
 Three measures of (inverse) precision based on the \dQuote{size} of the
 covariance matrix of the parameters are calculated. Let \eqn{V_k} be the
 covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i= 1,
