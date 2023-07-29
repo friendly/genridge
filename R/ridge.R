@@ -142,7 +142,7 @@ ridge <- function(y, ...) {
 	UseMethod("ridge")
 }
 
-#' @exportS3Method 
+#' @export 
 ridge.formula <-
 		function(formula, data, lambda=0, df, svd=TRUE, ...){
 	
@@ -170,7 +170,7 @@ ridge.formula <-
 }
 
 
-#' @exportS3Method 
+#' @export 
 ridge.default <-
 		function(y, X, lambda=0, df, svd=TRUE, ...){
 	#dimensions	
@@ -247,13 +247,13 @@ ridge.default <-
 
 
 
-#' @exportS3Method 
+#' @exportS3Method coef ridge
 coef.ridge <-
 function(object, ...) {
 	object$coef
 }
 
-#' @exportS3Method 
+#' @exportS3Method print ridge
 print.ridge <-
 function(x, digits = max(5, getOption("digits") - 5),...) {
   if (length(coef(x))) {
