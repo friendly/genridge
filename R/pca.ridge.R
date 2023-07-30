@@ -12,10 +12,11 @@
 #' of the scaled predictor matrix, \eqn{X}.
 #' 
 #' In this space, the transformed coefficients are \eqn{V \beta_k}, with
-#' covariance matrices \deqn{V \Sigma_k V^T}
+#' covariance matrices \deqn{V \Sigma_k V^T}.
 #' 
 #' This transformation provides alternative views of ridge estimates in
-#' low-rank approximations.
+#' low-rank approximations. In particular, it allows one to see where the
+#' effects of collinearity typically reside --- in the smallest PCA dimesnions.
 #' 
 #' 
 #' @param x A \code{ridge} object, as fit by \code{\link{ridge}}
@@ -31,7 +32,7 @@
 #' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 #' Graphical Statistics}, \bold{22}(1), 50-68,
 #' doi:10.1080/10618600.2012.681237,
-#' \url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
+#' \url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
 #' @export 
 #' @keywords dplot multivariate
 #' @examples
@@ -42,7 +43,7 @@
 #' lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 #' lridge <- ridge(longley.y, longley.X, lambda=lambda)
 #' 
-#' plridge <- pca.ridge(lridge)
+#' plridge <- pca(lridge)
 #' traceplot(plridge)
 #' pairs(plridge)
 #' # view in space of smallest singular values
@@ -53,7 +54,7 @@ pca <- function(x, ...){
   UseMethod("pca")
 }
 
-#' @export
+#' @exportS3Method 
 pca.ridge <- function(x, ...) {
 	if (is.null(x$svd.V)) stop("ridge object must contain svd.V")
 	

@@ -89,11 +89,11 @@ package:
 - `pairs.ridge()`: All pairwise bivariate ridge trace plots
 - `plot3d.ridge()`: 3D ridge trace plots with ellipsoids
 
-In addition, the function `pca.ridge` transforms the coefficients and
-covariance matrices of a ridge object from predictor space to the
-equivalent, but more interesting space of the PCA of $X^T X$ or the SVD
-of $X$. The main plotting functions also work for these objects, of
-class `c("ridge", "pcaridge")`.
+In addition, the `pca()` method for `"ridge"` objects transforms the
+coefficients and covariance matrices of a ridge object from predictor
+space to the equivalent, but more interesting space of the PCA of
+$X^T X$ or the SVD of $X$. The main plotting functions also work for
+these objects, of class `c("ridge", "pcaridge")`.
 
 - `biplot.pcaridge()`: Adds variable vectors to the bivariate plots of
   coefficients in PCA space
@@ -245,9 +245,9 @@ pch <- c(15:18, 7, 9)
 lambdaf <- c(expression(~widehat(beta)^OLS), ".005", ".01", ".02", ".04", ".08")
 
 for (i in 2:5) {
-    plot.ridge(lridge, variables=c(1,i), 
-               radius=0.5, cex.lab=1.5, col=clr, 
-               labels=NULL, fill=TRUE, fill.alpha=0.2)
+    plot(lridge, variables=c(1,i), 
+         radius=0.5, cex.lab=1.5, col=clr, 
+         labels=NULL, fill=TRUE, fill.alpha=0.2)
     text(lridge$coef[1,1], lridge$coef[1,i], 
          expression(~widehat(beta)^OLS), cex=1.5, pos=4, offset=.1)
     text(lridge$coef[-1,c(1,i)], lambdaf[-1], pos=3, cex=1.3)
@@ -334,16 +334,25 @@ par(op)
 Just as principal components analysis gives low-dimensional views of a
 data set, PCA can be useful to understand ridge regression.
 
-The function `pca.ridge` transforms a `ridge` object from parameter
-space, where the estimated coefficients are $\beta_k$ with covariance
-matrices $\Sigma_k$, to the principal component space defined by the
-right singular vectors, $V$, of the singular value decomposition of the
-scaled predictor matrix, $X$.
+The `pca` method transforms a `ridge` object from parameter space, where
+the estimated coefficients are $\beta_k$ with covariance matrices
+$\Sigma_k$, to the principal component space defined by the right
+singular vectors, $V$, of the singular value decomposition of the scaled
+predictor matrix, $X$.
 
 ``` r
 #' echo = -1
 par(mar=c(4, 4, 1, 1)+ 0.1)
-plridge <- pca.ridge(lridge)
+plridge <- pca(lridge)
+plridge
+#> Ridge Coefficients:
+#>        dim1      dim2      dim3      dim4      dim5      dim6    
+#> 0.000   1.51541  -0.37939  -1.80131  -0.34595  -5.97391   6.74225
+#> 0.005   1.51531  -0.37928  -1.79855  -0.33886  -5.32221   3.68519
+#> 0.010   1.51521  -0.37918  -1.79579  -0.33205  -4.79871   2.53553
+#> 0.020   1.51500  -0.37898  -1.79031  -0.31922  -4.00988   1.56135
+#> 0.040   1.51459  -0.37858  -1.77944  -0.29633  -3.01774   0.88291
+#> 0.080   1.51377  -0.37778  -1.75810  -0.25915  -2.01876   0.47238
 traceplot(plridge)
 ```
 
@@ -419,7 +428,7 @@ Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
 **22**(1), 50-68, [doi
 link](http://dx.doi.org/10.1080/10618600.2012.681237), Online:
-[genridge-jcgs.pdf](http://datavis.ca/papers/genridge-jcgs.pdf).
+[genridge-jcgs.pdf](https://www.datavis.ca/papers/genridge-jcgs.pdf).
 
 Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing
 Collinearity Diagnostics, *The American Statistician*, **63**, 56–65.

@@ -57,7 +57,7 @@ plot3d(mridge, radius=0.2, labels=mridge$df)
 plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
 
 # plots in PCA/SVD space
-mpridge <- pca.ridge(mridge)
+mpridge <- pca(mridge)
 traceplot(mpridge, X="df")
 biplot(mpridge, radius=0.25)
 }

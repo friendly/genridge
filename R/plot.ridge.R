@@ -1,6 +1,7 @@
 
 #' Bivariate Ridge Trace Plots
 #' 
+#' @description 
 #' The bivariate ridge trace plot displays 2D projections of the covariance
 #' ellipsoids for a set of ridge regression estimates indexed by a ridge tuning
 #' constant.
@@ -53,7 +54,6 @@
 #' @author Michael Friendly
 #' @importFrom graphics abline polygon text
 #' @importFrom grDevices gray
-#' @export
 #' @seealso \code{\link{ridge}} for details on ridge regression as implemented
 #' here
 #' 
@@ -65,7 +65,7 @@
 #' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 #' Graphical Statistics}, \bold{22}(1), 50-68,
 #' doi:10.1080/10618600.2012.681237,
-#' \url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
+#' \url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
 #' 
 #' @keywords hplot
 #' @examples
@@ -79,7 +79,7 @@
 #' 
 #' op <- par(mfrow=c(2,2), mar=c(4, 4, 1, 1)+ 0.1)
 #' for (i in 2:5) {
-#' 	plot.ridge(lridge, variables=c(1,i), radius=0.5, cex.lab=1.5)
+#' 	plot(lridge, variables=c(1,i), radius=0.5, cex.lab=1.5)
 #' 	text(lridge$coef[1,1], lridge$coef[1,i], expression(~widehat(beta)^OLS), 
 #' 	     cex=1.5, pos=4, offset=.1)
 #' 	if (i==2) text(lridge$coef[-1,1:2], lambdaf[-1], pos=3, cex=1.25)
@@ -95,6 +95,7 @@
 #' plot(pridge, fill=c(TRUE, rep(FALSE,7)))
 #' 
 #' 
+#' @exportS3Method 
 plot.ridge <-
 function(x, variables=1:2, radius=1, which.lambda=1:length(x$lambda), 
 		labels=lambda, pos=3, cex=1.2,
@@ -165,6 +166,7 @@ function(x, variables=1:2, radius=1, which.lambda=1:length(x$lambda),
 }
 
 # for pcaridge objects, default to last 2 variables
+#' @exportS3Method 
 plot.pcaridge <-
   function(x, variables=(p-1):p, labels=NULL, ...) {
     p <- dim(coef(x))[2]

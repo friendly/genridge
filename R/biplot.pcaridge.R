@@ -69,7 +69,7 @@
 #' Visualizing Bias \emph{and} Precision. 
 #' \emph{Journal of Computational and Graphical Statistics}, \bold{22}(1), 50-68,
 #' \doi{10.1080/10618600.2012.681237},
-#' \url{http://datavis.ca/papers/genridge-jcgs.pdf}
+#' \url{https://datavis.ca/papers/genridge-jcgs.pdf}
 #'
 #' @importFrom graphics arrows
 #' @importFrom stats coef
@@ -83,7 +83,7 @@
 #' lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 #' lridge <- ridge(longley.y, longley.X, lambda=lambda)
 #' 
-#' plridge <- pca.ridge(lridge)
+#' plridge <- pca(lridge)
 #' 
 #' plot(plridge, radius=0.5)
 #' 

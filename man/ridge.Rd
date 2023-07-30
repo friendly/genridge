@@ -17,12 +17,12 @@ ridge(y, ...)
 \item{\dots}{Other arguments, passed down to methods}
 
 \item{X}{A matrix of predictor variables. NA's not allowed. Should not
-include a column of 1's for the intercept}
+include a column of 1's for the intercept.}
 
-\item{formula}{For the \code{formula} method, a two-sided formula}
+\item{formula}{For the \code{formula} method, a two-sided formula.}
 
 \item{data}{For the \code{formula} method, data frame within which to
-evaluate the formula}
+evaluate the formula.}
 
 \item{lambda}{A scalar or vector of ridge constants. A value of 0
 corresponds to ordinary least squares.}
@@ -129,7 +129,7 @@ plot3d(mridge, radius=0.2, labels=mridge$df)
 plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
 
 # plots in PCA/SVD space
-mpridge <- pca.ridge(mridge)
+mpridge <- pca(mridge)
 traceplot(mpridge, X="df")
 biplot(mpridge, radius=0.25)
 }

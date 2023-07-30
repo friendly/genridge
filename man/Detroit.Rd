@@ -65,7 +65,7 @@ Det <- cbind(Det, Homicide=Detroit[,"Homicide"])
 
 # use the formula interface; specify ridge constants in terms
 # of equivalent degrees of freedom
-dridge <- ridge(Homicide~., data=Det, df=seq(6,4,-.5))
+dridge <- ridge(Homicide ~ ., data=Det, df=seq(6,4,-.5))
 
 # univariate trace plots are seemingly paradoxical in that
 # some coefficients "shrink" *away* from 0
@@ -77,7 +77,8 @@ pairs(dridge, radius=0.5)
 plot3d(dridge, radius=0.5, labels=dridge$df)
 
 # transform to PCA/SVD space
-dpridge <- pca.ridge(dridge)
+dpridge <- pca(dridge)
+
 # not so paradoxical in PCA space
 traceplot(dpridge, X="df")
 biplot(dpridge, radius=0.5, labels=dpridge$df)

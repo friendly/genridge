@@ -105,7 +105,7 @@ lridge <- ridge(longley.y, longley.X, lambda=lambda)
 plot3d(lridge, var=c(1,4,5), radius=0.5)
 
 # view in SVD/PCA space
-plridge <- pca.ridge(lridge)
+plridge <- pca(lridge)
 plot3d(plridge, radius=0.5)
 }
 
@@ -116,7 +116,7 @@ Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 Graphical Statistics}, \bold{22}(1), 50-68,
 doi:10.1080/10618600.2012.681237,
-\url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
+\url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
 }
 \seealso{
 \code{\link{plot.ridge}}, \code{\link{pairs.ridge}},

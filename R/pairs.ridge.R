@@ -30,7 +30,6 @@
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
 #' @importFrom graphics par text box barplot
-#' @export
 #' @seealso \code{\link{ridge}} for details on ridge regression as implemented here
 #' 
 #' \code{\link{plot.ridge}}, \code{\link{traceplot}} for other plotting methods
@@ -39,7 +38,7 @@
 #' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 #' Graphical Statistics}, \bold{22}(1), 50-68,
 #' doi:10.1080/10618600.2012.681237,
-#' \url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
+#' \url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
 #' 
 #' @keywords hplot
 #' @examples
@@ -59,6 +58,7 @@
 #' 
 #' pairs(pridge)
 #' 
+#' @exportS3Method 
 pairs.ridge <-
 function(x, variables, radius=1, lwd=1, lty=1,
 		col = c("black", "red", "darkgreen", "blue","darkcyan","magenta", "brown","darkgray"), 

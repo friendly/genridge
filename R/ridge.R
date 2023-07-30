@@ -18,10 +18,10 @@
 #' 
 #' @param y A numeric vector containing the response variable. NAs not allowed.
 #' @param X A matrix of predictor variables. NA's not allowed. Should not
-#'        include a column of 1's for the intercept
-#' @param formula For the \code{formula} method, a two-sided formula
+#'        include a column of 1's for the intercept.
+#' @param formula For the \code{formula} method, a two-sided formula.
 #' @param data For the \code{formula} method, data frame within which to
-#'        evaluate the formula
+#'        evaluate the formula.
 #' @param lambda A scalar or vector of ridge constants. A value of 0
 #'        corresponds to ordinary least squares.
 #' @param df A scalar or vector of effective degrees of freedom corresponding
@@ -131,7 +131,7 @@
 #' plot3d(mridge, variables=c(2,3,5), radius=0.2, labels=mridge$df)
 #' 
 #' # plots in PCA/SVD space
-#' mpridge <- pca.ridge(mridge)
+#' mpridge <- pca(mridge)
 #' traceplot(mpridge, X="df")
 #' biplot(mpridge, radius=0.25)
 #' }
@@ -142,6 +142,7 @@ ridge <- function(y, ...) {
 	UseMethod("ridge")
 }
 
+#' @exportS3Method 
 #' @export 
 ridge.formula <-
 		function(formula, data, lambda=0, df, svd=TRUE, ...){
@@ -170,7 +171,7 @@ ridge.formula <-
 }
 
 
-#' @export 
+#' @exportS3Method  
 ridge.default <-
 		function(y, X, lambda=0, df, svd=TRUE, ...){
 	#dimensions	
