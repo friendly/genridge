@@ -56,7 +56,7 @@
 #' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 #' Graphical Statistics}, \bold{22}(1), 50-68,
 #' doi:10.1080/10618600.2012.681237,
-#' \url{http://euclid.psych.yorku.ca/datavis/papers/genridge.pdf}
+#' \url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
 #' 
 #' Arthur E. Hoerl and Robert W. Kennard (1970). Ridge Regression: Biased
 #' Estimation for Nonorthogonal Problems, \emph{Technometrics}, 12(1), pp.

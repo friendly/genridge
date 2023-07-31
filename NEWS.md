@@ -1,3 +1,9 @@
+## Version 0.7.0 (2023-07-31)
+
+o Converted the package to roxygen2 documentation, correcting some infelicities with S3 methods
+o Added an extended README example.
+o fix link to genridge paper PDF
+
 ## Version 0.6.8 (2023-07-11)
 o a maintenance release, correcting a problem with an \alias{} in one .Rd file
 
