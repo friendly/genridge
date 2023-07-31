@@ -73,7 +73,6 @@
 #'
 #' @importFrom graphics arrows
 #' @importFrom stats coef
-#' @export
 #' @keywords hplot
 #' @examples
 #' 
@@ -98,7 +97,7 @@
 #' biplot(lridge, radius=0.5, asp=NA)
 #' 
 #' 
- 
+#' @exportS3Method  
 biplot.pcaridge <- function(x, variables=(p-1):p, labels=NULL, asp=1, 
 		origin, scale, 
 		var.lab=rownames(V), 
@@ -147,7 +146,7 @@ biplot.pcaridge <- function(x, variables=(p-1):p, labels=NULL, asp=1,
 	Text(origin, 1.01*scale*V, var.lab, col=var.col, cex=var.cex)
 }
 
-#' @export
+#' @exportS3Method 
 biplot.ridge <-
   function(x, variables=1:2, xlab, ylab, ...) {
     x$svd.V <- t(x$svd.V)

@@ -87,7 +87,10 @@
 #' 
 #' 
 #' coef(lridge)
+#' 
+#' # standard trace plot
 #' traceplot(lridge)
+#' # plot vs. equivalent df
 #' traceplot(lridge, X="df")
 #' pairs(lridge, radius=0.5)
 #' #}
@@ -142,8 +145,8 @@ ridge <- function(y, ...) {
 	UseMethod("ridge")
 }
 
+#' @rdname ridge
 #' @exportS3Method 
-#' @export 
 ridge.formula <-
 		function(formula, data, lambda=0, df, svd=TRUE, ...){
 	
@@ -171,6 +174,7 @@ ridge.formula <-
 }
 
 
+#' @rdname ridge
 #' @exportS3Method  
 ridge.default <-
 		function(y, X, lambda=0, df, svd=TRUE, ...){
@@ -248,12 +252,14 @@ ridge.default <-
 
 
 
+#' @rdname ridge
 #' @exportS3Method coef ridge
 coef.ridge <-
 function(object, ...) {
 	object$coef
 }
 
+#' @rdname ridge
 #' @exportS3Method print ridge
 print.ridge <-
 function(x, digits = max(5, getOption("digits") - 5),...) {
@@ -265,7 +271,8 @@ function(x, digits = max(5, getOption("digits") - 5),...) {
   invisible(x)
 }
 
-#' @exportS3Method 
+#' @rdname ridge
+#' @exportS3Method vcov ridge
 vcov.ridge <- function(object,  ...) {
 	object$cov
 }

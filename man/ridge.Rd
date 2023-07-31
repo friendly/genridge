@@ -10,14 +10,21 @@
 \title{Ridge Regression Estimates}
 \usage{
 ridge(y, ...)
+
+\method{ridge}{formula}(formula, data, lambda = 0, df, svd = TRUE, ...)
+
+\method{ridge}{default}(y, X, lambda = 0, df, svd = TRUE, ...)
+
+\method{coef}{ridge}(object, ...)
+
+\method{print}{ridge}(x, digits = max(5, getOption("digits") - 5), ...)
+
+\method{vcov}{ridge}(object, ...)
 }
 \arguments{
 \item{y}{A numeric vector containing the response variable. NAs not allowed.}
 
 \item{\dots}{Other arguments, passed down to methods}
-
-\item{X}{A matrix of predictor variables. NA's not allowed. Should not
-include a column of 1's for the intercept.}
 
 \item{formula}{For the \code{formula} method, a two-sided formula.}
 
@@ -32,6 +39,9 @@ to \code{lambda}}
 
 \item{svd}{If \code{TRUE} the SVD of the centered and scaled \code{X} matrix
 is returned in the \code{ridge} object.}
+
+\item{X}{A matrix of predictor variables. NA's not allowed. Should not
+include a column of 1's for the intercept.}
 
 \item{x, object}{An object of class \code{ridge}}
 
@@ -85,7 +95,10 @@ lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year +
 
 
 coef(lridge)
+
+# standard trace plot
 traceplot(lridge)
+# plot vs. equivalent df
 traceplot(lridge, X="df")
 pairs(lridge, radius=0.5)
 #}

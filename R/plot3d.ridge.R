@@ -63,8 +63,7 @@
 #' @param add if \code{TRUE}, add to the current \code{rgl} plot; the default
 #'        is \code{FALSE}.
 #' @param \dots Other arguments passed down
-#' @export
-#' @return None 
+#' @return None. Used for its side-effect of plotting
 #' 
 #' @note This is an initial implementation.  The details and arguments are
 #' subject to change.
@@ -97,13 +96,15 @@
 #' }
 #' 
 #' 
-
+#'
+#' @export
 plot3d <-
   function (x, ...) {
     UseMethod("plot3d")
   }
 
 # for pcaridge objects, default to last 3 variables
+#' @rdname plot3d
 #' @exportS3Method 
 plot3d.pcaridge <-
   function(x, variables=(p-2):p, ...) {
@@ -112,6 +113,8 @@ plot3d.pcaridge <-
   }
 
 
+#' @rdname plot3d
+#' @import rgl
 #' @exportS3Method 
 plot3d.ridge <-
 function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),

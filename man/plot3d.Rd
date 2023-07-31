@@ -7,6 +7,35 @@
 \title{3D Ridge Trace Plots}
 \usage{
 plot3d(x, ...)
+
+\method{plot3d}{pcaridge}(x, variables = (p - 2):p, ...)
+
+\method{plot3d}{ridge}(
+  x,
+  variables = 1:3,
+  radius = 1,
+  which.lambda = 1:length(x$lambda),
+  lwd = 1,
+  lty = 1,
+  xlim,
+  ylim,
+  zlim,
+  xlab,
+  ylab,
+  zlab,
+  col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown",
+    "darkgray"),
+  labels = lambda,
+  ref = TRUE,
+  ref.col = gray(0.7),
+  segments = 40,
+  shade = TRUE,
+  shade.alpha = 0.1,
+  wire = FALSE,
+  aspect = 1,
+  add = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{ridge} object, as fit by \code{\link{ridge}} or a
@@ -70,7 +99,7 @@ details.}
 is \code{FALSE}.}
 }
 \value{
-None
+None. Used for its side-effect of plotting
 }
 \description{
 The 3D ridge trace plot displays 3D projections of the covariance ellipsoids
@@ -108,6 +137,7 @@ plot3d(lridge, var=c(1,4,5), radius=0.5)
 plridge <- pca(lridge)
 plot3d(plridge, radius=0.5)
 }
+
 
 
 }
