@@ -29,7 +29,7 @@ covariance matrices \deqn{V \Sigma_k V^T}.
 
 This transformation provides alternative views of ridge estimates in
 low-rank approximations. In particular, it allows one to see where the
-effects of collinearity typically reside --- in the smallest PCA dimesnions.
+effects of collinearity typically reside --- in the smallest PCA dimensions.
 }
 \examples{
 

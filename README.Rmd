@@ -39,7 +39,7 @@ Consider the standard linear model,
 $\mathbf{y} = \mathbf{X} \; \mathbf{\beta} + \mathbf{\epsilon}$
 for $p$ predictors in a multiple regression.
 In this context,
-high multiple correlations among the predictors lead to well-known problems of colinearity
+high multiple correlations among the predictors lead to well-known problems of collinearity
 under ordinary least squares (OLS) estimation, which result in unstable estimates of the
 parameters in β: standard errors are inflated and estimated coefficients tend to be too large
 in absolute value on average.
@@ -126,7 +126,7 @@ The goal is to predict `Employed` from `GNP`, `Unemployed`, `Armed.Forces`, `Pop
 These data are (purposely) perverse, in that: 
 
 * each variable is a time series so that there is clearly a lack of independence among predictors.
-* there is also some _structural colinearity_ among the variables `GNP`, `Year`, `GNP.deflator`, `Population`, e.g., `GNP.deflator` is a multiplicative factor to account for inflation.
+* there is also some _structural collinearity_ among the variables `GNP`, `Year`, `GNP.deflator`, `Population`, e.g., `GNP.deflator` is a multiplicative factor to account for inflation.
 
 ```{r longley1}
 data(longley)
@@ -149,7 +149,7 @@ lridge
 
 ### Variance Inflation Factors
 
-The effects of colinearity can be measured by a variance inflation factor (VIF), the ratio
+The effects of collinearity can be measured by a variance inflation factor (VIF), the ratio
 of the sampling variances of the coefficients, relative to what they would be if all
 predictors were uncorrelated, given by 
 $$
@@ -301,7 +301,7 @@ traceplot(plridge)
 What is perhaps surprising is that the coefficients for the first 4 components are not shrunk at all.
 Rather, the effect of shrinkage is seen only on the _last two dimensions_.
 These are the
-directions that contribute most to colinearity, for which other visualization methods have
+directions that contribute most to collinearity, for which other visualization methods have
 been proposed (Friendly & Kwan 2009).
 
 The `pairs()` plot illustrates the _joint_ effects: the principal components of
