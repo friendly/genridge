@@ -1,19 +1,121 @@
 # tweaked labels
 # axis3s(... nticks ...)
 
+
+#' 3D Ridge Trace Plots
+#' 
+#' @name plot3d
+#' @aliases plot3d plot3d.ridge plot3d.pcaridge
+#' 
+#' @description
+#' The 3D ridge trace plot displays 3D projections of the covariance ellipsoids
+#' for a set of ridge regression estimates indexed by a ridge tuning constant.
+#' 
+#' The centers of these ellipses show the bias induced for each parameter, and
+#' also how the change in the ridge estimate for one parameter is related to
+#' changes for other parameters.
+#' 
+#' The size and shapes of the covariance ellipsoids show directly the effect on
+#' precision of the estimates as a function of the ridge tuning constant.
+#' 
+#' \code{plot3d.ridge} and \code{plot3d.pcaridge} differ only in the defaults
+#' for the variables plotted.
+#' 
+#' @param x A \code{ridge} object, as fit by \code{\link{ridge}} or a
+#'        \code{pcaridge} object as transformed by \code{\link{pca.ridge}}
+#' @param variables Predictors in the model to be displayed in the plot: an
+#'        integer or character vector of length 3, giving the indices or names of the
+#'        variables. Defaults to the first three predictors for \code{ridge} objects
+#'        or the \emph{last} three dimensions for \code{pcaridge} objects.
+#' @param radius Radius of the ellipse-generating circle for the covariance
+#'        ellipsoids.  The default, \code{radius=1} gives a standard \dQuote{unit}
+#'        ellipsoid. Typically, \code{radius<1} gives less cluttered displays.
+#' @param which.lambda A vector of indices used to select the values of
+#'        \code{lambda} for which ellipsoids are plotted. The default is to plot
+#'        ellipsoids for all values of \code{lambda} in the \code{ridge} object.
+#' @param lwd,lty Line width and line type for the covariance ellipsoids.
+#'        Recycled as necessary.
+#' @param xlim,ylim,zlim X, Y, Z limits for the plot, each a vector of length
+#'        2.  If missing, the range of the covariance ellipsoids is used.
+#' @param xlab,ylab,zlab Labels for the X, Y, Z variables in the plot. If
+#'        missing, the names of the predictors given in \code{variables} is used.
+#' @param col A numeric or character vector giving the colors used to plot the
+#'        covariance ellipsoids.  Recycled as necessary.
+#' @param labels A numeric or character vector giving the labels to be drawn at
+#'        the centers of the covariance ellipsoids.
+#' @param ref Logical: whether to draw horizontal and vertical reference lines
+#'        at 0. This is not yet implemented.
+#' @param ref.col Color of reference lines.
+#' @param segments Number of line segments used in drawing each dimension of a
+#'        covariance ellipsoid.
+#' @param shade a logical scalar or vector, indicating whether the ellipsoids
+#'        should be rendered with \code{\link[rgl]{shade3d}}. Recycled as necessary.
+#' @param shade.alpha a numeric value in the range [0,1], or a vector of such
+#'        values, giving the alpha transparency for ellipsoids rendered with
+#'        \code{shade=TRUE}.
+#' @param wire a logical scalar or vector, indicating whether the ellipsoids
+#'        should be rendered with \code{\link[rgl]{wire3d}}. Recycled as necessary.
+#' @param aspect a scalar or vector of length 3, or the character string "iso",
+#'        indicating the ratios of the x, y, and z axes of the bounding box.  The
+#'        default, \code{aspect=1} makes the bounding box display as a cube
+#'        approximately filling the display. See \code{\link[rgl]{aspect3d}} for
+#'       details.
+#' @param add if \code{TRUE}, add to the current \code{rgl} plot; the default
+#'        is \code{FALSE}.
+#' @param \dots Other arguments passed down
+#' @return None. Used for its side-effect of plotting
+#' 
+#' @note This is an initial implementation.  The details and arguments are
+#' subject to change.
+#' @author Michael Friendly
+#' @seealso \code{\link{plot.ridge}}, \code{\link{pairs.ridge}},
+#' \code{\link{pca.ridge}}
+#' @references Friendly, M. (2013). The Generalized Ridge Trace Plot:
+#' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
+#' Graphical Statistics}, \bold{22}(1), 50-68,
+#' doi:10.1080/10618600.2012.681237,
+#' \url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
+#' @keywords hplot
+#' @examples
+#' 
+#' lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + 
+#'                       Year + GNP.deflator, data=longley)
+#' longley.y <- longley[, "Employed"]
+#' longley.X <- model.matrix(lmod)[,-1]
+#' 
+#' lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
+#' lambdaf <- c("0", ".005", ".01", ".02", ".04", ".08")
+#' lridge <- ridge(longley.y, longley.X, lambda=lambda)
+#' 
+#' \donttest{
+#' plot3d(lridge, var=c(1,4,5), radius=0.5)
+#' 
+#' # view in SVD/PCA space
+#' plridge <- pca(lridge)
+#' plot3d(plridge, radius=0.5)
+#' }
+#' 
+#' 
+#'
+#' @export
 plot3d <-
-		function (x, ...) {
-	UseMethod("plot3d")
-}
+  function (x, ...) {
+    UseMethod("plot3d")
+  }
 
 # for pcaridge objects, default to last 3 variables
+#' @rdname plot3d
+#' @exportS3Method 
 plot3d.pcaridge <-
-		function(x, variables=(p-2):p, ...) {
-	p <- dim(coef(x))[2]
-	plot3d.ridge(x, variables, ...)
-}
+  function(x, variables=(p-2):p, ...) {
+    p <- dim(coef(x))[2]
+    plot3d.ridge(x, variables, ...)
+  }
 
 
+#' @rdname plot3d
+#' @import rgl
+#' @exportS3Method 
 plot3d.ridge <-
 function(x, variables=1:3, radius=1, which.lambda=1:length(x$lambda),
 		lwd=1, lty=1, 

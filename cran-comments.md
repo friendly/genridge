@@ -9,4 +9,10 @@ There were no ERRORs or WARNINGS or NOTEs
 character(0)
 
 ## Comments
-This is a maintenance release, correcting a problem with an \alias{} in one .Rd file
+This was originally a maintenance release, correcting a problem with an \alias{} in one .Rd file.
+In addition:
+
+o Converted the package to roxygen2 documentation, correcting some infelicities with S3 methods
+o Added an extended README example.
+o fix link to genridge paper PDF
+

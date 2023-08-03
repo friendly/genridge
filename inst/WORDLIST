@@ -1,6 +1,7 @@
 bestglm
 Boca
-celcius
+celsius
+<<<<<<< HEAD
 colinear
 contourf
 CRC
@@ -17,7 +18,8 @@ heptone
 HKB             
 Hoerl           
 hyperplasia
-iso             
+iso 
+jcgs
 Johnstone       
 Kabalin         
 Kennard         
@@ -28,7 +30,9 @@ linearized
 Longley         
 Longley's       
 Longley’s     
-Marquardt       
+Marquardt
+mathbf
+mathrm
 McNeal          
 Monette         
 NA's            
@@ -36,15 +40,22 @@ nd
 Nonorthogonal
 pca
 pcaridge
+Pillai's
 Preprint
 prostatectomy   
 prostatic       
 PWS             
-Raton           
+Raton
+README
 Redwine 
 repo            
 rgb             
-rgl             
+rgl
+roxygen
+widehat
+β
+λ
+
 Snee            
 Stamey          
 StatLib         
