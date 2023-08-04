@@ -6,3 +6,6 @@ README.Rmd
 cran-comments.md
 ^CRAN-SUBMISSION$
 extra/
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

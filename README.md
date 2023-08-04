@@ -11,7 +11,7 @@
 
 ## Generalized Ridge Trace Plots for Ridge Regression
 
-Version 0.6-8
+Version 0.7.0
 
 ### What is ridge regression?
 
@@ -19,7 +19,7 @@ Consider the standard linear model,
 $\mathbf{y} = \mathbf{X} \; \mathbf{\beta} + \mathbf{\epsilon}$ for $p$
 predictors in a multiple regression. In this context, high multiple
 correlations among the predictors lead to well-known problems of
-colinearity under ordinary least squares (OLS) estimation, which result
+collinearity under ordinary least squares (OLS) estimation, which result
 in unstable estimates of the parameters in β: standard errors are
 inflated and estimated coefficients tend to be too large in absolute
 value on average.
@@ -39,7 +39,7 @@ $\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigm
 
 Ridge regression replaces the standard residual sum of squares criterion
 with a penalized form, $$
-\mathrm{RSS}(k) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^T  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^T \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,
+\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^T  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^T \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,
 $$ whose solution is easily seen to be:
 
 $$
@@ -116,13 +116,14 @@ consisting of 7 economic variables, observed yearly from 1947 to 1962
 `Employed` from `GNP`, `Unemployed`, `Armed.Forces`, `Population`,
 `Year`, `GNP.deflator`.
 
-These data are (purposely) perverse, in that:
+These data, constructed to illustrate numerical problems in least
+squares software at the time, are (purposely) perverse, in that:
 
 - each variable is a time series so that there is clearly a lack of
   independence among predictors.
-- there is also some *structural colinearity* among the variables `GNP`,
-  `Year`, `GNP.deflator`, `Population`, e.g., `GNP.deflator` is a
-  multiplicative factor to account for inflation.
+- worse, there is also some *structural collinearity* among the
+  variables `GNP`, `Year`, `GNP.deflator`, `Population`, e.g.,
+  `GNP.deflator` is a multiplicative factor to account for inflation.
 
 ``` r
 data(longley)
@@ -144,7 +145,7 @@ predictive modeling, where OLS has low bias, but can have large
 predictive variance.
 
 `ridge()` returns a matrix containing the coefficients for each
-predictor for each shrinkage value.
+predictor for each shrinkage value and other quantities.
 
 ``` r
 lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
@@ -163,7 +164,7 @@ lridge
 
 ### Variance Inflation Factors
 
-The effects of colinearity can be measured by a variance inflation
+The effects of collinearity can be measured by a variance inflation
 factor (VIF), the ratio of the sampling variances of the coefficients,
 relative to what they would be if all predictors were uncorrelated,
 given by $$
@@ -187,6 +188,15 @@ vif(lridge)
 #> 0.080   11.28      2.994        2.301      28.59  28.82        29.52
 ```
 
+<!-- #### Fitting the ridge regression model -->
+<!-- From this, we could proceed to fit the ridge regression model using `MASS::lm.ridge()` -->
+<!-- with a choice for the ridge factor, e.g., $\lambda = 0.01$. -->
+<!-- ```{r lm-ridge} -->
+<!-- longley.modridge <- MASS::lm.ridge(Employed ~ GNP + Unemployed + Armed.Forces +  -->
+<!--                                      Population + Year + GNP.deflator,  -->
+<!--        data=longley, lambda = 0.01) -->
+<!-- ``` -->
+
 ### Univariate trace plots
 
 A standard, univariate, `traceplot()` simply plots the estimated
@@ -204,7 +214,20 @@ traceplot(lridge, xlim = c(-0.02, 0.08))
 
 The dotted lines show choices for the ridge constant by two commonly
 used criteria to balance bias against precision due to **HKB**: Hoerl,
-Kennard, and Baldwin (1975) and **LW**: Lawless and Wang (1976).
+Kennard, and Baldwin (1975) and **LW**: Lawless and Wang (1976). These
+values (along with a generalized cross-validation value GCV) are also
+stored in the `"ridge"` object,
+
+``` r
+c(HKB=lridge$kHKB, LW=lridge$kLW, GCV=lridge$kGCV)
+#>      HKB       LW      GCV 
+#> 0.004275 0.032295 0.005000
+```
+
+These values seem rather small, but note that the coefficients for
+`Year` and `GNP` are shrunk considerably.
+
+### Alternative plot
 
 It is sometimes easier to interpret the plot when coefficients are
 plotted against the equivalent degrees of freedom, where $\lambda = 0$
@@ -257,13 +280,14 @@ par(op)
 
 <div class="figure">
 
-<img src="man/figures/README-longley-plot-ridge-1.png" alt="**Figure**: Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="100%" />
+<img src="man/figures/README-longley-plot-ridge-1.png" alt="**Figure**: Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with &lt;U+03BB&gt; = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="100%" />
 <p class="caption">
 **Figure**: Bivariate ridge trace plots for the coefficients of four
-predictors against the coefficient for GNP in Longley’s data, with λ =
-0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are
-driven toward zero, but the bivariate plot also makes clear the
-reduction in variance, as well as the bivariate path of shrinkage.
+predictors against the coefficient for GNP in Longley’s data, with
+\<U+03BB\> = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the
+coefficients are driven toward zero, but the bivariate plot also makes
+clear the reduction in variance, as well as the bivariate path of
+shrinkage.
 </p>
 
 </div>
@@ -304,7 +328,6 @@ is a measure of variance. Plotting these against each other gives a
 direct view of the tradeoff.
 
 ``` r
-#' fig.show = "hold"
 pdat <- precision(lridge)
 op <- par(mar=c(4, 4, 1, 1) + 0.2)
 library(splines)
@@ -321,13 +344,10 @@ x <- data.frame(lambda=c(lridge$kHKB, lridge$kLW))
 fit <- predict(mod, x)
 points(fit[,2:1], pch=15, col=gray(.50), cex=1.5)
 text(fit[,2:1], c("HKB", "LW"), pos=4, cex=1.25, col=gray(.50))
+par(op)
 ```
 
 ![](man/figures/README-precision-plot-1.png)<!-- -->
-
-``` r
-par(op)
-```
 
 ## Low-rank views
 
@@ -341,8 +361,6 @@ singular vectors, $V$, of the singular value decomposition of the scaled
 predictor matrix, $X$.
 
 ``` r
-#' echo = -1
-par(mar=c(4, 4, 1, 1)+ 0.1)
 plridge <- pca(lridge)
 plridge
 #> Ridge Coefficients:
@@ -361,7 +379,7 @@ traceplot(plridge)
 What is perhaps surprising is that the coefficients for the first 4
 components are not shrunk at all. Rather, the effect of shrinkage is
 seen only on the *last two dimensions*. These are the directions that
-contribute most to colinearity, for which other visualization methods
+contribute most to collinearity, for which other visualization methods
 have been proposed (Friendly & Kwan 2009).
 
 The `pairs()` plot illustrates the *joint* effects: the principal
@@ -381,8 +399,6 @@ that are related to the smallest dimension (6) are shrunk quickly at
 first.
 
 ``` r
-#' echo = -1
-par(mar=c(4, 4, 1, 1)+ 0.1)
 plot(plridge, variables=5:6, fill = TRUE, fill.alpha=0.2)
 text(plridge$coef[, 5:6], 
        label = lambdaf, 
@@ -422,16 +438,35 @@ par(op)
 
 ![](man/figures/README-biplot-1.png)<!-- -->
 
+## Other examples
+
+The genridge package contains four data sets, each with its own
+examples; e.g., you can try `example(Acetylene)`.
+
+``` r
+vcdExtra::datasets(package="genridge")
+#>        Item      class   dim                               Title
+#> 1 Acetylene data.frame  16x4                      Acetylene Data
+#> 2   Detroit data.frame 13x14 Detroit Homicide Data for 1961-1973
+#> 3  Manpower data.frame  17x6              Hospital manpower data
+#> 4  prostate data.frame 97x10                Prostate Cancer Data
+```
+
 ## References
 
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
-**22**(1), 50-68, [doi
+**22**(1), 50-68, [DOI
 link](http://dx.doi.org/10.1080/10618600.2012.681237), Online:
-[genridge-jcgs.pdf](https://www.datavis.ca/papers/genridge-jcgs.pdf).
+[genridge-jcgs.pdf](https://www.datavis.ca/papers/genridge-jcgs.pdf),
+Supp. materials:
+[genridge-supp.zip](http://datavis.ca/papers/genridge-supp.zip)
 
 Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing
-Collinearity Diagnostics, *The American Statistician*, **63**, 56–65.
+Collinearity Diagnostics, *The American Statistician*, **63**(1), 56–65,
+[DOI link](https://doi.org/10.1198/tast.2009.0012), Online:
+[viscollin-tast.pdf](http://datavis.ca/papers/viscollin-tast.pdf), Supp.
+materials: <http://datavis.ca/papers/viscollin/>.
 
 Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), Ridge
 Regression: Some Simulations, *Communications in Statistics*, **4**,

@@ -1,0 +1,52 @@
+url: http://friendly.github.io/genridge
+
+template:
+  bootstrap: 5
+  params:
+    bootswatch: cosmo
+  bslib:
+    base_font: {google: "Roboto"}
+    heading_font: {google: "Roboto Slab"}
+    code_font: {google: "JetBrains Mono"}
+
+reference:
+- title: "Ridge functions"
+  desc: >
+    Functions for computing ridge regressions
+  contents: 
+    - genridge-package
+    - precision
+    - ridge
+    - coef.ridge
+    - print.ridge
+    - vcov.ridge
+    - vif.ridge
+
+- title: "Plot methods"
+  desc: "Plotting ridge regression results"
+  contents:
+    - contourf
+    - plot.ridge
+    - plot3d
+    - plot3d.ridge
+    - pairs.ridge
+    - traceplot
+    - trans.colors
+
+- title: "PCA methods"
+  desc: "Low-rank PCA methods"
+  contents:
+    - pca
+    - pca.ridge
+    - biplot.pcaridge
+
+- title: "Data sets"
+  desc: "Data sets in the package"
+  contents:
+    - Acetylene
+    - Detroit
+    - Manpower
+    - prostate
+
+
+
