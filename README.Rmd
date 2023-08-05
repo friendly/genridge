@@ -24,6 +24,8 @@ library(genridge)
 [![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/genridge)](https://cran.r-project.org/package=genridge)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
+[![](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge)
+
 <!-- badges: end -->
 
 # genridge <img src="man/figures/logo.png" style="float:right; height:200px;" />

@@ -5,6 +5,8 @@
 [![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/genridge)](https://cran.r-project.org/package=genridge)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
+[![](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge)
+
 <!-- badges: end -->
 
 # genridge <img src="man/figures/logo.png" style="float:right; height:200px;" />
@@ -38,7 +40,9 @@ $$ with
 $\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^T \mathbf{X})^{-1}$.
 
 Ridge regression replaces the standard residual sum of squares criterion
-with a penalized form, $$
+with a penalized form,
+
+$$
 \mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^T  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^T \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,
 $$ whose solution is easily seen to be:
 
@@ -280,14 +284,13 @@ par(op)
 
 <div class="figure">
 
-<img src="man/figures/README-longley-plot-ridge-1.png" alt="**Figure**: Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with &lt;U+03BB&gt; = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="100%" />
+<img src="man/figures/README-longley-plot-ridge-1.png" alt="**Figure**: Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="100%" />
 <p class="caption">
 **Figure**: Bivariate ridge trace plots for the coefficients of four
-predictors against the coefficient for GNP in Longley’s data, with
-\<U+03BB\> = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the
-coefficients are driven toward zero, but the bivariate plot also makes
-clear the reduction in variance, as well as the bivariate path of
-shrinkage.
+predictors against the coefficient for GNP in Longley’s data, with λ =
+0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are
+driven toward zero, but the bivariate plot also makes clear the
+reduction in variance, as well as the bivariate path of shrinkage.
 </p>
 
 </div>
