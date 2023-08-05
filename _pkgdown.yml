@@ -2,8 +2,6 @@ url: https://friendly.github.io/genridge
 
 template:
   bootstrap: 5
-  params:
-    bootswatch: cosmo
   bslib:
     base_font: {google: "Roboto"}
     heading_font: {google: "Roboto Slab"}
