@@ -3,6 +3,7 @@ Boca
 celsius
 <<<<<<< HEAD
 colinear
+collinear
 contourf
 CRC
 Dekker
@@ -55,14 +56,14 @@ roxygen
 widehat
 β
 λ
-
 Snee            
 Stamey          
 StatLib         
 Technometrics   
 Uwe             
 vcov            
-vif             
+vif  
+viscollin
 Wilks           
 yorku
 
