@@ -21,6 +21,6 @@ LazyLoad: yes
 LazyData: yes
 Language: en-US
 BugReports: https://github.com/friendly/genridge/issues
-URL: https://friendly.github.io/genridge
+URL: https://friendly.github.io/genridge/
 RoxygenNote: 7.2.3
 Encoding: UTF-8
