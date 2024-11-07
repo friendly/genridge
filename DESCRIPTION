@@ -1,8 +1,8 @@
 Package: genridge
 Type: Package
 Title: Generalized Ridge Trace Plots for Ridge Regression
-Version: 0.7.0
-Date: 2023-07-31
+Version: 0.7.1
+Date: 2024-11-07
 Authors@R: c(person("Michael", "Friendly", , "friendly@yorku.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3237-0941"))
            )

@@ -13,7 +13,7 @@
 
 ## Generalized Ridge Trace Plots for Ridge Regression
 
-Version 0.7.0
+Version 0.7.1
 
 ### What is ridge regression?
 
@@ -35,23 +35,29 @@ predictive accuracy.
 
 The OLS estimates, which minimize the sum of squared residuals
 $RSS = \Sigma \mathbf{\epsilon}^2$ are given by: $$
-\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y} \; ,
+\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,
 $$ with
-$\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^T \mathbf{X})^{-1}$.
+$\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}$.
 
 Ridge regression replaces the standard residual sum of squares criterion
 with a penalized form,
 
 $$
-\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^T  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^T \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,
-$$ whose solution is easily seen to be:
+\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^\top  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^\top \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,
+$$
+
+whose solution is easily seen to be:
 
 $$
-\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^T \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}  
+\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  
 $$
 
 where $\lambda$ is the *shrinkage factor* or *tuning constant*,
-penalizing larger coefficients. In general,
+penalizing larger coefficients. Shrinkage can also be expressed as the
+equivalent degrees of freedom, the trace of the analog of the “hat”
+matrix,
+$\text{tr}[(\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top]$.
+In general,
 
 - The bias increases as λ increases,
 - The sampling variance decreases as λ increases.
@@ -64,11 +70,12 @@ variance and choice of a shrinkage value $\lambda$.
 
 The `genridge` package introduces generalizations of the standard
 univariate ridge trace plot used in ridge regression and related methods
-(Friendly, 2013) These graphical methods show both bias (actually,
-shrinkage) and precision, by plotting the covariance ellipsoids of the
-estimated coefficients, rather than just the estimates themselves. 2D
-and 3D plotting methods are provided, both in the space of the predictor
-variables and in the transformed space of the PCA/SVD of the predictors.
+(Friendly, 2011, 2013). These graphical methods show both bias
+(actually, shrinkage) and precision, by plotting the covariance
+ellipsoids of the estimated coefficients, rather than just the estimates
+themselves. 2D and 3D plotting methods are provided, both in the space
+of the predictor variables and in the transformed space of the PCA/SVD
+of the predictors.
 
 ### Details
 
@@ -77,10 +84,19 @@ described in Friendly (2013). Ridge regression models may be fit using
 the function `ridge`, which incorporates features of `MASS::lm.ridge()`
 and `ElemStatLearn::simple.ridge()`. In particular, the shrinkage
 factors in ridge regression may be specified either in terms of the
-constant ($\lambda$) added to the diagonal of $X^T X$ matrix, or the
+constant ($\lambda$) added to the diagonal of $X^\top X$ matrix, or the
 equivalent number of degrees of freedom.
 
-More importantly, the `ridge` function also calculates and returns the
+The following computational functions are provided:
+
+- `ridge()` Calculates ridge regregression estimates; returns an object
+  of class `"ridge"`
+- `pca.ridge()` Transform coefcients and covariance matrices to PCA/SVD
+  space; returns an object of class `c("pcaridge", "ridge")`
+  `vif.ridge()` Calculates VIFs for “ridge” objects `precision()`
+  Calculates measures of precision and shrinkage
+
+More importantly, the `ridge` functions also calculate and returns the
 associated covariance matrices of each of the ridge estimates, allowing
 precision to be studied and displayed graphically.
 
@@ -96,7 +112,7 @@ package:
 In addition, the `pca()` method for `"ridge"` objects transforms the
 coefficients and covariance matrices of a ridge object from predictor
 space to the equivalent, but more interesting space of the PCA of
-$X^T X$ or the SVD of $X$. The main plotting functions also work for
+$X^\top X$ or the SVD of $X$. The main plotting functions also work for
 these objects, of class `c("ridge", "pcaridge")`.
 
 - `biplot.pcaridge()`: Adds variable vectors to the bivariate plots of
@@ -107,9 +123,10 @@ useful measures and plots.
 
 ## Installation
 
-|                     |                                                |
-|---------------------|------------------------------------------------|
-| CRAN version        | `install.packages("genridge")`                 |
+|  |  |
+|----|----|
+| CRAN version | `install.packages("genridge")` |
+| R-universe | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
 | Development version | `remotes::install_github("friendly/genridge")` |
 
 ## Examples
@@ -367,13 +384,13 @@ predictor matrix, $X$.
 plridge <- pca(lridge)
 plridge
 #> Ridge Coefficients:
-#>        dim1      dim2      dim3      dim4      dim5      dim6    
-#> 0.000   1.51541  -0.37939  -1.80131  -0.34595  -5.97391   6.74225
-#> 0.005   1.51531  -0.37928  -1.79855  -0.33886  -5.32221   3.68519
-#> 0.010   1.51521  -0.37918  -1.79579  -0.33205  -4.79871   2.53553
-#> 0.020   1.51500  -0.37898  -1.79031  -0.31922  -4.00988   1.56135
-#> 0.040   1.51459  -0.37858  -1.77944  -0.29633  -3.01774   0.88291
-#> 0.080   1.51377  -0.37778  -1.75810  -0.25915  -2.01876   0.47238
+#>        dim1     dim2     dim3     dim4     dim5     dim6   
+#> 0.000  1.51541  0.37939  1.80131  0.34595  5.97391  6.74225
+#> 0.005  1.51531  0.37928  1.79855  0.33886  5.32221  3.68519
+#> 0.010  1.51521  0.37918  1.79579  0.33205  4.79871  2.53553
+#> 0.020  1.51500  0.37898  1.79031  0.31922  4.00988  1.56135
+#> 0.040  1.51459  0.37858  1.77944  0.29633  3.01774  0.88291
+#> 0.080  1.51377  0.37778  1.75810  0.25915  2.01876  0.47238
 traceplot(plridge)
 ```
 
@@ -456,6 +473,11 @@ vcdExtra::datasets(package="genridge")
 ```
 
 ## References
+
+Friendly, M. (2011). Generalized Ridge Trace Plots: Visualizing Bias
+*and* Precision with the `genridge` R package.
+[gentalk.pdf](http://euclid.psych.yorku.ca/datavis/papers/gentalk.pdf);
+[gentalk-2x2.pdf](http://euclid.psych.yorku.ca/datavis/papers/gentalk-2x2.pdf)
 
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
