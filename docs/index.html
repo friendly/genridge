@@ -19,10 +19,10 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.7/font.css" rel="stylesheet">
-<link href="deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
-<link href="deps/Roboto_Slab-0.4.7/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.9/font.css" rel="stylesheet">
+<link href="deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet">
+<link href="deps/Roboto_Slab-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Generalized Ridge Trace Plots for Ridge Regression">
@@ -42,11 +42,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">genridge</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,21 +90,22 @@
 <div class="section level2">
 <h2 id="generalized-ridge-trace-plots-for-ridge-regression">Generalized Ridge Trace Plots for Ridge Regression<a class="anchor" aria-label="anchor" href="#generalized-ridge-trace-plots-for-ridge-regression"></a>
 </h2>
-<p>Version 0.7.0</p>
+<p>Version 0.7.1</p>
 <div class="section level3">
 <h3 id="what-is-ridge-regression">What is ridge regression?<a class="anchor" aria-label="anchor" href="#what-is-ridge-regression"></a>
 </h3>
 <p>Consider the standard linear model, <span class="math inline"><strong>y</strong> = <strong>X</strong> <strong>β</strong> + <strong>ϵ</strong></span> for <span class="math inline"><em>p</em></span> predictors in a multiple regression. In this context, high multiple correlations among the predictors lead to well-known problems of collinearity under ordinary least squares (OLS) estimation, which result in unstable estimates of the parameters in β: standard errors are inflated and estimated coefficients tend to be too large in absolute value on average.</p>
 <p>Ridge regression is an instance of a class of techniques designed to obtain more favorable predictions at the expense of some increase in bias, compared to ordinary least squares (OLS) estimation. An essential idea behind these methods is that the OLS estimates are constrained in some way, shrinking them, on average, toward zero, to satisfy increased predictive accuracy.</p>
 <p>The OLS estimates, which minimize the sum of squared residuals <span class="math inline"><em>R</em><em>S</em><em>S</em> = <em>Σ</em><strong>ϵ</strong><sup>2</sup></span> are given by: <span class="math display">$$
-\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y} \; ,
-$$</span> with <span class="math inline">$\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^T \mathbf{X})^{-1}$</span>.</p>
+\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,
+$$</span> with <span class="math inline">$\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}$</span>.</p>
 <p>Ridge regression replaces the standard residual sum of squares criterion with a penalized form,</p>
-<p><span class="math display">RSS(<em>λ</em>) = (<strong>y</strong>−<strong>X</strong><strong>β</strong>)<sup><em>T</em></sup>(<strong>y</strong>−<strong>X</strong><strong>β</strong>) + <em>λ</em><strong>β</strong><sup><em>T</em></sup><strong>β</strong>    (<em>λ</em>≥0) ,</span> whose solution is easily seen to be:</p>
+<p><span class="math display">RSS(<em>λ</em>) = (<strong>y</strong>−<strong>X</strong><strong>β</strong>)<sup>⊤</sup>(<strong>y</strong>−<strong>X</strong><strong>β</strong>) + <em>λ</em><strong>β</strong><sup>⊤</sup><strong>β</strong>    (<em>λ</em>≥0) ,</span></p>
+<p>whose solution is easily seen to be:</p>
 <p><span class="math display">$$
-\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^T \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}  
+\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  
 $$</span></p>
-<p>where <span class="math inline"><em>λ</em></span> is the <em>shrinkage factor</em> or <em>tuning constant</em>, penalizing larger coefficients. In general,</p>
+<p>where <span class="math inline"><em>λ</em></span> is the <em>shrinkage factor</em> or <em>tuning constant</em>, penalizing larger coefficients. Shrinkage can also be expressed as the equivalent degrees of freedom, the trace of the analog of the “hat” matrix, <span class="math inline">tr[(<strong>X</strong><sup>⊤</sup><strong>X</strong>+<em>λ</em><strong>I</strong>)<sup>−1</sup><strong>X</strong><sup>⊤</sup>]</span>. In general,</p>
 <ul>
 <li>The bias increases as λ increases,</li>
 <li>The sampling variance decreases as λ increases.</li>
@@ -114,13 +115,21 @@ $$</span></p>
 <div class="section level3">
 <h3 id="package-overview">Package overview<a class="anchor" aria-label="anchor" href="#package-overview"></a>
 </h3>
-<p>The <code>genridge</code> package introduces generalizations of the standard univariate ridge trace plot used in ridge regression and related methods (Friendly, 2013) These graphical methods show both bias (actually, shrinkage) and precision, by plotting the covariance ellipsoids of the estimated coefficients, rather than just the estimates themselves. 2D and 3D plotting methods are provided, both in the space of the predictor variables and in the transformed space of the PCA/SVD of the predictors.</p>
+<p>The <code>genridge</code> package introduces generalizations of the standard univariate ridge trace plot used in ridge regression and related methods (Friendly, 2011, 2013). These graphical methods show both bias (actually, shrinkage) and precision, by plotting the covariance ellipsoids of the estimated coefficients, rather than just the estimates themselves. 2D and 3D plotting methods are provided, both in the space of the predictor variables and in the transformed space of the PCA/SVD of the predictors.</p>
 </div>
 <div class="section level3">
 <h3 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
 </h3>
-<p>This package provides computational support for the graphical methods described in Friendly (2013). Ridge regression models may be fit using the function <code>ridge</code>, which incorporates features of <code><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html" class="external-link">MASS::lm.ridge()</a></code> and <code>ElemStatLearn::simple.ridge()</code>. In particular, the shrinkage factors in ridge regression may be specified either in terms of the constant (<span class="math inline"><em>λ</em></span>) added to the diagonal of <span class="math inline"><em>X</em><sup><em>T</em></sup><em>X</em></span> matrix, or the equivalent number of degrees of freedom.</p>
-<p>More importantly, the <code>ridge</code> function also calculates and returns the associated covariance matrices of each of the ridge estimates, allowing precision to be studied and displayed graphically.</p>
+<p>This package provides computational support for the graphical methods described in Friendly (2013). Ridge regression models may be fit using the function <code>ridge</code>, which incorporates features of <code><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html" class="external-link">MASS::lm.ridge()</a></code> and <code>ElemStatLearn::simple.ridge()</code>. In particular, the shrinkage factors in ridge regression may be specified either in terms of the constant (<span class="math inline"><em>λ</em></span>) added to the diagonal of <span class="math inline"><em>X</em><sup>⊤</sup><em>X</em></span> matrix, or the equivalent number of degrees of freedom.</p>
+<p>The following computational functions are provided:</p>
+<ul>
+<li>
+<code><a href="reference/ridge.html">ridge()</a></code> Calculates ridge regregression estimates; returns an object of class <code>"ridge"</code>
+</li>
+<li>
+<code><a href="reference/pca.html">pca.ridge()</a></code> Transform coefcients and covariance matrices to PCA/SVD space; returns an object of class <code>c("pcaridge", "ridge")</code> <code><a href="reference/vif.ridge.html">vif.ridge()</a></code> Calculates VIFs for “ridge” objects <code><a href="reference/precision.html">precision()</a></code> Calculates measures of precision and shrinkage</li>
+</ul>
+<p>More importantly, the <code>ridge</code> functions also calculate and returns the associated covariance matrices of each of the ridge estimates, allowing precision to be studied and displayed graphically.</p>
 <p>This provides the support for the main plotting functions in the package:</p>
 <ul>
 <li>
@@ -132,7 +141,7 @@ $$</span></p>
 <li>
 <code><a href="reference/plot3d.html">plot3d.ridge()</a></code>: 3D ridge trace plots with ellipsoids</li>
 </ul>
-<p>In addition, the <code><a href="reference/pca.html">pca()</a></code> method for <code>"ridge"</code> objects transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of <span class="math inline"><em>X</em><sup><em>T</em></sup><em>X</em></span> or the SVD of <span class="math inline"><em>X</em></span>. The main plotting functions also work for these objects, of class <code>c("ridge", "pcaridge")</code>.</p>
+<p>In addition, the <code><a href="reference/pca.html">pca()</a></code> method for <code>"ridge"</code> objects transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of <span class="math inline"><em>X</em><sup>⊤</sup><em>X</em></span> or the SVD of <span class="math inline"><em>X</em></span>. The main plotting functions also work for these objects, of class <code>c("ridge", "pcaridge")</code>.</p>
 <ul>
 <li>
 <code><a href="reference/biplot.pcaridge.html">biplot.pcaridge()</a></code>: Adds variable vectors to the bivariate plots of coefficients in PCA space</li>
@@ -143,16 +152,26 @@ $$</span></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<table class="table"><tbody>
+<table class="table">
+<colgroup>
+<col width="21%">
+<col width="78%">
+</colgroup>
+<tbody>
 <tr class="odd">
 <td>CRAN version</td>
 <td><code>install.packages("genridge")</code></td>
 </tr>
 <tr class="even">
+<td>R-universe</td>
+<td><code>install.packages("genridge", repos = c('https://friendly.r-universe.dev')</code></td>
+</tr>
+<tr class="odd">
 <td>Development version</td>
 <td><code>remotes::install_github("friendly/genridge")</code></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -219,13 +238,10 @@ $$</span> where “others” represents all other predictors except <span class=
 </h3>
 <p>A standard, univariate, <code><a href="reference/traceplot.html">traceplot()</a></code> simply plots the estimated coefficients for each predictor against the shrinkage factor, <span class="math inline"><em>λ</em></span>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#' fig.width = 7,</span></span>
-<span><span class="co">#' echo = -1,</span></span>
-<span><span class="co">#' fig.cap = "**Figure**: Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">lridge</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.08</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-longley-tp1-1.png"><!-- --></p>
-<p>The dotted lines show choices for the ridge constant by two commonly used criteria to balance bias against precision due to <strong>HKB</strong>: Hoerl, Kennard, and Baldwin (1975) and <strong>LW</strong>: Lawless and Wang (1976). These values (along with a generalized cross-validation value GCV) are also stored in the <code>"ridge"</code> object,</p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">lridge</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.08</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<figure><img src="reference/figures/README-longley-tp1-1.png" alt="Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."><figcaption aria-hidden="true">
+Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08.
+</figcaption></figure><p>The dotted lines show choices for the ridge constant by two commonly used criteria to balance bias against precision due to <strong>HKB</strong>: Hoerl, Kennard, and Baldwin (1975) and <strong>LW</strong>: Lawless and Wang (1976). These values (along with a generalized cross-validation value GCV) are also stored in the <code>"ridge"</code> object,</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>HKB<span class="op">=</span><span class="va">lridge</span><span class="op">$</span><span class="va">kHKB</span>, LW<span class="op">=</span><span class="va">lridge</span><span class="op">$</span><span class="va">kLW</span>, GCV<span class="op">=</span><span class="va">lridge</span><span class="op">$</span><span class="va">kGCV</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      HKB       LW      GCV </span></span>
@@ -318,13 +334,13 @@ $$</span> where “others” represents all other predictors except <span class=
 <code class="sourceCode R"><span><span class="va">plridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pca.html">pca</a></span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span>
 <span><span class="va">plridge</span></span>
 <span><span class="co">#&gt; Ridge Coefficients:</span></span>
-<span><span class="co">#&gt;        dim1      dim2      dim3      dim4      dim5      dim6    </span></span>
-<span><span class="co">#&gt; 0.000   1.51541  -0.37939  -1.80131  -0.34595  -5.97391   6.74225</span></span>
-<span><span class="co">#&gt; 0.005   1.51531  -0.37928  -1.79855  -0.33886  -5.32221   3.68519</span></span>
-<span><span class="co">#&gt; 0.010   1.51521  -0.37918  -1.79579  -0.33205  -4.79871   2.53553</span></span>
-<span><span class="co">#&gt; 0.020   1.51500  -0.37898  -1.79031  -0.31922  -4.00988   1.56135</span></span>
-<span><span class="co">#&gt; 0.040   1.51459  -0.37858  -1.77944  -0.29633  -3.01774   0.88291</span></span>
-<span><span class="co">#&gt; 0.080   1.51377  -0.37778  -1.75810  -0.25915  -2.01876   0.47238</span></span>
+<span><span class="co">#&gt;        dim1     dim2     dim3     dim4     dim5     dim6   </span></span>
+<span><span class="co">#&gt; 0.000  1.51541  0.37939  1.80131  0.34595  5.97391  6.74225</span></span>
+<span><span class="co">#&gt; 0.005  1.51531  0.37928  1.79855  0.33886  5.32221  3.68519</span></span>
+<span><span class="co">#&gt; 0.010  1.51521  0.37918  1.79579  0.33205  4.79871  2.53553</span></span>
+<span><span class="co">#&gt; 0.020  1.51500  0.37898  1.79031  0.31922  4.00988  1.56135</span></span>
+<span><span class="co">#&gt; 0.040  1.51459  0.37858  1.77944  0.29633  3.01774  0.88291</span></span>
+<span><span class="co">#&gt; 0.080  1.51377  0.37778  1.75810  0.25915  2.01876  0.47238</span></span>
 <span><span class="fu"><a href="reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">plridge</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-pca-traceplot-1.png"><!-- --></p>
 <p>What is perhaps surprising is that the coefficients for the first 4 components are not shrunk at all. Rather, the effect of shrinkage is seen only on the <em>last two dimensions</em>. These are the directions that contribute most to collinearity, for which other visualization methods have been proposed (Friendly &amp; Kwan 2009).</p>
@@ -372,6 +388,7 @@ $$</span> where “others” represents all other predictors except <span class=
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
+<p>Friendly, M. (2011). Generalized Ridge Trace Plots: Visualizing Bias <em>and</em> Precision with the <code>genridge</code> R package. <a href="http://euclid.psych.yorku.ca/datavis/papers/gentalk.pdf" class="external-link">gentalk.pdf</a>; <a href="http://euclid.psych.yorku.ca/datavis/papers/gentalk-2x2.pdf" class="external-link">gentalk-2x2.pdf</a></p>
 <p>Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias <em>and</em> Precision. <em>Journal of Computational and Graphical Statistics</em>, <strong>22</strong>(1), 50-68, <a href="http://dx.doi.org/10.1080/10618600.2012.681237" class="external-link">DOI link</a>, Online: <a href="https://www.datavis.ca/papers/genridge-jcgs.pdf" class="external-link">genridge-jcgs.pdf</a>, Supp. materials: <a href="http://datavis.ca/papers/genridge-supp.zip" class="external-link">genridge-supp.zip</a></p>
 <p>Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing Collinearity Diagnostics, <em>The American Statistician</em>, <strong>63</strong>(1), 56–65, <a href="https://doi.org/10.1198/tast.2009.0012" class="external-link">DOI link</a>, Online: <a href="http://datavis.ca/papers/viscollin-tast.pdf" class="external-link">viscollin-tast.pdf</a>, Supp. materials: <a href="http://datavis.ca/papers/viscollin/" class="external-link uri">http://datavis.ca/papers/viscollin/</a>.</p>
 <p>Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), Ridge Regression: Some Simulations, <em>Communications in Statistics</em>, <strong>4</strong>, 105–123.</p>

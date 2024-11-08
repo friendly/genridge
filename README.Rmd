@@ -201,9 +201,9 @@ A standard, univariate, `traceplot()` simply plots the estimated coefficients fo
 against the shrinkage factor, $\lambda$.
 
 ```{r longley-tp1}
-#' fig.width = 7,
-#' echo = -1,
-#' fig.cap = "**Figure**: Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."
+#| fig.width = 7,
+#| echo = -1,
+#| fig.cap = "Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."
 par(mar=c(4, 4, 1, 1)+ 0.1)
 traceplot(lridge, xlim = c(-0.02, 0.08))
 ```

@@ -123,11 +123,11 @@ useful measures and plots.
 
 ## Installation
 
-|  |  |
-|----|----|
-| CRAN version | `install.packages("genridge")` |
-| R-universe | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
-| Development version | `remotes::install_github("friendly/genridge")` |
+|                     |                                                                             |
+|---------------------|-----------------------------------------------------------------------------|
+| CRAN version        | `install.packages("genridge")`                                              |
+| R-universe          | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
+| Development version | `remotes::install_github("friendly/genridge")`                              |
 
 ## Examples
 
@@ -224,14 +224,17 @@ A standard, univariate, `traceplot()` simply plots the estimated
 coefficients for each predictor against the shrinkage factor, $\lambda$.
 
 ``` r
-#' fig.width = 7,
-#' echo = -1,
-#' fig.cap = "**Figure**: Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."
-par(mar=c(4, 4, 1, 1)+ 0.1)
 traceplot(lridge, xlim = c(-0.02, 0.08))
 ```
 
-![](man/figures/README-longley-tp1-1.png)<!-- -->
+<figure>
+<img src="man/figures/README-longley-tp1-1.png"
+alt="Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08." />
+<figcaption aria-hidden="true">Univariate ridge trace plots for the
+coefficients of predictors of Employment in Longley’s data via ridge
+regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04,
+0.08.</figcaption>
+</figure>
 
 The dotted lines show choices for the ridge constant by two commonly
 used criteria to balance bias against precision due to **HKB**: Hoerl,
