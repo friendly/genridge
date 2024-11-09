@@ -281,10 +281,13 @@ NULL
 #' pridge <- ridge(py, pX, df=8:1)
 #' pridge
 #' 
-#' plot(pridge)
-#' pairs(pridge)
+#' # univariate ridge trace plots
 #' traceplot(pridge)
 #' traceplot(pridge, X="df")
+#' 
+#' # bivariate ridge trace plots
+#' plot(pridge)
+#' pairs(pridge)
 #' 
 #' 
 #' 

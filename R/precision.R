@@ -5,10 +5,6 @@
 #' @aliases precision precision.ridge precision.lm
 #'
 #' @description
-#' Calculates measures of precision based on the size of the estimated
-#' covariance matrices of the parameters and shrinkage of the parameters in a
-#' ridge regression model. %% ~~ A concise (1-5 lines) description of what the
-#' function does. ~~
 #' 
 #' Three measures of (inverse) precision based on the \dQuote{size} of the
 #' covariance matrix of the parameters are calculated. Let \eqn{V_k} be the
@@ -19,8 +15,8 @@
 #'        measures the linearized
 #'        volume of the covariance ellipsoid and corresponds conceptually to Wilks'
 #'        Lambda criterion 
-#'   \item \eqn{ trace( V_k ) = \sum \lambda} corresponds conceptually to Pillai's trace criterion 
-#'   \item \eqn{ \lambda_1 = max (\lambda)} corresponds to Roy's largest root criterion.  
+#'   \item \eqn{ \text{trace}( V_k ) = \sum \lambda} corresponds conceptually to Pillai's trace criterion 
+#'   \item \eqn{ \lambda_1 = \max (\lambda)} corresponds to Roy's largest root criterion.  
 #' }
 #' 
 #' @param object An object of class \code{ridge} or \code{lm}

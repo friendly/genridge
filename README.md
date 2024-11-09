@@ -93,8 +93,8 @@ The following computational functions are provided:
   of class `"ridge"`
 - `pca.ridge()` Transform coefcients and covariance matrices to PCA/SVD
   space; returns an object of class `c("pcaridge", "ridge")`
-  `vif.ridge()` Calculates VIFs for “ridge” objects `precision()`
-  Calculates measures of precision and shrinkage
+- `vif.ridge()` Calculates VIFs for “ridge” objects
+- `precision()` Calculates measures of precision and shrinkage
 
 More importantly, the `ridge` functions also calculate and returns the
 associated covariance matrices of each of the ridge estimates, allowing
@@ -123,11 +123,11 @@ useful measures and plots.
 
 ## Installation
 
-|                     |                                                                             |
-|---------------------|-----------------------------------------------------------------------------|
-| CRAN version        | `install.packages("genridge")`                                              |
-| R-universe          | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
-| Development version | `remotes::install_github("friendly/genridge")`                              |
+|  |  |
+|----|----|
+| CRAN version | `install.packages("genridge")` |
+| R-universe | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
+| Development version | `remotes::install_github("friendly/genridge")` |
 
 ## Examples
 
@@ -259,9 +259,6 @@ corresponds to 6 degrees of freedom in the parameter space of six
 predictors.
 
 ``` r
-#' fig.width = 7,
-#' echo = -1
-par(mar=c(4, 4, 1, 1)+ 0.1)
 traceplot(lridge, X="df", xlim = c(4, 6.5))
 ```
 
@@ -345,10 +342,11 @@ precision(lridge)
 #> 0.080  0.080 4.128 -21.05  0.5873  0.2599    0.3373
 ```
 
-`norm.beta`, $||\mathbf{\beta}|| / \max{||\mathbf{\beta}||}$ is a
-measure of shrinkage, and `det`, $\log{| \text{Var}(\mathbf{\beta}) |}$,
-is a measure of variance. Plotting these against each other gives a
-direct view of the tradeoff.
+`norm.beta` $= ||\mathbf{\beta}|| / \max{||\mathbf{\beta}||}$ is a
+measure of shrinkage, and `det`
+$= \log{| \text{Var}(\mathbf{\beta}) |}$, is a measure of variance.
+Plotting these against each other gives a direct view of the tradeoff
+between bias and precision.
 
 ``` r
 pdat <- precision(lridge)
@@ -366,7 +364,7 @@ mod <- lm(cbind(det, norm.beta) ~ bs(lambda, df=5), data=pdat)
 x <- data.frame(lambda=c(lridge$kHKB, lridge$kLW))
 fit <- predict(mod, x)
 points(fit[,2:1], pch=15, col=gray(.50), cex=1.5)
-text(fit[,2:1], c("HKB", "LW"), pos=4, cex=1.25, col=gray(.50))
+text(fit[,2:1], c("HKB", "LW"), pos=3, cex=1.5, col=gray(.50))
 par(op)
 ```
 
@@ -377,8 +375,8 @@ par(op)
 Just as principal components analysis gives low-dimensional views of a
 data set, PCA can be useful to understand ridge regression.
 
-The `pca` method transforms a `ridge` object from parameter space, where
-the estimated coefficients are $\beta_k$ with covariance matrices
+The `pca` method transforms a `"ridge"` object from parameter space,
+where the estimated coefficients are $\beta_k$ with covariance matrices
 $\Sigma_k$, to the principal component space defined by the right
 singular vectors, $V$, of the singular value decomposition of the scaled
 predictor matrix, $X$.
@@ -478,7 +476,8 @@ vcdExtra::datasets(package="genridge")
 ## References
 
 Friendly, M. (2011). Generalized Ridge Trace Plots: Visualizing Bias
-*and* Precision with the `genridge` R package.
+*and* Precision with the `genridge` R package. SCS Seminar, Jan., 2011.
+Slides:
 [gentalk.pdf](http://euclid.psych.yorku.ca/datavis/papers/gentalk.pdf);
 [gentalk-2x2.pdf](http://euclid.psych.yorku.ca/datavis/papers/gentalk-2x2.pdf)
 

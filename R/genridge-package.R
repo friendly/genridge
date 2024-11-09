@@ -44,8 +44,7 @@
 #' provide other useful measures and plots.
 #' 
 #' @name genridge-package
-#' @aliases genridge-package genridge
-#' @docType package
+#' @aliases genridge-package genridge _PACKAGE
 #' @author Michael Friendly
 #' 
 #' Maintainer: Michael Friendly <friendly@@yorku.ca>

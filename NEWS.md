@@ -1,6 +1,7 @@
 ## genridge 0.7.1 (2024-11-07)
 
 o Added links to gentalk.pdf
+o Improved README and fixed some examples
 
 ## genridge 0.7.0 (2023-07-31)
 
