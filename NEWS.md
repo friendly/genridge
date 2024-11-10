@@ -2,6 +2,7 @@
 
 o Added links to gentalk.pdf
 o Improved README and fixed some examples
+o `presion()` result gains a class "precision" for a plot method
 
 ## genridge 0.7.0 (2023-07-31)
 

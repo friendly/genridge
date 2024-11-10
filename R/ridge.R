@@ -1,4 +1,8 @@
 # TODO: Add a .lm method
+# TODO: Fix warning:
+#   Warning message:
+#     In model.matrix.default(Terms, m, contrasts) :
+#     non-list contrasts argument ignored
 
 #' Ridge Regression Estimates
 #' 

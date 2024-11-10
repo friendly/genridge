@@ -1,3 +1,4 @@
+# Nov 10, 2024: result gains class "precision" for a plot method
 
 #' Measures of Precision and Shrinkage for Ridge Regression
 #' 
@@ -26,7 +27,7 @@
 #'        normalized to a maximum of 1.0.
 #' @param \dots Other arguments (currently unused)
 #' 
-#' @return A data.frame with the following columns 
+#' @return An object of class \code{c("precision", "data.frame")} with the following columns: 
 #' \item{lambda}{The ridge constant} 
 #' \item{df}{The equivalent effective degrees of freedom} 
 #' \item{det}{The \code{det.fun} function of the determinant of the covariance matrix} 
@@ -49,6 +50,11 @@
 #' 
 #' lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 #' lridge <- ridge(longley.y, longley.X, lambda=lambda)
+#'
+#' # same, using formula interface
+#' lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, 
+#' 		data=longley, lambda=lambda)
+#' 
 #' clr <- c("black", rainbow(length(lambda)-1, start=.6, end=.1))
 #' coef(lridge)
 #' 
@@ -97,12 +103,14 @@ precision.ridge <- function(object,
 	meig <- unlist(lapply(V, maxeig))	
 	norm <- sqrt(rowMeans(coef(object)^2))
 	if (normalize) norm <- norm / max(norm)
-	data.frame(lambda=object$lambda, 
+	res <- data.frame(lambda=object$lambda, 
 	           df=object$df, 
 	           det=ldet, 
 	           trace=trace, 
 	           max.eig=meig, 
 	           norm.beta=norm)
+	class(res) <- c("precision", "data.frame")
+	res
 }
 
 #' @exportS3Method 
@@ -127,5 +135,35 @@ precision.lm <- function(object, det.fun=c("log","root"), normalize=TRUE, ...) {
 	            trace=trace, 
 	            max.eig=meig, 
 	            norm.beta=norm)
+	class(res) <- c("precision", "data.frame")
 	unlist(res)
+}
+
+#' @exportS3Method 
+plot.precision <- function(object, 
+                           x = "norm.beta", 
+                           y = c("det", "trace", "max.eig"),
+                           labels = c("lambda", "df"),
+                           main = NULL,
+                           ...) {
+  y <- match.arg(y)
+  labels <- match.arg(labels)
+  
+  x <- object[, x]
+  y <- object[, y]
+  lambda <- object[, "lambda"]
+  df <- object[, "df"]
+  
+  plot(x, y, type = "b", ...)
+  text(x, y, labels)
+}
+
+if (FALSE) {
+lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
+                  Population + Year + GNP.deflator, 
+                data=longley, lambda=lambda)
+pridge <- precision(lridge)
+
+plot(pridge)
+  
 }
