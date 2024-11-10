@@ -4,6 +4,7 @@
 
 [![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/genridge)](https://cran.r-project.org/package=genridge)
+[![](https://friendly.r-universe.dev/badges/genridge)](https://friendly.r-universe.dev)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
 [![](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge)
 
@@ -301,13 +302,13 @@ par(op)
 
 <div class="figure">
 
-<img src="man/figures/README-longley-plot-ridge-1.png" alt="**Figure**: Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="100%" />
+<img src="man/figures/README-longley-plot-ridge-1.png" alt="Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="100%" />
 <p class="caption">
-**Figure**: Bivariate ridge trace plots for the coefficients of four
-predictors against the coefficient for GNP in Longley’s data, with λ =
-0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are
-driven toward zero, but the bivariate plot also makes clear the
-reduction in variance, as well as the bivariate path of shrinkage.
+Bivariate ridge trace plots for the coefficients of four predictors
+against the coefficient for GNP in Longley’s data, with λ = 0, 0.005,
+0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven
+toward zero, but the bivariate plot also makes clear the reduction in
+variance, as well as the bivariate path of shrinkage.
 </p>
 
 </div>
@@ -320,16 +321,29 @@ The `pairs()` method for `"ridge"` objects shows all pairwise views in
 scatterplot matrix form.
 
 ``` r
-pairs(lridge, radius=0.5, diag.cex = 1.5)
+pairs(lridge, radius=0.5, diag.cex = 2, 
+      fill = TRUE, fill.alpha = 0.1)
 ```
 
-<img src="man/figures/README-longley-pairs-1.png" width="100%" />
+<div class="figure">
+
+<img src="man/figures/README-longley-pairs-1.png" alt="Scatterplot matrix of bivariate ridge trace plots" width="100%" />
+<p class="caption">
+Scatterplot matrix of bivariate ridge trace plots
+</p>
+
+</div>
+
+See Friendly et-al. (2013) for other examples of how elliptical thinking
+can lead to insights in statistical problems.
 
 ### Visualizing the bias-variance tradeoff
 
 The function `precision()` calculates a number of measures of the effect
 of shrinkage of the coefficients on the estimated sampling variance.
-See: `help(precision)` for details.
+Larger shrinkage $\lambda$ should lead to smaller
+$\widehat{\text{Var}} (\mathbf{\widehat{\beta}})$, indicating increased
+precision. See: `help(precision)` for details.
 
 ``` r
 precision(lridge)
@@ -344,9 +358,9 @@ precision(lridge)
 
 `norm.beta` $= ||\mathbf{\beta}|| / \max{||\mathbf{\beta}||}$ is a
 measure of shrinkage, and `det`
-$= \log{| \text{Var}(\mathbf{\beta}) |}$, is a measure of variance.
-Plotting these against each other gives a direct view of the tradeoff
-between bias and precision.
+$= \log{| \text{Var}(\mathbf{\beta}) |}$, is a measure of variance of
+the coefficients (inverse of precision). Plotting these against each
+other gives a direct view of the tradeoff between bias and precision.
 
 ``` r
 pdat <- precision(lridge)
@@ -457,7 +471,7 @@ text(plridge$coef[,5:6], lambdaf, pos=2, cex=1.3)
 par(op)
 ```
 
-![](man/figures/README-biplot-1.png)<!-- -->
+![](man/figures/README-fig.cap:%22Biplotviewoftheridgetraceplotforthesmallesttwodimensions,wheretheeffectsofshrinkagearemostapparent.%22-1.png)<!-- -->
 
 ## Other examples
 
@@ -494,6 +508,11 @@ Collinearity Diagnostics, *The American Statistician*, **63**(1), 56–65,
 [DOI link](https://doi.org/10.1198/tast.2009.0012), Online:
 [viscollin-tast.pdf](http://datavis.ca/papers/viscollin-tast.pdf), Supp.
 materials: <http://datavis.ca/papers/viscollin/>.
+
+Friendly, M., Monette, G., & Fox, J. (2013). Elliptical Insights:
+Understanding Statistical Methods Through Elliptical Geometry.
+*Statistical Science*, **28**(1), 1–39.
+<https://doi.org/10.1214/12-STS402>
 
 Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), Ridge
 Regression: Some Simulations, *Communications in Statistics*, **4**,

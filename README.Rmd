@@ -23,6 +23,7 @@ library(genridge)
 <!-- badges: start -->
 [![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/genridge)](https://cran.r-project.org/package=genridge)
+[![](https://friendly.r-universe.dev/badges/genridge)](https://friendly.r-universe.dev)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
 [![](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge)
 
@@ -253,7 +254,7 @@ four of the other predictors.
 ```{r longley-plot-ridge}
 #| out.width = "100%",
 #| fig.show = "hold",
-#| fig.cap = "**Figure**: Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage."
+#| fig.cap = "Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage."
 op <- par(mfrow=c(2,2), mar=c(4, 4, 1, 1)+ 0.1)
 clr <-  c("black", "red", "darkgreen","blue", "cyan4", "magenta")
 pch <- c(15:18, 7, 9)
@@ -276,14 +277,21 @@ the origin $(0, 0)$, and the covariance ellipses get smaller, indicating increas
 The `pairs()` method for `"ridge"` objects shows all pairwise views in scatterplot matrix form.
 
 ```{r longley-pairs}
-#| out.width = "100%"
-pairs(lridge, radius=0.5, diag.cex = 1.5)
+#| out.width = "100%",
+#| fig.cap = "Scatterplot matrix of bivariate ridge trace plots"
+pairs(lridge, radius=0.5, diag.cex = 2, 
+      fill = TRUE, fill.alpha = 0.1)
 ```
+
+See Friendly et-al. (2013) for other examples of how elliptical thinking can lead to insights
+in statistical problems.
 
 ### Visualizing the bias-variance tradeoff
 
 The function `precision()` calculates a number of measures of the effect of shrinkage of the
-coefficients on the estimated sampling variance. See: `help(precision)` for details.
+coefficients on the estimated sampling variance. Larger shrinkage $\lambda$ should lead
+to smaller $\widehat{\text{Var}} (\mathbf{\widehat{\beta}})$, indicating increased precision.
+See: `help(precision)` for details.
 
 ```{r precision}
 precision(lridge)
@@ -291,7 +299,7 @@ precision(lridge)
 
 `norm.beta` $= ||\mathbf{\beta}|| / \max{||\mathbf{\beta}||}$ is a measure of shrinkage, and `det`
 $= \log{| \text{Var}(\mathbf{\beta}) |}$,
-is a measure of variance. Plotting these against
+is a measure of variance of the coefficients (inverse of precision). Plotting these against
 each other gives a direct view of the tradeoff between bias and precision.
 
 ```{r precision-plot}
@@ -373,7 +381,8 @@ The biplot view showing the dimensions corresponding to the two smallest singula
 between (`Year`, `Population`) and `GNP` contributes to `dim 6`.
 
 ```{r biplot}
-#| fig.show="hold"
+#| fig.show="hold",
+#| fig.cap: "Biplot view of the ridge trace plot for the smallest two dimensions, where the effects of shrinkage are most apparent."
 op <- par(mar=c(4, 4, 1, 1) + 0.2)
 biplot(plridge, radius=0.5, 
        ref=FALSE, asp=1, 
@@ -412,6 +421,8 @@ _The American Statistician_, **63**(1), 56–65,
 [DOI link](https://doi.org/10.1198/tast.2009.0012),
 Online: [viscollin-tast.pdf](http://datavis.ca/papers/viscollin-tast.pdf),
 Supp. materials: [http://datavis.ca/papers/viscollin/](http://datavis.ca/papers/viscollin/).
+
+Friendly, M., Monette, G., & Fox, J. (2013). Elliptical Insights: Understanding Statistical Methods Through Elliptical Geometry. _Statistical Science_, **28**(1), 1–39. https://doi.org/10.1214/12-STS402
 
 Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), 
 Ridge Regression: Some Simulations, _Communications in Statistics_, **4**, 105–123.

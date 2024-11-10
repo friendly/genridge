@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://friendly.github.io/genridge/404.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/index.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/Acetylene.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/biplot.pcaridge.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/contourf.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/Detroit.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/genridge-package.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/Manpower.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/pairs.ridge.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/pca.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/plot.ridge.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/plot3d.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/precision.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/prostate.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/ridge.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/traceplot.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/trans.colors.html</loc>
-  </url>
-  <url>
-    <loc>https://friendly.github.io/genridge/reference/vif.ridge.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://friendly.github.io/genridge/404.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/authors.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/index.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/news/index.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/Acetylene.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/biplot.pcaridge.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/contourf.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/Detroit.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/genridge-package.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/index.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/Manpower.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/pairs.ridge.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/pca.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/plot.ridge.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/plot3d.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/precision.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/prostate.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/ridge.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/traceplot.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/trans.colors.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/vif.ridge.html</loc></url>
 </urlset>
+

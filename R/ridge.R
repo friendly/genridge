@@ -1,3 +1,4 @@
+# TODO: Add a .lm method
 
 #' Ridge Regression Estimates
 #' 
