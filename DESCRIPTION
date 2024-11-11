@@ -8,7 +8,7 @@ Authors@R: c(person("Michael", "Friendly", , "friendly@yorku.ca", role = c("aut"
            )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.11.1), car
-Imports: rgl
+Imports: rgl, colorspace
 Suggests: MASS, bestglm, vcdExtra
 Description: The genridge package introduces generalizations of the standard univariate
   ridge trace plot used in ridge regression and related methods.  These graphical methods

@@ -20,7 +20,7 @@ normalized to a maximum of 1.0.}
 \item{\dots}{Other arguments (currently unused)}
 }
 \value{
-A data.frame with the following columns 
+An object of class \code{c("precision", "data.frame")} with the following columns: 
 \item{lambda}{The ridge constant} 
 \item{df}{The equivalent effective degrees of freedom} 
 \item{det}{The \code{det.fun} function of the determinant of the covariance matrix} 
@@ -54,6 +54,11 @@ longley.X <- data.matrix(longley[, c(2:6,1)])
 
 lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 lridge <- ridge(longley.y, longley.X, lambda=lambda)
+
+# same, using formula interface
+lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, 
+		data=longley, lambda=lambda)
+
 clr <- c("black", rainbow(length(lambda)-1, start=.6, end=.1))
 coef(lridge)
 
