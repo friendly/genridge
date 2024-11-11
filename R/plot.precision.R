@@ -1,11 +1,12 @@
 #' Plot Bias vs Variance for Ridge Precision
 #'
-#' @param object A data frame of class \code{"precision"} resulting from \code{link{precision}} called
-#'        on a \code{"ridge"} object.
-#' @param x    The character name of the column to be used for the horizontal axis.
-#' @param y    The character name of the column to be used for the vertical axis.
+#' @param x A data frame of class \code{"precision"} resulting from \code{link{precision}} called
+#'        on a \code{"ridge"} object. Named \code{x} only to conform with the \code{\link{plot}} generic.
+#' @param xvar    The character name of the column to be used for the horizontal axis.
+#' @param yvar    The character name of the column to be used for the vertical axis.
 #' @param labels The character name of the column to be used for point labels.
-#' @param criteria 
+#' @param criteria The vector of optimal shrinkage criteria from the \code{link{ridge}} call to be added
+#'        as labels in the plot. Not yet implemented.
 #' @param pch  Plotting character for points
 #' @param cex  Character size for points
 #' @param col  Point colors
@@ -15,28 +16,31 @@
 #' @param ...  Other arguments passed to \code{link{plot}}.
 #'
 #' @return     Returns nothing. Used for the side effect of plotting.
+#' @importFrom colorspace qualitative_hcl
 #' @exportS3Method 
 #'
 #' @examples
-plot.precision <- function(object, 
-                           x = "norm.beta", 
-                           y = c("det", "trace", "max.eig"),
-                           labels = c("lambda", "df"),
-                           criteria = NULL,
-                           pch = 16,
-                           cex = 1.5,
-                           col,
-                           main = NULL,
-                           xlab, ylab,
-                           ...) {
-  y <- match.arg(y)
+#' # none yet
+plot.precision <- function(
+    x, 
+    xvar = "norm.beta", 
+    yvar = c("det", "trace", "max.eig"),
+    labels = c("lambda", "df"),
+    criteria = NULL,
+    pch = 16,
+    cex = 1.5,
+    col,
+    main = NULL,
+    xlab, ylab,
+    ...) {
+  yvar <- match.arg(yvar)
   labels <- match.arg(labels)
-  if (missing(xlab)) xlab <- paste("shrinkage:", x)
-  if (missing(ylab)) ylab <- paste("variance:", y)
+  if (missing(xlab)) xlab <- paste("shrinkage:", xvar)
+  if (missing(ylab)) ylab <- paste("variance:", yvar)
   
-  x <- object[, x]
-  y <- object[, y]
-  labs <- object[, labels]
+  xvar <- x[, xvar]
+  yvar <- x[, yvar]
+  labs <- x[, labels]
   if (labels=="df") labs <- round(labs, 2)
   labs[1] <- "OLS"     # expression(~widehat(beta)^OLS)  # or, maybe just "OLS"
   nl <- length(labs)
@@ -44,9 +48,7 @@ plot.precision <- function(object,
   if (missing(col)) col <- c("black", 
                              colorspace::qualitative_hcl(nl-1L, palette = "Dark 3"))
   
-  df <- object[, "df"]
-  
-  plot(x, y, type = "b", 
+  plot(xvar, yvar, type = "b", 
        pch = pch,
        col = col,
        cex = cex,
@@ -54,7 +56,7 @@ plot.precision <- function(object,
        xlab = xlab, ylab = ylab,
        main = main,
        ...)
-  text(x, y, labs, pos=c(4, rep(2, nl)), cex = 1.25, xpd = TRUE)
+  text(xvar, yvar, labs, pos=c(4, rep(2, nl)), cex = 1.25, xpd = TRUE)
 }
 
 if (FALSE) {
@@ -68,6 +70,6 @@ if (FALSE) {
   plot(pridge)
   plot(pridge, labels = "df")
   
-  plot(pridge, y="trace")
+  plot(pridge, yvar="trace")
   
 }

@@ -12,14 +12,34 @@
 #' @description  
 #' The function \code{ridge} fits linear models by ridge regression, returning
 #' an object of class \code{ridge} designed to be used with the plotting
-#' methods in this package.
+#' methods in this package. 
 #' 
-#' Ridge regression shrinkage can be parameterized in several ways. If a vector
-#' of \code{lambda} values is supplied, these are used directly in the ridge
-#' regression computations. Otherwise, if a vector \code{df} is supplied the
-#' equivalent values of \code{lambda}.  In either case, both \code{lambda} and
-#' \code{df} are returned in the \code{ridge} object, but the rownames of the
+#' It is also designed to facilitate an alternative representation
+#' of the effects of shrinkage in the space of uncorrelated (PCA/SVD) components of the predictors.
+#' 
+#' The standard formulation of ridge regression is that it regularizes the estimates of coefficients
+#' by adding small positive constants \eqn{\lambda} to the diagonal elements of \eqn{\mathbf{X}^\top\mathbf{X}} in
+#' the least squares solution to achieve a more favorable tradeoff between bias and variance (inverse of precision)
+#' of the coefficients.
+#' 
+#' \deqn{\widehat{\mathbf{\beta}}^{\text{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  }
+#' 
+#' Ridge regression shrinkage can be parameterized in several ways.
+#' \itemize{
+#'    \item If a vector of \code{lambda} values is supplied, these are used directly in the ridge regression computations. 
+#'    \item Otherwise, if a vector \code{df} can be supplied the equivalent values for effective degrees of freedom corresponding to shrinkage,
+#'          going down from the number of predictors in the model.
+#' }
+#' 
+#' In either case, both \code{lambda} and
+#' \code{df} are returned in the \code{ridge} object, but the \code{rownames} of the
 #' coefficients are given in terms of \code{lambda}.
+#' 
+#' @details
+#' 
+#' If an intercept is present in the model, its coefficient is not penalized. (If you want to penalize 
+#' an intercept, put in your own constant term and remove the intercept.)
+#' 
 #' 
 #' @param y A numeric vector containing the response variable. NAs not allowed.
 #' @param X A matrix of predictor variables. NA's not allowed. Should not
@@ -33,6 +53,8 @@
 #'        to \code{lambda}
 #' @param svd If \code{TRUE} the SVD of the centered and scaled \code{X} matrix
 #'        is returned in the \code{ridge} object.
+#' @param contrasts a list of contrasts to be used for some or all of factor terms in the formula. 
+#'        See the \code{contrasts.arg} of \code{\link[stats]{model.matrix.default}}.
 #' @param x,object An object of class \code{ridge}
 #' @param \dots Other arguments, passed down to methods
 #' @param digits For the \code{print} method, the number of digits to print.
@@ -48,7 +70,7 @@
 #' \item{kGCV}{value of \code{lambda} with the minimum GCV}
 #' \item{criteria}{Collects the criteria \code{kHKB}, \code{kLW}, and \code{kGCV} in a named vector}
 #' 
-#' If \code{svd==TRUE}, the following are also included:
+#' If \code{svd==TRUE} (the default), the following are also included:
 #' 
 #' \item{svd.D}{Singular values of the \code{svd} of the scaled X matrix}
 #' \item{svd.U}{Left singular vectors of the \code{svd} of the scaled X matrix.
@@ -58,8 +80,7 @@
 #' @author Michael Friendly
 #' @importFrom stats coef coefficients contrasts lm.fit model.matrix model.offset model.response uniroot vcov
 #' @export
-#' @seealso \code{\link[MASS]{lm.ridge}} for other implementations of ridge
-#' regression
+#' @seealso \code{\link[MASS]{lm.ridge}} for other implementations of ridge regression
 #' 
 #' \code{\link{traceplot}}, \code{\link{plot.ridge}},
 #' \code{\link{pairs.ridge}}, \code{\link{plot3d.ridge}}, for 1D, 2D, 3D plotting methods
@@ -153,8 +174,14 @@ ridge <- function(y, ...) {
 
 #' @rdname ridge
 #' @exportS3Method 
-ridge.formula <-
-		function(formula, data, lambda=0, df, svd=TRUE, ...){
+ridge.formula <- function(
+    formula, 
+    data, 
+    lambda=0, 
+    df, 
+    svd=TRUE, 
+    contrasts=NULL,
+    ...){
 	
 	#code from MASS:::lm.ridge
 	m <- match.call(expand.dots = FALSE)
@@ -249,7 +276,8 @@ ridge.default <-
 	               coef=coef, cov=cov, 
 	               mse=mse, scales=Xscale, 
 	               kHKB=HKB, kLW=LW,
-	               GCV=GCV, kGCV=kGCV)
+	               GCV=GCV, kGCV=kGCV,
+	               criteria = criteria)
 	
 	if (svd) {
 		rownames(u) <- rownames(X)
