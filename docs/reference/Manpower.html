@@ -104,7 +104,6 @@ analyses</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9597.570761    7.940593 8933.086501   23.293856    4.279835 </span>
 <span class="r-in"><span><span class="co"># ridge regression models, specified in terms of equivalent df</span></span></span>
 <span class="r-in"><span><span class="va">mridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="ridge.html">ridge</a></span><span class="op">(</span><span class="va">Hours</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">Manpower</span>, df<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3.75</span>, <span class="op">-</span><span class="fl">.25</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-list contrasts argument ignored</span>
 <span class="r-in"><span><span class="fu">vif</span><span class="op">(</span><span class="va">mridge</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     Load     Xray     BedDays   AreaPop     Stay</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.0000000000 9597.570762 7.940593 8933.086501 23.293856 4.279835</span>

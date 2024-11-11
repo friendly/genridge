@@ -95,7 +95,7 @@ normalized to a maximum of 1.0.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data.frame with the following columns</p>
+    <p>An object of class <code>c("precision", "data.frame")</code> with the following columns:</p>
 <dl><dt>lambda</dt>
 <dd><p>The ridge constant</p></dd>
 
@@ -138,6 +138,11 @@ will not correspond to those for <code>ridge</code> with ridge constant = 0.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.02</span>, <span class="fl">0.04</span>, <span class="fl">0.08</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">lridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="ridge.html">ridge</a></span><span class="op">(</span><span class="va">longley.y</span>, <span class="va">longley.X</span>, lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># same, using formula interface</span></span></span>
+<span class="r-in"><span><span class="va">lridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="ridge.html">ridge</a></span><span class="op">(</span><span class="va">Employed</span> <span class="op">~</span> <span class="va">GNP</span> <span class="op">+</span> <span class="va">Unemployed</span> <span class="op">+</span> <span class="va">Armed.Forces</span> <span class="op">+</span> <span class="va">Population</span> <span class="op">+</span> <span class="va">Year</span> <span class="op">+</span> <span class="va">GNP.deflator</span>, </span></span>
+<span class="r-in"><span>    data<span class="op">=</span><span class="va">longley</span>, lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">clr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>, start<span class="op">=</span><span class="fl">.6</span>, end<span class="op">=</span><span class="fl">.1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              GNP Unemployed Armed.Forces  Population     Year GNP.deflator</span>

@@ -25,6 +25,7 @@ reference:
   contents:
     - contourf
     - plot.ridge
+    - plot.precision
     - plot3d
     - plot3d.ridge
     - pairs.ridge

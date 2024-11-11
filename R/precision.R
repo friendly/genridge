@@ -41,7 +41,7 @@
 #' 
 #' @author Michael Friendly
 #' @export
-#' @seealso \code{\link{ridge}},
+#' @seealso \code{\link{ridge}}, \code{\link{plot.precision}}
 #' @keywords regression models
 #' @examples
 #' 

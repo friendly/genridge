@@ -152,7 +152,6 @@ application: A data-oriented approach</em>.  Marcel Dekker.</p>
 <span class="r-in"><span><span class="co"># use the formula interface; specify ridge constants in terms</span></span></span>
 <span class="r-in"><span><span class="co"># of equivalent degrees of freedom</span></span></span>
 <span class="r-in"><span><span class="va">dridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="ridge.html">ridge</a></span><span class="op">(</span><span class="va">Homicide</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">Det</span>, df<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">4</span>,<span class="op">-</span><span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-list contrasts argument ignored</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># univariate trace plots are seemingly paradoxical in that</span></span></span>
 <span class="r-in"><span><span class="co"># some coefficients "shrink" *away* from 0</span></span></span>

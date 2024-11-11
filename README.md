@@ -4,9 +4,9 @@
 
 [![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/genridge)](https://cran.r-project.org/package=genridge)
-[![](https://friendly.r-universe.dev/badges/genridge)](https://friendly.r-universe.dev)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
-[![](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge)
+[![R-universe](https://friendly.r-universe.dev/badges/genridge)](https://friendly.r-universe.dev)
+[![downloads](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
+[![pkgdown](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge)
 
 <!-- badges: end -->
 
@@ -371,7 +371,7 @@ with(pdat, {
     cex.lab=1.25, pch=16, cex=1.5, col=clr, lwd=2,
   xlab='shrinkage: ||b|| / max(||b||)',
     ylab='variance: log |Var(b)|')
-    text(norm.beta, det, lambdaf, cex=1.25, pos=c(rep(2,length(lambda)-1),4))
+    text(norm.beta, det, lambdaf, cex=1.25, pos=c(rep(2,length(lambda)-1),4), xpd = TRUE)
     text(min(norm.beta), max(det), "log |Variance| vs. Shrinkage", cex=1.5, pos=4)
     })
 mod <- lm(cbind(det, norm.beta) ~ bs(lambda, df=5), data=pdat)
