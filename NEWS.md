@@ -2,7 +2,9 @@
 
 o Added links to gentalk.pdf
 o Improved README and fixed some examples
-o `presion()` result gains a class "precision" for a plot method
+o `precision()` result gains a class "precision" for a plot method
+o `plot.precision()` plots shrinkage vs. variance
+o `ridge()` now collects the optimal criteria in a named list
 
 ## genridge 0.7.0 (2023-07-31)
 

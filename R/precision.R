@@ -139,31 +139,3 @@ precision.lm <- function(object, det.fun=c("log","root"), normalize=TRUE, ...) {
 	unlist(res)
 }
 
-#' @exportS3Method 
-plot.precision <- function(object, 
-                           x = "norm.beta", 
-                           y = c("det", "trace", "max.eig"),
-                           labels = c("lambda", "df"),
-                           main = NULL,
-                           ...) {
-  y <- match.arg(y)
-  labels <- match.arg(labels)
-  
-  x <- object[, x]
-  y <- object[, y]
-  lambda <- object[, "lambda"]
-  df <- object[, "df"]
-  
-  plot(x, y, type = "b", ...)
-  text(x, y, labels)
-}
-
-if (FALSE) {
-lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
-                  Population + Year + GNP.deflator, 
-                data=longley, lambda=lambda)
-pridge <- precision(lridge)
-
-plot(pridge)
-  
-}

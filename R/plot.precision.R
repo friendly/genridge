@@ -1,0 +1,54 @@
+#' @exportS3Method 
+plot.precision <- function(object, 
+                           x = "norm.beta", 
+                           y = c("det", "trace", "max.eig"),
+                           labels = c("lambda", "df"),
+                           criteria = NULL,
+                           pch = 16,
+                           cex = 1.5,
+                           col,
+                           main = NULL,
+                           xlab, ylab,
+                           ...) {
+  y <- match.arg(y)
+  labels <- match.arg(labels)
+  if (missing(xlab)) xlab <- paste("shrinkage:", x)
+  if (missing(ylab)) ylab <- paste("variance:", y)
+  
+  x <- object[, x]
+  y <- object[, y]
+  labs <- object[, labels]
+  if (labels=="df") labs <- round(labs, 2)
+  labs[1] <- "OLS"     # expression(~widehat(beta)^OLS)  # or, maybe just "OLS"
+  nl <- length(labs)
+  
+  if (missing(col)) col <- c("black", 
+                             colorspace::qualitative_hcl(nl-1L, palette = "Dark 3"))
+  
+  df <- object[, "df"]
+  
+  plot(x, y, type = "b", 
+       pch = pch,
+       col = col,
+       cex = cex,
+       lwd = 2,
+       xlab = xlab, ylab = ylab,
+       main = main,
+       ...)
+  text(x, y, labs, pos=c(4, rep(2, nl)), cex = 1.25, xpd = TRUE)
+}
+
+if (FALSE) {
+  lambda <- c(0, 0.001, 0.005, 0.01, 0.02, 0.04, 0.08)
+  lambdaf <- c(expression(~widehat(beta)^OLS), lambda[-1])
+  lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
+                    Population + Year + GNP.deflator, 
+                  data=longley, lambda=lambda)
+  pridge <- precision(lridge)
+  
+  plot(pridge)
+  plot(pridge, labels = "df")
+  
+  plot(pridge, y="trace")
+  
+}
