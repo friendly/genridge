@@ -1,4 +1,23 @@
+#' Plot Bias vs Variance for Ridge Precision
+#'
+#' @param object A data frame of class \code{"precision"} resulting from \code{link{precision}} called
+#'        on a \code{"ridge"} object.
+#' @param x    The character name of the column to be used for the horizontal axis.
+#' @param y    The character name of the column to be used for the vertical axis.
+#' @param labels The character name of the column to be used for point labels.
+#' @param criteria 
+#' @param pch  Plotting character for points
+#' @param cex  Character size for points
+#' @param col  Point colors
+#' @param main Plot title
+#' @param xlab Label for horizontal axis
+#' @param ylab Label for vertical axis
+#' @param ...  Other arguments passed to \code{link{plot}}.
+#'
+#' @return     Returns nothing. Used for the side effect of plotting.
 #' @exportS3Method 
+#'
+#' @examples
 plot.precision <- function(object, 
                            x = "norm.beta", 
                            y = c("det", "trace", "max.eig"),

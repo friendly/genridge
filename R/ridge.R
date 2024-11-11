@@ -46,6 +46,7 @@
 #' \item{kLW}{L-W estimate of the ridge constant} 
 #' \item{GCV}{vector of GCV values} 
 #' \item{kGCV}{value of \code{lambda} with the minimum GCV}
+#' \item{criteria}{Collects the criteria \code{kHKB}, \code{kLW}, and \code{kGCV} in a named vector}
 #' 
 #' If \code{svd==TRUE}, the following are also included:
 #' 
@@ -242,9 +243,14 @@ ridge.default <-
 	GCV <- colSums((y - X %*% t(coef))^2)/(n - colSums(matrix(dd^2/div, dn)))^2
 	k <- seq_along(GCV)[GCV == min(GCV)]
 	kGCV <- lambda[k]
+	criteria <- c("kHKB" = HKB, "kLW" = LW, "kGCV" = kGCV)
 	
-	result <- list(lambda=lambda, df=df, coef=coef, cov=cov, mse=mse, scales=Xscale, kHKB=HKB, kLW=LW,
-			GCV=GCV, kGCV=kGCV)
+	result <- list(lambda=lambda, df=df, 
+	               coef=coef, cov=cov, 
+	               mse=mse, scales=Xscale, 
+	               kHKB=HKB, kLW=LW,
+	               GCV=GCV, kGCV=kGCV)
+	
 	if (svd) {
 		rownames(u) <- rownames(X)
 		colnames(u) <- colnames(v) <- paste("dim", 1:p, sep="")
