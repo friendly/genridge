@@ -210,15 +210,6 @@ vif(lridge)
 #> 0.080   11.28      2.994        2.301      28.59  28.82        29.52
 ```
 
-<!-- #### Fitting the ridge regression model -->
-<!-- From this, we could proceed to fit the ridge regression model using `MASS::lm.ridge()` -->
-<!-- with a choice for the ridge factor, e.g., $\lambda = 0.01$. -->
-<!-- ```{r lm-ridge} -->
-<!-- longley.modridge <- MASS::lm.ridge(Employed ~ GNP + Unemployed + Armed.Forces +  -->
-<!--                                      Population + Year + GNP.deflator,  -->
-<!--        data=longley, lambda = 0.01) -->
-<!-- ``` -->
-
 ### Univariate trace plots
 
 A standard, univariate, `traceplot()` simply plots the estimated
@@ -230,8 +221,8 @@ traceplot(lridge, xlim = c(-0.02, 0.08))
 
 <figure>
 <img src="man/figures/README-longley-tp1-1.png"
-alt="Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08." />
-<figcaption aria-hidden="true">Univariate ridge trace plots for the
+alt="Univariate ridge trace plot for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08." />
+<figcaption aria-hidden="true">Univariate ridge trace plot for the
 coefficients of predictors of Employment in Longley’s data via ridge
 regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04,
 0.08.</figcaption>
@@ -263,12 +254,17 @@ predictors.
 traceplot(lridge, X="df", xlim = c(4, 6.5))
 ```
 
-![](man/figures/README-longley-tp2-1.png)<!-- -->
+<figure>
+<img src="man/figures/README-longley-tp2-1.png"
+alt="Univariate ridge trace plot of coefficients against effective degrees of freedom." />
+<figcaption aria-hidden="true">Univariate ridge trace plot of
+coefficients against effective degrees of freedom.</figcaption>
+</figure>
 
-**This is the wrong plot!** These plots show the trends in increased
-bias associated with larger $\lambda$, but they do **not** show the
-accompanying decrease in variance (increase in precision). For that, we
-need to consider the variances and covariances of the estimated
+**But wait: This is the wrong plot!** These plots show the trends in
+increased bias associated with larger $\lambda$, but they do **not**
+show the accompanying decrease in variance (increase in precision). For
+that, we need to consider the variances and covariances of the estimated
 coefficients. The univariate trace plot is the wrong graphic form for
 what is essentially a *multivariate* problem, where we would like to
 visualize how both coefficients and their variances change with
@@ -382,7 +378,12 @@ text(fit[,2:1], c("HKB", "LW"), pos=3, cex=1.5, col=gray(.50))
 par(op)
 ```
 
-![](man/figures/README-precision-plot-1.png)<!-- -->
+<figure>
+<img src="man/figures/README-precision-plot-1.png"
+alt="Plot of log(Variance) vs. shrinkage to show the tradeoff between bias and variance." />
+<figcaption aria-hidden="true">Plot of log(Variance) vs. shrinkage to
+show the tradeoff between bias and variance.</figcaption>
+</figure>
 
 ## Low-rank views
 

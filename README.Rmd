@@ -184,17 +184,6 @@ considerably reduced for a few of the predictors.
 vif(lridge)
 ```
 
-<!-- #### Fitting the ridge regression model -->
-
-<!-- From this, we could proceed to fit the ridge regression model using `MASS::lm.ridge()` -->
-<!-- with a choice for the ridge factor, e.g., $\lambda = 0.01$. -->
-
-<!-- ```{r lm-ridge} -->
-<!-- longley.modridge <- MASS::lm.ridge(Employed ~ GNP + Unemployed + Armed.Forces +  -->
-<!--                                      Population + Year + GNP.deflator,  -->
-<!-- 		data=longley, lambda = 0.01) -->
-<!-- ``` -->
-
 
 ### Univariate trace plots
 
@@ -204,7 +193,7 @@ against the shrinkage factor, $\lambda$.
 ```{r longley-tp1}
 #| fig.width = 7,
 #| echo = -1,
-#| fig.cap = "Univariate ridge trace plots for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."
+#| fig.cap = "Univariate ridge trace plot for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."
 par(mar=c(4, 4, 1, 1)+ 0.1)
 traceplot(lridge, xlim = c(-0.02, 0.08))
 ```
@@ -230,11 +219,12 @@ space of six predictors.
 ```{r longley-tp2}
 #| fig.width = 7,
 #| echo = -1,
+#| fig.cap = "Univariate ridge trace plot of coefficients against effective degrees of freedom."
 par(mar=c(4, 4, 1, 1)+ 0.1)
 traceplot(lridge, X="df", xlim = c(4, 6.5))
 ```
 
-**This is the wrong plot!** These plots show the trends in increased bias associated with larger $\lambda$, but they do **not**
+**But wait: This is the wrong plot!** These plots show the trends in increased bias associated with larger $\lambda$, but they do **not**
 show the accompanying decrease in variance (increase in precision).
 For that, we need to consider the variances and covariances of the estimated coefficients.
 The univariate trace plot is the wrong graphic form for what is essentially a _multivariate_ problem,
@@ -303,7 +293,8 @@ is a measure of variance of the coefficients (inverse of precision). Plotting th
 each other gives a direct view of the tradeoff between bias and precision.
 
 ```{r precision-plot}
-#| fig.show = "hold"
+#| fig.show = "hold",
+#| fig.cap = "Plot of log(Variance) vs. shrinkage to show the tradeoff between bias and variance."
 pdat <- precision(lridge)
 op <- par(mar=c(4, 4, 1, 1) + 0.2)
 library(splines)

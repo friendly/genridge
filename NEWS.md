@@ -5,7 +5,7 @@ o Improved README and fixed some examples
 o `precision()` result gains a class "precision" in preparation for a plot method
 o Implemented `plot.precision()` for plots shrinkage vs. variance, using various criteria
 o Fixed warning from `ridge()` related to contrasts
-o `ridge()` now collects the optimal `criteria` in a named list
+o `ridge()` now collects the optimal `criteria` in a named list, which can be added in `plot.precision()`
 
 ## genridge 0.7.0 (2023-07-31)
 
