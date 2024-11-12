@@ -90,10 +90,10 @@ equivalent number of degrees of freedom.
 
 The following computational functions are provided:
 
-- `ridge()` Calculates ridge regregression estimates; returns an object
-  of class `"ridge"`
-- `pca.ridge()` Transform coefcients and covariance matrices to PCA/SVD
-  space; returns an object of class `c("pcaridge", "ridge")`
+- `ridge()` Calculates ridge regression estimates; returns an object of
+  class `"ridge"`
+- `pca.ridge()` Transform coefficients and covariance matrices to
+  PCA/SVD space; returns an object of class `c("pcaridge", "ridge")`
 - `vif.ridge()` Calculates VIFs for “ridge” objects
 - `precision()` Calculates measures of precision and shrinkage
 

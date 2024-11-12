@@ -24,7 +24,7 @@ A data frame with 13 observations on the following 14 variables.
 }
 }
 \source{
-\url{http://lib.stat.cmu.edu/datasets/detroit}
+\url{https://lib.stat.cmu.edu/datasets/detroit}
 }
 \description{
 The data set \code{Detroit} was used extensively in the book by Miller

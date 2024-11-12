@@ -12,7 +12,8 @@ DOI
 Efroymson       
 eigen           
 ElemStatLearn   
-Freiha          
+Freiha
+gentalk
 Github          
 Gunst           
 heptone         
@@ -42,6 +43,7 @@ Nonorthogonal
 pca
 pcaridge
 Pillai's
+pkgdown
 Preprint
 prostatectomy   
 prostatic       
@@ -56,6 +58,7 @@ roxygen
 widehat
 β
 λ
+SCS
 Snee            
 Stamey          
 StatLib         
@@ -63,6 +66,7 @@ Technometrics
 Uwe             
 vcov            
 vif  
+VIFs
 viscollin
 Wilks           
 yorku

@@ -113,7 +113,7 @@ NULL
 #' Miller, A. J. (2002). \emph{Subset Selection in Regression}. 2nd Ed. Chapman
 #' & Hall/CRC. Boca Raton.
 #' 
-#' @source \url{http://lib.stat.cmu.edu/datasets/detroit}
+#' @source \url{https://lib.stat.cmu.edu/datasets/detroit}
 #' @keywords datasets
 #' @examples
 #' 
