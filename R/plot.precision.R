@@ -34,6 +34,8 @@
 #'
 #' @importFrom colorspace qualitative_hcl
 #' @importFrom splines bs
+#' @importFrom stats lm predict
+#' @importFrom graphics points text
 #' @exportS3Method 
 #'
 #' @examples
@@ -103,7 +105,7 @@ plot.precision <- function(
   
   if (!is.null(criteria)) {
     mod <- lm(cbind(yvar, xvar) ~ splines::bs(lambda, df=5), 
-              data=pridge)
+              data=x)
     pts  <- data.frame(lambda=criteria) 
     fit <- predict(mod, pts) 
     points(fit[,2:1], pch=15, col=gray(.50), cex=1.6)
@@ -112,29 +114,3 @@ plot.precision <- function(
   }
 }
 
-if (FALSE) {
-  lambda <- c(0, 0.001, 0.005, 0.01, 0.02, 0.04, 0.08)
-  lambdaf <- c(expression(~widehat(beta)^OLS), lambda[-1])
-  lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
-                    Population + Year + GNP.deflator, 
-                  data=longley, lambda=lambda)
-  
-  criteria <- lridge$criteria
-  pridge <- precision(lridge)
-  
-  plot(pridge)
-  plot(pridge, criteria = criteria)
-  
-  mod <- lm(cbind(det, norm.beta) ~ splines::bs(lambda, df=5), 
-            data=pridge)
-  pts  <- data.frame(lambda=c(lridge$kHKB, 
-                           lridge$kLW))
-  fit <- predict(mod, pts)
-  points(fit[,2:1], pch=15, col=gray(.50), cex=1.6)
-  text(fit[,2:1], c("HKB", "LW"), pos=3, cex=1.5, col=gray(.50))
-  
-  plot(pridge, labels = "df")
-  
-  plot(pridge, yvar="trace")
-  
-}
