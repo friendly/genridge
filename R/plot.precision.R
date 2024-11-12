@@ -57,6 +57,13 @@ plot.precision <- function(
        main = main,
        ...)
   text(xvar, yvar, labs, pos=c(4, rep(2, nl)), cex = 1.25, xpd = TRUE)
+  
+  if (!is.null(criteria)) {
+    mod <- lm(cbind(yvar, xvar) ~ splines::bs(lambda, df=5), 
+              data=pridge)
+    pts  <- data.frame(lambda=criteria) 
+    fit <- predict(mod, pts)                           
+  }
 }
 
 if (FALSE) {
@@ -65,9 +72,20 @@ if (FALSE) {
   lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
                     Population + Year + GNP.deflator, 
                   data=longley, lambda=lambda)
+  
+  criteria <- lridge$criteria
   pridge <- precision(lridge)
   
   plot(pridge)
+  
+  mod <- lm(cbind(det, norm.beta) ~ splines::bs(lambda, df=5), 
+            data=pridge)
+  pts  <- data.frame(lambda=c(lridge$kHKB, 
+                           lridge$kLW))
+  fit <- predict(mod, pts)
+  points(fit[,2:1], pch=15, col=gray(.50), cex=1.6)
+  text(fit[,2:1], c("HKB", "LW"), pos=3, cex=1.5, col=gray(.50))
+  
   plot(pridge, labels = "df")
   
   plot(pridge, yvar="trace")
