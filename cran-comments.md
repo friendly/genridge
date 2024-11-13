@@ -1,6 +1,6 @@
 ## Test environments
-* local Windows 7 install, R version 4.2.3 (2023-03-15 ucrt)
-* win-builder R Under development (unstable) (2023-07-24 r84748 ucrt)
+* local Windows107 install, R version 4.4.1 (2024-06-14 ucrt)
+* win-builder R Under development (unstable) (2024-11-11 r87319 ucrt)
 
 ## R CMD check results
 There were no ERRORs or WARNINGS or NOTEs
@@ -9,10 +9,14 @@ There were no ERRORs or WARNINGS or NOTEs
 character(0)
 
 ## Comments
-This was originally a maintenance release, correcting a problem with an \alias{} in one .Rd file.
-In addition:
+This was modest update release, improving documentation and adding new functionality.
 
-o Converted the package to roxygen2 documentation, correcting some infelicities with S3 methods
-o Added an extended README example.
-o fix link to genridge paper PDF
 
+### genridge 0.7.1 (2024-11-07)
+
+o Added links to gentalk.pdf
+o Improved README and fixed some examples
+o `precision()` result gains a class "precision" in preparation for a plot method
+o Implemented `plot.precision()` for plots shrinkage vs. variance, using various criteria
+o Fixed warning from `ridge()` related to contrasts
+o `ridge()` now collects the optimal `criteria` in a named list, which can be added in `plot.precision()`
