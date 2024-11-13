@@ -5,17 +5,17 @@
 #' Estimate regression coefficients by using ridge regression.
 #'
 #' Consider the multivariate regression:
-#' \deqn{Y = X Psi + e.}
-#' Psi is a M-by-K matrix of regression coefficients.
+#' \deqn{Y = X B + e.}
+#' B is a M-by-K matrix of regression coefficients.
 #' The ridge regression estimate for the coefficients is
-#' \deqn{Psi = (X'X + lambda * I)^{-1} X'Y.}
+#' \deqn{B = (X'X + lambda * I)^{-1} X'Y.}
 #'
 #' @param Y An N x K matrix of dependent variables.
 #' @param X An N x M matrix of regressors.
 #' @param lambda Numeric vector of lambda values
 #' @param do_scale If true, X is centered and scaled, and Y is centered.
 #' @return A list object with the components: 
-#'   1) Psi - A list of estimated Psi matrices, 
+#'   1) B - A list of estimated B matrices, 
 #'   2) lambda - A vector of lambda values, 
 #'   3) GCV - A vector of GCV values
 #' @references G. H. Golub, M. Heath, G. Wahba (1979).
@@ -61,11 +61,11 @@ ridge_mlm <- function (Y, X, lambda = 0, do_scale = FALSE) {
   GCV <-  n * colSums(Resid ^ 2) /
     (n - colSums(matrix(d ^ 2 / n / Divsmall, r))) ^ 2
   
-  # Return list of M-by-K Psi matrices
+  # Return list of M-by-K B matrices
   coef <- split(coef, rep(1:k, each = ncol(X) * ncol(Y)))
   coef <- lapply(coef, matrix, nrow = ncol(X),
                  dimnames = list(colnames(X), colnames(Y)))
   
-  res <- list(Psi = coef, lambda = lambda, GCV = GCV)
+  res <- list(B = coef, lambda = lambda, GCV = GCV)
   res
 }
