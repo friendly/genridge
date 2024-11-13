@@ -1,12 +1,12 @@
 ## Test environments
-* local Windows107 install, R version 4.4.1 (2024-06-14 ucrt)
+* local Windows10 install, R version 4.4.1 (2024-06-14 ucrt)
 * win-builder R Under development (unstable) (2024-11-11 r87319 ucrt)
 
 ## R CMD check results
 There were no ERRORs or WARNINGS or NOTEs
 
 ## Reverse dependencies
-character(0)
+There are no reverse dependencies
 
 ## Comments
 This was modest update release, improving documentation and adding new functionality.
