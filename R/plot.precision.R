@@ -15,7 +15,7 @@
 #'        \code{c("det", "trace", "max.eig")}. See \code{\link{precision}} for definitions of these measures.
 #' @param labels  The character name of the column to be used for point labels. One of \code{c("lambda", "df")}.
 #' @param label.cex Character size for point labels.
-#' @param label.prefix Character or expression prefix for the point labels. Not yet implemented.
+#' @param label.prefix Character or expression prefix for the point labels.
 #' @param criteria The vector of optimal shrinkage criteria from the \code{\link{ridge}} call to be added
 #'        as points in the plot. 
 #' @param pch  Plotting character for points
@@ -54,6 +54,7 @@
 #'
 #' # use degrees of freedom as point labels 
 #' plot(pridge, labels = "df")
+#' plot(pridge, labels = "df", label.prefix="df:")
 #' # show the trace measure
 #' plot(pridge, yvar="trace")
 
@@ -84,7 +85,8 @@ plot.precision <- function(
   labs <- x[, labels]
   lambda <- x[, "lambda"]
   if (labels=="df") labs <- round(labs, 2)
-  labs[1] <- "OLS"     # expression(~widehat(beta)^OLS)  # or, maybe just "OLS"
+  if (!missing(label.prefix)) labs <- paste(label.prefix, labs)
+  if (lambda[1] == 0) labs[1] <- "OLS"     # or, expression(~widehat(beta)^OLS) 
   nl <- length(labs)
   
   if (missing(col)) col <- c("black", 
@@ -99,7 +101,7 @@ plot.precision <- function(
        main = main,
        ...)
   text(xvar, yvar, labs, 
-       pos=c(4, rep(2, nl)), 
+       pos=c(2, rep(4, nl)), 
        cex = label.cex, 
        xpd = TRUE)
   

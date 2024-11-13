@@ -35,7 +35,7 @@ of squares of the coefficients (\code{"norm.beta"}) used as a measure of shrinka
 
 \item{label.cex}{Character size for point labels.}
 
-\item{label.prefix}{Character or expression prefix for the point labels. Not yet implemented.}
+\item{label.prefix}{Character or expression prefix for the point labels.}
 
 \item{criteria}{The vector of optimal shrinkage criteria from the \code{\link{ridge}} call to be added
 as points in the plot.}
@@ -79,6 +79,7 @@ plot(pridge, criteria = criteria)
 
 # use degrees of freedom as point labels 
 plot(pridge, labels = "df")
+plot(pridge, labels = "df", label.prefix="df:")
 # show the trace measure
 plot(pridge, yvar="trace")
 }
