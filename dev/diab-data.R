@@ -35,6 +35,17 @@ colMeans(diab[, -1])
 diab_scaled <- scale(diab) |> as.data.frame()
 colSums(diab_scaled^2)
 
+diab_scaled <- diab
+diab_scaled[, -1] <- as.data.frame(lapply(diab[, -1], function(x) x - mean(x)))
+
+scale2 <- function(x, na.rm = FALSE){ 
+  x <- (x - mean(x, na.rm = na.rm))
+  x <- x / sum(x^2)
+}
+
+diab_scaled <- diab |>
+  mutate(across(!"prog"), scale2())
+
 diab.lm <- lm(prog ~ ., data = diab_scaled)
 coef(diab.lm)
 
