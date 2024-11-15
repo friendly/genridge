@@ -35,7 +35,7 @@ There are ten baseline variables: age, sex, body-mass index (\code{bmi}), averag
 and six blood serum measurements.
 }
 \details{
-%%  ~~ If necessary, more details than the __description__ above ~~
+Efron & Hastie describe their analysis using the standardized the centered predictor variables to be unit L2 norm
 }
 \examples{
 data(diab)
@@ -46,6 +46,9 @@ data(diab)
 Efron, B., Hastie, T., Johnstone, I., & Tibshirani, R. (2004). Least Angle Regression. 
 \emph{The Annals of Statistics}, \bold{32}(2), 407-499. 
 \doi{https://doi.org/10.1214/009053604000000067}
+
+Efron, B., & Hastie, T. (2021). \emph{Computer Age Statistical Inference, Student Edition: Algorithms, Evidence, and Data Science},
+Cambridge University Press. \doi{https://doi.org/10.1017/9781108914062}
 }
 \concept{ridge}
 \keyword{datasets}
