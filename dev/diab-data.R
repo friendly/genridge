@@ -1,4 +1,3 @@
-library(tidyverse)
 
 diabetes <- read.csv("http://hastie.su.domains/CASI_files/DATA/diabetes.csv")
 
@@ -26,30 +25,4 @@ str(diab)
 save(diab, file = "diab.RData")
 
 use_data_doc(diab, file="diab.Rd")
-
-load("data/diab.RData")
-
-# standardize X to mean zero, sum of squares = 1
-colMeans(diab[, -1])
-
-diab_scaled <- scale(diab) |> as.data.frame()
-colSums(diab_scaled^2)
-
-diab_scaled <- diab
-diab_scaled[, -1] <- as.data.frame(lapply(diab[, -1], function(x) x - mean(x)))
-
-scale2 <- function(x, na.rm = FALSE){ 
-  x <- (x - mean(x, na.rm = na.rm))
-  x <- x / sum(x^2)
-}
-
-diab_scaled <- diab |>
-  mutate(across(!"prog"), scale2())
-
-diab.lm <- lm(prog ~ ., data = diab_scaled)
-coef(diab.lm)
-
-
-lambda <- c(0, 0.005, 0.01, 0.02, 0.05, 0.075, 0.1, 0.15)
-diab.lridge <- ridge(prog ~ ., data = diab, lambda =lambda)
 
