@@ -1,3 +1,5 @@
+# TODO: allow for a longer list of colors
+
 #' Univariate Ridge Trace Plots
 #' 
 #' The \code{traceplot} function extends and simplifies the univariate ridge

@@ -12,7 +12,7 @@
 \item{\dots}{Other arguments (unused)}
 }
 \value{
-Returns a matrix of variance inflation factors of the same size and
+Returns a data.frame (also of class \code{"vif.ridge"}) of variance inflation factors of the same size and
         shape as \code{coef{mod}}. The columns correspond to the predictors in the
         model and the rows correspond to the values of \code{lambda} in ridge
         estimation.
