@@ -27,6 +27,8 @@
   ref.col = gray(0.7),
   ...
 )
+
+\method{plot}{pcaridge}(x, variables = (p - 1):p, labels = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
@@ -94,6 +96,9 @@ changes for other parameters.
 
 The size and shapes of the covariance ellipses show directly the effect on
 precision of the estimates as a function of the ridge tuning constant.
+
+\code{plot.pcaridge} does these bivariate ridge trace plots for \code{"pcaridge"} objects, defaulting to plotting the
+two smallest components.
 }
 \examples{
 

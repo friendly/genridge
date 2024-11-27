@@ -2,14 +2,14 @@
 #' 
 #' The function \code{vif.ridge} calculates variance inflation factors for the
 #' predictors in a set of ridge regression models indexed by the
-#' tuning/shrinkage factor.
+#' tuning/shrinkage factor, returning one row for each value of the $\\lambda$ parameter.
 #' 
 #' Variance inflation factors are calculated using the simplified formulation
 #' in Fox & Monette (1992).
 #' 
 #' @param mod A \code{ridge} object
 #' @param \dots Other arguments (unused)
-#' @return Returns a matrix of variance inflation factors of the same size and
+#' @return Returns a data.frame (also of class \code{"vif.ridge"}) of variance inflation factors of the same size and
 #'         shape as \code{coef{mod}}. The columns correspond to the predictors in the
 #'         model and the rows correspond to the values of \code{lambda} in ridge
 #'         estimation. 
@@ -28,14 +28,14 @@
 #'                       Year + GNP.deflator, data=longley)
 #' vif(lmod)
 #' 
-#' longley.y <- longley[, "Employed"]
-#' longley.X <- data.matrix(longley[, c(2:6,1)])
-#' 
 #' lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
-#' lridge <- ridge(longley.y, longley.X, lambda=lambda)
+#' #' lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
+#'                               Population + Year + GNP.deflator, 
+#' 		                data=longley, lambda=lambda)
+#'
 #' coef(lridge)
 #' 
-#' 
+#' # get VIFs for the shrunk estimates
 #' vridge <- vif(lridge)
 #' vridge
 #' 
@@ -86,5 +86,7 @@ vif.ridge <- function(mod, ...) {
 	res <- t(sapply(V, Vif))
 	colnames(res) <- colnames(coef(mod))
 	rownames(res) <- rownames(coef(mod))
+	res <- as.data.frame(res)
+	class(res) <- c("vif.ridge", "data.frame")
 	res
 }

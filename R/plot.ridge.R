@@ -55,9 +55,9 @@
 #' @importFrom graphics abline polygon text
 #' @importFrom grDevices gray
 #' @seealso \code{\link{ridge}} for details on ridge regression as implemented
-#' here
+#' here; \code{\link{pairs.ridge}}, \code{\link{traceplot}}, for basic plots.
 #' 
-#' \code{\link{pairs.ridge}}, \code{\link{traceplot}},
+#' \code{\link{pcaridge}} for transformation of ridge regression estimates to PCA space.
 #' \code{\link{biplot.pcaridge}} and \code{\link{plot3d.ridge}} for other
 #' plotting methods
 #' 
@@ -166,6 +166,11 @@ function(x, variables=1:2, radius=1, which.lambda=1:length(x$lambda),
 }
 
 # for pcaridge objects, default to last 2 variables
+#'
+#' @description
+#' \code{plot.pcaridge} does these bivariate ridge trace plots for \code{"pcaridge"} objects, defaulting to plotting the
+#' two smallest components.
+#' @rdname plot.ridge
 #' @exportS3Method 
 plot.pcaridge <-
   function(x, variables=(p-1):p, labels=NULL, ...) {

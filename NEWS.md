@@ -1,3 +1,11 @@
+## genridge 0.7.2 (2024-11-15)
+
+o Fleshed out and installed `plot.precision()`
+o Illustrate `plot.precision()` in `README.Rmd`
+o Added `diab` data, diabetes from CASI
+o Fixed documentation for `plot.ridge()` so that `plot.pcaridge()` is documented explicitly.
+o 'vif.ridge()` now returns a data.frame of class also "vif.ridge" to prepare for a plot method.
+
 ## genridge 0.7.1 (2024-11-07)
 
 o Added links to gentalk.pdf
