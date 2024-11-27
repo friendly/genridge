@@ -206,6 +206,8 @@ in the `"ridge"` object,
 
 ```{r HKB}
 c(HKB=lridge$kHKB, LW=lridge$kLW, GCV=lridge$kGCV)
+# these are also stored in 'criteria' for use with plotting methods
+criteria <- lridge$criteria
 ```
 
 These values seem rather small, but note that the coefficients for `Year` and `GNP` are 
@@ -214,7 +216,9 @@ shrunk considerably.
 ### Alternative plot
 It is sometimes easier to interpret the plot when coefficients are plotted against the equivalent
 degrees of freedom, where $\lambda = 0$ corresponds to 6 degrees of freedom in the parameter
-space of six predictors.
+space of six predictors. Note that the values of $\lambda$ chosen here were approximately 
+chosen on a log scale. Using the scaling `X="df"` here makes the points more nearly equally
+spaced.
 
 ```{r longley-tp2}
 #| fig.width = 7,
@@ -228,21 +232,21 @@ traceplot(lridge, X="df", xlim = c(4, 6.5))
 show the accompanying decrease in variance (increase in precision).
 For that, we need to consider the variances and covariances of the estimated coefficients.
 The univariate trace plot is the wrong graphic form for what is essentially a _multivariate_ problem,
-where we would like to visualize how both coefficients and their variances change with
+where we would like to visualize how _both_ coefficients and their variances change with
 $\lambda$.
 
 
 
 ### Bivariate trace plots
 
-The bivariate analog of the trace plot suggested by Friendly (2013) plots bivariate
-confidence ellipses for pairs of coefficients. Their centers, $(\widehat{\beta}_i, \widehat{\beta}_j)$ show the estimated coefficients, and their size and shape
+The bivariate analog of the trace plot suggested by Friendly (2013) plots **bivariate
+confidence ellipses** for pairs of coefficients. Their centers, $(\widehat{\beta}_i, \widehat{\beta}_j)$ show the estimated coefficients, and their size and shape
 indicate sampling variance, $\widehat{\text{Var}} (\mathbf{\widehat{\beta}}_{ij})$.
 Here, we plot those for `GNP` against
 four of the other predictors.
 
 ```{r longley-plot-ridge}
-#| out.width = "100%",
+#| out.width = "80%",
 #| fig.show = "hold",
 #| fig.cap = "Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage."
 op <- par(mfrow=c(2,2), mar=c(4, 4, 1, 1)+ 0.1)
@@ -267,7 +271,7 @@ the origin $(0, 0)$, and the covariance ellipses get smaller, indicating increas
 The `pairs()` method for `"ridge"` objects shows all pairwise views in scatterplot matrix form.
 
 ```{r longley-pairs}
-#| out.width = "100%",
+#| out.width = "80%",
 #| fig.cap = "Scatterplot matrix of bivariate ridge trace plots"
 pairs(lridge, radius=0.5, diag.cex = 2, 
       fill = TRUE, fill.alpha = 0.1)
@@ -295,10 +299,10 @@ each other gives a direct view of the tradeoff between bias and precision.
 ```{r precision-plot}
 #| fig.show = "hold",
 #| fig.cap = "Plot of log(Variance) vs. shrinkage to show the tradeoff between bias and variance."
-pdat <- precision(lridge)
+pridge <- precision(lridge)
 op <- par(mar=c(4, 4, 1, 1) + 0.2)
 library(splines)
-with(pdat, {
+with(pridge, {
 	plot(norm.beta, det, type="b", 
 	cex.lab=1.25, pch=16, cex=1.5, col=clr, lwd=2,
   xlab='shrinkage: ||b|| / max(||b||)',
@@ -306,13 +310,28 @@ with(pdat, {
 	text(norm.beta, det, lambdaf, cex=1.25, pos=c(rep(2,length(lambda)-1),4), xpd = TRUE)
 	text(min(norm.beta), max(det), "log |Variance| vs. Shrinkage", cex=1.5, pos=4)
 	})
-mod <- lm(cbind(det, norm.beta) ~ bs(lambda, df=5), data=pdat)
+mod <- lm(cbind(det, norm.beta) ~ bs(lambda, df=5), data=pridge)
 x <- data.frame(lambda=c(lridge$kHKB, lridge$kLW))
 fit <- predict(mod, x)
 points(fit[,2:1], pch=15, col=gray(.50), cex=1.5)
 text(fit[,2:1], c("HKB", "LW"), pos=3, cex=1.5, col=gray(.50))
 par(op)
 ```
+
+These plots are now provided in the `plot()` method for (class `"precision"`) objects returned by `precision()`.
+This plots the measure `norm.beta` on the horizontal axis vs. any of 
+the variance measures `det`, `trace`, or `max.eig`, and labels the points with either `k` or `df`.
+See `help("precision")` for the definitions of these variance measures.
+
+A plot similar to that above can be produced as shown below, but here labeling the points with
+effective degrees of freedom. The shape of the curve is quite similar.
+
+```{r precision-plot2,echo=-1}
+#| fig.cap = "Plot of det(Variance) vs. shrinkage (`norm.beta`) to show the tradeoff between bias and variance using the `plot()` method for `'precision'` objects. Points are labeled with the effective degrees of freedom."
+op <- par(mar=c(4, 4, 1, 1) + 0.2)
+plot(pridge, labels = "df", label.prefix="df:", criteria = criteria)
+```
+
 
 
 ## Low-rank views
@@ -344,7 +363,7 @@ The `pairs()` plot illustrates the _joint_ effects: the principal components of
 $\mathbf{X}$ are uncorrelated, so the ellipses are all aligned with the coordinate axes
 and the ellipses largely coincide for dimensions 1 to 4:
 ```{r pca-pairs}
-#| out.width = "100%"
+#| out.width = "80%"
 pairs(plridge)
 ```
 
