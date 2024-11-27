@@ -14,6 +14,8 @@
 
 ## Generalized Ridge Trace Plots for Ridge Regression
 
+<!-- Version 0.7.1 -->
+
 Version 0.7.1
 
 ### What is ridge regression?
