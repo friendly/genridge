@@ -57,7 +57,7 @@
 #' @seealso \code{\link{ridge}} for details on ridge regression as implemented
 #' here; \code{\link{pairs.ridge}}, \code{\link{traceplot}}, for basic plots.
 #' 
-#' \code{\link{pcaridge}} for transformation of ridge regression estimates to PCA space.
+#' \code{\link{pca.ridge}} for transformation of ridge regression estimates to PCA space.
 #' \code{\link{biplot.pcaridge}} and \code{\link{plot3d.ridge}} for other
 #' plotting methods
 #' 

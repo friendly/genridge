@@ -24,11 +24,13 @@
 )
 }
 \arguments{
-\item{mod}{A \code{"ridge"} object}
+\item{mod}{A \code{"ridge"} object computed by \code{\link{ridge}}}
 
-\item{\dots}{Other arguments (unused) for compatibility with the generic from \code{\link[car]{vif}}}
+\item{\dots}{Other arguments passed to methods}
 
 \item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
+
+\item{digits}{Number of digits to display in the \code{print} method}
 
 \item{X}{What to plot as the horizontal coordinate, one of \code{c("lambda", "df")}}
 
@@ -48,7 +50,7 @@ curves.  Recycled as necessary.}
 Returns a \code{"vif.ridge"} of variance inflation factors of the same size and
         shape as \code{coef{mod}}. The columns correspond to the predictors in the
         model and the rows correspond to the values of \code{lambda} in ridge
-        estimation.
+        estimation. [Now returns a list!!! FIXME]
 }
 \description{
 The function \code{vif.ridge} calculates variance inflation factors for the
@@ -85,29 +87,32 @@ vridge
 pch <- c(15:18, 7, 9)
 clr <- c("black", rainbow(5, start=.6, end=.1))
 
-matplot(rownames(vridge), vridge, type='b', 
+### Transition examples, because the vif() method now returns a list structure 
+### rather than a data.frame 
+vr <- vridge$vif
+matplot(rownames(vr), vr, type='b', 
 	xlab='Ridge constant (k)', ylab="Variance Inflation", 
 	xlim=c(0, 0.08), 
 	col=clr, pch=pch, cex=1.2)
-text(0.0, vridge[1,], colnames(vridge), pos=4)
+text(0.0, vr[1,], colnames(vr), pos=4)
 
-matplot(lridge$df, vridge, type='b', 
-	xlab='Degrees of freedom', ylab="Variance Inflation", 
-	col=clr, pch=pch, cex=1.2)
-text(6, vridge[1,], colnames(vridge), pos=2)
+# matplot(lridge$df, vridge, type='b', 
+# 	xlab='Degrees of freedom', ylab="Variance Inflation", 
+#	col=clr, pch=pch, cex=1.2)
+# text(6, vridge[1,], colnames(vridge), pos=2)
 
 # more useful to plot VIF on the sqrt scale
 
-matplot(rownames(vridge), sqrt(vridge), type='b', 
-	xlab='Ridge constant (k)', ylab=expression(sqrt(VIF)), 
-	xlim=c(-0.01, 0.08), 
-	col=clr, pch=pch, cex=1.2, cex.lab=1.25)
-text(-0.01, sqrt(vridge[1,]), colnames(vridge), pos=4, cex=1.2)
+# matplot(rownames(vridge), sqrt(vridge), type='b', 
+#	xlab='Ridge constant (k)', ylab=expression(sqrt(VIF)), 
+#	xlim=c(-0.01, 0.08), 
+#	col=clr, pch=pch, cex=1.2, cex.lab=1.25)
+# text(-0.01, sqrt(vridge[1,]), colnames(vridge), pos=4, cex=1.2)
 
-matplot(lridge$df, sqrt(vridge), type='b', 
-	xlab='Degrees of freedom', ylab=expression(sqrt(VIF)), 
-	col=clr, pch=pch, cex=1.2, cex.lab=1.25)
-text(6, sqrt(vridge[1,]), colnames(vridge), pos=2, cex=1.2)
+# matplot(lridge$df, sqrt(vridge), type='b', 
+#	xlab='Degrees of freedom', ylab=expression(sqrt(VIF)), 
+#	col=clr, pch=pch, cex=1.2, cex.lab=1.25)
+# text(6, sqrt(vridge[1,]), colnames(vridge), pos=2, cex=1.2)
 
 
 }
