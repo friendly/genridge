@@ -44,13 +44,17 @@ curves.  Recycled as necessary.}
 
 \item{ylab}{Label for vertical axis}
 
-\item{xlim, ylim}{x, y limits for the plot}
+\item{xlim, ylim}{x, y limits for the plot. You may need to adjust these to allow for the variable labels.}
 }
 \value{
-Returns a \code{"vif.ridge"} of variance inflation factors of the same size and
+\code{vif} returns a \code{"vif.ridge"} object, which is a list of four components
+  \item{vif}{a data frame of the same size and
         shape as \code{coef{mod}}. The columns correspond to the predictors in the
         model and the rows correspond to the values of \code{lambda} in ridge
-        estimation. [Now returns a list!!! FIXME]
+        estimation.}
+  \item{lambda}{the vector of ridge constants from the original call to \code{\link{ridge}} }
+  \item{df}{the vector of effective degrees of freedom corresponding to \code{lambda}}
+  \item{criteria}{the optimal values of \code{lambda}}
 }
 \description{
 The function \code{vif.ridge} calculates variance inflation factors for the

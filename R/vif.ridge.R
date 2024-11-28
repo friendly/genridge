@@ -11,10 +11,15 @@
 #' 
 #' @param mod A \code{"ridge"} object computed by \code{\link{ridge}}
 #' @param \dots Other arguments passed to methods
-#' @return Returns a \code{"vif.ridge"} of variance inflation factors of the same size and
+#' @return \code{vif} returns a \code{"vif.ridge"} object, which is a list of four components
+#'   \item{vif}{a data frame of the same size and
 #'         shape as \code{coef{mod}}. The columns correspond to the predictors in the
 #'         model and the rows correspond to the values of \code{lambda} in ridge
-#'         estimation. [Now returns a list!!! FIXME]
+#'         estimation.}
+#'   \item{lambda}{the vector of ridge constants from the original call to \code{\link{ridge}} }
+#'   \item{df}{the vector of effective degrees of freedom corresponding to \code{lambda}}
+#'   \item{criteria}{the optimal values of \code{lambda}}
+#' 
 #' @author Michael Friendly
 #' @export
 #' @importFrom car vif
