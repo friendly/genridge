@@ -7,9 +7,9 @@
 #' Variance inflation factors are calculated using the simplified formulation
 #' in Fox & Monette (1992).
 #' 
-#' @param mod A \code{ridge} object
-#' @param \dots Other arguments (unused)
-#' @return Returns a data.frame (also of class \code{"vif.ridge"}) of variance inflation factors of the same size and
+#' @param mod A \code{"ridge"} object
+#' @param \dots Other arguments (unused) for compatibility with the generic from \code{\link[car]{vif}}
+#' @return Returns a \code{"vif.ridge"} of variance inflation factors of the same size and
 #'         shape as \code{coef{mod}}. The columns correspond to the predictors in the
 #'         model and the rows correspond to the values of \code{lambda} in ridge
 #'         estimation. 
@@ -29,9 +29,9 @@
 #' vif(lmod)
 #' 
 #' lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
-#' #' lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
-#'                               Population + Year + GNP.deflator, 
-#' 		                data=longley, lambda=lambda)
+#' lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
+#'                            Population + Year + GNP.deflator, 
+#' 		             data=longley, lambda=lambda)
 #'
 #' coef(lridge)
 #' 
@@ -87,6 +87,21 @@ vif.ridge <- function(mod, ...) {
 	colnames(res) <- colnames(coef(mod))
 	rownames(res) <- rownames(coef(mod))
 	res <- as.data.frame(res)
-	class(res) <- c("vif.ridge", "data.frame")
+	res <- list(vif = res, lambda = mod$lambda, df = mod$df)
+	class(res) <- "vif.ridge"
 	res
 }
+
+#' @rdname vif.ridge
+#' @exportS3Method print vif.ridge
+print.vif.ridge <-
+  function(x, digits = max(4, getOption("digits") - 5),...) {
+    vif <- x$vif
+    if (length(vif)) {
+      cat("Variance inflaction factors:\n")
+      print(format(vif, digits = digits), print.gap = 2, 
+                    quote = FALSE)
+    }
+    invisible(x)
+  }
+
