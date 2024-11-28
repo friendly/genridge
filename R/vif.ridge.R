@@ -1,8 +1,10 @@
+#' @title 
 #' Variance Inflation Factors for Ridge Regression
-#' 
+#'
+#' @description
 #' The function \code{vif.ridge} calculates variance inflation factors for the
 #' predictors in a set of ridge regression models indexed by the
-#' tuning/shrinkage factor, returning one row for each value of the $\\lambda$ parameter.
+#' tuning/shrinkage factor, returning one row for each value of the \eqn{\lambda} parameter.
 #' 
 #' Variance inflation factors are calculated using the simplified formulation
 #' in Fox & Monette (1992).
@@ -19,7 +21,7 @@
 #' @importFrom stats coef cov2cor vcov
 #' @seealso \code{\link[car]{vif}}, \code{\link{precision}}
 #' @references Fox, J. and Monette, G. (1992). Generalized collinearity
-#' diagnostics. \emph{JASA}, \bold{87}, 178-183
+#' diagnostics. \emph{JASA}, \bold{87}, 178-183, \doi{10.1080/01621459.1992.10475190}.
 #' @keywords models regression
 #' @examples
 #' 
@@ -87,7 +89,7 @@ vif.ridge <- function(mod, ...) {
 	colnames(res) <- colnames(coef(mod))
 	rownames(res) <- rownames(coef(mod))
 	res <- as.data.frame(res)
-	res <- list(vif = res, lambda = mod$lambda, df = mod$df)
+	res <- list(vif = res, lambda = mod$lambda, df = mod$df, criteria = mod$criteria)
 	class(res) <- "vif.ridge"
 	res
 }
@@ -105,3 +107,61 @@ print.vif.ridge <-
     invisible(x)
   }
 
+
+#' @description
+#' 
+#' The \code{plot.vif.ridge} method plots variance inflation factors for a \code{"vif.ridge"} object
+#' in a similar style to what is provided by \code{\link{traceplot}}. That is, it plots the VIF for each
+#' coefficient in the model against either the ridge \eqn{\lambda} tuning constant or it's equivalent
+#' effective degrees of freedom.
+#' 
+#' @inheritParams traceplot
+#' @rdname vif.ridge
+#' @exportS3Method plot vif.ridge
+plot.vif.ridge <-
+  function(x, 
+           X=c("lambda","df"), 
+           col = c("black", "red", "darkgreen", "blue","darkcyan","magenta", "brown","darkgray"), 
+           pch = c(15:18, 7, 9, 12, 13),
+           xlab, ylab="Variance Inflation", 
+           xlim, ylim, ... ) {
+    
+    type <- X <- match.arg(X)
+    if (type=="lambda") {
+      X <- x$lambda
+      if (missing(xlab)) xlab <- "Ridge constant"
+      labels <- "left"
+    }
+    else {
+      X <- x$df
+      if (missing(xlab)) xlab <- "Degrees of freedom"
+      labels <- "right"
+    }
+    vif <- x$vif
+    K <- nrow(vif)
+    if (missing(xlim)) xlim <- range(X)
+    if (missing(ylim)) ylim <- range(vif)
+    
+    #	labels <- match.arg(labels)
+    if (labels == "left") {
+      xlim[1] <- xlim[1] - .1 * diff(xlim)
+      labx <- X[1]
+      laby <- vif[1,]
+    }
+    else {
+      xlim[2] <- xlim[2] + .1 * diff(xlim)
+      labx <- X[1]
+      laby <- vif[1,]
+    }
+    
+    matplot(X, vif, 	type="b", xlim=xlim, ylim=ylim, ylab=ylab, xlab=xlab, col=col, pch=pch, ...)
+    abline(h=0, lty=3)
+    
+    if (type=="lambda") {
+      criteria <- x$criteria
+      abline(v=criteria, col="gray", lty=2)
+      text(criteria, ylim[1], names(criteria), pos=3)
+    }
+    vnames <- colnames(vif)
+    text(labx, laby, colnames(vif), pos=c(2,4)[1+(labels=="right")], xpd=TRUE)
+  }

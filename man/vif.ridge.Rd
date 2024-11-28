@@ -3,19 +3,49 @@
 \name{vif.ridge}
 \alias{vif.ridge}
 \alias{print.vif.ridge}
+\alias{plot.vif.ridge}
 \title{Variance Inflation Factors for Ridge Regression}
 \usage{
 \method{vif}{ridge}(mod, ...)
 
 \method{print}{vif.ridge}(x, digits = max(4, getOption("digits") - 5), ...)
+
+\method{plot}{vif.ridge}(
+  x,
+  X = c("lambda", "df"),
+  col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown",
+    "darkgray"),
+  pch = c(15:18, 7, 9, 12, 13),
+  xlab,
+  ylab = "Variance Inflation",
+  xlim,
+  ylim,
+  ...
+)
 }
 \arguments{
 \item{mod}{A \code{"ridge"} object}
 
 \item{\dots}{Other arguments (unused) for compatibility with the generic from \code{\link[car]{vif}}}
+
+\item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
+
+\item{X}{What to plot as the horizontal coordinate, one of \code{c("lambda", "df")}}
+
+\item{col}{A numeric or character vector giving the colors used to plot the
+ridge trace curves.  Recycled as necessary.}
+
+\item{pch}{Vector of plotting characters used to plot the ridge trace
+curves.  Recycled as necessary.}
+
+\item{xlab}{Label for horizontal axis}
+
+\item{ylab}{Label for vertical axis}
+
+\item{xlim, ylim}{x, y limits for the plot}
 }
 \value{
-Returns a data.frame (also of class \code{"vif.ridge"}) of variance inflation factors of the same size and
+Returns a \code{"vif.ridge"} of variance inflation factors of the same size and
         shape as \code{coef{mod}}. The columns correspond to the predictors in the
         model and the rows correspond to the values of \code{lambda} in ridge
         estimation.
@@ -23,11 +53,15 @@ Returns a data.frame (also of class \code{"vif.ridge"}) of variance inflation fa
 \description{
 The function \code{vif.ridge} calculates variance inflation factors for the
 predictors in a set of ridge regression models indexed by the
-tuning/shrinkage factor, returning one row for each value of the $\\lambda$ parameter.
-}
-\details{
+tuning/shrinkage factor, returning one row for each value of the \eqn{\lambda} parameter.
+
 Variance inflation factors are calculated using the simplified formulation
 in Fox & Monette (1992).
+
+The \code{plot.vif.ridge} method plots variance inflation factors for a \code{"vif.ridge"} object
+in a similar style to what is provided by \code{\link{traceplot}}. That is, it plots the VIF for each
+coefficient in the model against either the ridge \eqn{\lambda} tuning constant or it's equivalent
+effective degrees of freedom.
 }
 \examples{
 
@@ -37,9 +71,9 @@ lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population +
 vif(lmod)
 
 lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
-#' lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
-                              Population + Year + GNP.deflator, 
-		                data=longley, lambda=lambda)
+lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
+                           Population + Year + GNP.deflator, 
+		             data=longley, lambda=lambda)
 
 coef(lridge)
 
@@ -79,7 +113,7 @@ text(6, sqrt(vridge[1,]), colnames(vridge), pos=2, cex=1.2)
 }
 \references{
 Fox, J. and Monette, G. (1992). Generalized collinearity
-diagnostics. \emph{JASA}, \bold{87}, 178-183
+diagnostics. \emph{JASA}, \bold{87}, 178-183, \doi{10.1080/01621459.1992.10475190}.
 }
 \seealso{
 \code{\link[car]{vif}}, \code{\link{precision}}
