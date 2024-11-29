@@ -123,7 +123,8 @@ precision.ridge <- function(object,
 	           det=ldet, 
 	           trace=trace, 
 	           max.eig=meig, 
-	           norm.beta=norm)
+	           norm.beta=norm,
+	           bias=bias)
 	class(res) <- c("precision", "data.frame")
 	res
 }
