@@ -20,7 +20,7 @@ Returns a data.frame (also of class \code{"vif.ridge"}) of variance inflation fa
 \description{
 The function \code{vif.ridge} calculates variance inflation factors for the
 predictors in a set of ridge regression models indexed by the
-tuning/shrinkage factor.
+tuning/shrinkage factor, returning one row for each value of the $\\lambda$ parameter.
 }
 \details{
 Variance inflation factors are calculated using the simplified formulation
@@ -33,14 +33,14 @@ lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population +
                       Year + GNP.deflator, data=longley)
 vif(lmod)
 
-longley.y <- longley[, "Employed"]
-longley.X <- data.matrix(longley[, c(2:6,1)])
-
 lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
-lridge <- ridge(longley.y, longley.X, lambda=lambda)
+#' lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + 
+                              Population + Year + GNP.deflator, 
+		                data=longley, lambda=lambda)
+
 coef(lridge)
 
-
+# get VIFs for the shrunk estimates
 vridge <- vif(lridge)
 vridge
 
