@@ -32,7 +32,7 @@ curves.  Recycled as necessary.}
 
 \item{ylab}{Label for vertical axis}
 
-\item{xlim, ylim}{x, y limits for the plot}
+\item{xlim, ylim}{x, y limits for the plot. You may need to adjust these to allow for the variable labels.}
 
 \item{\dots}{Other arguments passed to \code{\link[graphics]{matplot}}}
 }

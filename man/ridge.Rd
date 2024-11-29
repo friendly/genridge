@@ -95,6 +95,10 @@ Ridge regression shrinkage can be parameterized in several ways.
 In either case, both \code{lambda} and
 \code{df} are returned in the \code{ridge} object, but the \code{rownames} of the
 coefficients are given in terms of \code{lambda}.
+
+\code{coef} extracts the estimated coefficients for each value of the shrinkage factor
+
+\code{vcov} extracts the estimated \eqn{p \times p} covariance matrices of the coefficients for each value of the shrinkage factor.
 }
 \details{
 If an intercept is present in the model, its coefficient is not penalized. (If you want to penalize 

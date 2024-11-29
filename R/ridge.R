@@ -291,6 +291,9 @@ ridge.default <-
 
 
 
+#' @description
+#' \code{coef} extracts the estimated coefficients for each value of the shrinkage factor
+#' 
 #' @rdname ridge
 #' @exportS3Method coef ridge
 coef.ridge <-
@@ -310,6 +313,8 @@ function(x, digits = max(5, getOption("digits") - 5),...) {
   invisible(x)
 }
 
+#' @description
+#' \code{vcov} extracts the estimated \eqn{p \times p} covariance matrices of the coefficients for each value of the shrinkage factor.
 #' @rdname ridge
 #' @exportS3Method vcov ridge
 vcov.ridge <- function(object,  ...) {
