@@ -1,6 +1,6 @@
 # TODO: Add label.prefix code
 
-#' Plot Bias vs Variance for Ridge Precision
+#' Plot Shrinkage vs. Variance for Ridge Precision
 #' 
 #' This function uses the results of \code{\link{precision}} to
 #' plot a measure of shrinkage of the coefficients in ridge regression against a selected measure

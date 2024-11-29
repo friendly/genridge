@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.precision.R
 \name{plot.precision}
 \alias{plot.precision}
-\title{Plot Bias vs Variance for Ridge Precision}
+\title{Plot Shrinkage vs. Variance for Ridge Precision}
 \usage{
 \method{plot}{precision}(
   x,
