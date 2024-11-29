@@ -8,11 +8,12 @@
 #' @description
 #' 
 #' Three measures of (inverse) precision based on the \dQuote{size} of the
-#' covariance matrix of the parameters are calculated. Let \eqn{V_k} be the
-#' covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i= 1,
-#' \dots p} be its eigenvalues. Then the variance (1/precision) measures are: 
+#' covariance matrix of the parameters are calculated. Let \eqn{V_k \equiv \text{Var}(\mathbf{\beta}_k)} 
+#' be the covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i= 1,
+#' \dots p} be its eigenvalues. Then the variance (= 1/precision) measures are: 
 #' \enumerate{ 
-#'   \item \code{"det"}: \eqn{\log | V_k | = \log \prod \lambda} or \eqn{|V_k|^{1/p} =(\prod \lambda)^{1/p}} 
+#'   \item \code{"det"}: \eqn{\log | V_k | = \log \prod \lambda} (with \code{det.fun = "log"}, the default)
+#'        or \eqn{|V_k|^{1/p} =(\prod \lambda)^{1/p}} (with \code{det.fun = "root"})
 #'        measures the linearized volume of the covariance ellipsoid and corresponds conceptually to Wilks'
 #'        Lambda criterion 
 #'   \item \code{"trace"}: \eqn{ \text{trace}( V_k ) = \sum \lambda} corresponds conceptually to Pillai's trace criterion 
@@ -22,7 +23,7 @@
 #' @param object An object of class \code{ridge} or \code{lm}
 #' @param det.fun Function to be applied to the determinants of the covariance
 #'        matrices, one of \code{c("log","root")}.
-#' @param normalize If \code{TRUE} the length of the coefficient vector is
+#' @param normalize If \code{TRUE} the length of the coefficient vector \eqn{\mathbf{\beta}_k} is
 #'        normalized to a maximum of 1.0.
 #' @param \dots Other arguments (currently unused)
 #' 

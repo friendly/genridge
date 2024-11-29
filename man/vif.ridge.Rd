@@ -61,6 +61,8 @@ The function \code{vif.ridge} calculates variance inflation factors for the
 predictors in a set of ridge regression models indexed by the
 tuning/shrinkage factor, returning one row for each value of the \eqn{\lambda} parameter.
 
+}
+\details{
 Variance inflation factors are calculated using the simplified formulation
 in Fox & Monette (1992).
 
