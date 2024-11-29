@@ -40,6 +40,11 @@
 #' If an intercept is present in the model, its coefficient is not penalized. (If you want to penalize 
 #' an intercept, put in your own constant term and remove the intercept.)
 #' 
+#' The predictors are centered, but not (yet) scaled in this implementation. 
+#' 
+#' A number of the methods in the package assume that \code{lambda} is a vector of shrinkage constants
+#' increasing from \code{lambda[1] = 0}, or equivalently, a vector of \code{df} decreasing from \eqn{p}.
+#' 
 #' 
 #' @param y A numeric vector containing the response variable. NAs not allowed.
 #' @param X A matrix of predictor variables. NA's not allowed. Should not
