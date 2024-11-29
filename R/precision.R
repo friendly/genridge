@@ -1,3 +1,4 @@
+# DONE:  allow choice of log.det or det()^{1/p}
 # Nov 10, 2024: result gains class "precision" for a plot method
 
 #' Measures of Precision and Shrinkage for Ridge Regression
@@ -85,7 +86,6 @@ precision <- function(object, det.fun, normalize, ...) {
 	UseMethod("precision")
 }
 
-# DONE:  allow choice of log.det or det()^{1/p}
 
 #' @exportS3Method 
 precision.ridge <- function(object, 
@@ -95,14 +95,29 @@ precision.ridge <- function(object,
 	maxeig <- function(x) max(eigen(x)$values)
 	
 	V <- object$cov
-	p <- ncol(coef(object))
+	b <- coef(object)
+	p <- ncol(b)
+	
 	det.fun <- match.arg(det.fun)
 	ldet <- unlist(lapply(V, det))
 	ldet <- if(det.fun == "log") log(ldet) else ldet^(1/p)
+	
 	trace <- unlist(lapply(V, tr))
-	meig <- unlist(lapply(V, maxeig))	
+	meig <- unlist(lapply(V, maxeig))
+
+	# calculate shrinkage	
 	norm <- sqrt(rowMeans(coef(object)^2))
 	if (normalize) norm <- norm / max(norm)
+	
+	# calculate bias: norm of (beta[lambda=0] - beta)
+	b0index <- which(object$lambda == 0)
+	if (b0index != 0) {
+	  b0 <- b[b0index, ]
+	  dif <- sweep(b, 2, b0)
+	  bias <- sqrt(rowMeans(dif^2))
+	}
+	else warning("There is no OLS solution (lambda==0), so can't calculate bias")
+
 	res <- data.frame(lambda=object$lambda, 
 	           df=object$df, 
 	           det=ldet, 
