@@ -1,7 +1,19 @@
 #' ---
-#' title: Longley data example for the genridge package
+#' title: Longley data example 
+#' author: "Michael Friendly"
+#' date: "`r format(Sys.Date())`"
+#' output:
+#'   html_document:
+#'      theme: journal
+#'      code_download: true
 #' ---
 
+#+ echo=FALSE
+knitr::opts_chunk$set(warning=FALSE, 
+                      message=FALSE, 
+                      R.options=list(digits=4))
+
+#' ## Load packages
 library(genridge)
 library(car)     # for vif() generic
 
@@ -24,7 +36,9 @@ lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces +
 print(lridge, digits = 2)
 
 #' ## The `"ridge"` object
-
+#' The main thing is the coefficients, (returned by `coef()`) but the `ridge` object contains
+#' info used by other functions so it doesn't have to be computed again.
+#'  
 names(lridge)
 
 #' ## Standard, univariate trace plot
@@ -63,6 +77,8 @@ text(lridge$coef[1,1], lridge$coef[1,4],
 text(lridge$coef[-1,c(1,4)], lambdaf[-1], pos=3, cex=1.3)
 
 #' ## Scatterplot matrix
+#' See all bivariate pairwise views
+#' 
 pairs(lridge, radius=0.5, diag.cex = 2, 
       fill = TRUE, fill.alpha = 0.1)
 
@@ -85,7 +101,7 @@ plot(pridge, yvar="trace",
 #' The `pca` method transforms a "ridge" object from parameter space to PCA space
 #' defined by the SVD of X
 
-plridge <- pca(lridge) |> print()
+plridge <- pca(lridge) |> print(digits = 3)
 
 traceplot(plridge, X="df", 
           cex.lab = 1.2, lwd=2)
