@@ -1,5 +1,6 @@
 # DONE:  allow choice of log.det or det()^{1/p}
 # Nov 10, 2024: result gains class "precision" for a plot method
+# Mov 24, 2024: Add calc of norm.diff, improve documentation
 
 #' Measures of Precision and Shrinkage for Ridge Regression
 #' 
@@ -28,12 +29,13 @@
 #' \itemize{
 #'    \item \code{norm.beta}: the root mean square of the coefficient vector \eqn{\lVert\mathbf{\beta}_k \rVert},
 #'         normalized to a maximum of 1.0 if \code{normalize == TRUE} (the default).
-#'    \item \code{norm.diff} the root mean square of the difference 
-#'         \eqn{\lVert \mathbf{\beta}_0 - \mathbf{\beta}_k \rVert}. This measure is inversely related to \code{norm.beta}
+#'    \item \code{norm.diff}: the root mean square of the difference from the OLS estimate
+#'         \eqn{\lVert \mathbf{\beta}_{\text{OLS}} - \mathbf{\beta}_k \rVert}. This measure is inversely related to \code{norm.beta}
 #' }
 #' 
-#' A plot method, \code{link{plot.precision}} facilitates making graphs of these quantities.
 #' 
+#' A plot method, \code{\link{plot.precision}} facilitates making graphs of these quantities.
+#'
 #' @param object An object of class \code{ridge} or \code{lm}
 #' @param det.fun Function to be applied to the determinants of the covariance
 #'        matrices, one of \code{c("log","root")}.
@@ -112,7 +114,8 @@ precision.ridge <- function(object,
 	V <- object$cov
 	b <- coef(object)
 	p <- ncol(b)
-	
+
+	# calculate precision measure	
 	det.fun <- match.arg(det.fun)
 	ldet <- unlist(lapply(V, det))
 	ldet <- if(det.fun == "log") log(ldet) else ldet^(1/p)
@@ -127,11 +130,14 @@ precision.ridge <- function(object,
 	# calculate norm.diff: norm of (beta[lambda=0] - beta)
 	b0index <- which(object$lambda == 0)
 	if (b0index != 0) {
-	  b0 <- b[b0index, ]
+	  b0 <- b[b0index, ]            # OLS estimate
 	  dif <- sweep(b, 2, b0)
 	  norm.diff <- sqrt(rowMeans(dif^2))
 	}
-	else warning("There is no OLS solution (lambda==0), so can't calculate norm.diff")
+	else {
+	  warning("There is no OLS solution (lambda==0), so can't calculate norm.diff")
+	  bias <- rep(NA, nrow(b))
+	}
 
 	res <- data.frame(lambda=object$lambda, 
 	           df=object$df, 

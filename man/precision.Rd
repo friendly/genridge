@@ -51,11 +51,12 @@ Two measures of shrinkage are also calculated:
 \itemize{
    \item \code{norm.beta}: the root mean square of the coefficient vector \eqn{\lVert\mathbf{\beta}_k \rVert},
         normalized to a maximum of 1.0 if \code{normalize == TRUE} (the default).
-   \item \code{norm.diff} the root mean square of the difference 
-        \eqn{\lVert \mathbf{\beta}_0 - \mathbf{\beta}_k \rVert}. This measure is inversely related to \code{norm.beta}
+   \item \code{norm.diff}: the root mean square of the difference from the OLS estimate
+        \eqn{\lVert \mathbf{\beta}_{\text{OLS}} - \mathbf{\beta}_k \rVert}. This measure is inversely related to \code{norm.beta}
 }
 
-A plot method, \code{link{plot.precision}} facilitates making graphs of these quantities.
+
+A plot method, \code{\link{plot.precision}} facilitates making graphs of these quantities.
 }
 \note{
 Models fit by \code{lm} and \code{ridge} use a different scaling for
