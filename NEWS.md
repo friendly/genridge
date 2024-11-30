@@ -6,6 +6,8 @@ o Added `diab` data, diabetes from CASI
 o Fixed documentation for `plot.ridge()` so that `plot.pcaridge()` is documented explicitly.
 o 'vif.ridge()` now returns a "vif.ridge" object list to prepare for a plot method.
 o Added `plot.vif.ridge()` to plot VIFs vs shrinkage
+o Added calculation of bias = sqrt((b_OLS - b_ridge)^2) to `precision()`
+o Added `plot.precision()` for plots of shrinkage vs. precision
 
 ## genridge 0.7.1 (2024-11-07)
 

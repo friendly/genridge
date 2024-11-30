@@ -21,6 +21,12 @@
 #'   \item \code{"max.eig"}: \eqn{ \lambda_1 = \max (\lambda)} corresponds to Roy's largest root criterion.  
 #' }
 #' 
+#' In addition, the function calculates root mean square of the estimated coefficients, 
+#' \code{norm.beta} = \eqn{\lVert\mathbf{\beta}\rVert / \max{\lVert\mathbf{\beta}\rVert}} as
+#' a measure of shrinkage, and 
+#' \code{bias} = \eqn{\lVert(\mathbf{\beta}_{OLS} - \mathbf{\beta}_{\lambda})\rVert}
+#' as measures of the effect of ridge regression on the coefficients.
+#' 
 #' @param object An object of class \code{ridge} or \code{lm}
 #' @param det.fun Function to be applied to the determinants of the covariance
 #'        matrices, one of \code{c("log","root")}.
@@ -34,7 +40,9 @@
 #' \item{det}{The \code{det.fun} function of the determinant of the covariance matrix} 
 #' \item{trace}{The trace of the covariance matrix}
 #' \item{max.eig}{Maximum eigen value of the covariance matrix}
-#' \item{norm.beta}{The root mean square of the estimated coefficients, possibly normalized} 
+#' \item{norm.beta}{The root mean square of the estimated coefficients, possibly normalized}
+#' \item{bias}{The root mean squared difference between the ridge shrunken coefficients and 
+#'       the OLS estimate for \code{lambda = 0}}
 #' 
 #' @note Models fit by \code{lm} and \code{ridge} use a different scaling for
 #' the predictors, so the results of \code{precision} for an \code{lm} model
@@ -97,7 +105,8 @@ precision.ridge <- function(object,
 	V <- object$cov
 	b <- coef(object)
 	p <- ncol(b)
-	
+
+	# calculate precision measure	
 	det.fun <- match.arg(det.fun)
 	ldet <- unlist(lapply(V, det))
 	ldet <- if(det.fun == "log") log(ldet) else ldet^(1/p)
@@ -112,11 +121,14 @@ precision.ridge <- function(object,
 	# calculate bias: norm of (beta[lambda=0] - beta)
 	b0index <- which(object$lambda == 0)
 	if (b0index != 0) {
-	  b0 <- b[b0index, ]
+	  b0 <- b[b0index, ]            # OLS estimate
 	  dif <- sweep(b, 2, b0)
 	  bias <- sqrt(rowMeans(dif^2))
+	  }
+	else {
+	  warning("There is no OLS solution (lambda==0), so can't calculate bias")
+	  bias <- rep(NA, nrow(b))
 	}
-	else warning("There is no OLS solution (lambda==0), so can't calculate bias")
 
 	res <- data.frame(lambda=object$lambda, 
 	           df=object$df, 

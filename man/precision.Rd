@@ -27,6 +27,8 @@ An object of class \code{c("precision", "data.frame")} with the following column
 \item{trace}{The trace of the covariance matrix}
 \item{max.eig}{Maximum eigen value of the covariance matrix}
 \item{norm.beta}{The root mean square of the estimated coefficients, possibly normalized}
+\item{bias}{The root mean squared difference between the ridge shrunken coefficients and 
+      the OLS estimate for \code{lambda = 0}}
 }
 \description{
 Three measures of (inverse) precision based on the \dQuote{size} of the
@@ -41,6 +43,12 @@ be the covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i=
   \item \code{"trace"}: \eqn{ \text{trace}( V_k ) = \sum \lambda} corresponds conceptually to Pillai's trace criterion 
   \item \code{"max.eig"}: \eqn{ \lambda_1 = \max (\lambda)} corresponds to Roy's largest root criterion.  
 }
+
+In addition, the function calculates root mean square of the estimated coefficients, 
+\code{norm.beta} = \eqn{\lVert\mathbf{\beta}\rVert / \max{\lVert\mathbf{\beta}\rVert}} as
+a measure of shrinkage, and 
+\code{bias} = \eqn{\lVert(\mathbf{\beta}_{OLS} - \mathbf{\beta}_{\lambda})\rVert}
+as measures of the effect of ridge regression on the coefficients.
 }
 \note{
 Models fit by \code{lm} and \code{ridge} use a different scaling for
