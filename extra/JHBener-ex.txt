@@ -1,0 +1,45 @@
+Ridge regression examples
+
+https://jbhender.github.io/Stats506/F17/Projects/G13/R.html
+
+library(faraway)
+data(seatpos)
+seatpos$hipcenter = -seatpos$hipcenter
+head(seatpos)
+
+Selection of λ
+
+As λ
+grows larger, the coefficients (as well as prediction variances) shirnk, while the bias increases. Thus we have to select a λ to make a trade-off, so as to control the overall prediction error. However, this is not automatically given to us as the range of lambda in the codes is input as an argument. So, though we can work out the best λ
+
+with package MASS, we still need a range to start with.
+
+Notice that the eigenvalues of XTX+λI
+should be a good reference, which can be obtained by adding λ to the eigenvalues of XTX
+
+:
+
+X = sapply(seatpos[, -9], scale)
+round(eigen(t(X) %*% X)$val, 3)
+
+## [1] 209.908  45.761  17.159   8.915   7.186   5.149   1.863   0.059
+
+So in order to reduce collinearity (i.e. reduce the difference in ratio among the eigenvalues of XTX+λI
+) without introducing too much bias, 101∼102
+
+seems be a good point to start with.
+
+fit = lm.ridge(hipcenter ~ ., seatpos, lambda = seq(0, 30, 1e-3))
+
+Then, to select an appropriate λ
+
+, we can apply the command select:
+
+select(fit)
+
+## modified HKB estimator is 5.425415 
+## modified L-W estimator is 3.589434 
+## smallest value of GCV  at 22.301
+
+#####
+https://www.science.smith.edu/~jcrouser/SDS293/labs/lab10-r.html
