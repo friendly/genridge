@@ -1,6 +1,6 @@
 ## Test environments
 * local Windows10 install, R version 4.4.1 (2024-06-14 ucrt)
-* win-builder R Under development (unstable) (2024-11-11 r87319 ucrt)
+* win-builder R Under development (unstable) (2024-11-30 r87409 ucrt)
 
 ## R CMD check results
 There were no ERRORs or WARNINGS or NOTEs
@@ -9,14 +9,16 @@ There were no ERRORs or WARNINGS or NOTEs
 There are no reverse dependencies
 
 ## Comments
-This was modest update release, improving documentation and adding new functionality.
+### genridge 0.8.0 (2024-11-30)
 
+This is a major update to the package adding additional plotting methods
 
-### genridge 0.7.1 (2024-11-07)
-
-o Added links to gentalk.pdf
-o Improved README and fixed some examples
-o `precision()` result gains a class "precision" in preparation for a plot method
-o Implemented `plot.precision()` for plots shrinkage vs. variance, using various criteria
-o Fixed warning from `ridge()` related to contrasts
-o `ridge()` now collects the optimal `criteria` in a named list, which can be added in `plot.precision()`
+o Fleshed out and installed `plot.precision()`
+o Illustrate `plot.precision()` in `README.Rmd`
+o Added `diab` data, diabetes from CASI
+o Fixed documentation for `plot.ridge()` so that `plot.pcaridge()` is documented explicitly.
+o 'vif.ridge()` now returns a "vif.ridge" object list to prepare for a plot method.
+o Added `plot.vif.ridge()` to plot VIFs vs shrinkage
+o Added `norm.diff` = sqrt((b_OLS - b_ridge)^2) as a measure of shrinkage to `precision()`
+o Added `plot.precision()` for plots of shrinkage vs. precision
+o Added `best()` to display the optimal shrinkage criteria

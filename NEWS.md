@@ -1,4 +1,6 @@
-## genridge 0.7.2 (2024-11-15)
+## genridge 0.8.0 (2024-11-30)
+
+This is a major update to the package adding additional plotting methods
 
 o Fleshed out and installed `plot.precision()`
 o Illustrate `plot.precision()` in `README.Rmd`
