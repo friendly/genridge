@@ -7,6 +7,8 @@
 \alias{coef.ridge}
 \alias{print.ridge}
 \alias{vcov.ridge}
+\alias{best}
+\alias{best.ridge}
 \title{Ridge Regression Estimates}
 \usage{
 ridge(y, ...)
@@ -20,6 +22,10 @@ ridge(y, ...)
 \method{print}{ridge}(x, digits = max(5, getOption("digits") - 5), ...)
 
 \method{vcov}{ridge}(object, ...)
+
+best(object, ...)
+
+\method{best}{ridge}(object, ...)
 }
 \arguments{
 \item{y}{A numeric vector containing the response variable. NAs not allowed.}
@@ -99,6 +105,9 @@ coefficients are given in terms of \code{lambda}.
 \code{coef} extracts the estimated coefficients for each value of the shrinkage factor
 
 \code{vcov} extracts the estimated \eqn{p \times p} covariance matrices of the coefficients for each value of the shrinkage factor.
+
+\code{best} extracts the optimal shrinkage values according to several criteria: 
+HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV: Golub et al. (1975)
 }
 \details{
 If an intercept is present in the model, its coefficient is not penalized. (If you want to penalize 
@@ -187,6 +196,9 @@ Regression: Some Simulations," \emph{Communications in Statistics}, 4,
 
 Lawless, J.F., and Wang, P. (1976), "A Simulation Study of Ridge and Other
 Regression Estimators," \emph{Communications in Statistics}, 5, 307-323.
+
+Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. 
+\emph{Technometrics}, \bold{21}:215–223. \url{https://doi.org/10.2307/1268518}
 }
 \seealso{
 \code{\link[MASS]{lm.ridge}} for other implementations of ridge regression

@@ -331,29 +331,32 @@ vcov.ridge <- function(object,  ...) {
 }
 
 #' @description
-#' \code{best} extracts and prints the optimal shrinkage values according to several criteria: 
+#' \code{best} extracts the optimal shrinkage values according to several criteria: 
 #' HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV: Golub et al. (1975)
 #' @rdname ridge
-#' @exportS3Method best ridge
-best <- function(obj) UseMethod("best")
+best <- function(object, ...) UseMethod("best")
 
-best.ridge <- function(obj)
+#' @returns A data.frame with one row for each of the HKB, LW, and GCV criteria
+#' @rdname ridge
+#' @exportS3Method best ridge
+best.ridge <- function(object, ...)
 {
-  crit <- object$criteria
-  if (!is.null(obj$svd.D)) {
-   dd <- obj$svd.D
+  if (!inherits(object, "ridge")) stop("This function only for 'ridge' objects")
+  crit <- object$criteria |> as.data.frame()
+  colnames(crit) <- "k"
+  if (!is.null(object$svd.D)) {
+   dd <- object$svd.D
    df <- sapply(crit, function(x) sum(dd^2/(dd^2 + x)))
+   crit <- cbind(crit, df = df)
   }
+  rn <- rownames(crit)
+  rownames(crit) <- gsub("^k", "", rn)
   
-  cat("modified HKB estimator is", format(obj$kHKB), "\n")
-  cat("modified L-W estimator is", format(obj$kLW), "\n")
-  cat("smallest value of GCV  at", format(obj$kGCV), "\n")
-  # GCV <- obj$GCV
-  # if(length(GCV)) {
-  #   k <- seq_along(GCV)[GCV==min(GCV)]
-  #   cat("smallest value of GCV  at",
-  #       format(obj$lambda[k]), "\n")
-  # }
+  # cat("modified HKB estimator is", format(object$kHKB), "\n")
+  # cat("modified L-W estimator is", format(object$kLW), "\n")
+  # cat("smallest value of GCV  at", format(object$kGCV), "\n")
+  
+  return(crit)
 }
 
 
