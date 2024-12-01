@@ -114,6 +114,7 @@ This provides the support for the main plotting functions in the package:
 * `pairs.ridge()`: All pairwise bivariate ridge trace plots
 * `plot3d.ridge()`: 3D ridge trace plots with ellipsoids
 * `plot.precision()`: Plots a measure of precsion vs. one of shrinkage
+* `plot.vif.ridge()`: Plots variance inflation factors
 
 In addition, the `pca()` method for `"ridge"` objects transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of $X^\top X$ or the SVD of $X$. The main plotting functions also work for these objects, of class `c("ridge", "pcaridge")`.
 
@@ -183,7 +184,18 @@ are dangerously high. With a ridge factor of 0.04 or greater, variance inflation
 considerably reduced for a few of the predictors.
 
 ```{r vif}
-vif(lridge)
+vridge <- vif(lridge)
+vridge
+```
+
+`vif()` returns a `"vif.ridge"` object for which there is a plot method:
+
+```{r plot-vif}
+clr <-  c("black", "red", "darkgreen","blue", "cyan4", "magenta")
+pch <- c(15:18, 7, 9)
+plot(vridge, X = "df", Y="sqrt",
+     col=clr, pch=pch, cex = 1.2,
+     xlim = c(4, 6.5))
 ```
 
 

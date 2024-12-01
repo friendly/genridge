@@ -75,6 +75,8 @@ If \code{svd==TRUE} (the default), the following are also included:
       Rows correspond to observations and columns to dimensions.}
 \item{svd.V}{Right singular vectors of the \code{svd} of the scaled X
       matrix. Rows correspond to variables and columns to dimensions.} %% ...
+
+A data.frame with one row for each of the HKB, LW, and GCV criteria
 }
 \description{
 The function \code{ridge} fits linear models by ridge regression, returning
@@ -198,7 +200,7 @@ Lawless, J.F., and Wang, P. (1976), "A Simulation Study of Ridge and Other
 Regression Estimators," \emph{Communications in Statistics}, 5, 307-323.
 
 Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. 
-\emph{Technometrics}, \bold{21}:215–223. \url{https://doi.org/10.2307/1268518}
+\emph{Technometrics}, \bold{21}:215–223. \doi{10.2307/1268518}
 }
 \seealso{
 \code{\link[MASS]{lm.ridge}} for other implementations of ridge regression

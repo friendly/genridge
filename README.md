@@ -112,6 +112,7 @@ package:
 - `pairs.ridge()`: All pairwise bivariate ridge trace plots
 - `plot3d.ridge()`: 3D ridge trace plots with ellipsoids
 - `plot.precision()`: Plots a measure of precsion vs. one of shrinkage
+- `plot.vif.ridge()`: Plots variance inflation factors
 
 In addition, the `pca()` method for `"ridge"` objects transforms the
 coefficients and covariance matrices of a ridge object from predictor
@@ -203,7 +204,8 @@ variance inflation has been considerably reduced for a few of the
 predictors.
 
 ``` r
-vif(lridge)
+vridge <- vif(lridge)
+vridge
 #> Variance inflaction factors:
 #>            GNP  Unemployed  Armed.Forces  Population    Year  GNP.deflator
 #> 0.000  1788.51      33.619         3.589      399.15  758.98        135.53
@@ -213,6 +215,18 @@ vif(lridge)
 #> 0.040    34.43       3.422         2.441       52.22   66.31         43.56
 #> 0.080    11.28       2.994         2.301       28.59   28.82         29.52
 ```
+
+`vif()` returns a `"vif.ridge"` object for which there is a plot method:
+
+``` r
+clr <-  c("black", "red", "darkgreen","blue", "cyan4", "magenta")
+pch <- c(15:18, 7, 9)
+plot(vridge, X = "df", Y="sqrt",
+     col=clr, pch=pch, cex = 1.2,
+     xlim = c(4, 6.5))
+```
+
+![](man/figures/README-plot-vif-1.png)<!-- -->
 
 ### Univariate trace plots
 

@@ -324,10 +324,11 @@ NULL
 #'  }
 #'
 #' @details 
-#' Efron & Hastie describe their analysis using the standardized the centered predictor variables to be unit L2 norm
+#' Efron & Hastie describe their analysis using the centered predictor variables standardized to unit L2 norm.
+#' \code{\link{ridge}} does not (yet) provide this scaling.
 #' @source 
-#' The dataset was taken from the web site for Efron & Hastie (2021), 
-#' \url{http://hastie.su.domains/CASI_files/DATA/diabetes.csv}.
+#' The dataset was taken from the web site for Efron & Hastie (2021), \emph{Computer Age Statistical Inference},
+#' \url{https://hastie.su.domains/CASI_files/DATA/diabetes.csv}.
 #' @references
 #' Efron, B., Hastie, T., Johnstone, I., & Tibshirani, R. (2004). Least Angle Regression. 
 #' \emph{The Annals of Statistics}, \bold{32}(2), 407-499. 

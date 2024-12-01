@@ -103,7 +103,7 @@
 #' Regression Estimators," \emph{Communications in Statistics}, 5, 307-323.
 #' 
 #' Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. 
-#' \emph{Technometrics}, \bold{21}:215–223. \url{https://doi.org/10.2307/1268518}
+#' \emph{Technometrics}, \bold{21}:215–223. \doi{10.2307/1268518}
 #' @keywords models regression
 #' @examples
 #' 

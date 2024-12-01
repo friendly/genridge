@@ -21,8 +21,8 @@ A data frame with 442 observations on the following 11 variables.
  }
 }
 \source{
-The dataset was taken from the web site for Efron & Hastie (2021), 
-\url{http://hastie.su.domains/CASI_files/DATA/diabetes.csv}.
+The dataset was taken from the web site for Efron & Hastie (2021), \emph{Computer Age Statistical Inference},
+\url{https://hastie.su.domains/CASI_files/DATA/diabetes.csv}.
 }
 \usage{
 data("diab")
@@ -35,7 +35,8 @@ There are ten baseline variables: age, sex, body-mass index (\code{bmi}), averag
 and six blood serum measurements.
 }
 \details{
-Efron & Hastie describe their analysis using the standardized the centered predictor variables to be unit L2 norm
+Efron & Hastie describe their analysis using the centered predictor variables standardized to unit L2 norm.
+\code{\link{ridge}} does not (yet) provide this scaling.
 }
 \examples{
 data(diab)
