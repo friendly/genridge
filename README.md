@@ -16,7 +16,7 @@
 
 <!-- Version 0.7.1 -->
 
-Version 0.7.1
+Version 0.7.2
 
 ### What is ridge regression?
 
@@ -111,6 +111,7 @@ package:
   ellipse of the estimated coefficients.
 - `pairs.ridge()`: All pairwise bivariate ridge trace plots
 - `plot3d.ridge()`: 3D ridge trace plots with ellipsoids
+- `plot.precision()`: Plots a measure of precsion vs. one of shrinkage
 
 In addition, the `pca()` method for `"ridge"` objects transforms the
 coefficients and covariance matrices of a ridge object from predictor
@@ -203,13 +204,14 @@ predictors.
 
 ``` r
 vif(lridge)
-#>           GNP Unemployed Armed.Forces Population   Year GNP.deflator
-#> 0.000 1788.51     33.619        3.589     399.15 758.98       135.53
-#> 0.005  540.04     12.118        2.921     193.30 336.15        90.63
-#> 0.010  259.00      7.284        2.733     134.42 218.84        74.79
-#> 0.020  101.12      4.573        2.578      87.29 128.82        58.94
-#> 0.040   34.43      3.422        2.441      52.22  66.31        43.56
-#> 0.080   11.28      2.994        2.301      28.59  28.82        29.52
+#> Variance inflaction factors:
+#>            GNP  Unemployed  Armed.Forces  Population    Year  GNP.deflator
+#> 0.000  1788.51      33.619         3.589      399.15  758.98        135.53
+#> 0.005   540.04      12.118         2.921      193.30  336.15         90.63
+#> 0.010   259.00       7.284         2.733      134.42  218.84         74.79
+#> 0.020   101.12       4.573         2.578       87.29  128.82         58.94
+#> 0.040    34.43       3.422         2.441       52.22   66.31         43.56
+#> 0.080    11.28       2.994         2.301       28.59   28.82         29.52
 ```
 
 ### Univariate trace plots
@@ -349,16 +351,17 @@ precision. See: `help(precision)` for details.
 
 ``` r
 precision(lridge)
-#>       lambda    df    det   trace max.eig norm.beta
-#> 0.000  0.000 6.000 -12.93 18.1190 15.4191    1.0000
-#> 0.005  0.005 5.415 -14.41  6.8209  4.6065    0.7406
-#> 0.010  0.010 5.135 -15.41  4.0423  2.1807    0.6365
-#> 0.020  0.020 4.818 -16.83  2.2180  1.0255    0.5282
-#> 0.040  0.040 4.478 -18.70  1.1647  0.5808    0.4233
-#> 0.080  0.080 4.128 -21.05  0.5873  0.2599    0.3373
+#>       lambda    df    det   trace max.eig norm.beta norm.diff
+#> 0.000  0.000 6.000 -12.93 18.1190 15.4191    1.0000     0.000
+#> 0.005  0.005 5.415 -14.41  6.8209  4.6065    0.7406     1.276
+#> 0.010  0.010 5.135 -15.41  4.0423  2.1807    0.6365     1.783
+#> 0.020  0.020 4.818 -16.83  2.2180  1.0255    0.5282     2.262
+#> 0.040  0.040 4.478 -18.70  1.1647  0.5808    0.4233     2.679
+#> 0.080  0.080 4.128 -21.05  0.5873  0.2599    0.3373     3.027
 ```
 
-`norm.beta` $= ||\mathbf{\beta}|| / \max{||\mathbf{\beta}||}$ is a
+`norm.beta`
+$= \lVert\mathbf{\beta}\rVert / \max{\lVert\mathbf{\beta}\rVert}$ is a
 measure of shrinkage, and `det`
 $= \log{| \text{Var}(\mathbf{\beta}) |}$, is a measure of variance of
 the coefficients (inverse of precision). Plotting these against each
@@ -512,11 +515,12 @@ examples; e.g., you can try `example(Acetylene)`.
 
 ``` r
 vcdExtra::datasets(package="genridge")
-#>        Item      class   dim                               Title
-#> 1 Acetylene data.frame  16x4                      Acetylene Data
-#> 2   Detroit data.frame 13x14 Detroit Homicide Data for 1961-1973
-#> 3  Manpower data.frame  17x6              Hospital manpower data
-#> 4  prostate data.frame 97x10                Prostate Cancer Data
+#>        Item      class    dim                               Title
+#> 1 Acetylene data.frame   16x4                      Acetylene Data
+#> 2   Detroit data.frame  13x14 Detroit Homicide Data for 1961-1973
+#> 3  Manpower data.frame   17x6              Hospital manpower data
+#> 4      diab data.frame 442x11                Diabetes Progression
+#> 5  prostate data.frame  97x10                Prostate Cancer Data
 ```
 
 ## References
@@ -545,6 +549,10 @@ Friendly, M., Monette, G., & Fox, J. (2013). Elliptical Insights:
 Understanding Statistical Methods Through Elliptical Geometry.
 *Statistical Science*, **28**(1), 1–39.
 <https://doi.org/10.1214/12-STS402>
+
+Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a
+method for choosing a good ridge parameter. *Technometrics*,
+**21**:215–223. <https://doi.org/10.2307/1268518>.
 
 Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), Ridge
 Regression: Some Simulations, *Communications in Statistics*, **4**,

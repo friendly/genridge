@@ -113,6 +113,7 @@ This provides the support for the main plotting functions in the package:
 * `plot.ridge()`: Bivariate ridge trace plots, showing the covariance ellipse of the estimated coefficients.
 * `pairs.ridge()`: All pairwise bivariate ridge trace plots
 * `plot3d.ridge()`: 3D ridge trace plots with ellipsoids
+* `plot.precision()`: Plots a measure of precsion vs. one of shrinkage
 
 In addition, the `pca()` method for `"ridge"` objects transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of $X^\top X$ or the SVD of $X$. The main plotting functions also work for these objects, of class `c("ridge", "pcaridge")`.
 
@@ -434,6 +435,9 @@ Online: [viscollin-tast.pdf](http://datavis.ca/papers/viscollin-tast.pdf),
 Supp. materials: [http://datavis.ca/papers/viscollin/](http://datavis.ca/papers/viscollin/).
 
 Friendly, M., Monette, G., & Fox, J. (2013). Elliptical Insights: Understanding Statistical Methods Through Elliptical Geometry. _Statistical Science_, **28**(1), 1–39. https://doi.org/10.1214/12-STS402
+
+Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. 
+_Technometrics_, **21**:215–223. https://doi.org/10.2307/1268518.
 
 Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), 
 Ridge Regression: Some Simulations, _Communications in Statistics_, **4**, 105–123.

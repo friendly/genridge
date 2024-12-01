@@ -60,4 +60,4 @@ longley.lmridge
 plot(longley.lmridge)
 
 
-#lmridge(prog ~ ., data = diab_scaled, K =lambda, scaling="scaled")
+# try

@@ -2,7 +2,6 @@
 ## Bootstrapping ridge regression
 #################################
 
-if (!require(genridge)) {install.packages("genridge"); library(genridge)}
 library(car)
 
 longley.y <- longley[, "Employed"]
@@ -27,7 +26,7 @@ boot.ridge <- function(data, indices, lambda) {
 set.seed(12313147)
 library(boot)
 Longley <- data.frame(Employed=longley.y, longley.X)
-B <- 800
+B <- 1
 
 lam <- lambda[c(1,3,6)]
 clr <- col[c(1,3,6)]

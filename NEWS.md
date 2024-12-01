@@ -8,6 +8,7 @@ o 'vif.ridge()` now returns a "vif.ridge" object list to prepare for a plot meth
 o Added `plot.vif.ridge()` to plot VIFs vs shrinkage
 o Added `norm.diff` = sqrt((b_OLS - b_ridge)^2) as a measure of shrinkage to `precision()`
 o Added `plot.precision()` for plots of shrinkage vs. precision
+o Added `best()` to display the optimal shrinkage criteria
 
 ## genridge 0.7.1 (2024-11-07)
 

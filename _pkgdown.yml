@@ -19,6 +19,7 @@ reference:
     - print.ridge
     - vcov.ridge
     - vif.ridge
+    - best.ridge
 
 - title: "Plot methods"
   desc: "Plotting ridge regression results"
@@ -46,6 +47,7 @@ reference:
     - Detroit
     - Manpower
     - prostate
+    - diab
 
 
 
