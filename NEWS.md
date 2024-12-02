@@ -6,7 +6,7 @@ o Fleshed out and installed `plot.precision()`
 o Illustrate `plot.precision()` in `README.Rmd`
 o Added `diab` data, diabetes from CASI
 o Fixed documentation for `plot.ridge()` so that `plot.pcaridge()` is documented explicitly.
-o 'vif.ridge()` now returns a "vif.ridge" object list to prepare for a plot method.
+o `vif.ridge()` now returns a `"vif.ridge"` object list to prepare for a plot method.
 o Added `plot.vif.ridge()` to plot VIFs vs shrinkage
 o Added `norm.diff` = sqrt((b_OLS - b_ridge)^2) as a measure of shrinkage to `precision()`
 o Added `plot.precision()` for plots of shrinkage vs. precision
