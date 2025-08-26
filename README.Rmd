@@ -285,7 +285,7 @@ the origin $(0, 0)$, and the covariance ellipses get smaller, indicating increas
 The `pairs()` method for `"ridge"` objects shows all pairwise views in scatterplot matrix form.
 
 ```{r longley-pairs}
-#| out.width = "80%",
+#| out.width = "90%",
 #| fig.cap = "Scatterplot matrix of bivariate ridge trace plots"
 pairs(lridge, radius=0.5, diag.cex = 2, 
       fill = TRUE, fill.alpha = 0.1)

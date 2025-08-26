@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
@@ -322,6 +323,7 @@ par(op)
 
 <img src="man/figures/README-longley-plot-ridge-1.png" alt="Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="80%" />
 <p class="caption">
+
 Bivariate ridge trace plots for the coefficients of four predictors
 against the coefficient for GNP in Longley’s data, with λ = 0, 0.005,
 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven
@@ -345,8 +347,9 @@ pairs(lridge, radius=0.5, diag.cex = 2,
 
 <div class="figure">
 
-<img src="man/figures/README-longley-pairs-1.png" alt="Scatterplot matrix of bivariate ridge trace plots" width="80%" />
+<img src="man/figures/README-longley-pairs-1.png" alt="Scatterplot matrix of bivariate ridge trace plots" width="90%" />
 <p class="caption">
+
 Scatterplot matrix of bivariate ridge trace plots
 </p>
 
