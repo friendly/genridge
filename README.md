@@ -13,11 +13,13 @@
 
 # genridge <img src="man/figures/logo.png" style="float:right; height:200px;" />
 
-## Generalized Ridge Trace Plots for Ridge Regression
+## **Generalized Ridge Trace Plots for Ridge Regression**
 
-<!-- Version 0.7.1 -->
+<!-- explicit version number now dynamic -->
 
-Version 0.8.0
+Version 0.8.0; documentation built for `pkgdown` 2026-09-10
+
+## 📝 Description
 
 ### What is ridge regression?
 
@@ -38,23 +40,19 @@ some way, shrinking them, on average, toward zero, to satisfy increased
 predictive accuracy.
 
 The OLS estimates, which minimize the sum of squared residuals
-$RSS = \Sigma \mathbf{\epsilon}^2$ are given by: $$
-\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,
-$$ with
+$RSS = \Sigma \mathbf{\epsilon}^2$ are given by:
+$$\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,$$
+with
 $\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}$.
 
 Ridge regression replaces the standard residual sum of squares criterion
 with a penalized form,
 
-$$
-\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^\top  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^\top \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,
-$$
+$$\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^\top  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^\top \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,$$
 
 whose solution is easily seen to be:
 
-$$
-\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  
-$$
+$$\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  $$
 
 where $\lambda$ is the *shrinkage factor* or *tuning constant*,
 penalizing larger coefficients. Shrinkage can also be expressed as the
@@ -127,7 +125,7 @@ these objects, of class `c("ridge", "pcaridge")`.
 Finally, the functions `precision()` and `vif.ridge()` provide other
 useful measures and plots.
 
-## Installation
+## 📂 Installation
 
 |  |  |
 |----|----|
@@ -135,7 +133,7 @@ useful measures and plots.
 | R-universe | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
 | Development version | `remotes::install_github("friendly/genridge")` |
 
-## Examples
+## 📊 Examples
 
 The classic example for ridge regression is Longley’s (1967) data,
 consisting of 7 economic variables, observed yearly from 1947 to 1962
@@ -194,9 +192,9 @@ lridge
 The effects of collinearity can be measured by a variance inflation
 factor (VIF), the ratio of the sampling variances of the coefficients,
 relative to what they would be if all predictors were uncorrelated,
-given by $$
-\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,
-$$ where “others” represents all other predictors except $X_i$.
+given by
+$$\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,$$
+where “others” represents all other predictors except $X_i$.
 
 `vif()` for a `"ridge"` object calculates variance inflation factors for
 all values of the ridge constant. You can see that for OLS, nearly all
@@ -436,7 +434,7 @@ objects. Points are labeled with the effective degrees of
 freedom.</figcaption>
 </figure>
 
-## Low-rank views
+## 🔍 Low-rank views
 
 Just as principal components analysis gives low-dimensional views of a
 data set, PCA can be useful to understand ridge regression.
@@ -478,7 +476,7 @@ dimensions 1 to 4:
 pairs(plridge)
 ```
 
-<img src="man/figures/README-pca-pairs-1.png" width="80%" />
+<img src="man/figures/README-pca-pairs-1.png" alt="" width="80%" />
 
 If we focus on the plot of dimensions `5:6`, we can see where all the
 shrinkage action is in this representation. Generally, the predictors
@@ -523,15 +521,25 @@ text(plridge$coef[,5:6], lambdaf, pos=2, cex=1.3)
 par(op)
 ```
 
-![](man/figures/README-fig.cap:%22Biplotviewoftheridgetraceplotforthesmallesttwodimensions,wheretheeffectsofshrinkagearemostapparent.%22-1.png)<!-- -->
+<figure>
+<img src="man/figures/README-biplot-1.png"
+alt="Biplot view of the ridge trace plot for the smallest two dimensions, where the effects of shrinkage are most apparent." />
+<figcaption aria-hidden="true">Biplot view of the ridge trace plot for
+the smallest two dimensions, where the effects of shrinkage are most
+apparent.</figcaption>
+</figure>
 
-## Other examples
+## 🗃️ Other examples
 
 The genridge package contains four data sets, each with its own
 examples; e.g., you can try `example(Acetylene)`.
 
 ``` r
 vcdExtra::datasets(package="genridge")
+#> Registered S3 methods overwritten by 'vcdExtra':
+#>   method      from
+#>   pairs.table vcd 
+#>   print.Kappa vcd
 #>        Item      class    dim                               Title
 #> 1 Acetylene data.frame   16x4                      Acetylene Data
 #> 2   Detroit data.frame  13x14 Detroit Homicide Data for 1961-1973
@@ -540,7 +548,7 @@ vcdExtra::datasets(package="genridge")
 #> 5  prostate data.frame  97x10                Prostate Cancer Data
 ```
 
-## References
+## 📚 References
 
 Friendly, M. (2011). Generalized Ridge Trace Plots: Visualizing Bias
 *and* Precision with the `genridge` R package. SCS Seminar, Jan., 2011.
