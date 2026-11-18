@@ -30,31 +30,37 @@ export(trans.colors)
 import(rgl)
 importFrom(car,vif)
 importFrom(colorspace,qualitative_hcl)
-importFrom(grDevices,col2rgb)
-importFrom(grDevices,colorRampPalette)
-importFrom(grDevices,contourLines)
-importFrom(grDevices,gray)
-importFrom(grDevices,rgb)
-importFrom(graphics,abline)
-importFrom(graphics,arrows)
-importFrom(graphics,barplot)
-importFrom(graphics,box)
-importFrom(graphics,contour)
-importFrom(graphics,matplot)
-importFrom(graphics,par)
-importFrom(graphics,points)
-importFrom(graphics,polygon)
-importFrom(graphics,text)
+importFrom(grDevices,
+  col2rgb,
+  colorRampPalette,
+  contourLines,
+  gray,
+  rgb
+)
+importFrom(graphics,
+  abline,
+  arrows,
+  barplot,
+  box,
+  contour,
+  matplot,
+  par,
+  points,
+  polygon,
+  text
+)
 importFrom(splines,bs)
-importFrom(stats,coef)
-importFrom(stats,coefficients)
-importFrom(stats,contrasts)
-importFrom(stats,cov2cor)
-importFrom(stats,lm)
-importFrom(stats,lm.fit)
-importFrom(stats,model.matrix)
-importFrom(stats,model.offset)
-importFrom(stats,model.response)
-importFrom(stats,predict)
-importFrom(stats,uniroot)
-importFrom(stats,vcov)
+importFrom(stats,
+  coef,
+  coefficients,
+  contrasts,
+  cov2cor,
+  lm,
+  lm.fit,
+  model.matrix,
+  model.offset,
+  model.response,
+  predict,
+  uniroot,
+  vcov
+)

@@ -28,5 +28,5 @@ LazyData: yes
 Language: en-US
 BugReports: https://github.com/friendly/genridge/issues
 URL: https://github.com/friendly/genridge, https://friendly.github.io/genridge/
-RoxygenNote: 7.3.2
 Encoding: UTF-8
+Config/roxygen2/version: 8.1.0

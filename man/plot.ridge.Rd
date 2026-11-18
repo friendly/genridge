@@ -132,8 +132,7 @@ plot(pridge, fill=c(TRUE, rep(FALSE,7)))
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 Graphical Statistics}, \bold{22}(1), 50-68,
-doi:10.1080/10618600.2012.681237,
-\url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
+\doi{10.1080/10618600.2012.681237}.
 }
 \seealso{
 \code{\link{ridge}} for details on ridge regression as implemented

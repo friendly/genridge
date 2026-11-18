@@ -1,3 +1,7 @@
+## genridge (development version)
+
+o Replaced links to `datavis.ca`, which is offline, with DOIs (documentation) and `friendly.github.io/papers` (README).
+
 ## genridge 0.8.0 (2024-11-30)
 
 This is a major update to the package adding additional plotting methods

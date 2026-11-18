@@ -72,8 +72,7 @@ traceplot(lridge, X="df")
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
 Graphical Statistics}, \bold{22}(1), 50-68,
-doi:10.1080/10618600.2012.681237,
-\url{https://www.datavis.ca/papers/genridge-jcgs.pdf}
+\doi{10.1080/10618600.2012.681237}.
 
 Hoerl, A. E.  and Kennard R. W. (1970). "Ridge Regression: Applications to
 Nonorthogonal Problems", \emph{Technometrics}, 12(1), 69-82.

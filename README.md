@@ -7,7 +7,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/genridge)](https://cran.r-project.org/package=genridge)
 [![R-universe](https://friendly.r-universe.dev/badges/genridge)](https://friendly.r-universe.dev)
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/genridge)](https://cran.r-project.org/package=genridge)
-[![pkgdown](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge)
+[![pkgdown](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/genridge/)
 
 <!-- badges: end -->
 
@@ -559,16 +559,16 @@ Slides:
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
 **22**(1), 50-68, [DOI
-link](http://dx.doi.org/10.1080/10618600.2012.681237), Online:
-[genridge-jcgs.pdf](https://www.datavis.ca/papers/genridge-jcgs.pdf),
+link](https://doi.org/10.1080/10618600.2012.681237), Online:
+[genridge-jcgs.pdf](https://friendly.github.io/papers/genridge-jcgs.pdf),
 Supp. materials:
-[genridge-supp.zip](http://datavis.ca/papers/genridge-supp.zip)
+[genridge-supp.zip](https://friendly.github.io/papers/genridge-supp.zip)
 
 Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing
 Collinearity Diagnostics, *The American Statistician*, **63**(1), 56–65,
 [DOI link](https://doi.org/10.1198/tast.2009.0012), Online:
-[viscollin-tast.pdf](http://datavis.ca/papers/viscollin-tast.pdf), Supp.
-materials: <http://datavis.ca/papers/viscollin/>.
+[viscollin-tast.pdf](https://friendly.github.io/papers/viscollin-tast.pdf), Supp.
+materials: <https://friendly.github.io/papers/viscollin/>.
 
 Friendly, M., Monette, G., & Fox, J. (2013). Elliptical Insights:
 Understanding Statistical Methods Through Elliptical Geometry.

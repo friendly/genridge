@@ -68,8 +68,7 @@
 #' Friendly, M. (2013). The Generalized Ridge Trace Plot:
 #' Visualizing Bias \emph{and} Precision. 
 #' \emph{Journal of Computational and Graphical Statistics}, \bold{22}(1), 50-68,
-#' \doi{10.1080/10618600.2012.681237},
-#' \url{https://datavis.ca/papers/genridge-jcgs.pdf}
+#' \doi{10.1080/10618600.2012.681237}.
 #'
 #' @importFrom graphics arrows
 #' @importFrom stats coef
