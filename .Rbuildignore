@@ -11,3 +11,4 @@ extra/
 ^pkgdown$
 dev/
 ^data-raw$
+^vignettes/articles$
