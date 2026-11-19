@@ -65,3 +65,91 @@ as.ridge.mlmridge <- function(x, response = 1, ...) {
   class(result) <- "ridge"
   result
 }
+
+
+#' Methods for Multivariate Ridge Regression Objects
+#'
+#' @description
+#' Basic methods for objects of class `"mlmridge"`, returned by [ridge()] when the response is
+#' a matrix.
+#'
+#' * `coef()` extracts the coefficients: by default a list with one \eqn{p \times q} matrix for
+#'   each ridge constant; with `type = "array"`, a 3-d array indexed by `[lambda, predictor, response]`;
+#'   with `response`, the \eqn{\lambda \times p} matrix for one response, as for a `"ridge"` object.
+#' * `vcov()` extracts the covariance matrices of the coefficients: by default a list with, for each
+#'   ridge constant, the \eqn{pq \times pq} covariance matrix of the stacked coefficients
+#'   \eqn{\mathrm{vec}(\mathbf{B})}, which is `kronecker(Sigma, cov[[i]])`; with `response`, the list of
+#'   \eqn{p \times p} matrices for one response.
+#' * `print()` shows the coefficients for each response and the optimal ridge constants given by
+#'   the HKB, LW and GCV criteria, for each response and pooled over responses.
+#'
+#' @name mlmridge-methods
+#' @param object,x An object of class `"mlmridge"`
+#' @param response If not `NULL`, a response (name or number) for which to return the results,
+#'        in the same form as for a univariate `"ridge"` object; see [as.ridge()].
+#' @param type For `coef()` with `response = NULL`: `"list"` (the default) or `"array"`.
+#' @param digits Number of significant digits to print.
+#' @param ... Other arguments, not used.
+#' @return `coef()` and `vcov()` return a list, array or matrix, as described above;
+#'        `print()` returns `x`, invisibly.
+#' @seealso [ridge()], [as.ridge()]
+#' @examples
+#' if (requireNamespace("heplots", quietly = TRUE)) {
+#'   data(schooldata, package = "heplots")
+#'   sridge <- ridge(cbind(reading, mathematics, selfesteem) ~
+#'                   education + occupation + visit + counseling + teacher,
+#'                   data = schooldata, lambda = c(0, 0.1, 0.5, 1, 2, 5))
+#'   sridge
+#'   coef(sridge)[[4]]                       # coefficients for lambda = 1
+#'   coef(sridge, response = "reading")      # lambda x p, for one response
+#'   dim(coef(sridge, type = "array"))
+#'   dim(vcov(sridge)[[1]])                  # pq x pq
+#' }
+NULL
+
+#' @rdname mlmridge-methods
+#' @exportS3Method coef mlmridge
+coef.mlmridge <- function(object, response = NULL, type = c("list", "array"), ...) {
+  if (!is.null(response)) return(as.ridge(object, response)$coef)
+  type <- match.arg(type)
+  if (type == "list") return(object$coef)
+  B <- object$coef
+  arr <- array(unlist(lapply(B, function(b) t(b))),          # each slice: response x predictor
+               dim = c(ncol(B[[1]]), nrow(B[[1]]), length(B)))
+  arr <- aperm(arr, c(3, 2, 1))                              # -> lambda x predictor x response
+  dimnames(arr) <- list(lambda = names(B), predictor = rownames(B[[1]]),
+                        response = colnames(B[[1]]))
+  arr
+}
+
+#' @rdname mlmridge-methods
+#' @exportS3Method vcov mlmridge
+vcov.mlmridge <- function(object, response = NULL, ...) {
+  if (!is.null(response)) return(as.ridge(object, response)$cov)
+  S <- object$Sigma
+  xnames <- rownames(object$coef[[1]])
+  vnames <- paste(rep(colnames(S), each = length(xnames)), xnames, sep = ":")
+  lapply(object$cov, function(V) {
+    K <- kronecker(S, V)
+    dimnames(K) <- list(vnames, vnames)
+    K
+  })
+}
+
+#' @rdname mlmridge-methods
+#' @exportS3Method print mlmridge
+print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
+  ynames <- colnames(x$Sigma)
+  B <- x$coef[[1]]
+  cat("Multivariate ridge regression:", length(ynames), "responses,", nrow(B), "predictors,",
+      length(x$lambda), "ridge constants\n")
+  for (k in seq_along(ynames)) {
+    cat("\nRidge Coefficients for ", ynames[k], ":\n", sep = "")
+    print.default(format(coef(x, response = k), digits = digits), print.gap = 2, quote = FALSE)
+  }
+  cat("\nOptimal ridge constants:\n")
+  print.default(format(x$criteria, digits = digits), print.gap = 2, quote = FALSE)
+  cat("GCV pooled over responses (", x$pool, "): ", format(x$kGCV.pooled, digits = digits),
+      "\n", sep = "")
+  invisible(x)
+}

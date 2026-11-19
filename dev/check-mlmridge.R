@@ -70,7 +70,28 @@ check("coef equal VARshrink ridge_mlm (lambda_v = lambda_g / n)",
 # 7. a 1-column matrix y still gives a univariate "ridge" object
 check("1-column matrix y -> class 'ridge'", identical(class(ridge(Y[, 1, drop = FALSE], X)), "ridge"))
 
-# 8. errors
+# 8. coef(), vcov(), print() methods
+check("coef(m) is the list", identical(coef(m), m$coef))
+check("coef(m, response = k) == univariate coef",
+      all.equal(coef(m, response = 2), coef(ridge(Y[, 2], X, lambda = lambda))))
+arr <- coef(m, type = "array")
+check("coef(type = 'array'): dim lambda x p x q", identical(dim(arr), c(6L, 5L, 3L)))
+check("  array[i, , k] == coef list[[i]][, k]",
+      all(sapply(seq_along(lambda), function(i) isTRUE(all.equal(arr[i, , ], m$coef[[i]], check.attributes = FALSE)))))
+check("  array[, , k] == coef(response = k)",
+      all.equal(unname(arr[, , "selfesteem"]), unname(coef(m, response = "selfesteem"))))
+vc <- vcov(m)
+check("vcov(m): list of pq x pq", is.list(vc) && identical(dim(vc[[1]]), c(15L, 15L)))
+ur <- ridge(Y[, "mathematics"], X, lambda = lambda)
+check("  diagonal block k of vcov == univariate cov (math, lambda[5])",
+      all.equal(unname(vc[[5]][6:10, 6:10]), unname(vcov(ur)[[5]])))
+check("  off-diagonal block == Sigma[j,k] * cov",
+      all.equal(unname(vc[[3]][1:5, 11:15]), unname(m$Sigma[1, 3] * m$cov[[3]])))
+check("vcov(m, response = k) == univariate vcov", all.equal(vcov(m, response = 2), vcov(ur)))
+pr <- capture.output(print(m))
+check("print() runs and shows pooled GCV", any(grepl("pooled", pr)))
+
+# 9. errors
 check("as.ridge() with bad response name -> error",
       inherits(tryCatch(as.ridge(m, "nope"), error = function(e) e), "error"))
 
