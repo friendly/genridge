@@ -14,7 +14,7 @@ precision(object, det.fun, normalize, ...)
 \item{det.fun}{Function to be applied to the determinants of the covariance
 matrices, one of \code{c("log","root")}.}
 
-\item{normalize}{If \code{TRUE} the length of the coefficient vector \eqn{\mathbf{\beta}_k} is
+\item{normalize}{If \code{TRUE} the length of the coefficient vector \eqn{\boldsymbol{\beta}_k} is
 normalized to a maximum of 1.0.}
 
 \item{...}{Other arguments (currently unused)}
@@ -37,7 +37,7 @@ The goal of \code{precision} is to allow you to study the relationship between s
 regression coefficients and their precision directly by calculating measures of each.
 
 Three measures of (inverse) precision based on the "size" of the
-covariance matrix of the parameters are calculated. Let \eqn{V_k \equiv \text{Var}(\mathbf{\beta}_k)}
+covariance matrix of the parameters are calculated. Let \eqn{V_k \equiv \text{Var}(\boldsymbol{\beta}_k)}
 be the covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i= 1,
 \dots p} be its eigenvalues. Then the variance (= 1/precision) measures are:
 \enumerate{
@@ -51,10 +51,10 @@ Lambda criterion
 
 Two measures of shrinkage are also calculated:
 \itemize{
-\item \code{norm.beta}: the root mean square of the coefficient vector \eqn{\lVert\mathbf{\beta}_k \rVert},
+\item \code{norm.beta}: the root mean square of the coefficient vector \eqn{\lVert\boldsymbol{\beta}_k \rVert},
 normalized to a maximum of 1.0 if \code{normalize == TRUE} (the default).
 \item \code{norm.diff}: the root mean square of the difference from the OLS estimate
-\eqn{\lVert \mathbf{\beta}_{\text{OLS}} - \mathbf{\beta}_k \rVert}. This measure is inversely related to \code{norm.beta}
+\eqn{\lVert \boldsymbol{\beta}_{\text{OLS}} - \boldsymbol{\beta}_k \rVert}. This measure is inversely related to \code{norm.beta}
 }
 
 A plot method, \code{\link[=plot.precision]{plot.precision()}} facilitates making graphs of these quantities.

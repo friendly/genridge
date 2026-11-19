@@ -24,7 +24,7 @@ Version 0.8.0; documentation built for `pkgdown` 2026-09-10
 ### What is ridge regression?
 
 Consider the standard linear model,
-$\mathbf{y} = \mathbf{X} \; \mathbf{\beta} + \mathbf{\epsilon}$ for $p$
+$\mathbf{y} = \mathbf{X} \; \boldsymbol{\beta} + \boldsymbol{\epsilon}$ for $p$
 predictors in a multiple regression. In this context, high multiple
 correlations among the predictors lead to well-known problems of
 collinearity under ordinary least squares (OLS) estimation, which result
@@ -40,19 +40,19 @@ some way, shrinking them, on average, toward zero, to satisfy increased
 predictive accuracy.
 
 The OLS estimates, which minimize the sum of squared residuals
-$RSS = \Sigma \mathbf{\epsilon}^2$ are given by:
-$$\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,$$
+$RSS = \Sigma \boldsymbol{\epsilon}^2$ are given by:
+$$\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,$$
 with
-$\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}$.
+$\widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}$.
 
 Ridge regression replaces the standard residual sum of squares criterion
 with a penalized form,
 
-$$\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^\top  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^\top \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,$$
+$$\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top  (\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda \boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \: ,$$
 
 whose solution is easily seen to be:
 
-$$\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  $$
+$$\widehat{\boldsymbol{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  $$
 
 where $\lambda$ is the *shrinkage factor* or *tuning constant*,
 penalizing larger coefficients. Shrinkage can also be expressed as the
@@ -376,9 +376,9 @@ precision(lridge)
 ```
 
 `norm.beta`
-$= \lVert\mathbf{\beta}\rVert / \max{\lVert\mathbf{\beta}\rVert}$ is a
+$= \lVert\boldsymbol{\beta}\rVert / \max{\lVert\boldsymbol{\beta}\rVert}$ is a
 measure of shrinkage, and `det`
-$= \log{| \text{Var}(\mathbf{\beta}) |}$, is a measure of variance of
+$= \log{| \text{Var}(\boldsymbol{\beta}) |}$, is a measure of variance of
 the coefficients (inverse of precision). Plotting these against each
 other gives a direct view of the tradeoff between bias and precision.
 

@@ -13,7 +13,7 @@
 #' regression coefficients and their precision directly by calculating measures of each.
 #' 
 #' Three measures of (inverse) precision based on the "size" of the
-#' covariance matrix of the parameters are calculated. Let \eqn{V_k \equiv \text{Var}(\mathbf{\beta}_k)} 
+#' covariance matrix of the parameters are calculated. Let \eqn{V_k \equiv \text{Var}(\boldsymbol{\beta}_k)} 
 #' be the covariance matrix for a given ridge constant, and let \eqn{\lambda_i , i= 1,
 #' \dots p} be its eigenvalues. Then the variance (= 1/precision) measures are: 
 #'
@@ -27,10 +27,10 @@
 #' 
 #' Two measures of shrinkage are also calculated:
 #'
-#' * `norm.beta`: the root mean square of the coefficient vector \eqn{\lVert\mathbf{\beta}_k \rVert},
+#' * `norm.beta`: the root mean square of the coefficient vector \eqn{\lVert\boldsymbol{\beta}_k \rVert},
 #'   normalized to a maximum of 1.0 if `normalize == TRUE` (the default).
 #' * `norm.diff`: the root mean square of the difference from the OLS estimate
-#'   \eqn{\lVert \mathbf{\beta}_{\text{OLS}} - \mathbf{\beta}_k \rVert}. This measure is inversely related to `norm.beta`
+#'   \eqn{\lVert \boldsymbol{\beta}_{\text{OLS}} - \boldsymbol{\beta}_k \rVert}. This measure is inversely related to `norm.beta`
 #'
 #' 
 #' 
@@ -39,7 +39,7 @@
 #' @param object An object of class `ridge` or `lm`
 #' @param det.fun Function to be applied to the determinants of the covariance
 #'        matrices, one of `c("log","root")`.
-#' @param normalize If `TRUE` the length of the coefficient vector \eqn{\mathbf{\beta}_k} is
+#' @param normalize If `TRUE` the length of the coefficient vector \eqn{\boldsymbol{\beta}_k} is
 #'        normalized to a maximum of 1.0.
 #' @param ... Other arguments (currently unused)
 #' 

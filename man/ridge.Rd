@@ -94,7 +94,7 @@ by adding small positive constants \eqn{\lambda} to the diagonal elements of \eq
 the least squares solution to achieve a more favorable tradeoff between bias and variance (inverse of precision)
 of the coefficients.
 
-\deqn{\widehat{\mathbf{\beta}}^{\text{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  }
+\deqn{\widehat{\boldsymbol{\beta}}^{\text{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  }
 
 Ridge regression shrinkage can be parameterized in several ways.
 \itemize{
