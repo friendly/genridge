@@ -54,10 +54,14 @@
 #' #text(lridge$kHKB, -3, "HKB")
 #' 
 #' traceplot(lridge, X="df")
-#' 
-#' 
-traceplot <-
-function(x, 
+#'
+#'
+traceplot <- function(x, ...) UseMethod("traceplot")
+
+#' @rdname traceplot
+#' @exportS3Method
+traceplot.ridge <-
+function(x,
 	X=c("lambda","df"), 
 #	labels=c("left", "right"),
 	col = c("black", "red", "darkgreen", "blue","darkcyan","magenta", "brown","darkgray"), 

@@ -153,3 +153,130 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
       "\n", sep = "")
   invisible(x)
 }
+
+
+#' Plot and Summary Methods for Multivariate Ridge Regression
+#'
+#' @description
+#' These methods apply the plots and summaries for univariate ridge regression to one response
+#' of a multivariate ridge regression (class `"mlmridge"`). Each extracts the results for that
+#' response with [as.ridge()] and calls the corresponding method for `"ridge"` objects:
+#'
+#' * `traceplot()`: univariate ridge trace plot ([traceplot()])
+#' * `plot()`: bivariate ridge trace plot of coefficients with covariance ellipses ([plot.ridge()])
+#' * `pairs()`: scatterplot matrix of bivariate ridge trace plots ([pairs.ridge()])
+#' * `plot3d()`: 3D ridge trace plot ([plot3d.ridge()])
+#' * `biplot()`: ridge trace plot with variable vectors ([biplot.ridge()])
+#' * `pca()`: transformation to PCA/SVD space ([pca.ridge()]), returning a `"pcaridge"` object
+#' * `precision()`: measures of precision and shrinkage ([precision()])
+#' * `vif()`: variance inflation factors ([vif.ridge()])
+#'
+#' Because all responses share the same ridge constants and predictors, the shrinkage factors,
+#' effective degrees of freedom, PCA/SVD of the predictors and the variance inflation factors
+#' are the same for every response; the coefficients, their covariance matrices (scaled by each
+#' response's residual variance) and the HKB, LW and GCV criteria differ.
+#'
+#' @name mlmridge-plots
+#' @param x,object,mod An object of class `"mlmridge"`
+#' @param response The response to use: a name, or a number in `1:q`. If not given, the first
+#'        response is used, with a message.
+#' @param main Title for the plot. The default is the name of the response.
+#' @param det.fun,normalize See [precision()].
+#' @param ... Other arguments, passed to the method for `"ridge"` objects.
+#' @return As for the corresponding method for `"ridge"` objects.
+#' @seealso [ridge()], [as.ridge()], [mlmridge-methods]
+#' @importFrom graphics pairs
+#' @importFrom stats biplot
+#' @examples
+#' if (requireNamespace("heplots", quietly = TRUE)) {
+#'   data(schooldata, package = "heplots")
+#'   lambda <- c(0, 0.1, 0.5, 1, 2, 5)
+#'   sridge <- ridge(cbind(reading, mathematics, selfesteem) ~
+#'                   education + occupation + visit + counseling + teacher,
+#'                   data = schooldata, lambda = lambda)
+#'
+#'   traceplot(sridge, response = "reading")
+#'   traceplot(sridge, response = "selfesteem", X = "df")
+#'
+#'   # bivariate ridge trace plot for two predictors
+#'   plot(sridge, response = "mathematics", variables = c("occupation", "visit"),
+#'        radius = 0.5)
+#'
+#'   pairs(sridge, response = "reading", radius = 0.5)
+#'
+#'   vif(sridge)
+#'   precision(sridge, response = "reading")
+#' }
+NULL
+
+# select one response of an "mlmridge" object, as a "ridge" object; message if not specified
+select_response <- function(x, response, missing_response) {
+  ynames <- colnames(x$Sigma)
+  r <- as.ridge(x, response)
+  k <- if (is.character(response)) match(response, ynames) else response
+  if (missing_response && length(ynames) > 1)
+    message("Using response '", ynames[k], "' (1 of ", length(ynames),
+            "); use response = to choose another")
+  list(ridge = r, name = ynames[k])
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method traceplot mlmridge
+traceplot.mlmridge <- function(x, response = 1, main, ...) {
+  sel <- select_response(x, response, missing(response))
+  if (missing(main)) main <- sel$name
+  traceplot(sel$ridge, main = main, ...)
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method plot mlmridge
+plot.mlmridge <- function(x, response = 1, main, ...) {
+  sel <- select_response(x, response, missing(response))
+  if (missing(main)) main <- sel$name
+  plot(sel$ridge, main = main, ...)
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method pairs mlmridge
+pairs.mlmridge <- function(x, response = 1, ...) {
+  sel <- select_response(x, response, missing(response))
+  pairs(sel$ridge, ...)
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method plot3d mlmridge
+plot3d.mlmridge <- function(x, response = 1, ...) {
+  sel <- select_response(x, response, missing(response))
+  plot3d(sel$ridge, ...)
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method biplot mlmridge
+biplot.mlmridge <- function(x, response = 1, main, ...) {
+  sel <- select_response(x, response, missing(response))
+  if (missing(main)) main <- sel$name
+  biplot(sel$ridge, main = main, ...)
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method pca mlmridge
+pca.mlmridge <- function(x, response = 1, ...) {
+  sel <- select_response(x, response, missing(response))
+  pca(sel$ridge, ...)
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method precision mlmridge
+precision.mlmridge <- function(object, det.fun = c("log", "root"), normalize = TRUE,
+                               response = 1, ...) {
+  sel <- select_response(object, response, missing(response))
+  precision(sel$ridge, det.fun = det.fun, normalize = normalize, ...)
+}
+
+#' @rdname mlmridge-plots
+#' @exportS3Method vif mlmridge
+vif.mlmridge <- function(mod, response = 1, ...) {
+  # VIFs depend only on X, so they are the same for every response; the criteria
+  # carried along for plot.vif.ridge() are those of the chosen response
+  vif(as.ridge(mod, response), ...)
+}

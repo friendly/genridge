@@ -2,9 +2,12 @@
 % Please edit documentation in R/traceplot.R
 \name{traceplot}
 \alias{traceplot}
+\alias{traceplot.ridge}
 \title{Univariate Ridge Trace Plots}
 \usage{
-traceplot(
+traceplot(x, ...)
+
+\method{traceplot}{ridge}(
   x,
   X = c("lambda", "df"),
   col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta", "brown",
@@ -20,6 +23,8 @@ traceplot(
 \arguments{
 \item{x}{A \code{ridge} object, as fit by \code{\link[=ridge]{ridge()}}}
 
+\item{...}{Other arguments passed to \code{\link[graphics:matplot]{graphics::matplot()}}}
+
 \item{X}{What to plot as the horizontal coordinate, one of \code{c("lambda", "df")}}
 
 \item{col}{A numeric or character vector giving the colors used to plot the
@@ -33,8 +38,6 @@ curves.  Recycled as necessary.}
 \item{ylab}{Label for vertical axis}
 
 \item{xlim, ylim}{x, y limits for the plot. You may need to adjust these to allow for the variable labels.}
-
-\item{...}{Other arguments passed to \code{\link[graphics:matplot]{graphics::matplot()}}}
 }
 \value{
 None. Used for its side effect of plotting.
