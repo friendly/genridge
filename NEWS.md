@@ -1,6 +1,7 @@
 ## genridge (development version)
 
 o Replaced links to `datavis.ca`, which is offline, with DOIs (documentation) and `friendly.github.io/papers` (README).
+o Documentation converted to roxygen markdown (`Roxygen: list(markdown = TRUE)`): `\code{}`, `\link{}`, `\emph{}` and `\bold{}` replaced by markdown equivalents, and `\describe{}`, `\itemize{}`, `\enumerate{}` and `@return` `\item{}` lists by markdown lists. Also fixed a few small errors in the docs.
 
 ## genridge 0.8.0 (2024-11-30)
 

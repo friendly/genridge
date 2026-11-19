@@ -22,14 +22,14 @@
 )
 }
 \arguments{
-\item{x}{A data frame of class \code{"precision"} resulting from \code{\link{precision}} called
-on a \code{"ridge"} object. Named \code{x} only to conform with the \code{\link{plot}} generic.}
+\item{x}{A data frame of class \code{"precision"} resulting from \code{\link[=precision]{precision()}} called
+on a \code{"ridge"} object. Named \code{x} only to conform with the \code{\link[=plot]{plot()}} generic.}
 
-\item{xvar}{The character name of the column to be used for the horizontal axis. Typically, this is the normalized sum 
+\item{xvar}{The character name of the column to be used for the horizontal axis. Typically, this is the normalized sum
 of squares of the coefficients (\code{"norm.beta"}) used as a measure of shrinkage / bias.}
 
-\item{yvar}{The character name of the column to be used for the vertical axis. One of 
-\code{c("det", "trace", "max.eig")}. See \code{\link{precision}} for definitions of these measures.}
+\item{yvar}{The character name of the column to be used for the vertical axis. One of
+\code{c("det", "trace", "max.eig")}. See \code{\link[=precision]{precision()}} for definitions of these measures.}
 
 \item{labels}{The character name of the column to be used for point labels. One of \code{c("lambda", "df")}.}
 
@@ -37,7 +37,7 @@ of squares of the coefficients (\code{"norm.beta"}) used as a measure of shrinka
 
 \item{label.prefix}{Character or expression prefix for the point labels.}
 
-\item{criteria}{The vector of optimal shrinkage criteria from the \code{\link{ridge}} call to be added
+\item{criteria}{The vector of optimal shrinkage criteria from the \code{\link[=ridge]{ridge()}} call to be added
 as points in the plot.}
 
 \item{pch}{Plotting character for points}
@@ -52,13 +52,14 @@ as points in the plot.}
 
 \item{ylab}{Label for vertical axis}
 
-\item{...}{Other arguments passed to \code{\link{plot}}.}
+\item{...}{Other arguments passed to \code{\link[=plot]{plot()}}.}
 }
 \value{
-Returns nothing. Used for the side effect of plotting.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Returns nothing. Used for the side effect of plotting.
+}\if{html}{\out{</div>}}
 }
 \description{
-This function uses the results of \code{\link{precision}} to
+This function uses the results of \code{\link[=precision]{precision()}} to
 plot a measure of shrinkage of the coefficients in ridge regression against a selected measure
 of their estimated sampling variance, so as to provide a direct visualization of the tradeoff
 between bias and precision.
@@ -84,8 +85,8 @@ plot(pridge, labels = "df", label.prefix="df:")
 plot(pridge, yvar="trace")
 }
 \seealso{
-\code{\link{ridge}} for details on ridge regression as implemented here.
-  \code{\link{precision}} for definitions of the measures
+\code{\link[=ridge]{ridge()}} for details on ridge regression as implemented here.
+\code{\link[=precision]{precision()}} for definitions of the measures
 }
 \author{
 Michael Friendly

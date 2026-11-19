@@ -8,14 +8,14 @@
 pca(x, ...)
 }
 \arguments{
-\item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
+\item{x}{A \code{ridge} object, as fit by \code{\link[=ridge]{ridge()}}}
 
-\item{\dots}{Other arguments passed down. Not presently used in this
+\item{...}{Other arguments passed down. Not presently used in this
 implementation.}
 }
 \value{
 An object of class \code{c("ridge", "pcaridge")}, with the same
-       components as the original \code{ridge} object.
+components as the original \code{ridge} object.
 }
 \description{
 The function \code{pca.ridge} transforms a \code{ridge} object from
@@ -50,11 +50,11 @@ plot(plridge, variables=5:6)
 \references{
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-Graphical Statistics}, \bold{22}(1), 50-68,
+Graphical Statistics}, \strong{22}(1), 50-68,
 \doi{10.1080/10618600.2012.681237}.
 }
 \seealso{
-\code{\link{ridge}}
+\code{\link[=ridge]{ridge()}}
 }
 \author{
 Michael Friendly

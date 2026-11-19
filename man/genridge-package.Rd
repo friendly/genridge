@@ -17,33 +17,31 @@ the transformed space of the PCA/SVD of the predictors.
 \details{
 This package provides computational support for the
 graphical methods described in Friendly (2013). Ridge regression models may
-be fit using the function \code{\link{ridge}}, which incorporates features
-of \code{\link[MASS]{lm.ridge}}.  In particular, the shrinkage factors in
+be fit using the function \code{\link[=ridge]{ridge()}}, which incorporates features
+of \code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}.  In particular, the shrinkage factors in
 ridge regression may be specified either in terms of the constant added to
 the diagonal of \eqn{X^T X} matrix (\code{lambda}), or the equivalent number
 of degrees of freedom.
 
-More importantly, the \code{\link{ridge}} function also calculates and
+More importantly, the \code{\link[=ridge]{ridge()}} function also calculates and
 returns the associated covariance matrices of each of the ridge estimates,
 allowing precision to be studied and displayed graphically.
 
 This provides the support for the main plotting functions in the package:
+\itemize{
+\item \code{\link[=plot.ridge]{plot.ridge()}}: Bivariate ridge trace plots
+\item \code{\link[=pairs.ridge]{pairs.ridge()}}: All pairwise bivariate ridge trace plots
+\item \code{\link[=plot3d.ridge]{plot3d.ridge()}}: 3D ridge trace plots
+\item \code{\link[=traceplot]{traceplot()}}: Traditional univariate ridge trace plots
+}
 
-\code{\link{plot.ridge}}: Bivariate ridge trace plots
-
-\code{\link{pairs.ridge}}: All pairwise bivariate ridge trace plots
-
-\code{\link{plot3d.ridge}}: 3D ridge trace plots
-
-\code{\link{traceplot}}: Traditional univariate ridge trace plots
-
-In addition, the function \code{\link{pca.ridge}} transforms the
+In addition, the function \code{\link[=pca.ridge]{pca.ridge()}} transforms the
 coefficients and covariance matrices of a \code{ridge} object from predictor
 space to the equivalent, but more interesting space of the PCA of \eqn{X^T
-X} or the SVD of \bold{X}.  The main plotting functions also work for these
+X} or the SVD of \strong{X}.  The main plotting functions also work for these
 objects, of class \code{c("ridge", "pcaridge")}.
 
-Finally, the functions \code{\link{precision}} and \code{\link{vif.ridge}}
+Finally, the functions \code{\link[=precision]{precision()}} and \code{\link[=vif.ridge]{vif.ridge()}}
 provide other useful measures and plots.
 }
 \examples{
@@ -54,7 +52,7 @@ provide other useful measures and plots.
 \references{
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-Graphical Statistics}, \bold{22}(1), 50-68,
+Graphical Statistics}, \strong{22}(1), 50-68,
 \doi{10.1080/10618600.2012.681237}.
 
 Arthur E. Hoerl and Robert W. Kennard (1970). Ridge Regression: Biased
@@ -65,11 +63,11 @@ Arthur E. Hoerl and Robert W. Kennard (1970). Ridge Regression: Applications
 to Nonorthogonal Problems \emph{Technometrics}, 12(1), pp. 69-82.
 }
 \seealso{
-\code{\link[MASS]{lm.ridge}}
+\code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 }
 \author{
 Michael Friendly
 
-Maintainer: Michael Friendly <friendly@yorku.ca>
+Maintainer: Michael Friendly \href{mailto:friendly@yorku.ca}{friendly@yorku.ca}
 }
 \keyword{package}

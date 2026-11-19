@@ -15,19 +15,19 @@
 #' 
 #' 
 #' @aliases plot.ridge plot.pcaridge
-#' @param x A \code{ridge} object, as fit by \code{\link{ridge}}
+#' @param x A `ridge` object, as fit by [ridge()]
 #' @param variables Predictors in the model to be displayed in the plot: an
 #'        integer or character vector of length 2, giving the indices or names of the
-#'        variables. Defaults to the first two predictors for \code{ridge} objects or
-#'        the \emph{last} two dimensions for \code{pcaridge} objects.
+#'        variables. Defaults to the first two predictors for `ridge` objects or
+#'        the *last* two dimensions for `pcaridge` objects.
 #' @param radius Radius of the ellipse-generating circle for the covariance
-#'        ellipsoids. The default, \code{radius=1} gives a standard \dQuote{unit}
-#'        ellipsoid. Typically, values \code{radius<1} gives less cluttered displays.
+#'        ellipsoids. The default, `radius=1` gives a standard "unit"
+#'        ellipsoid. Typically, values `radius<1` gives less cluttered displays.
 #' @param which.lambda A vector of indices used to select the values of
-#'        \code{lambda} for which ellipses are plotted. The default is to plot
-#'        ellipses for all values of \code{lambda} in the \code{ridge} object.
+#'        `lambda` for which ellipses are plotted. The default is to plot
+#'        ellipses for all values of `lambda` in the `ridge` object.
 #' @param labels A vector of character strings or expressions used as labels
-#'        for the ellipses. Use \code{labels=NULL} to suppress these.
+#'        for the ellipses. Use `labels=NULL` to suppress these.
 #' @param pos,cex Scalars or vectors of positions (relative to the ellipse
 #'        centers) and character size used to label the ellipses
 #' @param lwd,lty Line width and line type for the covariance ellipsoids.
@@ -47,23 +47,23 @@
 #' @param ref Logical: whether to draw horizontal and vertical reference lines
 #'        at 0.
 #' @param ref.col Color of reference lines.
-#' @param \dots Other arguments passed down to
-#'        \code{\link[graphics]{plot.default}}, e.g., \code{xlab}, \code{ylab}, and
+#' @param ... Other arguments passed down to
+#'        [graphics::plot.default()], e.g., `xlab`, `ylab`, and
 #'        other graphic parameters.
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
 #' @importFrom graphics abline polygon text
 #' @importFrom grDevices gray
-#' @seealso \code{\link{ridge}} for details on ridge regression as implemented
-#' here; \code{\link{pairs.ridge}}, \code{\link{traceplot}}, for basic plots.
+#' @seealso [ridge()] for details on ridge regression as implemented
+#' here; [pairs.ridge()], [traceplot()], for basic plots.
 #' 
-#' \code{\link{pca.ridge}} for transformation of ridge regression estimates to PCA space.
-#' \code{\link{biplot.pcaridge}} and \code{\link{plot3d.ridge}} for other
+#' [pca.ridge()] for transformation of ridge regression estimates to PCA space.
+#' [biplot.pcaridge()] and [plot3d.ridge()] for other
 #' plotting methods
 #' 
 #' @references Friendly, M. (2013). The Generalized Ridge Trace Plot:
-#' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-#' Graphical Statistics}, \bold{22}(1), 50-68,
+#' Visualizing Bias *and* Precision. *Journal of Computational and
+#' Graphical Statistics*, **22**(1), 50-68,
 #' \doi{10.1080/10618600.2012.681237}.
 #' 
 #' @keywords hplot
@@ -167,7 +167,7 @@ function(x, variables=1:2, radius=1, which.lambda=1:length(x$lambda),
 # for pcaridge objects, default to last 2 variables
 #'
 #' @description
-#' \code{plot.pcaridge} does these bivariate ridge trace plots for \code{"pcaridge"} objects, defaulting to plotting the
+#' `plot.pcaridge` does these bivariate ridge trace plots for `"pcaridge"` objects, defaulting to plotting the
 #' two smallest components.
 #' @rdname plot.ridge
 #' @exportS3Method 

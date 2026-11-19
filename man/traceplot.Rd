@@ -18,7 +18,7 @@ traceplot(
 )
 }
 \arguments{
-\item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
+\item{x}{A \code{ridge} object, as fit by \code{\link[=ridge]{ridge()}}}
 
 \item{X}{What to plot as the horizontal coordinate, one of \code{c("lambda", "df")}}
 
@@ -34,7 +34,7 @@ curves.  Recycled as necessary.}
 
 \item{xlim, ylim}{x, y limits for the plot. You may need to adjust these to allow for the variable labels.}
 
-\item{\dots}{Other arguments passed to \code{\link[graphics]{matplot}}}
+\item{...}{Other arguments passed to \code{\link[graphics:matplot]{graphics::matplot()}}}
 }
 \value{
 None. Used for its side effect of plotting.
@@ -42,7 +42,7 @@ None. Used for its side effect of plotting.
 \description{
 The \code{traceplot} function extends and simplifies the univariate ridge
 trace plots for ridge regression provided in the \code{plot} method for
-\code{\link[MASS]{lm.ridge}}
+\code{\link[MASS:lm.ridge]{MASS::lm.ridge()}}
 }
 \details{
 For ease of interpretation, the variables are labeled at the side of the
@@ -71,16 +71,16 @@ traceplot(lridge, X="df")
 \references{
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-Graphical Statistics}, \bold{22}(1), 50-68,
+Graphical Statistics}, \strong{22}(1), 50-68,
 \doi{10.1080/10618600.2012.681237}.
 
 Hoerl, A. E.  and Kennard R. W. (1970). "Ridge Regression: Applications to
 Nonorthogonal Problems", \emph{Technometrics}, 12(1), 69-82.
 }
 \seealso{
-\code{\link{ridge}} for details on ridge regression as implemented here
+\code{\link[=ridge]{ridge()}} for details on ridge regression as implemented here
 
-\code{\link{plot.ridge}}, \code{\link{pairs.ridge}} for other plotting
+\code{\link[=plot.ridge]{plot.ridge()}}, \code{\link[=pairs.ridge]{pairs.ridge()}} for other plotting
 methods
 }
 \author{

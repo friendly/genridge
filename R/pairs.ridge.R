@@ -4,7 +4,7 @@
 #' of predictors.
 #' 
 #' 
-#' @param x A \code{ridge} object, as fit by \code{\link{ridge}}
+#' @param x A `ridge` object, as fit by [ridge()]
 #' @param variables Predictors in the model to be displayed in the plot: an
 #'        integer or character vector, giving the indices or names of the variables.
 #' @param radius Radius of the ellipse-generating circle for the covariance
@@ -25,18 +25,18 @@
 #'        the diagonal panels
 #' @param diag.cex Character size for predictor labels in diagonal panels
 #' @param diag.panel Function to draw diagonal panels.  Not yet implemented:
-#'        just uses internal \code{panel.label} to write the variable name and ranges.
-#' @param \dots Other arguments passed down
+#'        just uses internal `panel.label` to write the variable name and ranges.
+#' @param ... Other arguments passed down
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
 #' @importFrom graphics par text box barplot
-#' @seealso \code{\link{ridge}} for details on ridge regression as implemented here
+#' @seealso [ridge()] for details on ridge regression as implemented here
 #' 
-#' \code{\link{plot.ridge}}, \code{\link{traceplot}} for other plotting methods
+#' [plot.ridge()], [traceplot()] for other plotting methods
 #' 
 #' @references Friendly, M. (2013). The Generalized Ridge Trace Plot:
-#' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-#' Graphical Statistics}, \bold{22}(1), 50-68,
+#' Visualizing Bias *and* Precision. *Journal of Computational and
+#' Graphical Statistics*, **22**(1), 50-68,
 #' \doi{10.1080/10618600.2012.681237}.
 #' 
 #' @keywords hplot

@@ -6,15 +6,15 @@
 \title{Acetylene Data}
 \format{
 A data frame with 16 observations on the following 4 variables.
-\describe{ 
- \item{\code{yield}}{conversion percentage yield of acetylene}
- \item{\code{temp}}{reactor temperature (celsius)} 
- \item{\code{ratio}}{H2 to N-heptone ratio} 
- \item{\code{time}}{contact time (sec)} 
+\itemize{
+\item \code{yield}: conversion percentage yield of acetylene
+\item \code{temp}: reactor temperature (celsius)
+\item \code{ratio}: H2 to N-heptone ratio
+\item \code{time}: contact time (sec)
 }
 }
 \source{
-SAS documentation example for \code{PROC REG}, \emph{Ridge
+SAS documentation example for \verb{PROC REG}, \emph{Ridge
 Regression for Acetylene Data}.
 }
 \description{
@@ -51,7 +51,7 @@ pairs(aridge0, radius=0.2)
 }
 \references{
 Marquardt, D.W., and Snee, R.D. (1975), "Ridge Regression in
-Practice," \emph{The American Statistician}, \bold{29}, 3-20.
+Practice," \emph{The American Statistician}, \strong{29}, 3-20.
 
 Marquardt, D.W. (1980), "A Critique of Some Ridge Regression Methods:
 Comment," \emph{Journal of the American Statistical Association}, Vol. 75,

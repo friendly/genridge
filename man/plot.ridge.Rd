@@ -31,7 +31,7 @@
 \method{plot}{pcaridge}(x, variables = (p - 1):p, labels = NULL, ...)
 }
 \arguments{
-\item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
+\item{x}{A \code{ridge} object, as fit by \code{\link[=ridge]{ridge()}}}
 
 \item{variables}{Predictors in the model to be displayed in the plot: an
 integer or character vector of length 2, giving the indices or names of the
@@ -39,7 +39,7 @@ variables. Defaults to the first two predictors for \code{ridge} objects or
 the \emph{last} two dimensions for \code{pcaridge} objects.}
 
 \item{radius}{Radius of the ellipse-generating circle for the covariance
-ellipsoids. The default, \code{radius=1} gives a standard \dQuote{unit}
+ellipsoids. The default, \code{radius=1} gives a standard "unit"
 ellipsoid. Typically, values \code{radius<1} gives less cluttered displays.}
 
 \item{which.lambda}{A vector of indices used to select the values of
@@ -78,8 +78,8 @@ at 0.}
 
 \item{ref.col}{Color of reference lines.}
 
-\item{\dots}{Other arguments passed down to
-\code{\link[graphics]{plot.default}}, e.g., \code{xlab}, \code{ylab}, and
+\item{...}{Other arguments passed down to
+\code{\link[graphics:plot.default]{graphics::plot.default()}}, e.g., \code{xlab}, \code{ylab}, and
 other graphic parameters.}
 }
 \value{
@@ -131,15 +131,15 @@ plot(pridge, fill=c(TRUE, rep(FALSE,7)))
 \references{
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-Graphical Statistics}, \bold{22}(1), 50-68,
+Graphical Statistics}, \strong{22}(1), 50-68,
 \doi{10.1080/10618600.2012.681237}.
 }
 \seealso{
-\code{\link{ridge}} for details on ridge regression as implemented
-here; \code{\link{pairs.ridge}}, \code{\link{traceplot}}, for basic plots.
+\code{\link[=ridge]{ridge()}} for details on ridge regression as implemented
+here; \code{\link[=pairs.ridge]{pairs.ridge()}}, \code{\link[=traceplot]{traceplot()}}, for basic plots.
 
-\code{\link{pca.ridge}} for transformation of ridge regression estimates to PCA space.
-\code{\link{biplot.pcaridge}} and \code{\link{plot3d.ridge}} for other
+\code{\link[=pca.ridge]{pca.ridge()}} for transformation of ridge regression estimates to PCA space.
+\code{\link[=biplot.pcaridge]{biplot.pcaridge()}} and \code{\link[=plot3d.ridge]{plot3d.ridge()}} for other
 plotting methods
 }
 \author{

@@ -18,27 +18,27 @@
 #' The size and shapes of the covariance ellipsoids show directly the effect on
 #' precision of the estimates as a function of the ridge tuning constant.
 #' 
-#' \code{plot3d.ridge} and \code{plot3d.pcaridge} differ only in the defaults
+#' `plot3d.ridge` and `plot3d.pcaridge` differ only in the defaults
 #' for the variables plotted.
 #' 
-#' @param x A \code{ridge} object, as fit by \code{\link{ridge}} or a
-#'        \code{pcaridge} object as transformed by \code{\link{pca.ridge}}
+#' @param x A `ridge` object, as fit by [ridge()] or a
+#'        `pcaridge` object as transformed by [pca.ridge()]
 #' @param variables Predictors in the model to be displayed in the plot: an
 #'        integer or character vector of length 3, giving the indices or names of the
-#'        variables. Defaults to the first three predictors for \code{ridge} objects
-#'        or the \emph{last} three dimensions for \code{pcaridge} objects.
+#'        variables. Defaults to the first three predictors for `ridge` objects
+#'        or the *last* three dimensions for `pcaridge` objects.
 #' @param radius Radius of the ellipse-generating circle for the covariance
-#'        ellipsoids.  The default, \code{radius=1} gives a standard \dQuote{unit}
-#'        ellipsoid. Typically, \code{radius<1} gives less cluttered displays.
+#'        ellipsoids.  The default, `radius=1` gives a standard "unit"
+#'        ellipsoid. Typically, `radius<1` gives less cluttered displays.
 #' @param which.lambda A vector of indices used to select the values of
-#'        \code{lambda} for which ellipsoids are plotted. The default is to plot
-#'        ellipsoids for all values of \code{lambda} in the \code{ridge} object.
+#'        `lambda` for which ellipsoids are plotted. The default is to plot
+#'        ellipsoids for all values of `lambda` in the `ridge` object.
 #' @param lwd,lty Line width and line type for the covariance ellipsoids.
 #'        Recycled as necessary.
 #' @param xlim,ylim,zlim X, Y, Z limits for the plot, each a vector of length
 #'        2.  If missing, the range of the covariance ellipsoids is used.
 #' @param xlab,ylab,zlab Labels for the X, Y, Z variables in the plot. If
-#'        missing, the names of the predictors given in \code{variables} is used.
+#'        missing, the names of the predictors given in `variables` is used.
 #' @param col A numeric or character vector giving the colors used to plot the
 #'        covariance ellipsoids.  Recycled as necessary.
 #' @param labels A numeric or character vector giving the labels to be drawn at
@@ -49,30 +49,30 @@
 #' @param segments Number of line segments used in drawing each dimension of a
 #'        covariance ellipsoid.
 #' @param shade a logical scalar or vector, indicating whether the ellipsoids
-#'        should be rendered with \code{\link[rgl]{shade3d}}. Recycled as necessary.
-#' @param shade.alpha a numeric value in the range [0,1], or a vector of such
+#'        should be rendered with [rgl::shade3d()]. Recycled as necessary.
+#' @param shade.alpha a numeric value in the range \[0, 1\], or a vector of such
 #'        values, giving the alpha transparency for ellipsoids rendered with
-#'        \code{shade=TRUE}.
+#'        `shade=TRUE`.
 #' @param wire a logical scalar or vector, indicating whether the ellipsoids
-#'        should be rendered with \code{\link[rgl]{wire3d}}. Recycled as necessary.
+#'        should be rendered with [rgl::wire3d()]. Recycled as necessary.
 #' @param aspect a scalar or vector of length 3, or the character string "iso",
 #'        indicating the ratios of the x, y, and z axes of the bounding box.  The
-#'        default, \code{aspect=1} makes the bounding box display as a cube
-#'        approximately filling the display. See \code{\link[rgl]{aspect3d}} for
+#'        default, `aspect=1` makes the bounding box display as a cube
+#'        approximately filling the display. See [rgl::aspect3d()] for
 #'       details.
-#' @param add if \code{TRUE}, add to the current \code{rgl} plot; the default
-#'        is \code{FALSE}.
-#' @param \dots Other arguments passed down
+#' @param add if `TRUE`, add to the current `rgl` plot; the default
+#'        is `FALSE`.
+#' @param ... Other arguments passed down
 #' @return None. Used for its side-effect of plotting
 #' 
 #' @note This is an initial implementation.  The details and arguments are
 #' subject to change.
 #' @author Michael Friendly
-#' @seealso \code{\link{plot.ridge}}, \code{\link{pairs.ridge}},
-#' \code{\link{pca.ridge}}
+#' @seealso [plot.ridge()], [pairs.ridge()],
+#' [pca.ridge()]
 #' @references Friendly, M. (2013). The Generalized Ridge Trace Plot:
-#' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-#' Graphical Statistics}, \bold{22}(1), 50-68,
+#' Visualizing Bias *and* Precision. *Journal of Computational and
+#' Graphical Statistics*, **22**(1), 50-68,
 #' \doi{10.1080/10618600.2012.681237}.
 #' @keywords hplot
 #' @examples

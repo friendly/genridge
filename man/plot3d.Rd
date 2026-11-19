@@ -38,10 +38,10 @@ plot3d(x, ...)
 )
 }
 \arguments{
-\item{x}{A \code{ridge} object, as fit by \code{\link{ridge}} or a
-\code{pcaridge} object as transformed by \code{\link{pca.ridge}}}
+\item{x}{A \code{ridge} object, as fit by \code{\link[=ridge]{ridge()}} or a
+\code{pcaridge} object as transformed by \code{\link[=pca.ridge]{pca.ridge()}}}
 
-\item{\dots}{Other arguments passed down}
+\item{...}{Other arguments passed down}
 
 \item{variables}{Predictors in the model to be displayed in the plot: an
 integer or character vector of length 3, giving the indices or names of the
@@ -49,7 +49,7 @@ variables. Defaults to the first three predictors for \code{ridge} objects
 or the \emph{last} three dimensions for \code{pcaridge} objects.}
 
 \item{radius}{Radius of the ellipse-generating circle for the covariance
-ellipsoids.  The default, \code{radius=1} gives a standard \dQuote{unit}
+ellipsoids.  The default, \code{radius=1} gives a standard "unit"
 ellipsoid. Typically, \code{radius<1} gives less cluttered displays.}
 
 \item{which.lambda}{A vector of indices used to select the values of
@@ -80,19 +80,19 @@ at 0. This is not yet implemented.}
 covariance ellipsoid.}
 
 \item{shade}{a logical scalar or vector, indicating whether the ellipsoids
-should be rendered with \code{\link[rgl]{shade3d}}. Recycled as necessary.}
+should be rendered with \code{\link[rgl:shade3d]{rgl::shade3d()}}. Recycled as necessary.}
 
-\item{shade.alpha}{a numeric value in the range [0,1], or a vector of such
+\item{shade.alpha}{a numeric value in the range [0, 1], or a vector of such
 values, giving the alpha transparency for ellipsoids rendered with
 \code{shade=TRUE}.}
 
 \item{wire}{a logical scalar or vector, indicating whether the ellipsoids
-should be rendered with \code{\link[rgl]{wire3d}}. Recycled as necessary.}
+should be rendered with \code{\link[rgl:wire3d]{rgl::wire3d()}}. Recycled as necessary.}
 
 \item{aspect}{a scalar or vector of length 3, or the character string "iso",
- indicating the ratios of the x, y, and z axes of the bounding box.  The
- default, \code{aspect=1} makes the bounding box display as a cube
- approximately filling the display. See \code{\link[rgl]{aspect3d}} for
+indicating the ratios of the x, y, and z axes of the bounding box.  The
+default, \code{aspect=1} makes the bounding box display as a cube
+approximately filling the display. See \code{\link[rgl:aspect3d]{rgl::aspect3d()}} for
 details.}
 
 \item{add}{if \code{TRUE}, add to the current \code{rgl} plot; the default
@@ -144,12 +144,12 @@ plot3d(plridge, radius=0.5)
 \references{
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-Graphical Statistics}, \bold{22}(1), 50-68,
+Graphical Statistics}, \strong{22}(1), 50-68,
 \doi{10.1080/10618600.2012.681237}.
 }
 \seealso{
-\code{\link{plot.ridge}}, \code{\link{pairs.ridge}},
-\code{\link{pca.ridge}}
+\code{\link[=plot.ridge]{plot.ridge()}}, \code{\link[=pairs.ridge]{pairs.ridge()}},
+\code{\link[=pca.ridge]{pca.ridge()}}
 }
 \author{
 Michael Friendly

@@ -29,13 +29,13 @@ has component \code{x$z} this is used for \code{z}.}
 \item{z}{a matrix containing the values to be plotted (NAs are allowed).
 Note that \code{x} can be used instead of \code{z} for convenience.}
 
-\item{nlevels}{number of contour levels desired \bold{iff} levels is not
+\item{nlevels}{number of contour levels desired \strong{iff} levels is not
 supplied}
 
 \item{levels}{numeric vector of levels at which to draw contour lines}
 
 \item{zlim}{z-limits for the plot. x-limits and y-limits can be passed
-through \dots{}}
+through \code{...}}
 
 \item{col}{color for the lines drawn}
 
@@ -55,18 +55,18 @@ character string, or a numeric value between 0 and 1.  Use
 
 \item{add}{logical. If \code{TRUE}, add to a current plot.}
 
-\item{\dots}{additional arguments passed to \code{\link[graphics]{contour}},
-including all arguments of \code{\link[graphics]{contour.default}} not
+\item{...}{additional arguments passed to \code{\link[graphics:contour]{graphics::contour()}},
+including all arguments of \code{\link[graphics:contour.default]{graphics::contour.default()}} not
 mentioned above, as well as additional graphical parameters passed by
-\code{\link[graphics]{contour.default}} to more basic functions.}
+\code{\link[graphics:contour.default]{graphics::contour.default()}} to more basic functions.}
 }
 \value{
 Returns invisibly the list of contours lines, with components
-       \code{levels}, \code{x}, \code{y}. See
-       \code{\link[grDevices]{contourLines}}.
+\code{levels}, \code{x}, \code{y}. See
+\code{\link[grDevices:contourLines]{grDevices::contourLines()}}.
 }
 \description{
-This is an enhancement to \code{\link[graphics]{contour}}, written as a
+This is an enhancement to \code{\link[graphics:contour]{graphics::contour()}}, written as a
 wrapper for that function.  It creates a contour plot, or adds contour lines
 to an existing plot, allowing the contours to be filled and returning the
 list of contour lines.
@@ -86,10 +86,10 @@ sapply(res, function(x) x[[1]])
 
 }
 \seealso{
-\code{\link[graphics]{contour}},
-\code{\link[grDevices]{contourLines}}
+\code{\link[graphics:contour]{graphics::contour()}},
+\code{\link[grDevices:contourLines]{grDevices::contourLines()}}
 
-\code{\link[lattice]{contourplot}} from package lattice.
+\code{\link[lattice:contourplot]{lattice::contourplot()}} from package lattice.
 }
 \author{
 Michael Friendly

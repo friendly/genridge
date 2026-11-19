@@ -24,12 +24,12 @@
 )
 }
 \arguments{
-\item{x}{A \code{pcaridge} object computed by \code{\link{pca.ridge}} or a \code{ridge} object.}
+\item{x}{A \code{pcaridge} object computed by \code{\link[=pca.ridge]{pca.ridge()}} or a \code{ridge} object.}
 
 \item{variables}{The dimensions or variables to be shown in the the plot.
 By default, the \emph{last} two dimensions, corresponding to the smallest
 singular values, are plotted for \code{class("pcaridge")} objects or the
- \emph{first} two variables for \code{class("ridge")} objects.}
+\emph{first} two variables for \code{class("ridge")} objects.}
 
 \item{labels}{A vector of character strings or expressions used as labels
 for the ellipses. Use \code{labels=NULL} to suppress these.}
@@ -62,7 +62,7 @@ labels.}
 \code{suffix=TRUE} the percent of variance accounted for by each dimension
 is added to the axis label.}
 
-\item{\dots}{Other arguments, passed to \code{\link{plot.pcaridge}}}
+\item{...}{Other arguments, passed to \code{\link[=plot.pcaridge]{plot.pcaridge()}}}
 }
 \value{
 None
@@ -83,7 +83,7 @@ spaces simultaneously -- the transformed PCA/SVD space of the original
 predictors, and vectors representing the predictors projected into this
 space.
 
-\code{biplot.ridge} is a similar extension of \code{\link{plot.ridge}},
+\code{biplot.ridge} is a similar extension of \code{\link[=plot.ridge]{plot.ridge()}},
 adding vectors showing the relation of the PCA/SVD dimensions to the plotted
 variables.
 
@@ -116,12 +116,12 @@ biplot(lridge, radius=0.5, asp=NA)
 }
 \references{
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
-Visualizing Bias \emph{and} Precision. 
-\emph{Journal of Computational and Graphical Statistics}, \bold{22}(1), 50-68,
+Visualizing Bias \emph{and} Precision.
+\emph{Journal of Computational and Graphical Statistics}, \strong{22}(1), 50-68,
 \doi{10.1080/10618600.2012.681237}.
 }
 \seealso{
-\code{\link{plot.ridge}}, \code{\link{pca.ridge}}
+\code{\link[=plot.ridge]{plot.ridge()}}, \code{\link[=pca.ridge]{pca.ridge()}}
 }
 \author{
 Michael Friendly, with contributions by Uwe Ligges

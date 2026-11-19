@@ -10,8 +10,8 @@
 #' @aliases ridge ridge.default ridge.formula coef.ridge print.ridge vcov.ridge
 #'
 #' @description  
-#' The function \code{ridge} fits linear models by ridge regression, returning
-#' an object of class \code{ridge} designed to be used with the plotting
+#' The function `ridge` fits linear models by ridge regression, returning
+#' an object of class `ridge` designed to be used with the plotting
 #' methods in this package. 
 #' 
 #' It is also designed to facilitate an alternative representation
@@ -25,15 +25,15 @@
 #' \deqn{\widehat{\mathbf{\beta}}^{\text{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  }
 #' 
 #' Ridge regression shrinkage can be parameterized in several ways.
-#' \itemize{
-#'    \item If a vector of \code{lambda} values is supplied, these are used directly in the ridge regression computations. 
-#'    \item Otherwise, if a vector \code{df} can be supplied the equivalent values for effective degrees of freedom corresponding to shrinkage,
-#'          going down from the number of predictors in the model.
-#' }
+#'
+#' * If a vector of `lambda` values is supplied, these are used directly in the ridge regression computations.
+#' * Otherwise, if a vector `df` can be supplied the equivalent values for effective degrees of freedom corresponding to shrinkage,
+#'   going down from the number of predictors in the model.
+#'
 #' 
-#' In either case, both \code{lambda} and
-#' \code{df} are returned in the \code{ridge} object, but the \code{rownames} of the
-#' coefficients are given in terms of \code{lambda}.
+#' In either case, both `lambda` and
+#' `df` are returned in the `ridge` object, but the `rownames` of the
+#' coefficients are given in terms of `lambda`.
 #' 
 #' @details
 #' 
@@ -42,68 +42,69 @@
 #' 
 #' The predictors are centered, but not (yet) scaled in this implementation. 
 #' 
-#' A number of the methods in the package assume that \code{lambda} is a vector of shrinkage constants
-#' increasing from \code{lambda[1] = 0}, or equivalently, a vector of \code{df} decreasing from \eqn{p}.
+#' A number of the methods in the package assume that `lambda` is a vector of shrinkage constants
+#' increasing from `lambda[1] = 0`, or equivalently, a vector of `df` decreasing from \eqn{p}.
 #' 
 #' 
 #' @param y A numeric vector containing the response variable. NAs not allowed.
 #' @param X A matrix of predictor variables. NA's not allowed. Should not
 #'        include a column of 1's for the intercept.
-#' @param formula For the \code{formula} method, a two-sided formula.
-#' @param data For the \code{formula} method, data frame within which to
+#' @param formula For the `formula` method, a two-sided formula.
+#' @param data For the `formula` method, data frame within which to
 #'        evaluate the formula.
 #' @param lambda A scalar or vector of ridge constants. A value of 0
 #'        corresponds to ordinary least squares.
 #' @param df A scalar or vector of effective degrees of freedom corresponding
-#'        to \code{lambda}
-#' @param svd If \code{TRUE} the SVD of the centered and scaled \code{X} matrix
-#'        is returned in the \code{ridge} object.
+#'        to `lambda`
+#' @param svd If `TRUE` the SVD of the centered and scaled `X` matrix
+#'        is returned in the `ridge` object.
 #' @param contrasts a list of contrasts to be used for some or all of factor terms in the formula. 
-#'        See the \code{contrasts.arg} of \code{\link[stats]{model.matrix.default}}.
-#' @param x,object An object of class \code{ridge}
-#' @param \dots Other arguments, passed down to methods
-#' @param digits For the \code{print} method, the number of digits to print.
+#'        See the `contrasts.arg` of [stats::model.matrix.default()].
+#' @param x,object An object of class `ridge`
+#' @param ... Other arguments, passed down to methods
+#' @param digits For the `print` method, the number of digits to print.
 #' 
 #' @return A list with the following components: 
-#' \item{lambda}{The vector of ridge constants} 
-#' \item{df}{The vector of effective degrees of freedom corresponding to \code{lambda}} 
-#' \item{coef}{The matrix of estimated ridge regression coefficients} 
-#' \item{scales}{scalings used on the X matrix} 
-#' \item{kHKB}{HKB estimate of the ridge constant}
-#' \item{kLW}{L-W estimate of the ridge constant} 
-#' \item{GCV}{vector of GCV values} 
-#' \item{kGCV}{value of \code{lambda} with the minimum GCV}
-#' \item{criteria}{Collects the criteria \code{kHKB}, \code{kLW}, and \code{kGCV} in a named vector}
+#'
+#' * `lambda`: The vector of ridge constants
+#' * `df`: The vector of effective degrees of freedom corresponding to `lambda`
+#' * `coef`: The matrix of estimated ridge regression coefficients
+#' * `scales`: scalings used on the X matrix
+#' * `kHKB`: HKB estimate of the ridge constant
+#' * `kLW`: L-W estimate of the ridge constant
+#' * `GCV`: vector of GCV values
+#' * `kGCV`: value of `lambda` with the minimum GCV
+#' * `criteria`: Collects the criteria `kHKB`, `kLW`, and `kGCV` in a named vector
 #' 
-#' If \code{svd==TRUE} (the default), the following are also included:
+#' If `svd==TRUE` (the default), the following are also included:
 #' 
-#' \item{svd.D}{Singular values of the \code{svd} of the scaled X matrix}
-#' \item{svd.U}{Left singular vectors of the \code{svd} of the scaled X matrix.
-#'       Rows correspond to observations and columns to dimensions.}
-#' \item{svd.V}{Right singular vectors of the \code{svd} of the scaled X
-#'       matrix. Rows correspond to variables and columns to dimensions.} %% ...
+#' * `svd.D`: Singular values of the `svd` of the scaled X matrix
+#' * `svd.U`: Left singular vectors of the `svd` of the scaled X matrix.
+#'   Rows correspond to observations and columns to dimensions.
+#' * `svd.V`: Right singular vectors of the `svd` of the scaled X
+#'   matrix. Rows correspond to variables and columns to dimensions.
 #' @author Michael Friendly
 #' @importFrom stats coef coefficients contrasts lm.fit model.matrix model.offset model.response uniroot vcov
 #' @export
-#' @seealso \code{\link[MASS]{lm.ridge}} for other implementations of ridge regression
+#' @seealso [MASS::lm.ridge()] for other implementations of ridge regression
 #' 
-#' \code{\link{traceplot}}, \code{\link{plot.ridge}},
-#' \code{\link{pairs.ridge}}, \code{\link{plot3d.ridge}}, for 1D, 2D, 3D plotting methods
+#' [traceplot()], [plot.ridge()],
+#' [pairs.ridge()], [plot3d.ridge()], for 1D, 2D, 3D plotting methods
 #' 
-#' \code{\link{pca.ridge}}, \code{\link{biplot.ridge}},
-#' \code{\link{biplot.pcaridge}} for views in PCA/SVD space
+#' [pca.ridge()], [biplot.ridge()],
+#' [biplot.pcaridge()] for views in PCA/SVD space
 #' 
-#' \code{\link{precision.ridge}} for measures of shrinkage and precision
+#' [precision.ridge()] for measures of shrinkage and precision
 #' 
 #' @references Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), "Ridge
-#' Regression: Some Simulations," \emph{Communications in Statistics}, 4,
+#' Regression: Some Simulations," *Communications in Statistics*, 4,
 #' 105-123.
 #' 
 #' Lawless, J.F., and Wang, P. (1976), "A Simulation Study of Ridge and Other
-#' Regression Estimators," \emph{Communications in Statistics}, 5, 307-323.
+#' Regression Estimators," *Communications in Statistics*, 5, 307-323.
 #' 
 #' Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. 
-#' \emph{Technometrics}, \bold{21}:215–223. \doi{10.2307/1268518}
+#' *Technometrics*, **21**:215–223. \doi{10.2307/1268518}
 #' @keywords models regression
 #' @examples
 #' 
@@ -301,7 +302,7 @@ ridge.default <-
 
 
 #' @description
-#' \code{coef} extracts the estimated coefficients for each value of the shrinkage factor
+#' `coef` extracts the estimated coefficients for each value of the shrinkage factor
 #' 
 #' @rdname ridge
 #' @exportS3Method coef ridge
@@ -323,7 +324,7 @@ function(x, digits = max(5, getOption("digits") - 5),...) {
 }
 
 #' @description
-#' \code{vcov} extracts the estimated \eqn{p \times p} covariance matrices of the coefficients for each value of the shrinkage factor.
+#' `vcov` extracts the estimated \eqn{p \times p} covariance matrices of the coefficients for each value of the shrinkage factor.
 #' @rdname ridge
 #' @exportS3Method vcov ridge
 vcov.ridge <- function(object,  ...) {
@@ -331,7 +332,7 @@ vcov.ridge <- function(object,  ...) {
 }
 
 #' @description
-#' \code{best} extracts the optimal shrinkage values according to several criteria: 
+#' `best` extracts the optimal shrinkage values according to several criteria: 
 #' HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV: Golub et al. (1975)
 #' @rdname ridge
 best <- function(object, ...) UseMethod("best")

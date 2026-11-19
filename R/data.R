@@ -1,35 +1,35 @@
 
 #' Acetylene Data
 #' 
-#' The data consist of measures of \code{yield} of a chemical manufacturing
+#' The data consist of measures of `yield` of a chemical manufacturing
 #' process for acetylene in relation to numeric parameters.
 #' 
 #' Marquardt and Snee (1975) used these data to illustrate ridge regression in
 #' a model containing quadratic and interaction terms, particularly the need to
 #' center and standardize variables appearing in high-order terms.
 #' 
-#' Typical models for these data include the interaction of \code{temp:ratio},
-#' and a squared term in \code{temp}
+#' Typical models for these data include the interaction of `temp:ratio`,
+#' and a squared term in `temp`
 #' 
 #' @name Acetylene
 #' @docType data
 #' @format A data frame with 16 observations on the following 4 variables.
-#' \describe{ 
-#'  \item{\code{yield}}{conversion percentage yield of acetylene}
-#'  \item{\code{temp}}{reactor temperature (celsius)} 
-#'  \item{\code{ratio}}{H2 to N-heptone ratio} 
-#'  \item{\code{time}}{contact time (sec)} 
-#' }
+#'
+#' * `yield`: conversion percentage yield of acetylene
+#' * `temp`: reactor temperature (celsius)
+#' * `ratio`: H2 to N-heptone ratio
+#' * `time`: contact time (sec)
+#'
 #' @references 
 #' Marquardt, D.W., and Snee, R.D. (1975), "Ridge Regression in
-#' Practice," \emph{The American Statistician}, \bold{29}, 3-20.
+#' Practice," *The American Statistician*, **29**, 3-20.
 #' 
 #' Marquardt, D.W. (1980), "A Critique of Some Ridge Regression Methods:
-#' Comment," \emph{Journal of the American Statistical Association}, Vol. 75,
+#' Comment," *Journal of the American Statistical Association*, Vol. 75,
 #' No. 369 (Mar., 1980), pp. 87-91
 #' 
-#' @source SAS documentation example for \code{PROC REG}, \emph{Ridge
-#' Regression for Acetylene Data}.
+#' @source SAS documentation example for `PROC REG`, *Ridge
+#' Regression for Acetylene Data*.
 #' @keywords datasets
 #' @examples
 #' 
@@ -59,7 +59,7 @@ NULL
 #' Detroit Homicide Data for 1961-1973
 #' 
 #' @description 
-#' The data set \code{Detroit} was used extensively in the book by Miller
+#' The data set `Detroit` was used extensively in the book by Miller
 #' (2002) on subset regression. The data are unusual in that a subset of three
 #' predictors can be found which gives a very much better fit to the data than
 #' the subsets found from the Efroymson stepwise algorithm, or from forward
@@ -76,44 +76,44 @@ NULL
 #' complete dataset first appeared in Gunst and Mason (1980, Appendix A).
 #' Miller (2002) discusses this dataset throughout his book, but doesn't state
 #' clearly which variables he used as predictors and which is the dependent
-#' variable.  (\code{Homicide} was the dependent variable, and the predictors
-#' were \code{Police} \dots{} \code{WkEarn}.)  The data were obtained from
+#' variable.  (`Homicide` was the dependent variable, and the predictors
+#' were `Police` ... `WkEarn`.)  The data were obtained from
 #' StatLib.
 #' 
 #' A similar version of this data set, with different variable names appears in
-#' the \code{bestglm} package.
+#' the `bestglm` package.
 #' 
 #' @name Detroit
 #' @docType data
 #' @format A data frame with 13 observations on the following 14 variables.
-#' \describe{ 
-#'  \item{\code{Police}}{Full-time police per 100,000 population}
-#'  \item{\code{Unemp}}{Percent unemployed in the population}
-#'  \item{\code{MfgWrk}}{Number of manufacturing workers in thousands}
-#'  \item{\code{GunLic}}{Number of handgun licences per 100,000 population}
-#'  \item{\code{GunReg}}{Number of handgun registrations per 100,000 population} 
-#'  \item{\code{HClear}}{Percent of homicides cleared by arrests}
-#'  \item{\code{WhMale}}{Number of white males in the population}
-#'  \item{\code{NmfgWrk}}{Number of non-manufacturing workers in thousands}
-#'  \item{\code{GovWrk}}{Number of government workers in thousands}
-#'  \item{\code{HrEarn}}{Average hourly earnings} 
-#'  \item{\code{WkEarn}}{Average weekly earnings} 
-#'  \item{\code{Accident}}{Death rate in accidents per 100,000 population} 
-#'  \item{\code{Assaults}}{Number of assaults per 100,000 population} 
-#'  \item{\code{Homicide}}{Number of homicides per 100,000 of population} 
-#' }
+#'
+#' * `Police`: Full-time police per 100,000 population
+#' * `Unemp`: Percent unemployed in the population
+#' * `MfgWrk`: Number of manufacturing workers in thousands
+#' * `GunLic`: Number of handgun licences per 100,000 population
+#' * `GunReg`: Number of handgun registrations per 100,000 population
+#' * `HClear`: Percent of homicides cleared by arrests
+#' * `WhMale`: Number of white males in the population
+#' * `NmfgWrk`: Number of non-manufacturing workers in thousands
+#' * `GovWrk`: Number of government workers in thousands
+#' * `HrEarn`: Average hourly earnings
+#' * `WkEarn`: Average weekly earnings
+#' * `Accident`: Death rate in accidents per 100,000 population
+#' * `Assaults`: Number of assaults per 100,000 population
+#' * `Homicide`: Number of homicides per 100,000 of population
+#'
 #' 
 #' @references 
 #' Fisher, J.C. (1976). Homicide in Detroit: The Role of Firearms.
-#' \emph{Criminology}, \bold{14}, 387--400.
+#' *Criminology*, **14**, 387--400.
 #' 
-#' Gunst, R.F. and Mason, R.L. (1980). \emph{Regression analysis and its
-#' application: A data-oriented approach}.  Marcel Dekker.
+#' Gunst, R.F. and Mason, R.L. (1980). *Regression analysis and its
+#' application: A data-oriented approach*.  Marcel Dekker.
 #' 
-#' Miller, A. J. (2002). \emph{Subset Selection in Regression}. 2nd Ed. Chapman
+#' Miller, A. J. (2002). *Subset Selection in Regression*. 2nd Ed. Chapman
 #' & Hall/CRC. Boca Raton.
 #' 
-#' @source \url{https://lib.stat.cmu.edu/datasets/detroit}
+#' @source <https://lib.stat.cmu.edu/datasets/detroit>
 #' @keywords datasets
 #' @examples
 #' 
@@ -173,25 +173,25 @@ NULL
 #' @name Manpower
 #' @docType data
 #' @format A data frame with 17 observations on the following 6 variables.
-#' \describe{ 
-#'  \item{\code{Hours}}{monthly man hours (response variable)}
-#'  \item{\code{Load}}{average daily patient load} 
-#'  \item{\code{Xray}}{monthly X-ray exposures} 
-#'  \item{\code{BedDays}}{monthly occupied bed days}
-#'  \item{\code{AreaPop}}{eligible population in the area in thousands}
-#'  \item{\code{Stay}}{average length of patient's stay in days} 
-#' }
-#' @seealso \code{\link[bestglm]{manpower}} for the same data, and other
+#'
+#' * `Hours`: monthly man hours (response variable)
+#' * `Load`: average daily patient load
+#' * `Xray`: monthly X-ray exposures
+#' * `BedDays`: monthly occupied bed days
+#' * `AreaPop`: eligible population in the area in thousands
+#' * `Stay`: average length of patient's stay in days
+#'
+#' @seealso [bestglm::manpower] for the same data, and other
 #' analyses
 #' 
 #' @references 
 #' Donald R. Jensen and Donald E. Ramirez (2012). Variations on
-#' Ridge Traces in Regression, \emph{Communications in Statistics - Simulation
-#' and Computation}, 41 (2), 265-278.
+#' Ridge Traces in Regression, *Communications in Statistics - Simulation
+#' and Computation*, 41 (2), 265-278.
 #' 
 #' @source 
-#' Raymond H. Myers (1990). \emph{Classical and Modern Regression with
-#' Applications}, 2nd ed., PWS-Kent, pp. 130-133.
+#' Raymond H. Myers (1990). *Classical and Modern Regression with
+#' Applications*, 2nd ed., PWS-Kent, pp. 130-133.
 #' 
 #' @keywords datasets
 #' @examples
@@ -244,18 +244,18 @@ NULL
 #' @name prostate
 #' @docType data
 #' @format A data frame with 97 observations on the following 10 variables.
-#' \describe{ 
-#'  \item{lcavol}{log cancer volume} 
-#'  \item{lweight}{log prostate weight} 
-#'  \item{age}{in years} 
-#'  \item{lbph}{log of the amount of benign prostatic hyperplasia} 
-#'  \item{svi}{seminal vesicle invasion} 
-#'  \item{lcp}{log of capsular penetration} 
-#'  \item{gleason}{a numeric vector}
-#'  \item{pgg45}{percent of Gleason score 4 or 5} 
-#'  \item{lpsa}{response}
-#'  \item{train}{a logical vector} 
-#' }
+#'
+#' * `lcavol`: log cancer volume
+#' * `lweight`: log prostate weight
+#' * `age`: in years
+#' * `lbph`: log of the amount of benign prostatic hyperplasia
+#' * `svi`: seminal vesicle invasion
+#' * `lcp`: log of capsular penetration
+#' * `gleason`: a numeric vector
+#' * `pgg45`: percent of Gleason score 4 or 5
+#' * `lpsa`: response
+#' * `train`: a logical vector
+#'
 #' @note There was an error in this dataset in earlier versions of the package,
 #' as indicated in a footnote on page 3 of the second edition of the book. As
 #' of version 2012.04-0 this was corrected.
@@ -264,7 +264,7 @@ NULL
 #' Stamey, T., Kabalin, J., McNeal, J., Johnstone, I., Freiha, F.,
 #' Redwine, E. and Yang, N (1989) Prostate specific antigen in the diagnosis
 #' and treatment of adenocarcinoma of the prostate II. Radical prostatectomy
-#' treated patients, \emph{Journal of Urology}, \bold{16}: 1076--1083.
+#' treated patients, *Journal of Urology*, **16**: 1076--1083.
 #' @keywords datasets
 #' @examples
 #' 
@@ -303,39 +303,39 @@ NULL
 #' These data consist of observations on 442 patients, with the response of interest being 
 #' a quantitative measure of disease progression one year after baseline.
 #'
-#' There are ten baseline variables: age, sex, body-mass index (\code{bmi}), average blood pressure (\code{map})
+#' There are ten baseline variables: age, sex, body-mass index (`bmi`), average blood pressure (`map`)
 #' and six blood serum measurements.
 #'
 #' @usage data("diab")
 #' @format
 #'  A data frame with 442 observations on the following 11 variables.
-#'  \describe{
-#'    \item{\code{prog}}{disease progression, a numeric vector}
-#'    \item{\code{age}}{age, a numeric vector}
-#'    \item{\code{sex}}{integer, a numeric vector}
-#'    \item{\code{bmi}}{body mass index, a numeric vector}
-#'    \item{\code{map}}{mean arterial blood pressure, a numeric vector}
-#'    \item{\code{tc}}{blood serum TC, a numeric vector}
-#'    \item{\code{ldl}}{blood serum low-density lipoprotein ("bad cholersterol"), a numeric vector}
-#'    \item{\code{hdl}}{blood serum high-density lipoprotein ("good cholersterol"), a numeric vector}
-#'    \item{\code{tch}}{blood serum TCH, a numeric vector}
-#'    \item{\code{ltg}}{blood serum lamotrigine, a numeric vector}
-#'    \item{\code{glu}}{blood serum glucose, a numeric vector}
-#'  }
+#'
+#' * `prog`: disease progression, a numeric vector
+#' * `age`: age, a numeric vector
+#' * `sex`: integer, a numeric vector
+#' * `bmi`: body mass index, a numeric vector
+#' * `map`: mean arterial blood pressure, a numeric vector
+#' * `tc`: blood serum TC, a numeric vector
+#' * `ldl`: blood serum low-density lipoprotein ("bad cholesterol"), a numeric vector
+#' * `hdl`: blood serum high-density lipoprotein ("good cholesterol"), a numeric vector
+#' * `tch`: blood serum TCH, a numeric vector
+#' * `ltg`: blood serum lamotrigine, a numeric vector
+#' * `glu`: blood serum glucose, a numeric vector
+#'
 #'
 #' @details 
 #' Efron & Hastie describe their analysis using the centered predictor variables standardized to unit L2 norm.
-#' \code{\link{ridge}} does not (yet) provide this scaling.
+#' [ridge()] does not (yet) provide this scaling.
 #' @source 
-#' The dataset was taken from the web site for Efron & Hastie (2021), \emph{Computer Age Statistical Inference},
-#' \url{https://hastie.su.domains/CASI_files/DATA/diabetes.csv}.
+#' The dataset was taken from the web site for Efron & Hastie (2021), *Computer Age Statistical Inference*,
+#' <https://hastie.su.domains/CASI_files/DATA/diabetes.csv>.
 #' @references
 #' Efron, B., Hastie, T., Johnstone, I., & Tibshirani, R. (2004). Least Angle Regression. 
-#' \emph{The Annals of Statistics}, \bold{32}(2), 407-499. 
-#' \doi{https://doi.org/10.1214/009053604000000067}
+#' *The Annals of Statistics*, **32**(2), 407-499. 
+#' \doi{10.1214/009053604000000067}
 #' 
-#' Efron, B., & Hastie, T. (2021). \emph{Computer Age Statistical Inference, Student Edition: Algorithms, Evidence, and Data Science},
-#' Cambridge University Press. \doi{https://doi.org/10.1017/9781108914062}
+#' Efron, B., & Hastie, T. (2021). *Computer Age Statistical Inference, Student Edition: Algorithms, Evidence, and Data Science*,
+#' Cambridge University Press. \doi{10.1017/9781108914062}
 #'
 #' @concept ridge
 #' @keywords datasets

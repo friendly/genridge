@@ -2,21 +2,21 @@
 
 #' Plot Shrinkage vs. Variance for Ridge Precision
 #' 
-#' This function uses the results of \code{\link{precision}} to
+#' This function uses the results of [precision()] to
 #' plot a measure of shrinkage of the coefficients in ridge regression against a selected measure
 #' of their estimated sampling variance, so as to provide a direct visualization of the tradeoff
 #' between bias and precision.
 #'
-#' @param x A data frame of class \code{"precision"} resulting from \code{\link{precision}} called
-#'        on a \code{"ridge"} object. Named \code{x} only to conform with the \code{\link{plot}} generic.
+#' @param x A data frame of class `"precision"` resulting from [precision()] called
+#'        on a `"ridge"` object. Named `x` only to conform with the [plot()] generic.
 #' @param xvar    The character name of the column to be used for the horizontal axis. Typically, this is the normalized sum 
-#'        of squares of the coefficients (\code{"norm.beta"}) used as a measure of shrinkage / bias.
+#'        of squares of the coefficients (`"norm.beta"`) used as a measure of shrinkage / bias.
 #' @param yvar    The character name of the column to be used for the vertical axis. One of 
-#'        \code{c("det", "trace", "max.eig")}. See \code{\link{precision}} for definitions of these measures.
-#' @param labels  The character name of the column to be used for point labels. One of \code{c("lambda", "df")}.
+#'        `c("det", "trace", "max.eig")`. See [precision()] for definitions of these measures.
+#' @param labels  The character name of the column to be used for point labels. One of `c("lambda", "df")`.
 #' @param label.cex Character size for point labels.
 #' @param label.prefix Character or expression prefix for the point labels.
-#' @param criteria The vector of optimal shrinkage criteria from the \code{\link{ridge}} call to be added
+#' @param criteria The vector of optimal shrinkage criteria from the [ridge()] call to be added
 #'        as points in the plot. 
 #' @param pch  Plotting character for points
 #' @param cex  Character size for points
@@ -24,13 +24,13 @@
 #' @param main Plot title
 #' @param xlab Label for horizontal axis
 #' @param ylab Label for vertical axis
-#' @param ...  Other arguments passed to \code{\link{plot}}.
+#' @param ...  Other arguments passed to [plot()].
 #'
 #' @return     Returns nothing. Used for the side effect of plotting.
 #' @author Michael Friendly
 #' @seealso
-#'   \code{\link{ridge}} for details on ridge regression as implemented here.
-#'   \code{\link{precision}} for definitions of the measures
+#'   [ridge()] for details on ridge regression as implemented here.
+#'   [precision()] for definitions of the measures
 #'
 #' @importFrom colorspace qualitative_hcl
 #' @importFrom splines bs

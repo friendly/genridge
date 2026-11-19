@@ -23,7 +23,7 @@
 )
 }
 \arguments{
-\item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
+\item{x}{A \code{ridge} object, as fit by \code{\link[=ridge]{ridge()}}}
 
 \item{variables}{Predictors in the model to be displayed in the plot: an
 integer or character vector, giving the indices or names of the variables.}
@@ -57,7 +57,7 @@ Recycled as necessary.}
 \item{fill.alpha}{Numeric vector: alpha transparency value(s) for filled
 ellipsoids. Recycled as necessary.}
 
-\item{\dots}{Other arguments passed down}
+\item{...}{Other arguments passed down}
 }
 \value{
 None. Used for its side effect of plotting.
@@ -87,13 +87,13 @@ pairs(pridge)
 \references{
 Friendly, M. (2013). The Generalized Ridge Trace Plot:
 Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-Graphical Statistics}, \bold{22}(1), 50-68,
+Graphical Statistics}, \strong{22}(1), 50-68,
 \doi{10.1080/10618600.2012.681237}.
 }
 \seealso{
-\code{\link{ridge}} for details on ridge regression as implemented here
+\code{\link[=ridge]{ridge()}} for details on ridge regression as implemented here
 
-\code{\link{plot.ridge}}, \code{\link{traceplot}} for other plotting methods
+\code{\link[=plot.ridge]{plot.ridge()}}, \code{\link[=traceplot]{traceplot()}} for other plotting methods
 }
 \author{
 Michael Friendly

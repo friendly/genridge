@@ -6,13 +6,13 @@
 \title{Hospital manpower data}
 \format{
 A data frame with 17 observations on the following 6 variables.
-\describe{ 
- \item{\code{Hours}}{monthly man hours (response variable)}
- \item{\code{Load}}{average daily patient load} 
- \item{\code{Xray}}{monthly X-ray exposures} 
- \item{\code{BedDays}}{monthly occupied bed days}
- \item{\code{AreaPop}}{eligible population in the area in thousands}
- \item{\code{Stay}}{average length of patient's stay in days} 
+\itemize{
+\item \code{Hours}: monthly man hours (response variable)
+\item \code{Load}: average daily patient load
+\item \code{Xray}: monthly X-ray exposures
+\item \code{BedDays}: monthly occupied bed days
+\item \code{AreaPop}: eligible population in the area in thousands
+\item \code{Stay}: average length of patient's stay in days
 }
 }
 \source{
@@ -70,7 +70,7 @@ Ridge Traces in Regression, \emph{Communications in Statistics - Simulation
 and Computation}, 41 (2), 265-278.
 }
 \seealso{
-\code{\link[bestglm]{manpower}} for the same data, and other
+\link[bestglm:manpower]{bestglm::manpower} for the same data, and other
 analyses
 }
 \keyword{datasets}

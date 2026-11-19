@@ -44,7 +44,7 @@ trans.colors("red", alpha=seq(0,1, length=5), names=paste("red", 1:5, sep=""))
 
 }
 \seealso{
-\code{\link[grDevices]{col2rgb}}, \code{\link[grDevices]{rgb}},
+\code{\link[grDevices:col2rgb]{grDevices::col2rgb()}}, \code{\link[grDevices:rgb]{grDevices::rgb()}},
 }
 \author{
 Michael Friendly

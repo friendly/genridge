@@ -25,11 +25,11 @@
 )
 }
 \arguments{
-\item{mod}{A \code{"ridge"} object computed by \code{\link{ridge}}}
+\item{mod}{A \code{"ridge"} object computed by \code{\link[=ridge]{ridge()}}}
 
-\item{\dots}{Other arguments passed to methods}
+\item{...}{Other arguments passed to methods}
 
-\item{x}{A \code{ridge} object, as fit by \code{\link{ridge}}}
+\item{x}{A \code{ridge} object, as fit by \code{\link[=ridge]{ridge()}}}
 
 \item{digits}{Number of digits to display in the \code{print} method}
 
@@ -51,13 +51,15 @@ curves.  Recycled as necessary.}
 }
 \value{
 \code{vif} returns a \code{"vif.ridge"} object, which is a list of four components
-  \item{vif}{a data frame of the same size and
-        shape as \code{coef{mod}}. The columns correspond to the predictors in the
-        model and the rows correspond to the values of \code{lambda} in ridge
-        estimation.}
-  \item{lambda}{the vector of ridge constants from the original call to \code{\link{ridge}} }
-  \item{df}{the vector of effective degrees of freedom corresponding to \code{lambda}}
-  \item{criteria}{the optimal values of \code{lambda}}
+\itemize{
+\item \code{vif}: a data frame of the same size and
+shape as \code{coef(mod)}. The columns correspond to the predictors in the
+model and the rows correspond to the values of \code{lambda} in ridge
+estimation.
+\item \code{lambda}: the vector of ridge constants from the original call to \code{\link[=ridge]{ridge()}}
+\item \code{df}: the vector of effective degrees of freedom corresponding to \code{lambda}
+\item \code{criteria}: the optimal values of \code{lambda}
+}
 }
 \description{
 The function \code{vif.ridge} calculates variance inflation factors for the
@@ -68,7 +70,7 @@ Variance inflation factors are calculated using the simplified formulation
 in Fox & Monette (1992).
 
 The \code{plot.vif.ridge} method plots variance inflation factors for a \code{"vif.ridge"} object
-in a similar style to what is provided by \code{\link{traceplot}}. That is, it plots the VIF for each
+in a similar style to what is provided by \code{\link[=traceplot]{traceplot()}}. That is, it plots the VIF for each
 coefficient in the model against either the ridge \eqn{\lambda} tuning constant or it's equivalent
 effective degrees of freedom.
 }
@@ -115,10 +117,10 @@ plot(vridge, X = "df", Y="sqrt",
 }
 \references{
 Fox, J. and Monette, G. (1992). Generalized collinearity
-diagnostics. \emph{JASA}, \bold{87}, 178-183, \doi{10.1080/01621459.1992.10475190}.
+diagnostics. \emph{JASA}, \strong{87}, 178-183, \doi{10.1080/01621459.1992.10475190}.
 }
 \seealso{
-\code{\link[car]{vif}}, \code{\link{precision}}
+\code{\link[car:vif]{car::vif()}}, \code{\link[=precision]{precision()}}
 }
 \author{
 Michael Friendly

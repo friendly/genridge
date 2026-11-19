@@ -5,7 +5,7 @@
 #' @aliases pca pca.ridge
 #' 
 #' @description  
-#' The function \code{pca.ridge} transforms a \code{ridge} object from
+#' The function `pca.ridge` transforms a `ridge` object from
 #' parameter space, where the estimated coefficients are \eqn{\beta_k} with
 #' covariance matrices \eqn{\Sigma_k}, to the principal component space defined
 #' by the right singular vectors, \eqn{V}, of the singular value decomposition
@@ -19,18 +19,18 @@
 #' effects of collinearity typically reside --- in the smallest PCA dimensions.
 #' 
 #' 
-#' @param x A \code{ridge} object, as fit by \code{\link{ridge}}
-#' @param \dots Other arguments passed down. Not presently used in this
+#' @param x A `ridge` object, as fit by [ridge()]
+#' @param ... Other arguments passed down. Not presently used in this
 #'        implementation.
-#' @return An object of class \code{c("ridge", "pcaridge")}, with the same
-#'        components as the original \code{ridge} object. 
+#' @return An object of class `c("ridge", "pcaridge")`, with the same
+#'        components as the original `ridge` object. 
 #' 
 #' @author Michael Friendly
-#' @seealso \code{\link{ridge}}
+#' @seealso [ridge()]
 #' @references 
 #' Friendly, M. (2013). The Generalized Ridge Trace Plot:
-#' Visualizing Bias \emph{and} Precision. \emph{Journal of Computational and
-#' Graphical Statistics}, \bold{22}(1), 50-68,
+#' Visualizing Bias *and* Precision. *Journal of Computational and
+#' Graphical Statistics*, **22**(1), 50-68,
 #' \doi{10.1080/10618600.2012.681237}.
 #' @export 
 #' @keywords dplot multivariate

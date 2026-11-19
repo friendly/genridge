@@ -2,31 +2,32 @@
 #' Variance Inflation Factors for Ridge Regression
 #'
 #' @description
-#' The function \code{vif.ridge} calculates variance inflation factors for the
+#' The function `vif.ridge` calculates variance inflation factors for the
 #' predictors in a set of ridge regression models indexed by the
 #' tuning/shrinkage factor, returning one row for each value of the \eqn{\lambda} parameter.
 #' 
 #' Variance inflation factors are calculated using the simplified formulation
 #' in Fox & Monette (1992).
 #' 
-#' @param mod A \code{"ridge"} object computed by \code{\link{ridge}}
-#' @param \dots Other arguments passed to methods
-#' @return \code{vif} returns a \code{"vif.ridge"} object, which is a list of four components
-#'   \item{vif}{a data frame of the same size and
-#'         shape as \code{coef{mod}}. The columns correspond to the predictors in the
-#'         model and the rows correspond to the values of \code{lambda} in ridge
-#'         estimation.}
-#'   \item{lambda}{the vector of ridge constants from the original call to \code{\link{ridge}} }
-#'   \item{df}{the vector of effective degrees of freedom corresponding to \code{lambda}}
-#'   \item{criteria}{the optimal values of \code{lambda}}
+#' @param mod A `"ridge"` object computed by [ridge()]
+#' @param ... Other arguments passed to methods
+#' @return `vif` returns a `"vif.ridge"` object, which is a list of four components
+#'
+#' * `vif`: a data frame of the same size and
+#'   shape as `coef(mod)`. The columns correspond to the predictors in the
+#'   model and the rows correspond to the values of `lambda` in ridge
+#'   estimation.
+#' * `lambda`: the vector of ridge constants from the original call to [ridge()]
+#' * `df`: the vector of effective degrees of freedom corresponding to `lambda`
+#' * `criteria`: the optimal values of `lambda`
 #' 
 #' @author Michael Friendly
 #' @export
 #' @importFrom car vif
 #' @importFrom stats coef cov2cor vcov
-#' @seealso \code{\link[car]{vif}}, \code{\link{precision}}
+#' @seealso [car::vif()], [precision()]
 #' @references Fox, J. and Monette, G. (1992). Generalized collinearity
-#' diagnostics. \emph{JASA}, \bold{87}, 178-183, \doi{10.1080/01621459.1992.10475190}.
+#' diagnostics. *JASA*, **87**, 178-183, \doi{10.1080/01621459.1992.10475190}.
 #' @keywords models regression
 #' @examples
 #' 
@@ -73,7 +74,7 @@ vif.ridge <- function(mod, ...) {
 	res
 }
 
-#' @param digits Number of digits to display in the \code{print} method
+#' @param digits Number of digits to display in the `print` method
 #' @rdname vif.ridge
 #' @exportS3Method print vif.ridge
 print.vif.ridge <-
@@ -90,13 +91,13 @@ print.vif.ridge <-
 
 #' @description
 #' 
-#' The \code{plot.vif.ridge} method plots variance inflation factors for a \code{"vif.ridge"} object
-#' in a similar style to what is provided by \code{\link{traceplot}}. That is, it plots the VIF for each
+#' The `plot.vif.ridge` method plots variance inflation factors for a `"vif.ridge"` object
+#' in a similar style to what is provided by [traceplot()]. That is, it plots the VIF for each
 #' coefficient in the model against either the ridge \eqn{\lambda} tuning constant or it's equivalent
 #' effective degrees of freedom.
 #' 
 #' @inheritParams traceplot
-#' @param Y What to plot as the vertical coordinate, one of \code{c("vif", "sqrt")}, where the latter plots \eqn{\sqrt{VIF}}.
+#' @param Y What to plot as the vertical coordinate, one of `c("vif", "sqrt")`, where the latter plots \eqn{\sqrt{VIF}}.
 #' @rdname vif.ridge
 #' @exportS3Method plot vif.ridge
 #' @examples

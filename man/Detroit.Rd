@@ -6,21 +6,21 @@
 \title{Detroit Homicide Data for 1961-1973}
 \format{
 A data frame with 13 observations on the following 14 variables.
-\describe{ 
- \item{\code{Police}}{Full-time police per 100,000 population}
- \item{\code{Unemp}}{Percent unemployed in the population}
- \item{\code{MfgWrk}}{Number of manufacturing workers in thousands}
- \item{\code{GunLic}}{Number of handgun licences per 100,000 population}
- \item{\code{GunReg}}{Number of handgun registrations per 100,000 population} 
- \item{\code{HClear}}{Percent of homicides cleared by arrests}
- \item{\code{WhMale}}{Number of white males in the population}
- \item{\code{NmfgWrk}}{Number of non-manufacturing workers in thousands}
- \item{\code{GovWrk}}{Number of government workers in thousands}
- \item{\code{HrEarn}}{Average hourly earnings} 
- \item{\code{WkEarn}}{Average weekly earnings} 
- \item{\code{Accident}}{Death rate in accidents per 100,000 population} 
- \item{\code{Assaults}}{Number of assaults per 100,000 population} 
- \item{\code{Homicide}}{Number of homicides per 100,000 of population} 
+\itemize{
+\item \code{Police}: Full-time police per 100,000 population
+\item \code{Unemp}: Percent unemployed in the population
+\item \code{MfgWrk}: Number of manufacturing workers in thousands
+\item \code{GunLic}: Number of handgun licences per 100,000 population
+\item \code{GunReg}: Number of handgun registrations per 100,000 population
+\item \code{HClear}: Percent of homicides cleared by arrests
+\item \code{WhMale}: Number of white males in the population
+\item \code{NmfgWrk}: Number of non-manufacturing workers in thousands
+\item \code{GovWrk}: Number of government workers in thousands
+\item \code{HrEarn}: Average hourly earnings
+\item \code{WkEarn}: Average weekly earnings
+\item \code{Accident}: Death rate in accidents per 100,000 population
+\item \code{Assaults}: Number of assaults per 100,000 population
+\item \code{Homicide}: Number of homicides per 100,000 of population
 }
 }
 \source{
@@ -45,7 +45,7 @@ complete dataset first appeared in Gunst and Mason (1980, Appendix A).
 Miller (2002) discusses this dataset throughout his book, but doesn't state
 clearly which variables he used as predictors and which is the dependent
 variable.  (\code{Homicide} was the dependent variable, and the predictors
-were \code{Police} \dots{} \code{WkEarn}.)  The data were obtained from
+were \code{Police} ... \code{WkEarn}.)  The data were obtained from
 StatLib.
 
 A similar version of this data set, with different variable names appears in
@@ -91,7 +91,7 @@ biplot(dridge, radius=0.5, labels=dridge$df)
 }
 \references{
 Fisher, J.C. (1976). Homicide in Detroit: The Role of Firearms.
-\emph{Criminology}, \bold{14}, 387--400.
+\emph{Criminology}, \strong{14}, 387--400.
 
 Gunst, R.F. and Mason, R.L. (1980). \emph{Regression analysis and its
 application: A data-oriented approach}.  Marcel Dekker.
