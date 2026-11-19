@@ -176,8 +176,10 @@ Real multivariate shrinkage, which borrows strength across responses:
   `Brown-Zidek-1980` (*Annals of Statistics*, 8(1), 64–74). This is the most natural "next
   step" for genridge.
 - **Curds and whey**: Breiman & Friedman (1997), "Predicting multivariate responses in multiple
-  linear regression", *JRSS B*, 59(1), 3–54. *(Not in statistics.bib; verify the citation
-  before using.)*
+  linear regression", *JRSS B*, 59(1), 3–54. *(Citation verified 2026-11-19, but not in
+  statistics.bib.)* Their eq. (6.3) is exactly the shared-λ estimator
+  $(\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{Y}$, so it is the
+  natural reference for the method itself.
 - **Reduced-rank ridge regression**: Mukherjee & Zhu (2011), *Statistical Analysis and Data
   Mining*, 4(6). *(Not in statistics.bib; verify.)*
 - **glmnet** with `family = "mgaussian"` (a group-lasso / elastic-net penalty across
@@ -201,6 +203,41 @@ The example data need several responses and *collinear* predictors.
   - simulated data with controlled collinearity, for the vignette.
 
 Open: is there a natural dataset in heplots, candisc or mvinfluence with high VIFs?
+
+**Search results (2026-11-19).** A web search plus checks in R found these. The full report,
+which will be lost if the temp folder is cleared, is
+`scratchpad/mlm-dataset-candidates.md`. The key numbers for `schooldata` were re-checked with
+genridge's `ridge()`.
+
+1. **`heplots::schooldata` (recommended main example).**
+   - n = 70.
+   - Responses: `reading`, `mathematics`, `selfesteem`, correlated 0.94–0.99.
+   - Predictors: `education`, `occupation`, `visit`, `counseling`, `teacher`.
+   - **VIFs: 7.4, 85.9, 61.6, 53.9, 1.6.** `occupation`, `visit` and `counseling` correlate
+     at r = 0.98–0.99.
+   - Clear wrong-sign OLS coefficients that ridge corrects:
+     - `visit` is −5.3 for reading and −9.9 for math at λ = 0, and positive by λ = 5;
+     - `occupation` is inflated (≈ 20–25) and shrinks to ≈ 4–7.
+   - heplots already uses it for MLM and HE-plot examples, so it suits ridge HE plots
+     (§5.4).
+   - Caveats:
+     - reading and math are almost collinear (r = 0.99), so ellipses in that plane will be
+       thin;
+     - several high-leverage or outlying cases (`robmlm()` downweights 12);
+     - the variables are indices that are hard to interpret.
+2. **`robustbase::pulpfiber`.**
+   - n = 62; 4 responses (paper properties), 4 predictors (fibre properties).
+   - VIFs up to 6.2; the responses correlate at 0.87–0.99.
+   - Wrong-sign OLS coefficients for X1 and X3 that ridge corrects.
+   - A milder second example.
+3. **`mtcars`.**
+   - Responses `mpg` and `qsec`; predictors `cyl`, `disp`, `hp`, `wt`, `drat`, `carb`.
+   - Max VIF is 17.8.
+   - Fine for short `@examples` with no extra dependency, though `qsec` as a response is a
+     stretch.
+4. Rejected, mostly because collinearity was too mild or the responses weren't a natural MLM:
+   `Rohwer`, `Sake`, `NLSY`, `Hernior`, linnerud, `pls::oliveoil`, `rrr::tobacco` (Izenman's
+   example, VIF only 4.1), `CASchools`, `Credit` and others.
 
 ## 8. Suggested implementation steps
 
