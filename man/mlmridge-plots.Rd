@@ -14,7 +14,7 @@
 \usage{
 \method{traceplot}{mlmridge}(x, response = NULL, main, layout = TRUE, ...)
 
-\method{plot}{mlmridge}(x, response = 1, main, ...)
+\method{plot}{mlmridge}(x, response = 1, predictor = NULL, responses = 1:2, main, ...)
 
 \method{pairs}{mlmridge}(x, response = 1, ...)
 
@@ -51,6 +51,17 @@ have set up yourself, e.g., with \code{par(mfrow = )}.}
 
 \item{...}{Other arguments, passed to the method for \code{"ridge"} objects.}
 
+\item{predictor}{For \code{plot()}: if given, plot coefficient ellipses across responses for this
+predictor, or several predictors (names or numbers), instead of the within-response
+plot; see \strong{Details}. Further arguments to control the plot (\code{radius}, \code{which.lambda},
+\code{labels}, \code{col}, \code{fill}, \code{fill.alpha}, \code{lwd}, \code{lty}, \code{center.pch}, \code{center.cex}, \code{ref},
+\code{ref.col}, \code{xlim}, \code{ylim}, \code{xlab}, \code{ylab}) have the same meaning as in \code{\link[=plot.ridge]{plot.ridge()}}.
+By default, the centres are labelled with the values of \eqn{\lambda} for one predictor,
+and with the predictor names for several.}
+
+\item{responses}{For \code{plot()} with \code{predictor}: the two responses (names or numbers) giving
+the horizontal and vertical axes. Default: the first two.}
+
 \item{det.fun, normalize}{See \code{\link[=precision]{precision()}}.}
 }
 \value{
@@ -63,7 +74,9 @@ response with \code{\link[=as.ridge]{as.ridge()}} and calls the corresponding me
 \itemize{
 \item \code{traceplot()}: univariate ridge trace plots (\code{\link[=traceplot]{traceplot()}}), by default for all responses,
 one panel each
-\item \code{plot()}: bivariate ridge trace plot of coefficients with covariance ellipses (\code{\link[=plot.ridge]{plot.ridge()}})
+\item \code{plot()}: bivariate ridge trace plot of coefficients with covariance ellipses (\code{\link[=plot.ridge]{plot.ridge()}});
+with \verb{predictor =}, coefficient ellipses for one or more predictors in the space of two
+responses (see \strong{Details})
 \item \code{pairs()}: scatterplot matrix of bivariate ridge trace plots (\code{\link[=pairs.ridge]{pairs.ridge()}})
 \item \code{plot3d()}: 3D ridge trace plot (\code{\link[=plot3d.ridge]{plot3d.ridge()}})
 \item \code{biplot()}: ridge trace plot with variable vectors (\code{\link[=biplot.ridge]{biplot.ridge()}})
@@ -76,6 +89,41 @@ Because all responses share the same ridge constants and predictors, the shrinka
 effective degrees of freedom, PCA/SVD of the predictors and the variance inflation factors
 are the same for every response; the coefficients, their covariance matrices (scaled by each
 response's residual variance) and the HKB, LW and GCV criteria differ.
+}
+\details{
+\strong{Two kinds of plot from \code{plot()}.} \code{plot()} for an \code{"mlmridge"} object draws one of two
+different displays, depending on whether \code{predictor} is given:
+\itemize{
+\item \strong{Within one response} (the default, \verb{response =}): as for a univariate ridge regression
+(\code{\link[=plot.ridge]{plot.ridge()}}), the axes are two \emph{predictors}, and each ellipse shows the joint
+variability of their coefficients for that response, at one value of \eqn{\lambda}.
+\item \strong{Across responses} (\verb{predictor =}): the axes are two \emph{responses} (\verb{responses =}), and each
+ellipse shows the joint variability of one predictor's coefficients for those two responses,
+at one value of \eqn{\lambda}. The path of the centres traces how the predictor's effects on
+both responses change together as \eqn{\lambda} increases. With several predictors, each has
+its own path, labelled with its name.
+}
+
+For predictor \eqn{j}, the coefficients for all responses (row \eqn{j} of \eqn{\mathbf{B}(\lambda)})
+have covariance matrix \eqn{[\mathbf{V}_\lambda]_{jj} \, \boldsymbol{\Sigma}}, where
+\eqn{\boldsymbol{\Sigma}} is the residual covariance matrix of the responses (\code{x$Sigma}) and
+\eqn{\mathbf{V}_\lambda} depends only on the predictors (\code{x$cov}). So in the across-responses
+plot, all the ellipses have the \strong{same shape and orientation}, that of the residual
+covariance of the two responses: only their centres and sizes change with \eqn{\lambda} and
+between predictors.
+
+The across-responses display is the ridge analogue of \code{\link[heplots:coefplot]{heplots::coefplot()}} for a
+multivariate linear model, which draws confidence ellipses for the coefficients of each
+predictor in the space of two responses. There are two differences in meaning:
+\itemize{
+\item \code{coefplot()} shows each predictor once, for the OLS fit; here each predictor is traced over
+the values of \eqn{\lambda}.
+\item \code{coefplot()} scales its ellipses as confidence regions (by \code{level}, using an \eqn{F} or
+\eqn{\chi^2} quantile), so whether an ellipse covers the origin is a test of the
+coefficients. Here, as in \code{\link[=plot.ridge]{plot.ridge()}}, the ellipses are scaled by \code{radius} (1 = standard
+"unit" ellipse) and describe the sampling variability around a \emph{biased} estimate; they are
+not confidence regions for the true coefficients, and covering the origin is not a test.
+}
 }
 \examples{
 if (requireNamespace("heplots", quietly = TRUE)) {
@@ -94,6 +142,11 @@ if (requireNamespace("heplots", quietly = TRUE)) {
   # bivariate ridge trace plot for two predictors
   plot(sridge, response = "mathematics", variables = c("occupation", "visit"),
        radius = 0.5)
+
+  # coefficient ellipses across two responses, for one predictor ...
+  plot(sridge, predictor = "visit", responses = c("reading", "mathematics"), fill = TRUE)
+  # ... and for all predictors, at lambda = 0 and 5
+  plot(sridge, predictor = 1:5, which.lambda = c(1, 6), col = c("black", "red"))
 
   pairs(sridge, response = "reading", radius = 0.5)
 

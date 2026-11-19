@@ -29,6 +29,15 @@ for (r in c("reading", "mathematics", "selfesteem"))
   plot(sridge, response = r, variables = c("occupation", "visit"),
        radius = 0.5, labels = lambda)
 par(op)'),
+  list(id = "cross-one", w = 1200, h = 450,
+       title = "plot(predictor = ): coefficient ellipses across two responses (reading, mathematics)",
+       code = 'op <- par(mfrow = c(1, 3))
+for (p in c("occupation", "visit", "counseling"))
+  plot(sridge, predictor = p, responses = c("reading", "mathematics"), fill = TRUE)
+par(op)'),
+  list(id = "cross-all", w = 700, h = 650,
+       title = "plot(predictor = 1:5): all predictors, at lambda = 0 (black) and 5 (red)",
+       code = 'plot(sridge, predictor = 1:5, which.lambda = c(1, 6), col = c("black", "red"))'),
   list(id = "pairs", w = 800, h = 800,
        title = "pairs(): all pairs of predictors, response = \"reading\"",
        code = 'pairs(sridge, response = "reading", radius = 0.5)'),

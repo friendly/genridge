@@ -164,7 +164,9 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #'
 #' * `traceplot()`: univariate ridge trace plots ([traceplot()]), by default for all responses,
 #'   one panel each
-#' * `plot()`: bivariate ridge trace plot of coefficients with covariance ellipses ([plot.ridge()])
+#' * `plot()`: bivariate ridge trace plot of coefficients with covariance ellipses ([plot.ridge()]);
+#'   with `predictor =`, coefficient ellipses for one or more predictors in the space of two
+#'   responses (see **Details**)
 #' * `pairs()`: scatterplot matrix of bivariate ridge trace plots ([pairs.ridge()])
 #' * `plot3d()`: 3D ridge trace plot ([plot3d.ridge()])
 #' * `biplot()`: ridge trace plot with variable vectors ([biplot.ridge()])
@@ -177,6 +179,39 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #' are the same for every response; the coefficients, their covariance matrices (scaled by each
 #' response's residual variance) and the HKB, LW and GCV criteria differ.
 #'
+#' @details
+#' **Two kinds of plot from `plot()`.** `plot()` for an `"mlmridge"` object draws one of two
+#' different displays, depending on whether `predictor` is given:
+#'
+#' * **Within one response** (the default, `response =`): as for a univariate ridge regression
+#'   ([plot.ridge()]), the axes are two *predictors*, and each ellipse shows the joint
+#'   variability of their coefficients for that response, at one value of \eqn{\lambda}.
+#' * **Across responses** (`predictor =`): the axes are two *responses* (`responses =`), and each
+#'   ellipse shows the joint variability of one predictor's coefficients for those two responses,
+#'   at one value of \eqn{\lambda}. The path of the centres traces how the predictor's effects on
+#'   both responses change together as \eqn{\lambda} increases. With several predictors, each has
+#'   its own path, labelled with its name.
+#'
+#' For predictor \eqn{j}, the coefficients for all responses (row \eqn{j} of \eqn{\mathbf{B}(\lambda)})
+#' have covariance matrix \eqn{[\mathbf{V}_\lambda]_{jj} \, \boldsymbol{\Sigma}}, where
+#' \eqn{\boldsymbol{\Sigma}} is the residual covariance matrix of the responses (`x$Sigma`) and
+#' \eqn{\mathbf{V}_\lambda} depends only on the predictors (`x$cov`). So in the across-responses
+#' plot, all the ellipses have the **same shape and orientation**, that of the residual
+#' covariance of the two responses: only their centres and sizes change with \eqn{\lambda} and
+#' between predictors.
+#'
+#' The across-responses display is the ridge analogue of [heplots::coefplot()] for a
+#' multivariate linear model, which draws confidence ellipses for the coefficients of each
+#' predictor in the space of two responses. There are two differences in meaning:
+#'
+#' * `coefplot()` shows each predictor once, for the OLS fit; here each predictor is traced over
+#'   the values of \eqn{\lambda}.
+#' * `coefplot()` scales its ellipses as confidence regions (by `level`, using an \eqn{F} or
+#'   \eqn{\chi^2} quantile), so whether an ellipse covers the origin is a test of the
+#'   coefficients. Here, as in [plot.ridge()], the ellipses are scaled by `radius` (1 = standard
+#'   "unit" ellipse) and describe the sampling variability around a *biased* estimate; they are
+#'   not confidence regions for the true coefficients, and covering the origin is not a test.
+#'
 #' @name mlmridge-plots
 #' @param x,object,mod An object of class `"mlmridge"`
 #' @param response The response to use: a name, or a number in `1:q`. If not given, the first
@@ -188,11 +223,20 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #'        multi-panel layout with one panel per response, side by side where possible, and
 #'        restore the previous layout afterwards. Use `layout = FALSE` to draw into a layout you
 #'        have set up yourself, e.g., with `par(mfrow = )`.
+#' @param predictor For `plot()`: if given, plot coefficient ellipses across responses for this
+#'        predictor, or several predictors (names or numbers), instead of the within-response
+#'        plot; see **Details**. Further arguments to control the plot (`radius`, `which.lambda`,
+#'        `labels`, `col`, `fill`, `fill.alpha`, `lwd`, `lty`, `center.pch`, `center.cex`, `ref`,
+#'        `ref.col`, `xlim`, `ylim`, `xlab`, `ylab`) have the same meaning as in [plot.ridge()].
+#'        By default, the centres are labelled with the values of \eqn{\lambda} for one predictor,
+#'        and with the predictor names for several.
+#' @param responses For `plot()` with `predictor`: the two responses (names or numbers) giving
+#'        the horizontal and vertical axes. Default: the first two.
 #' @param det.fun,normalize See [precision()].
 #' @param ... Other arguments, passed to the method for `"ridge"` objects.
 #' @return As for the corresponding method for `"ridge"` objects.
 #' @seealso [ridge()], [as.ridge()], [mlmridge-methods]
-#' @importFrom graphics pairs
+#' @importFrom graphics pairs lines polygon points text abline
 #' @importFrom stats biplot
 #' @examples
 #' if (requireNamespace("heplots", quietly = TRUE)) {
@@ -211,6 +255,11 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #'   # bivariate ridge trace plot for two predictors
 #'   plot(sridge, response = "mathematics", variables = c("occupation", "visit"),
 #'        radius = 0.5)
+#'
+#'   # coefficient ellipses across two responses, for one predictor ...
+#'   plot(sridge, predictor = "visit", responses = c("reading", "mathematics"), fill = TRUE)
+#'   # ... and for all predictors, at lambda = 0 and 5
+#'   plot(sridge, predictor = 1:5, which.lambda = c(1, 6), col = c("black", "red"))
 #'
 #'   pairs(sridge, response = "reading", radius = 0.5)
 #'
@@ -253,10 +302,81 @@ traceplot.mlmridge <- function(x, response = NULL, main, layout = TRUE, ...) {
 
 #' @rdname mlmridge-plots
 #' @exportS3Method plot mlmridge
-plot.mlmridge <- function(x, response = 1, main, ...) {
+plot.mlmridge <- function(x, response = 1, predictor = NULL, responses = 1:2, main, ...) {
+  if (!is.null(predictor)) {
+    if (!missing(response))
+      warning("'response' is ignored when 'predictor' is given; use 'responses' to choose the two responses")
+    if (missing(main)) main <- if (length(predictor) == 1) predictor else ""
+    return(invisible(plot_cross_response(x, predictor = predictor, responses = responses,
+                                         main = main, ...)))
+  }
   sel <- select_response(x, response, missing(response))
   if (missing(main)) main <- sel$name
   plot(sel$ridge, main = main, ...)
+}
+
+# Cross-response coefficient ellipses: for each predictor, its coefficients for two responses
+# across lambda, with covariance ellipses [V_lambda]_jj * Sigma[r, r]. Arguments follow plot.ridge().
+plot_cross_response <- function(x, predictor, responses = 1:2,
+                                radius = 1, which.lambda = seq_along(x$lambda),
+                                labels = NULL, pos = 3, cex = 1.2,
+                                lwd = 2, lty = 1, xlim, ylim,
+                                col = c("black", "red", "darkgreen", "blue", "darkcyan", "magenta",
+                                        "brown", "darkgray"),
+                                center.pch = 16, center.cex = 1.5,
+                                fill = FALSE, fill.alpha = 0.3, ref = TRUE, ref.col = gray(.70),
+                                xlab, ylab, main = "", ...) {
+  ynames <- colnames(x$Sigma)
+  xnames <- rownames(x$coef[[1]])
+  if (is.numeric(responses)) responses <- ynames[responses]
+  if (length(responses) != 2 || !all(responses %in% ynames))
+    stop("'responses' must be two of: ", paste(ynames, collapse = ", "))
+  if (is.numeric(predictor)) predictor <- xnames[predictor]
+  if (!all(predictor %in% xnames))
+    stop("'predictor' must be among: ", paste(xnames, collapse = ", "))
+
+  lambda <- x$lambda[which.lambda]
+  nl <- length(lambda)
+  col <- rep_len(col, nl)
+  lwd <- rep_len(lwd, nl)
+  lty <- rep_len(lty, nl)
+  fill <- rep_len(fill, nl)
+  fill.alpha <- rep_len(fill.alpha, nl)
+  fill.col <- ifelse(fill, mapply(function(cl, a) grDevices::adjustcolor(cl, alpha.f = a),
+                                  col, fill.alpha), NA)
+  # labels at the ellipse centres: lambda values for one predictor, predictor names for several
+  if (is.null(labels)) labels <- if (length(predictor) == 1) lambda else predictor
+
+  S <- x$Sigma[responses, responses]
+  angles <- seq(0, 2 * pi, length.out = 61)
+  circle <- radius * cbind(cos(angles), sin(angles))
+  centers <- lapply(predictor, function(j)
+    t(sapply(which.lambda, function(i) x$coef[[i]][j, responses])))
+  ells <- lapply(predictor, function(j) lapply(which.lambda, function(i) {
+    sweep(circle %*% chol(x$cov[[i]][j, j] * S), 2, x$coef[[i]][j, responses], "+")
+  }))
+
+  allxy <- do.call(rbind, unlist(ells, recursive = FALSE))
+  if (missing(xlim)) xlim <- range(allxy[, 1], if (ref) 0)
+  if (missing(ylim)) ylim <- range(allxy[, 2], if (ref) 0)
+  if (missing(xlab)) xlab <- paste("Coefficient for", responses[1])
+  if (missing(ylab)) ylab <- paste("Coefficient for", responses[2])
+
+  plot(NA, xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, main = main, ...)
+  if (ref) abline(h = 0, v = 0, col = ref.col)
+  for (p in seq_along(predictor)) {
+    for (i in seq_len(nl))
+      polygon(ells[[p]][[i]], col = fill.col[i], border = col[i], lwd = lwd[i], lty = lty[i])
+    ctr <- centers[[p]]
+    lines(ctr)
+    points(ctr, pch = center.pch, cex = center.cex, col = col)
+    if (!is.null(labels)) {
+      if (length(predictor) == 1) text(ctr, labels = labels, pos = pos, cex = cex)
+      else text(ctr[1, 1], ctr[1, 2], labels = labels[p], pos = pos, cex = cex)
+    }
+  }
+  invisible(list(centers = stats::setNames(centers, predictor),
+                 ellipses = stats::setNames(ells, predictor)))
 }
 
 #' @rdname mlmridge-plots

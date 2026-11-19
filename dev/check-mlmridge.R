@@ -114,4 +114,29 @@ check("traceplot(m, response = 'nope') -> error",
       inherits(tryCatch(traceplot(m, response = "nope"), error = function(e) e), "error"))
 dev.off()
 
+# 11. plot(predictor = ): cross-response coefficient ellipses
+pdf(NULL)
+cr <- plot(m, predictor = "visit", responses = c("reading", "selfesteem"))
+check("plot(predictor=): centres == coef rows across lambda",
+      all.equal(unname(cr$centers$visit), unname(t(sapply(m$coef, function(B) B["visit", c(1, 3)])))))
+# ellipse at lambda[4]: points satisfy (z - c)' S^-1 (z - c) = radius^2 with S = V_jj * Sigma[r, r]
+S4 <- m$cov[[4]]["visit", "visit"] * m$Sigma[c(1, 3), c(1, 3)]
+z <- sweep(cr$ellipses$visit[[4]], 2, cr$centers$visit[4, ])
+check("  ellipse shape == [V_lambda]_jj * Sigma[r, r] (radius 1)",
+      all.equal(rowSums((z %*% solve(S4)) * z), rep(1, nrow(z))))
+cr2 <- plot(m, predictor = 1:5, which.lambda = c(1, 6), responses = 1:2)
+check("  several predictors by number, which.lambda subset",
+      identical(names(cr2$centers), rownames(m$coef[[1]])) && nrow(cr2$centers[[1]]) == 2)
+check("  fill = TRUE, vector fill.alpha runs",
+      is.list(plot(m, predictor = "visit", fill = TRUE, fill.alpha = c(0.1, 0.3))))
+check("  bad predictor -> error",
+      inherits(tryCatch(plot(m, predictor = "nope"), error = function(e) e), "error"))
+check("  bad responses -> error",
+      inherits(tryCatch(plot(m, predictor = 1, responses = c("reading", "x")), error = function(e) e), "error"))
+w <- tryCatch(plot(m, predictor = 1, response = 2), warning = function(w) conditionMessage(w))
+check("  response = with predictor = -> warning", is.character(w) && grepl("ignored", w))
+check("plot(m, response = 2) still the within-response plot",
+      is.null(suppressMessages(plot(m, response = 2))))
+dev.off()
+
 cat(if (ok) "\nALL CHECKS PASSED\n" else "\nSOME CHECKS FAILED\n")

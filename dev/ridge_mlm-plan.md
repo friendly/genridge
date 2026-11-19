@@ -249,6 +249,36 @@ as now. HKB and LW are closed-form estimates.
      teaching point.
    - A `pairs()` version would take all response pairs for one predictor.
 
+   *Done 2026-11-19 (prototype `dev/cross-ellipses-prototype.R`, then in the package).*
+   - **Interface (MF: option 2):** `plot(x, predictor = , responses = 1:2, ...)` on
+     `plot.mlmridge()`, with the arguments of `plot.ridge()` (`radius`, `which.lambda`,
+     `labels`, `col`, `fill`, `ref`, …), and internal `plot_cross_response()`. Without
+     `predictor`, `plot()` keeps the within-response plot (`response =`).
+   - The two modes have different meanings (axes = predictors vs axes = responses). This is
+     explained under `@details` in `?mlmridge-plots`, including how the plot differs from
+     `heplots::coefplot()`:
+     - here each predictor is traced over λ;
+     - the ellipses are `radius`-scaled sampling-variability ellipses around a biased estimate,
+       not confidence regions, so covering the origin isn't a test.
+   - Findings on schooldata:
+     - `visit` crosses zero for both responses together;
+     - `counseling` moves *away* from the origin (ridge shrinks the norm, not each
+       coefficient);
+     - at λ = 5 the collinear predictors converge into a cluster (ridge's grouping effect).
+   - **Note: a `heplots::coefplot()` method for `mlmridge`** (option 1, not done). This would
+     be a thin wrapper around `plot_cross_response()`, for users who know `coefplot()` from
+     heplots.
+     - Because heplots is only in Suggests, the method would use delayed registration
+       (`@exportS3Method heplots::coefplot`, i.e. `S3method(heplots::coefplot, mlmridge)`).
+       It is active only when heplots is loaded, so `coefplot(sridge)` needs
+       `library(heplots)`.
+     - It should take `coefplot()`'s arguments where they make sense: `variables` (the two
+       responses), `parm` (predictors), `level` (convert to `radius`, perhaps with a note that
+       it isn't a confidence level here), `fill`, `labels`.
+     - Its documentation must repeat the difference in meaning.
+     - Alternatively, it could live in heplots as `coefplot.mlmridge()`, with genridge in
+       heplots' Suggests. Decide when doing it.
+
 4. **Ridge HE plots (new; links to heplots).**
    - **H**(λ) = $\widehat{\mathbf{B}}(\lambda)^\top \mathbf{X}^\top\mathbf{X}\,\widehat{\mathbf{B}}(\lambda)$
      (the fitted SSP);
