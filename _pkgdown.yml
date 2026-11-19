@@ -41,6 +41,15 @@ reference:
     - pca.ridge
     - biplot.pcaridge
 
+- title: "Multivariate ridge regression (experimental)"
+  desc: >
+    Ridge regression for several responses with common ridge constants:
+    `ridge()` with a matrix response returns an `"mlmridge"` object.
+  contents:
+    - as.ridge
+    - mlmridge-methods
+    - mlmridge-plots
+
 - title: "Data sets"
   desc: "Data sets in the package"
   contents:
