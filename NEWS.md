@@ -1,6 +1,6 @@
 ## genridge (development version)
 
-o Multivariate ridge regression (in progress): `ridge()` now accepts a matrix response (`cbind(Y1, Y2) ~ ...`, a multivariate `lm()` fit, or a matrix `y`), fitting all responses with common ridge constants and returning an object of class `"mlmridge"`. GCV can be pooled over responses (`pool =`). `as.ridge()` extracts the results for one response as a `"ridge"` object. `coef()`, `vcov()` and `print()` methods for `"mlmridge"` objects. `traceplot()`, `plot()`, `pairs()`, `plot3d()`, `biplot()`, `pca()`, `precision()` and `vif()` work on one response at a time (`response =`). `traceplot()` is now an S3 generic.
+o Multivariate ridge regression (in progress): `ridge()` now accepts a matrix response (`cbind(Y1, Y2) ~ ...`, a multivariate `lm()` fit, or a matrix `y`), fitting all responses with common ridge constants and returning an object of class `"mlmridge"`. GCV can be pooled over responses (`pool =`). `as.ridge()` extracts the results for one response as a `"ridge"` object. `coef()`, `vcov()` and `print()` methods for `"mlmridge"` objects. `traceplot()`, `plot()`, `pairs()`, `plot3d()`, `biplot()`, `pca()`, `precision()` and `vif()` work on one response at a time (`response =`); `traceplot()` by default draws all responses, one panel each. `traceplot()` is now an S3 generic.
 
 ## genridge 0.8.1
 

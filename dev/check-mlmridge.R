@@ -95,4 +95,23 @@ check("print() runs and shows pooled GCV", any(grepl("pooled", pr)))
 check("as.ridge() with bad response name -> error",
       inherits(tryCatch(as.ridge(m, "nope"), error = function(e) e), "error"))
 
+# 10. traceplot(): all responses by default
+pdf(NULL)
+op_before <- par("mfrow")
+msg <- tryCatch({ withCallingHandlers(traceplot(m), message = function(e) stop("message: ", conditionMessage(e))); "ok" },
+                error = function(e) conditionMessage(e))
+check("traceplot(m): all responses, no message, no error", identical(msg, "ok"))
+check("  par(mfrow) restored afterwards", identical(par("mfrow"), op_before))
+check("  draws q = 3 panels (one plot.new per response)", {
+  n <- 0; setHook("plot.new", function() n <<- n + 1)
+  traceplot(m); setHook("plot.new", NULL, "replace"); n == 3 })
+par(mfrow = c(2, 2))
+traceplot(m, response = c("reading", "selfesteem"), layout = FALSE)
+check("  layout = FALSE keeps the user's layout", identical(par("mfrow"), c(2L, 2L)))
+par(mfrow = c(1, 1))
+check("traceplot(m, response = 2:3) runs", is.null(traceplot(m, response = 2:3)))
+check("traceplot(m, response = 'nope') -> error",
+      inherits(tryCatch(traceplot(m, response = "nope"), error = function(e) e), "error"))
+dev.off()
+
 cat(if (ok) "\nALL CHECKS PASSED\n" else "\nSOME CHECKS FAILED\n")

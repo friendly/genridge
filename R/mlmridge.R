@@ -162,7 +162,8 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #' of a multivariate ridge regression (class `"mlmridge"`). Each extracts the results for that
 #' response with [as.ridge()] and calls the corresponding method for `"ridge"` objects:
 #'
-#' * `traceplot()`: univariate ridge trace plot ([traceplot()])
+#' * `traceplot()`: univariate ridge trace plots ([traceplot()]), by default for all responses,
+#'   one panel each
 #' * `plot()`: bivariate ridge trace plot of coefficients with covariance ellipses ([plot.ridge()])
 #' * `pairs()`: scatterplot matrix of bivariate ridge trace plots ([pairs.ridge()])
 #' * `plot3d()`: 3D ridge trace plot ([plot3d.ridge()])
@@ -179,8 +180,14 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #' @name mlmridge-plots
 #' @param x,object,mod An object of class `"mlmridge"`
 #' @param response The response to use: a name, or a number in `1:q`. If not given, the first
-#'        response is used, with a message.
-#' @param main Title for the plot. The default is the name of the response.
+#'        response is used, with a message. For `traceplot()`, `response` can name several
+#'        responses, and the default (`NULL`) plots all of them, one panel per response.
+#' @param main Title for the plot. The default is the name of the response. For `traceplot()`
+#'        with several responses, recycled over the panels.
+#' @param layout For `traceplot()` with several responses: if `TRUE` (the default), set up a
+#'        multi-panel layout with one panel per response, side by side where possible, and
+#'        restore the previous layout afterwards. Use `layout = FALSE` to draw into a layout you
+#'        have set up yourself, e.g., with `par(mfrow = )`.
 #' @param det.fun,normalize See [precision()].
 #' @param ... Other arguments, passed to the method for `"ridge"` objects.
 #' @return As for the corresponding method for `"ridge"` objects.
@@ -195,8 +202,11 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #'                   education + occupation + visit + counseling + teacher,
 #'                   data = schooldata, lambda = lambda)
 #'
-#'   traceplot(sridge, response = "reading")
-#'   traceplot(sridge, response = "selfesteem", X = "df")
+#'   # all responses, one panel each
+#'   traceplot(sridge)
+#'   traceplot(sridge, X = "df")
+#'   # one response
+#'   traceplot(sridge, response = "selfesteem")
 #'
 #'   # bivariate ridge trace plot for two predictors
 #'   plot(sridge, response = "mathematics", variables = c("occupation", "visit"),
@@ -222,10 +232,23 @@ select_response <- function(x, response, missing_response) {
 
 #' @rdname mlmridge-plots
 #' @exportS3Method traceplot mlmridge
-traceplot.mlmridge <- function(x, response = 1, main, ...) {
-  sel <- select_response(x, response, missing(response))
-  if (missing(main)) main <- sel$name
-  traceplot(sel$ridge, main = main, ...)
+traceplot.mlmridge <- function(x, response = NULL, main, layout = TRUE, ...) {
+  ynames <- colnames(x$Sigma)
+  if (is.null(response)) response <- ynames
+  if (is.numeric(response)) response <- ynames[response]
+  bad <- setdiff(response, ynames)
+  if (length(bad) || anyNA(response))
+    stop("response must be in: ", paste(ynames, collapse = ", "), ", or numbers in 1:", length(ynames))
+  nr <- length(response)
+  if (missing(main)) main <- response
+  main <- rep_len(main, nr)
+  if (layout && nr > 1) {
+    op <- par(mfrow = rev(grDevices::n2mfrow(nr)))   # side by side: 1 x 3, 2 x 2, 2 x 3, ...
+    on.exit(par(op))
+  }
+  for (i in seq_len(nr))
+    traceplot(as.ridge(x, response[i]), main = main[i], ...)
+  invisible(NULL)
 }
 
 #' @rdname mlmridge-plots

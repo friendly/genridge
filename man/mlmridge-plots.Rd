@@ -12,7 +12,7 @@
 \alias{vif.mlmridge}
 \title{Plot and Summary Methods for Multivariate Ridge Regression}
 \usage{
-\method{traceplot}{mlmridge}(x, response = 1, main, ...)
+\method{traceplot}{mlmridge}(x, response = NULL, main, layout = TRUE, ...)
 
 \method{plot}{mlmridge}(x, response = 1, main, ...)
 
@@ -38,9 +38,16 @@
 \item{x, object, mod}{An object of class \code{"mlmridge"}}
 
 \item{response}{The response to use: a name, or a number in \code{1:q}. If not given, the first
-response is used, with a message.}
+response is used, with a message. For \code{traceplot()}, \code{response} can name several
+responses, and the default (\code{NULL}) plots all of them, one panel per response.}
 
-\item{main}{Title for the plot. The default is the name of the response.}
+\item{main}{Title for the plot. The default is the name of the response. For \code{traceplot()}
+with several responses, recycled over the panels.}
+
+\item{layout}{For \code{traceplot()} with several responses: if \code{TRUE} (the default), set up a
+multi-panel layout with one panel per response, side by side where possible, and
+restore the previous layout afterwards. Use \code{layout = FALSE} to draw into a layout you
+have set up yourself, e.g., with \code{par(mfrow = )}.}
 
 \item{...}{Other arguments, passed to the method for \code{"ridge"} objects.}
 
@@ -54,7 +61,8 @@ These methods apply the plots and summaries for univariate ridge regression to o
 of a multivariate ridge regression (class \code{"mlmridge"}). Each extracts the results for that
 response with \code{\link[=as.ridge]{as.ridge()}} and calls the corresponding method for \code{"ridge"} objects:
 \itemize{
-\item \code{traceplot()}: univariate ridge trace plot (\code{\link[=traceplot]{traceplot()}})
+\item \code{traceplot()}: univariate ridge trace plots (\code{\link[=traceplot]{traceplot()}}), by default for all responses,
+one panel each
 \item \code{plot()}: bivariate ridge trace plot of coefficients with covariance ellipses (\code{\link[=plot.ridge]{plot.ridge()}})
 \item \code{pairs()}: scatterplot matrix of bivariate ridge trace plots (\code{\link[=pairs.ridge]{pairs.ridge()}})
 \item \code{plot3d()}: 3D ridge trace plot (\code{\link[=plot3d.ridge]{plot3d.ridge()}})
@@ -77,8 +85,11 @@ if (requireNamespace("heplots", quietly = TRUE)) {
                   education + occupation + visit + counseling + teacher,
                   data = schooldata, lambda = lambda)
 
-  traceplot(sridge, response = "reading")
-  traceplot(sridge, response = "selfesteem", X = "df")
+  # all responses, one panel each
+  traceplot(sridge)
+  traceplot(sridge, X = "df")
+  # one response
+  traceplot(sridge, response = "selfesteem")
 
   # bivariate ridge trace plot for two predictors
   plot(sridge, response = "mathematics", variables = c("occupation", "visit"),

@@ -17,17 +17,11 @@ sridge <- ridge(cbind(reading, mathematics, selfesteem) ~
 
 examples <- list(
   list(id = "traceplot", w = 1200, h = 450,
-       title = "traceplot(): one panel per response, via response =",
-       code = 'op <- par(mfrow = c(1, 3))
-for (r in c("reading", "mathematics", "selfesteem"))
-  traceplot(sridge, response = r)
-par(op)'),
+       title = "traceplot(): by default, all responses, one panel each",
+       code = 'traceplot(sridge)'),
   list(id = "traceplot-df", w = 1200, h = 450,
        title = "traceplot(X = \"df\"): same, against effective degrees of freedom",
-       code = 'op <- par(mfrow = c(1, 3))
-for (r in c("reading", "mathematics", "selfesteem"))
-  traceplot(sridge, response = r, X = "df")
-par(op)'),
+       code = 'traceplot(sridge, X = "df")'),
   list(id = "plot", w = 1200, h = 450,
        title = "plot(): bivariate ridge trace for occupation and visit, each response",
        code = 'op <- par(mfrow = c(1, 3))
@@ -83,8 +77,8 @@ for (ex in examples) {
 
 # the default-response message, and print/vif output, as text
 txt <- capture.output({
-  cat("> traceplot(sridge)   # no response =\n")
-  withCallingHandlers({ pdf(NULL); traceplot(sridge); dev.off() },
+  cat("> plot(sridge)   # no response = : uses the first response, with a message\n")
+  withCallingHandlers({ pdf(NULL); plot(sridge); dev.off() },
                       message = function(m) { cat(conditionMessage(m)); invokeRestart("muffleMessage") })
   cat("\n> vif(sridge)\n"); print(vif(sridge))
 })
