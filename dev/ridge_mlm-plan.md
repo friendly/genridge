@@ -224,11 +224,47 @@ Open: is there a natural dataset in heplots, candisc or mvinfluence with high VI
    - NEWS; version 0.9.0, since this is a new feature set.
 7. Optionally, a section in Vis-MLM-book ch. 9.
 
-## 9. Open questions for MF
+## 9. Decisions (MF, 2026-11-19)
 
-- Class design: should `mlmridge` inherit from `ridge` or not?
-- `coef` as a 3-d array or as a list of B matrices?
-- Generalize `ridge.default()` in place, or add a separate fit function?
-- Are HE-style ridge plots (§5.4) in scope for the first version, or a later one?
-- Example dataset (§7).
-- Add a `tests/` folder with testthat as part of this work?
+These replace the open questions that were here.
+
+1. **Class:** `c("mlmridge", "ridge")`, inheriting from `ridge` for now.
+2. **`coef`:** a list of p × q `B` matrices, one per λ, as in VARshrink. Add a helper to
+   convert it to a 3-d array `[lambda, predictor, response]`.
+3. **Fitting:** try to generalize `ridge.default()` to accept a matrix `y`, rather than
+   writing a separate fit function.
+4. **HE-style ridge plots (§5.4):** a great and novel contribution, but they need further
+   thought and design. Not in the first version; treat them as a separate design task.
+5. **Example dataset (§7):** MF will look for one that shows multivariate shrinkage. This may
+   need a web search.
+6. **Tests:** deferred.
+
+**What follows from decisions 1 and 2.** Because the class inherits from `ridge`, every
+existing `*.ridge` method will be dispatched for an `mlmridge` object. Those methods expect
+`coef` to be a λ × p *matrix*, so with a list they will fail or give wrong answers. So:
+
+- `mlmridge` needs its own method, or an explicit stop, for each inherited generic that
+  touches `coef` or `cov`:
+  - `coef`, `vcov`, `print`, `best`;
+  - `plot`, `pairs`, `plot3d`, `traceplot`;
+  - `pca`, `biplot`, `precision`, `vif`.
+- The simplest first version: each of these methods takes `response =` and delegates to the
+  univariate method through `as.ridge(x, response)` (§4, §5.1). Methods that don't depend on
+  the response, such as `vif()`, can use any response.
+- Audit which `*.ridge` methods read `x$coef` and `x$cov` directly before deciding; some may
+  only need `x$lambda`, `x$df` or `x$svd.*`.
+
+**What follows from decision 3.** `ridge.default()` is currently univariate throughout:
+- `y` is centered as a vector;
+- `MSE` and the HKB/LW criteria are computed with `lm.fit()`;
+- `coef[i, ]`, `mse[i]` and GCV are per-λ scalars or vectors.
+
+Generalizing it means:
+- treating `y` as an n × q matrix, with q = 1 the current case;
+- computing `Sigma` (q × q) in place of `MSE`;
+- storing `cov` as `V_λ`, *without* the `MSE` factor, in the multivariate case;
+- computing criteria per response plus a pooled GCV.
+
+**The univariate output must stay byte-for-byte the same.** Before changing anything, save
+reference results from the current `ridge()` for longley, prostate, Manpower and Acetylene, and
+compare after the change. This stands in for the deferred tests.
