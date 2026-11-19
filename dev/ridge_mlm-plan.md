@@ -98,32 +98,50 @@ just be q separate univariate ridges, and users can already do that.
 
 ## 4. The result object
 
-Proposed class: **`c("mlmridge", "ridge")`**? Or a separate `"mlmridge"` only? Decide after
-looking at which existing methods would silently do the wrong thing on a 3-d `coef`.
+Class: **`"mlmridge"`**, a separate class that does **not** inherit from `ridge`. See §9
+decision 1, revised after the audit in §10.
 
-Likely components, mirroring `ridge`:
+`ridge()` stays the single entry point. With a matrix response it returns an `mlmridge`
+object, much as `lm()` returns an `mlm` for a matrix response. Generics that have no
+`mlmridge` method yet fail with R's standard "no applicable method for '...' applied to an
+object of class 'mlmridge'". That is clearer than the misleading errors inherited `ridge`
+methods would give.
 
-- `lambda`, `df`: as now.
-- `coef`: a 3-d array `[lambda, predictor, response]`. A list of p × q `B` matrices, as in
-  VARshrink, is the alternative; the array makes `coef[, , "Y1"]` give the univariate matrix
-  directly.
-- `cov`: a list of p × p `V_λ` (the shared X part, without Σ).
-- `Sigma`: the q × q residual covariance from the OLS fit.
+Components. The names follow `ridge` where the meaning is the same; since the classes are
+separate, a name can take a multivariate meaning without risk:
+
+- `lambda`, `df`: as now. They depend only on X, so they are shared by all responses.
+- `coef`: a **list** of p × q `B` matrices, one per λ (decision 2). A helper,
+  e.g. `coef_array(x)`, returns the 3-d array `[lambda, predictor, response]`.
+- `cov`: a list of p × p `V_λ`, the shared X part *without* Σ. There's no need to rename it
+  `covX`, because no inherited `ridge` method will ever read it.
+- `Sigma`: the q × q residual covariance from the OLS fit, **E** / (n − p − 1).
 - `mse`: a matrix `[lambda, response]`.
 - `scales`, `svd.D`, `svd.U`, `svd.V`: as now; they depend only on X.
-- Criteria: HKB and LW per response (a matrix); GCV both pooled (as in VARshrink) and per
-  response; `kGCV` from the pooled GCV.
+- Criteria: HKB and LW per response (a matrix or named vectors); GCV both pooled (as in
+  VARshrink) and per response; `kGCV` from the pooled GCV. Exact layout to be settled
+  before `best()` and `traceplot()`.
 
 **Key helper: extract a univariate `ridge` object for one response**, e.g.
-`as.ridge(x, response = "Y1")` or `x[["Y1"]]`. It sets `coef = coef[, , k]`,
-`cov = Sigma[k, k] * V_λ` and so on, so **every existing method works per response for free**:
-`traceplot()`, `plot()`, `pairs()`, `plot3d()`, `precision()`, `vif()`, `pca()`, `biplot()`.
-This should be step 1 of the implementation.
+`as.ridge(x, response = "Y1")`.
+- It returns a genuine `ridge` object, with:
+  - `coef` = the λ × p matrix for that response;
+  - `cov` = `Sigma[k, k] * V_λ`;
+  - `mse`, `kHKB`, `kLW`, `GCV`, `kGCV` and `criteria` for that response;
+  - `lambda`, `df`, `scales` and `svd.*` unchanged.
+- So **every existing `ridge` method applies per response**: `traceplot()`, `plot()`,
+  `pairs()`, `plot3d()`, `precision()`, `vif()`, `pca()`, `biplot()`.
+- This works the same with or without inheritance, and it is where the code reuse comes from.
+- Step 1 of the implementation.
 
-`coef()`, `vcov()` and `print()` methods:
+Basic methods:
 
-- `coef(x, response = NULL)`: the array, or one response's matrix.
-- `vcov(x, lambda = )`: the full pq × pq `kronecker(Sigma, V_λ)`, or per response.
+- `coef(x, response = NULL)`: the list of B matrices, or one response's λ × p matrix.
+- `vcov(x, response = NULL)`: a list of pq × pq `kronecker(Sigma, V_λ)`, or one response's list
+  of `Sigma[k, k] * V_λ`.
+- `print()`: λ and df, then a coefficient table per response.
+- Optionally, `is_ridge_fit()` or a documentation note, if other code needs to recognize
+  "either kind of ridge fit". (The one argument for inheriting was `inherits(x, "ridge")`.)
 
 ## 5. Plot methods: ideas, roughly in order of value
 
@@ -265,7 +283,15 @@ genridge's `ridge()`.
 
 These replace the open questions that were here.
 
-1. **Class:** `c("mlmridge", "ridge")`, inheriting from `ridge` for now.
+1. **Class:** a separate class `"mlmridge"` that does **not** inherit from `ridge`.
+   *Revised 2026-11-19.* The original decision was `c("mlmridge", "ridge")`, inheriting from
+   `ridge`. The audit in §10 showed that inheriting gives almost no reuse: no `*.ridge`
+   method works unchanged, and the real reuse comes from `as.ridge()`, which doesn't need
+   inheritance. It also has costs:
+   - misleading errors from inherited methods;
+   - two traps: `cov` meaning different things, and the class order after `pca()`;
+   - every future `*.ridge` method would silently apply to `mlmridge` too, the same problem
+     stats has with `mlm` inheriting from `lm`.
 2. **`coef`:** a list of p × q `B` matrices, one per λ, as in VARshrink. Add a helper to
    convert it to a 3-d array `[lambda, predictor, response]`.
 3. **Fitting:** try to generalize `ridge.default()` to accept a matrix `y`, rather than
@@ -276,20 +302,20 @@ These replace the open questions that were here.
    need a web search.
 6. **Tests:** deferred.
 
-**What follows from decisions 1 and 2.** Because the class inherits from `ridge`, every
-existing `*.ridge` method will be dispatched for an `mlmridge` object. Those methods expect
-`coef` to be a λ × p *matrix*, so with a list they will fail or give wrong answers. So:
+**What follows from decisions 1 and 2.** No `*.ridge` method is dispatched for an `mlmridge`
+object, so each generic we want to support needs an `*.mlmridge` method. Unsupported generics
+fail with R's standard "no applicable method" error. The methods to provide, in order:
 
-- `mlmridge` needs its own method, or an explicit stop, for each inherited generic that
-  touches `coef` or `cov`:
-  - `coef`, `vcov`, `print`, `best`;
-  - `plot`, `pairs`, `plot3d`, `traceplot`;
-  - `pca`, `biplot`, `precision`, `vif`.
-- The simplest first version: each of these methods takes `response =` and delegates to the
-  univariate method through `as.ridge(x, response)` (§4, §5.1). Methods that don't depend on
-  the response, such as `vif()`, can use any response.
-- Audit which `*.ridge` methods read `x$coef` and `x$cov` directly before deciding; some may
-  only need `x$lambda`, `x$df` or `x$svd.*`.
+- `coef`, `vcov`, `print`; then `best`, once the criteria layout is settled;
+- `traceplot`, `plot`, `pairs`, `plot3d`, `precision`, `vif`, `pca`, `biplot`.
+
+The simplest first version: each method takes `response =` and delegates to the univariate
+method through `as.ridge(x, response)` (§4, §5.1). Methods that don't depend on the response,
+such as `vif()`, can use any response. Real multi-response methods (§5.2, §5.3) replace the
+delegation later, one generic at a time.
+
+The list form of `coef` (decision 2) fits a separate class better: no existing code expects a
+matrix there.
 
 **What follows from decision 3.** `ridge.default()` is currently univariate throughout:
 - `y` is centered as a vector;
@@ -300,13 +326,19 @@ Generalizing it means:
 - treating `y` as an n × q matrix, with q = 1 the current case;
 - computing `Sigma` (q × q) in place of `MSE`;
 - storing `cov` as `V_λ`, *without* the `MSE` factor, in the multivariate case;
-- computing criteria per response plus a pooled GCV.
+- computing criteria per response plus a pooled GCV;
+- returning class `"ridge"` when q = 1, and `"mlmridge"` when q > 1.
 
 **The univariate output must stay byte-for-byte the same.** Before changing anything, save
 reference results from the current `ridge()` for longley, prostate, Manpower and Acetylene, and
 compare after the change. This stands in for the deferred tests.
 
 ## 10. Audit: what inherited `*.ridge` methods do with an `mlmridge` object (2026-11-19)
+
+*This audit led to revising decision 1 (§9): `mlmridge` is now a separate class, so none of
+these inherited calls will happen. The table still records which `ridge` methods depend on
+which components, and that is what each `*.mlmridge` method or the `as.ridge()` delegation has
+to supply.*
 
 **Method.** I grepped `R/` for uses of `x$coef`, `x$cov`, `coef()`, `vcov()` and the other
 components. Then I built a **mock** `mlmridge` object with the decided structure and called
@@ -343,28 +375,28 @@ every inherited method on it:
   uses its scale (`plot`, `pairs`, `plot3d`, `precision`) goes through a per-response
   accessor that multiplies by `Sigma[k, k]`.
 
-**Points to watch:**
-- **Class order after `pca()`.** `pca.ridge()` sets `class(result) <- c("pcaridge", class(x))`,
-  which gives `c("pcaridge", "mlmridge", "ridge")`. So the `*.pcaridge` methods (`plot`,
-  `plot3d`, `biplot`) would be dispatched *before* any `*.mlmridge` method. `pca.mlmridge()`
-  needs to produce something like `c("mlmpcaridge", "mlmridge", "pcaridge", "ridge")`, or
-  `pca()` could be supported only per response.
-- **`cov` changes meaning.** For `ridge` it is the full covariance (MSE × `V_λ`); for
-  `mlmridge` it is the X part only. Every method that reads `x$cov` directly (`plot.ridge`,
-  `plot3d.ridge`, `precision.ridge`, `pca.ridge`) must reach it through
-  `as.ridge(x, response)`, never directly. Alternatively, store it under a different name
-  (e.g., `covX`) and leave `cov` absent, so a stray inherited call fails loudly instead of
-  quietly using the wrong scale. **Recommendation: use `covX`.**
-- **`kHKB`, `kLW`, `kGCV` and `criteria`** are read directly by `traceplot`, `best`,
-  `plot.vif.ridge` and `vif.ridge`. Decide their multivariate form (per-response vectors plus a
-  pooled GCV) before writing those methods.
+**Points to watch.** These were problems under inheritance; with a separate class, the first
+two go away.
+- *Resolved:* **class order after `pca()`.** Under inheritance, `pca.ridge()` would have
+  produced `c("pcaridge", "mlmridge", "ridge")`, sending `plot`, `plot3d` and `biplot` to the
+  `*.pcaridge` methods first. With a separate class, `pca.mlmridge()` either delegates per
+  response, returning an ordinary `pcaridge` object, or later returns its own
+  `c("mlmpcaridge", "mlmridge")`.
+- *Resolved:* **`cov` changing meaning.** Only `*.mlmridge` methods and `as.ridge()` ever
+  read an `mlmridge` object's `cov`, so it can hold `V_λ` under the same name. The `covX`
+  rename is no longer needed.
+- *Still open:* **`kHKB`, `kLW`, `kGCV` and `criteria`.** The univariate methods read these
+  directly (`traceplot`, `best`, `plot.vif.ridge`, `vif.ridge`). `as.ridge()` must fill them
+  per response. The `mlmridge` object's own layout (per-response vectors plus a pooled GCV)
+  needs to be settled before `best.mlmridge()` and `traceplot.mlmridge()`.
 
-**Minimal first version** (enough that nothing errors):
-1. `as.ridge(x, response)`.
-2. `coef`, `vcov` and `print` methods.
-3. A `response=` argument, defaulting to the first response with a message, on `traceplot`,
-   `plot`, `pairs`, `plot3d`, `precision`, `pca` and `biplot`, delegating through `as.ridge()`.
-4. A names fix for `vif`.
+**Minimal first version** (enough that every supported generic works):
+1. `as.ridge(x, response)`, returning a genuine `ridge` object.
+2. `coef`, `vcov` and `print` methods for `mlmridge`.
+3. `traceplot`, `plot`, `pairs`, `plot3d`, `precision`, `pca` and `biplot` methods for
+   `mlmridge`, each with a `response=` argument (defaulting to the first response, with a
+   message) and delegating through `as.ridge()`.
+4. A `vif.mlmridge()` that returns the shared VIFs, with predictor and λ names.
 
 `best` comes once the criteria are settled. Multi-response `traceplot` (§5.2) and the
 cross-response ellipses (§5.3) come after that.
