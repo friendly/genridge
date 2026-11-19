@@ -268,3 +268,66 @@ Generalizing it means:
 **The univariate output must stay byte-for-byte the same.** Before changing anything, save
 reference results from the current `ridge()` for longley, prostate, Manpower and Acetylene, and
 compare after the change. This stands in for the deferred tests.
+
+## 10. Audit: what inherited `*.ridge` methods do with an `mlmridge` object (2026-11-19)
+
+**Method.** I grepped `R/` for uses of `x$coef`, `x$cov`, `coef()`, `vcov()` and the other
+components. Then I built a **mock** `mlmridge` object with the decided structure and called
+every inherited method on it:
+- class `c("mlmridge", "ridge")`;
+- `coef` = a list of p × q `B` matrices, one per λ;
+- `cov` = a list of p × p `V_λ`, *without* the Σ or MSE factor;
+- `Sigma` = q × q;
+- data: longley, 5 predictors, 2 responses.
+
+| Method | Reads | Result on mock | Needed for `mlmridge` |
+|---|---|---|---|
+| `coef.ridge()` | `x$coef` | returns the list | fine as is (decision 2); add `coef(x, response=)` and the 3-d array helper |
+| `vcov.ridge()` | `x$cov` | returns the list of `V_λ` | its meaning changes (no Σ factor). Own method: `vcov(x, response=)` → `Sigma[k,k] * V_λ`; `vcov(x)` → the list of `kronecker(Sigma, V_λ)`? |
+| `print.ridge()` | `coef(x)` | runs; prints the raw list | own method (per-response coefficient tables, or one stacked table) |
+| `best.ridge()` | `criteria`, `svd.D` | runs | depends on how criteria are stored (per response + pooled GCV). The `df` column is right, since `svd.D` comes from X only |
+| `traceplot()` | `coef(x)` as a λ × p matrix; `kHKB`, `kLW` | **ERROR**: incorrect number of dimensions | own method (§5.2); `kHKB`/`kLW` become per response |
+| `plot.ridge()` | `x$coef[which.lambda, variables]`, `x$cov`, `dimnames(x$coef)[[2]]` | **ERROR**: "There are only 0 predictor variables" | delegate per response (§5.1). Ellipses need `Sigma[k,k] * V_λ` |
+| `pairs.ridge()` | `x$coef[, i]`, `apply(x$coef, 2, range)` | **ERROR**: dim(X) must have a positive length | delegate per response |
+| `plot3d.ridge()` | same pattern as `plot.ridge()` | not run (rgl); will fail the same way | delegate per response |
+| `precision.ridge()` | `x$cov`, `coef()` as a matrix, `ncol(b)` | **ERROR**: non-numeric argument to binary operator | delegate per response. A multivariate version would use `kronecker(Sigma, V_λ)` (§2.4) |
+| `vif.ridge()` | `vcov()`, `colnames(coef())`, `rownames(coef())` | runs, but the **row and column names are lost** | values are correct: VIF uses `cov2cor()`, so it doesn't depend on Σ, and it equals the univariate VIF. Only the names need fixing; no `response=` argument needed |
+| `pca.ridge()` | `x$coef %*% x$svd.V`, `x$cov` | **ERROR**: requires numeric matrix | own method: rotate each `B` (`t(V) %*% B`, i.e., rows of B) and each `V_λ` |
+| `biplot.ridge()` / `biplot.pcaridge()` | `coef(x)`, `svd.V`, `svd.D` | **ERROR**: "There are only 0 predictor variables" | delegate per response, or a new coefficient biplot (§5.5) |
+
+**Summary:**
+- 7 of the 12 methods give an error; 5 run.
+- Of the 5 that run:
+  - `coef` and `vcov` return lists, which is by design;
+  - `print` is untidy;
+  - `best` depends on how the criteria are stored;
+  - `vif` silently loses its names.
+- There are no silently *wrong numbers*, as long as `cov` holds `V_λ` and every method that
+  uses its scale (`plot`, `pairs`, `plot3d`, `precision`) goes through a per-response
+  accessor that multiplies by `Sigma[k, k]`.
+
+**Points to watch:**
+- **Class order after `pca()`.** `pca.ridge()` sets `class(result) <- c("pcaridge", class(x))`,
+  which gives `c("pcaridge", "mlmridge", "ridge")`. So the `*.pcaridge` methods (`plot`,
+  `plot3d`, `biplot`) would be dispatched *before* any `*.mlmridge` method. `pca.mlmridge()`
+  needs to produce something like `c("mlmpcaridge", "mlmridge", "pcaridge", "ridge")`, or
+  `pca()` could be supported only per response.
+- **`cov` changes meaning.** For `ridge` it is the full covariance (MSE × `V_λ`); for
+  `mlmridge` it is the X part only. Every method that reads `x$cov` directly (`plot.ridge`,
+  `plot3d.ridge`, `precision.ridge`, `pca.ridge`) must reach it through
+  `as.ridge(x, response)`, never directly. Alternatively, store it under a different name
+  (e.g., `covX`) and leave `cov` absent, so a stray inherited call fails loudly instead of
+  quietly using the wrong scale. **Recommendation: use `covX`.**
+- **`kHKB`, `kLW`, `kGCV` and `criteria`** are read directly by `traceplot`, `best`,
+  `plot.vif.ridge` and `vif.ridge`. Decide their multivariate form (per-response vectors plus a
+  pooled GCV) before writing those methods.
+
+**Minimal first version** (enough that nothing errors):
+1. `as.ridge(x, response)`.
+2. `coef`, `vcov` and `print` methods.
+3. A `response=` argument, defaulting to the first response with a message, on `traceplot`,
+   `plot`, `pairs`, `plot3d`, `precision`, `pca` and `biplot`, delegating through `as.ridge()`.
+4. A names fix for `vif`.
+
+`best` comes once the criteria are settled. Multi-response `traceplot` (§5.2) and the
+cross-response ellipses (§5.3) come after that.
