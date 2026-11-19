@@ -118,9 +118,7 @@ separate, a name can take a multivariate meaning without risk:
 - `Sigma`: the q × q residual covariance from the OLS fit, **E** / (n − p − 1).
 - `mse`: a matrix `[lambda, response]`.
 - `scales`, `svd.D`, `svd.U`, `svd.V`: as now; they depend only on X.
-- Criteria: HKB and LW per response (a matrix or named vectors); GCV both pooled (as in
-  VARshrink) and per response; `kGCV` from the pooled GCV. Exact layout to be settled
-  before `best()` and `traceplot()`.
+- Criteria: see **§4a** below.
 
 **Key helper: extract a univariate `ridge` object for one response**, e.g.
 `as.ridge(x, response = "Y1")`.
@@ -142,6 +140,67 @@ Basic methods:
 - `print()`: λ and df, then a coefficient table per response.
 - Optionally, `is_ridge_fit()` or a documentation note, if other code needs to recognize
   "either kind of ridge fit". (The one argument for inheriting was `inherits(x, "ridge")`.)
+
+## 4a. Criteria layout (agreed 2026-11-19)
+
+**The rule.** Per-response values go in fields with the **same names as in `ridge`**, each
+widened by one dimension for responses. Pooled values get **new names**. Then
+`as.ridge(x, k)` is just a subset, and the univariate methods (`traceplot`, `best`, `vif`,
+`plot.vif.ridge`) work on its result unchanged.
+
+| Field | Shape (q responses, m λ values) | Contents |
+|---|---|---|
+| `kHKB` | named vector, length q | HKB estimate per response, from that response's OLS fit (the univariate formula) |
+| `kLW` | named vector, length q | Lawless–Wang estimate per response |
+| `GCV` | m × q matrix | GCV per λ and response (the univariate formula, column by column) |
+| `kGCV` | named vector, length q | the λ minimizing each response's GCV |
+| `criteria` | q × 3 matrix | rows = responses; columns `kHKB`, `kLW`, `kGCV` |
+| `GCV.pooled` | vector, length m | one GCV across responses (see below) |
+| `kGCV.pooled` | number | the λ minimizing `GCV.pooled`: **the shared λ to recommend** |
+
+`as.ridge(x, k)` sets:
+- `kHKB = x$kHKB[k]`, `kLW = x$kLW[k]`, `kGCV = x$kGCV[k]`;
+- `GCV = x$GCV[, k]`;
+- `criteria = x$criteria[k, ]`.
+
+That gives exactly the univariate structure.
+
+**Pooling GCV.** In genridge the GCV denominator, $(n - \mathrm{df}(\lambda))^2$, depends only
+on X, so it is the same for every response. Pooling therefore combines the residual sums of
+squares $\mathrm{RSS}_k(\lambda)$, and their scale matters. There are three options, set with an
+argument `pool = c("scaled", "raw", "mahalanobis")`:
+
+- **`"scaled"` (default):**
+  $\sum_k \mathrm{RSS}_k(\lambda) / \hat\sigma^2_{kk} \,/\, (n - \mathrm{df})^2$, where
+  $\hat\sigma^2_{kk}$ is the OLS residual variance (the diagonal of `Sigma`).
+  - Each response contributes relative to its own noise level.
+  - The result doesn't depend on the units of the responses.
+- **`"raw"`:** $\sum_k \mathrm{RSS}_k(\lambda) / (n - \mathrm{df})^2$, as in VARshrink.
+  - The response with the largest variance dominates.
+  - The result depends on units. Included for comparison with VARshrink.
+- **`"mahalanobis"`:**
+  $\mathrm{tr}(\hat{\boldsymbol\Sigma}^{-1} \mathbf{R}(\lambda)^\top \mathbf{R}(\lambda)) / (n - \mathrm{df})^2$.
+  - It also uses the residual *covariances*, which is more principled.
+  - It is unstable when responses are nearly collinear (in schooldata, reading and math have
+    r = 0.99), so it is an option, not the default.
+
+**HKB and LW:** per response only. There is no ad-hoc pooling (e.g., averaging), since it has
+no theoretical basis. The principled multivariate analogue is Brown & Zidek's (1980)
+multivariate Hoerl–Kennard rule, which belongs to §6 (later extensions).
+
+**How the methods use the criteria:**
+- **`best.mlmridge()`** returns a long data frame with columns `response`, `criterion`
+  (HKB, LW, GCV), `k` and `df`:
+  - one row per response and criterion;
+  - a final `(pooled)` row for GCV.
+  
+  `df` comes from `svd.D`, which is shared, so it is computed exactly as in `best.ridge()`.
+- **`traceplot.mlmridge()`** draws one panel per response. Each panel marks that response's
+  HKB and LW, and every panel marks the pooled-GCV λ at the same place.
+- **`print.mlmridge()`** shows the pooled-GCV λ and the q × 3 `criteria` table.
+
+**To document:** `kGCV` and `kGCV.pooled` are the best values *among the λ values supplied*,
+as now. HKB and LW are closed-form estimates.
 
 ## 5. Plot methods: ideas, roughly in order of value
 
@@ -385,10 +444,10 @@ two go away.
 - *Resolved:* **`cov` changing meaning.** Only `*.mlmridge` methods and `as.ridge()` ever
   read an `mlmridge` object's `cov`, so it can hold `V_λ` under the same name. The `covX`
   rename is no longer needed.
-- *Still open:* **`kHKB`, `kLW`, `kGCV` and `criteria`.** The univariate methods read these
-  directly (`traceplot`, `best`, `plot.vif.ridge`, `vif.ridge`). `as.ridge()` must fill them
-  per response. The `mlmridge` object's own layout (per-response vectors plus a pooled GCV)
-  needs to be settled before `best.mlmridge()` and `traceplot.mlmridge()`.
+- *Resolved (§4a):* **`kHKB`, `kLW`, `kGCV` and `criteria`.** The univariate methods read
+  these directly (`traceplot`, `best`, `plot.vif.ridge`, `vif.ridge`). The layout in §4a keeps
+  the same names, widened per response, so `as.ridge()` fills them by subsetting. Pooled GCV
+  goes in `GCV.pooled` and `kGCV.pooled`.
 
 **Minimal first version** (enough that every supported generic works):
 1. `as.ridge(x, response)`, returning a genuine `ridge` object.
