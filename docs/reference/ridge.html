@@ -106,6 +106,9 @@ HKB: Hoerl et al. (1975); LW: Lawless &amp; Wang (1976); GCV: Golub et al. (1975
 <span><span class="co"># S3 method for class 'formula'</span></span>
 <span><span class="fu">ridge</span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span>, lambda <span class="op">=</span> <span class="fl">0</span>, <span class="va">df</span>, svd <span class="op">=</span> <span class="cn">TRUE</span>, contrasts <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for class 'lm'</span></span>
+<span><span class="fu">ridge</span><span class="op">(</span><span class="va">y</span>, lambda <span class="op">=</span> <span class="fl">0</span>, <span class="va">df</span>, svd <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># Default S3 method</span></span>
 <span><span class="fu">ridge</span><span class="op">(</span><span class="va">y</span>, <span class="va">X</span>, lambda <span class="op">=</span> <span class="fl">0</span>, <span class="va">df</span>, svd <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
@@ -129,7 +132,9 @@ HKB: Hoerl et al. (1975); LW: Lawless &amp; Wang (1976); GCV: Golub et al. (1975
 
 
 <dl><dt id="arg-y">y<a class="anchor" aria-label="anchor" href="#arg-y"></a></dt>
-<dd><p>A numeric vector containing the response variable. NAs not allowed.</p></dd>
+<dd><p>For the default method, a numeric vector containing the response variable. NAs not allowed.
+For the <code>lm</code> method, a linear model fitted by <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code>, whose response, predictors
+(including any factor contrasts and transformed terms) and offset are used.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -244,6 +249,10 @@ Regression Estimators," <em>Communications in Statistics</em>, 5, 307-323.</p>
 <span class="r-in"><span><span class="va">lridge</span> <span class="op">&lt;-</span> <span class="fu">ridge</span><span class="op">(</span><span class="va">Employed</span> <span class="op">~</span> <span class="va">GNP</span> <span class="op">+</span> <span class="va">Unemployed</span> <span class="op">+</span> <span class="va">Armed.Forces</span> <span class="op">+</span> <span class="va">Population</span> <span class="op">+</span> <span class="va">Year</span> <span class="op">+</span> <span class="va">GNP.deflator</span>, </span></span>
 <span class="r-in"><span>    data<span class="op">=</span><span class="va">longley</span>, lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># same, from a fitted lm() model</span></span></span>
+<span class="r-in"><span><span class="va">longley.lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Employed</span> <span class="op">~</span> <span class="va">GNP</span> <span class="op">+</span> <span class="va">Unemployed</span> <span class="op">+</span> <span class="va">Armed.Forces</span> <span class="op">+</span> <span class="va">Population</span> <span class="op">+</span> <span class="va">Year</span> <span class="op">+</span> <span class="va">GNP.deflator</span>,</span></span>
+<span class="r-in"><span>    data<span class="op">=</span><span class="va">longley</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lridge</span> <span class="op">&lt;-</span> <span class="fu">ridge</span><span class="op">(</span><span class="va">longley.lm</span>, lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              GNP Unemployed Armed.Forces  Population     Year GNP.deflator</span>
