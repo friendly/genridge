@@ -10,3 +10,4 @@ extra/
 ^docs$
 ^pkgdown$
 dev/
+^data-raw$
