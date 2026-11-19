@@ -46,7 +46,9 @@
 #' increasing from `lambda[1] = 0`, or equivalently, a vector of `df` decreasing from \eqn{p}.
 #' 
 #' 
-#' @param y A numeric vector containing the response variable. NAs not allowed.
+#' @param y For the default method, a numeric vector containing the response variable. NAs not allowed.
+#'        For the `lm` method, a linear model fitted by [stats::lm()], whose response, predictors
+#'        (including any factor contrasts and transformed terms) and offset are used.
 #' @param X A matrix of predictor variables. NA's not allowed. Should not
 #'        include a column of 1's for the intercept.
 #' @param formula For the `formula` method, a two-sided formula.
@@ -120,8 +122,12 @@
 #' # same, using formula interface
 #' lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, 
 #' 		data=longley, lambda=lambda)
-#' 
-#' 
+#'
+#' # same, from a fitted lm() model
+#' longley.lm <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator,
+#' 		data=longley)
+#' lridge <- ridge(longley.lm, lambda=lambda)
+#'
 #' coef(lridge)
 #' 
 #' # standard trace plot
@@ -215,9 +221,36 @@ ridge.formula <- function(
 	ridge.default(Y, X, lambda=lambda, df=df, svd=svd)
 }
 
+#' @rdname ridge
+#' @exportS3Method
+ridge.lm <- function(
+    y,
+    lambda = 0,
+    df,
+    svd = TRUE,
+    ...) {
+  if (inherits(y, "glm"))
+    stop("ridge() does not support glm objects; use a model fit by lm()")
+  if (inherits(y, "mlm"))
+    stop("ridge() does not (yet) support multivariate linear models")
+  if (!is.null(stats::weights(y)))
+    stop("ridge() does not support weighted least squares (lm() with weights)")
+
+  mf <- stats::model.frame(y)
+  Y <- model.response(mf)
+  X <- model.matrix(y)
+  offset <- model.offset(mf)
+  if (!is.null(offset))
+    Y <- Y - offset
+  # ridge.default() centers X and Y, so the intercept column is not needed
+  if (attr(stats::terms(y), "intercept"))
+    X <- X[, colnames(X) != "(Intercept)", drop = FALSE]
+  ridge.default(Y, X, lambda = lambda, df = df, svd = svd)
+}
+
 
 #' @rdname ridge
-#' @exportS3Method  
+#' @exportS3Method
 ridge.default <-
 		function(y, X, lambda=0, df, svd=TRUE, ...){
 	#dimensions	

@@ -7,6 +7,7 @@
 \alias{coef.ridge}
 \alias{print.ridge}
 \alias{vcov.ridge}
+\alias{ridge.lm}
 \alias{best}
 \alias{best.ridge}
 \title{Ridge Regression Estimates}
@@ -14,6 +15,8 @@
 ridge(y, ...)
 
 \method{ridge}{formula}(formula, data, lambda = 0, df, svd = TRUE, contrasts = NULL, ...)
+
+\method{ridge}{lm}(y, lambda = 0, df, svd = TRUE, ...)
 
 \method{ridge}{default}(y, X, lambda = 0, df, svd = TRUE, ...)
 
@@ -28,7 +31,9 @@ best(object, ...)
 \method{best}{ridge}(object, ...)
 }
 \arguments{
-\item{y}{A numeric vector containing the response variable. NAs not allowed.}
+\item{y}{For the default method, a numeric vector containing the response variable. NAs not allowed.
+For the \code{lm} method, a linear model fitted by \code{\link[stats:lm]{stats::lm()}}, whose response, predictors
+(including any factor contrasts and transformed terms) and offset are used.}
 
 \item{...}{Other arguments, passed down to methods}
 
@@ -138,6 +143,10 @@ lridge <- ridge(longley.y, longley.X, lambda=lambda)
 lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, 
 		data=longley, lambda=lambda)
 
+# same, from a fitted lm() model
+longley.lm <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator,
+		data=longley)
+lridge <- ridge(longley.lm, lambda=lambda)
 
 coef(lridge)
 
