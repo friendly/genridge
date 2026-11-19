@@ -4,6 +4,7 @@ o **Experimental:** multivariate ridge regression: `ridge()` now accepts a matri
 
 ## genridge 0.8.1
 
+o `traceplot()` and the `plot()` method for `vif()` results now leave enough room for the variable labels, based on their width, so long names are no longer clipped at the side of the plot.
 o Bug fixes:
     - `ridge()` with a formula and `svd = FALSE` failed with "variable lengths differ".
     - `best()` was documented but its generic was not exported; it now is.

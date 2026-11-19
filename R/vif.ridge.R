@@ -150,18 +150,11 @@ plot.vif.ridge <-
     if (missing(xlim)) xlim <- range(X)
     if (missing(ylim)) ylim <- range(vif)
     
-    #	labels <- match.arg(labels)
-    if (labels == "left") {
-      xlim[1] <- xlim[1] - .1 * diff(xlim)
-      labx <- X[1]
-      laby <- vif[1,]
-    }
-    else {
-      xlim[2] <- xlim[2] + .1 * diff(xlim)
-      labx <- X[1]
-      laby <- vif[1,]
-    }
-    
+    # make room for the variable labels at the side where they are drawn
+    xlim <- label_xlim(xlim, colnames(vif), side = labels)
+    labx <- X[1]
+    laby <- vif[1,]
+
     matplot(X, vif, 	type="b", xlim=xlim, ylim=ylim, ylab=ylab, xlab=xlab, col=col, pch=pch, ...)
     abline(h=0, lty=3)
     

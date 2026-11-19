@@ -23,7 +23,7 @@
 #' @param ... Other arguments passed to [graphics::matplot()]
 #' @return None. Used for its side effect of plotting.
 #' @author Michael Friendly
-#' @importFrom graphics matplot
+#' @importFrom graphics matplot strwidth par
 #' @export
 #' @seealso 
 #' [ridge()] for details on ridge regression as implemented here
@@ -85,17 +85,10 @@ function(x,
 	if (missing(xlim)) xlim <- range(X)
 	if (missing(ylim)) ylim <- range(coef)
 
-#	labels <- match.arg(labels)
-	if (labels == "left") {
-		xlim[1] <- xlim[1] - .1 * diff(xlim)
-		labx <- X[1]
-		laby <- coef[1,]
-	}
-	else {
-		xlim[2] <- xlim[2] + .1 * diff(xlim)
-		labx <- X[1]
-		laby <- coef[1,]
-	}
+	# make room for the variable labels at the side where they are drawn
+	xlim <- label_xlim(xlim, colnames(coef), side = labels)
+	labx <- X[1]
+	laby <- coef[1,]
 
 	matplot(X, coef, 	type="b", xlim=xlim, ylim=ylim, ylab=ylab, xlab=xlab, col=col, pch=pch, ...)
 	abline(h=0, lty=3)
@@ -106,6 +99,21 @@ function(x,
 		text(x$kLW, ylim[1], "LW", pos=3)
 	}
 	vnames <- colnames(coef)
-	text(labx, laby, colnames(coef), pos=c(2,4)[1+(labels=="right")])
+	text(labx, laby, colnames(coef), pos=c(2,4)[1+(labels=="right")], xpd=TRUE)
+}
+
+# Extend xlim on one side so that labels drawn at the first point (with pos = 2 or 4) fit inside
+# the plot region. The space needed is the width of the longest label (plus the text offset) as
+# a fraction of the plot width, allowing for the default 4% axis extension (xaxs = "r") at each
+# end. Never extends by less than the 10% used previously.
+label_xlim <- function(xlim, labels, side = c("left", "right"), cex = par("cex")) {
+  side <- match.arg(side)
+  r <- diff(xlim)
+  w <- max(strwidth(labels, units = "inches", cex = cex)) + strwidth("MM", units = "inches", cex = cex)
+  f <- min(w / par("pin")[1], 0.45)                  # fraction of the plot width needed
+  e <- r * (1.08 * f - 0.04) / (1.04 - 1.08 * f)     # extension giving that fraction
+  e <- max(e, 0.1 * r)
+  if (side == "left") xlim[1] <- xlim[1] - e else xlim[2] <- xlim[2] + e
+  xlim
 }
 

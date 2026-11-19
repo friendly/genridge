@@ -66,6 +66,7 @@ importFrom(graphics,
   par,
   points,
   polygon,
+  strwidth,
   text
 )
 importFrom(splines,bs)
