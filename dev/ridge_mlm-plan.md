@@ -278,6 +278,33 @@ as now. HKB and LW are closed-form estimates.
      - Its documentation must repeat the difference in meaning.
      - Alternatively, it could live in heplots as `coefplot.mlmridge()`, with genridge in
        heplots' Suggests. Decide when doing it.
+   - **Idea (held, 2026-11-19): make the several-predictor display easier to read.**
+     - **The plot:** `plot(sridge, predictor = 1:5, which.lambda = c(1, 6))` (gallery
+       `cross-all.png`).
+     - **What it shows:** each predictor's coefficients (reading, math) at λ = 0 and λ = 5,
+       with ellipses. The key message is the **grouping effect**: at λ = 5 the near-duplicate
+       predictors (occupation, visit, counseling, education; r = 0.98–0.99) converge to a
+       common value. Occupation comes *down* from ≈ 20 and visit comes *up* from negative
+       values, rather than each shrinking independently towards 0.
+     - **Why it's hard to read now:**
+       1. only the selected λ values are joined, so the path through the intermediate λ is
+          hidden;
+       2. the small red ellipses at λ = 5 overprint each other in the cluster;
+       3. labels appear only at the start (λ = 0), and they overlap (education/counseling);
+       4. there is no legend for the λ colours.
+     - **What could be done:**
+       - draw each predictor's **full path** through all λ (a thin line, perhaps with small
+         points), but **ellipses only at `which.lambda`**: a new argument such as
+         `path = TRUE` / `path.lambda = "all"`;
+       - optional **end labels** (`label.end = TRUE`) at the largest λ, and/or a small
+         offset (`pos`) for label clashes;
+       - a **λ legend** (`legend = TRUE`) when colours encode λ;
+       - colour by *predictor* with line type or fill alpha by λ, which reads better when
+         there are several predictors;
+       - a "zoom" option or inset for the cluster region at large λ;
+       - point to it in the vignette with an explanation, not as a default display.
+     - It may be easier to redo in tinyplot (`by = predictor` gives automatic legends and
+       palettes; see `dev/tinyplot-notes.md`).
 
 4. **Ridge HE plots (new; links to heplots).**
    - **H**(λ) = $\widehat{\mathbf{B}}(\lambda)^\top \mathbf{X}^\top\mathbf{X}\,\widehat{\mathbf{B}}(\lambda)$
