@@ -302,6 +302,14 @@ genridge's `ridge()`.
        thin;
      - several high-leverage or outlying cases (`robmlm()` downweights 12);
      - the variables are indices that are hard to interpret.
+   - **Criteria favour little shrinkage** (first run of the new code, 2026-11-19):
+     - HKB is 0.15 for reading, 0.15 for math and 0.03 for self-esteem; LW is 0.25, 0.30 and
+       0.02. GCV per response and pooled both have their minimum near λ = 0.1.
+     - The wrong-sign `visit` coefficients only correct themselves at λ ≈ 1–5, well past these
+       "optimal" values.
+     - This is a teaching point for the example: the prediction-optimal λ and the λ that gives
+       interpretable coefficients differ.
+     - Use a fine grid at the low end, e.g. `lambda = c(0, 0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10)`.
 2. **`robustbase::pulpfiber`.**
    - n = 62; 4 responses (paper properties), 4 predictors (fibre properties).
    - VIFs up to 6.2; the responses correlate at 0.87–0.99.
