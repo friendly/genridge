@@ -2,9 +2,71 @@
 
 ## genridge 0.8.1
 
+o **Experimental: multivariate ridge regression.** These functions are
+new in this version; their arguments and results may change in future
+releases. -
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) now
+accepts a matrix response: `cbind(Y1, Y2) ~ ...` in a formula, a
+multivariate [`lm()`](https://rdrr.io/r/stats/lm.html) fit, or a matrix
+`y`. All responses are fitted with common ridge constants, and the
+result has class `"mlmridge"`. - The HKB, LW and GCV criteria are given
+for each response; GCV can also be pooled over responses
+(`pool = "scaled"`, `"raw"` or `"mahalanobis"`) to choose a common ridge
+constant. -
+[`as.ridge()`](https://friendly.github.io/genridge/reference/as.ridge.md)
+extracts the results for one response as an ordinary `"ridge"` object. -
+[`coef()`](https://rdrr.io/r/stats/coef.html),
+[`vcov()`](https://rdrr.io/r/stats/vcov.html) and
+[`print()`](https://rdrr.io/r/base/print.html) methods for `"mlmridge"`
+objects. -
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md),
+[`plot()`](https://rdrr.io/r/graphics/plot.default.html),
+[`pairs()`](https://rdrr.io/r/graphics/pairs.html),
+[`plot3d()`](https://friendly.github.io/genridge/reference/plot3d.md),
+[`biplot()`](https://rdrr.io/r/stats/biplot.html),
+[`pca()`](https://friendly.github.io/genridge/reference/pca.md),
+[`precision()`](https://friendly.github.io/genridge/reference/precision.md)
+and `vif()` methods apply the univariate methods to one response at a
+time (`response =`).
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md)
+by default draws all responses, one panel each. -
+`plot(x, predictor = )` draws coefficient ellipses for one or more
+predictors in the space of two responses (`responses =`), traced over
+the ridge constants. o New vignette, “Getting started with genridge”,
+introducing the main functions with the `longley` and `Detroit`
+examples. o
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md)
+is now an S3 generic, with methods for `"ridge"` and `"mlmridge"`
+objects. o
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md)
+and the [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method
+for `vif()` results now leave enough room for the variable labels, based
+on their width, so long names are no longer clipped at the side of the
+plot. o Bug fixes: -
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) with
+a formula and `svd = FALSE` failed with “variable lengths differ”. -
+[`best()`](https://friendly.github.io/genridge/reference/ridge.md) was
+documented but its generic was not exported; it now is. -
+[`best()`](https://friendly.github.io/genridge/reference/ridge.md)
+reported the same (wrong) `df` for all three criteria; each now gets its
+own equivalent degrees of freedom.
+
+o New
+[`ridge.lm()`](https://friendly.github.io/genridge/reference/ridge.md)
+method:
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) can
+now be applied directly to a model fitted by
+[`lm()`](https://rdrr.io/r/stats/lm.html), e.g.,
+`ridge(lm(y ~ x1 + x2, data), lambda = ...)`. The response, model matrix
+(with any factor contrasts and transformed terms) and offset are taken
+from the fitted model. `glm` and weighted `lm` fits give an error; a
+multivariate [`lm()`](https://rdrr.io/r/stats/lm.html) fit gives a
+multivariate ridge regression (see above).
+
 o Replaced links to `datavis.ca`, which is offline, with DOIs
-(documentation) and `friendly.github.io/papers` (README). o
-Documentation converted to roxygen markdown
+(documentation) and `friendly.github.io/papers` (README).
+
+o Documentation converted to roxygen markdown
 (`Roxygen: list(markdown = TRUE)`): `\code{}`, `\link{}`, `\emph{}` and
 `\bold{}` replaced by markdown equivalents, and `\describe{}`,
 `\itemize{}`, `\enumerate{}` and `@return` `\item{}` lists by markdown

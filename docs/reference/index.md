@@ -50,6 +50,28 @@ Low-rank PCA methods
 - [`biplot(`*`<pcaridge>`*`)`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md)
   : Biplot of Ridge Regression Trace Plot in SVD Space
 
+## Multivariate ridge regression (experimental)
+
+Ridge regression for several responses with common ridge constants:
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) with
+a matrix response returns an `"mlmridge"` object.
+
+- [`as.ridge()`](https://friendly.github.io/genridge/reference/as.ridge.md)
+  : Extract a Univariate Ridge Regression from a Multivariate One
+- [`coef(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-methods.md)
+  [`vcov(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-methods.md)
+  [`print(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-methods.md)
+  : Methods for Multivariate Ridge Regression Objects
+- [`traceplot(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  [`plot(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  [`pairs(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  [`plot3d(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  [`biplot(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  [`pca(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  [`precision(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  [`vif(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)
+  : Plot and Summary Methods for Multivariate Ridge Regression
+
 ## Data sets
 
 Data sets in the package

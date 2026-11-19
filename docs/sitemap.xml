@@ -1,9 +1,12 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://friendly.github.io/genridge/404.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/articles/genridge.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/articles/index.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/authors.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/index.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/news/index.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/Acetylene.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/as.ridge.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/biplot.pcaridge.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/contourf.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/Detroit.html</loc></url>
@@ -11,6 +14,8 @@
 <url><loc>https://friendly.github.io/genridge/reference/genridge-package.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/index.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/Manpower.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/mlmridge-methods.html</loc></url>
+<url><loc>https://friendly.github.io/genridge/reference/mlmridge-plots.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/pairs.ridge.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/pca.html</loc></url>
 <url><loc>https://friendly.github.io/genridge/reference/plot.precision.html</loc></url>

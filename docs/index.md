@@ -2,13 +2,13 @@
 
 ## **Generalized Ridge Trace Plots for Ridge Regression**
 
-Version 0.8.0; documentation built for `pkgdown` 2026-09-10
+Version 0.8.1; documentation built for `pkgdown` 2026-11-19
 
 ## 📝 Description
 
 ### What is ridge regression?
 
-Consider the standard linear model, \mathbf{y} = \mathbf{X} \\
+Consider the standard linear model, \mathbf{y} = \mathbf{X}
 \boldsymbol{\beta} + \boldsymbol{\epsilon} for p predictors in a
 multiple regression. In this context, high multiple correlations among
 the predictors lead to well-known problems of collinearity under
@@ -26,18 +26,20 @@ predictive accuracy.
 
 The OLS estimates, which minimize the sum of squared residuals RSS =
 \Sigma \boldsymbol{\epsilon}^2 are given by:
+
 \widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top
-\mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \\ , with
-\widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}}) =
-\widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}.
+\mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \enspace ,
+
+with \widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}})
+= \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}.
 
 Ridge regression replaces the standard residual sum of squares criterion
 with a penalized form,
 
 \mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top
 (\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda
-\boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \\
-,
+\boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0)
+\enspace ,
 
 whose solution is easily seen to be:
 
@@ -200,8 +202,11 @@ lridge
 The effects of collinearity can be measured by a variance inflation
 factor (VIF), the ratio of the sampling variances of the coefficients,
 relative to what they would be if all predictors were uncorrelated,
-given by \text{VIF}(\beta_i) = \frac{1}{1 - R^2\_{i \| \text{others}}}
-\\ , where “others” represents all other predictors except X_i.
+given by
+
+\text{VIF}(\beta_i) = \frac{1}{1 - R^2\_{i \| \text{others}}} \enspace ,
+
+where “others” represents all other predictors except X_i.
 
 `vif()` for a `"ridge"` object calculates variance inflation factors for
 all values of the ridge constant. You can see that for OLS, nearly all

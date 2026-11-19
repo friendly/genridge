@@ -21,7 +21,7 @@ coefficients are given in terms of lambda.
 coef extracts the estimated coefficients for each value of the shrinkage factor
 vcov extracts the estimated \(p \times p\) covariance matrices of the coefficients for each value of the shrinkage factor.
 best extracts the optimal shrinkage values according to several criteria:
-HKB: Hoerl et al. (1975); LW: Lawless &amp;amp; Wang (1976); GCV: Golub et al. (1975)"><meta property="og:description" content="The function ridge fits linear models by ridge regression, returning
+HKB: Hoerl et al. (1975); LW: Lawless &amp;amp; Wang (1976); GCV: Golub et al. (1979)"><meta property="og:description" content="The function ridge fits linear models by ridge regression, returning
 an object of class ridge designed to be used with the plotting
 methods in this package.
 It is also designed to facilitate an alternative representation
@@ -43,7 +43,7 @@ coefficients are given in terms of lambda.
 coef extracts the estimated coefficients for each value of the shrinkage factor
 vcov extracts the estimated \(p \times p\) covariance matrices of the coefficients for each value of the shrinkage factor.
 best extracts the optimal shrinkage values according to several criteria:
-HKB: Hoerl et al. (1975); LW: Lawless &amp;amp; Wang (1976); GCV: Golub et al. (1975)"><meta property="og:image" content="https://friendly.github.io/genridge/logo.png"></head><body>
+HKB: Hoerl et al. (1975); LW: Lawless &amp;amp; Wang (1976); GCV: Golub et al. (1979)"><meta property="og:image" content="https://friendly.github.io/genridge/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -59,7 +59,8 @@ HKB: Hoerl et al. (1975); LW: Lawless &amp;amp; Wang (1976); GCV: Golub et al. (
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/genridge.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -96,7 +97,7 @@ coefficients are given in terms of <code>lambda</code>.</p>
 <p><code>coef</code> extracts the estimated coefficients for each value of the shrinkage factor</p>
 <p><code>vcov</code> extracts the estimated \(p \times p\) covariance matrices of the coefficients for each value of the shrinkage factor.</p>
 <p><code>best</code> extracts the optimal shrinkage values according to several criteria:
-HKB: Hoerl et al. (1975); LW: Lawless &amp; Wang (1976); GCV: Golub et al. (1975)</p>
+HKB: Hoerl et al. (1975); LW: Lawless &amp; Wang (1976); GCV: Golub et al. (1979)</p>
     </div>
 
     <div class="section level2">
@@ -110,7 +111,15 @@ HKB: Hoerl et al. (1975); LW: Lawless &amp; Wang (1976); GCV: Golub et al. (1975
 <span><span class="fu">ridge</span><span class="op">(</span><span class="va">y</span>, lambda <span class="op">=</span> <span class="fl">0</span>, <span class="va">df</span>, svd <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Default S3 method</span></span>
-<span><span class="fu">ridge</span><span class="op">(</span><span class="va">y</span>, <span class="va">X</span>, lambda <span class="op">=</span> <span class="fl">0</span>, <span class="va">df</span>, svd <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">ridge</span><span class="op">(</span></span>
+<span>  <span class="va">y</span>,</span>
+<span>  <span class="va">X</span>,</span>
+<span>  lambda <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  <span class="va">df</span>,</span>
+<span>  svd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  pool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scaled"</span>, <span class="st">"raw"</span>, <span class="st">"mahalanobis"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ridge'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -132,7 +141,8 @@ HKB: Hoerl et al. (1975); LW: Lawless &amp; Wang (1976); GCV: Golub et al. (1975
 
 
 <dl><dt id="arg-y">y<a class="anchor" aria-label="anchor" href="#arg-y"></a></dt>
-<dd><p>For the default method, a numeric vector containing the response variable. NAs not allowed.
+<dd><p>For the default method, a numeric vector containing the response variable, or a
+matrix of several response variables (see <strong>Multivariate response</strong> below). NAs not allowed.
 For the <code>lm</code> method, a linear model fitted by <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code>, whose response, predictors
 (including any factor contrasts and transformed terms) and offset are used.</p></dd>
 
@@ -175,6 +185,15 @@ See the <code>contrasts.arg</code> of <code><a href="https://rdrr.io/r/stats/mod
 include a column of 1's for the intercept.</p></dd>
 
 
+<dt id="arg-pool">pool<a class="anchor" aria-label="anchor" href="#arg-pool"></a></dt>
+<dd><p>For a multivariate response only: how the GCV criterion is pooled over responses
+to choose a common ridge constant. <code>"scaled"</code> (the default) sums each response's
+residual sum of squares divided by its OLS residual variance, so the result does not
+depend on the units of the responses; <code>"raw"</code> sums the residual sums of squares;
+<code>"mahalanobis"</code> uses \(\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)\)
+for the matrix \(R\) of residuals.</p></dd>
+
+
 <dt id="arg-x-object">x, object<a class="anchor" aria-label="anchor" href="#arg-x-object"></a></dt>
 <dd><p>An object of class <code>ridge</code></p></dd>
 
@@ -199,7 +218,20 @@ include a column of 1's for the intercept.</p></dd>
 Rows correspond to observations and columns to dimensions.</p></li>
 <li><p><code>svd.V</code>: Right singular vectors of the <code>svd</code> of the scaled X
 matrix. Rows correspond to variables and columns to dimensions.</p></li>
-</ul><p>A data.frame with one row for each of the HKB, LW, and GCV criteria</p>
+</ul><p><strong>Multivariate response (experimental).</strong> If the response is a matrix with more than one column (e.g.,
+<code>cbind(Y1, Y2) ~ x1 + x2</code> in the formula, a multivariate <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> fit, or a matrix <code>y</code>), all
+responses are fitted with the same ridge constants and the result is an object of class
+<code>"mlmridge"</code>. Its components follow those above, but:</p><ul><li><p><code>coef</code> is a list, with one \(p \times q\) matrix of coefficients for each value of <code>lambda</code>.</p></li>
+<li><p><code>cov</code> is a list of the \(p \times p\) matrices that depend only on <code>X</code>; the covariance
+matrix of the coefficients for response \(k\) is <code>Sigma[k, k] * cov[[i]]</code>.</p></li>
+<li><p><code>Sigma</code> is the residual covariance matrix of the responses, from the OLS fit.</p></li>
+<li><p><code>mse</code> and <code>GCV</code> are matrices, with one column per response; <code>kHKB</code>, <code>kLW</code> and <code>kGCV</code> are
+vectors, and <code>criteria</code> is a matrix, with one row per response.</p></li>
+<li><p><code>GCV.pooled</code> and <code>kGCV.pooled</code> give the GCV criterion pooled over responses (see <code>pool</code>)
+and the value of <code>lambda</code> minimizing it.</p></li>
+</ul><p>Use <code><a href="as.ridge.html">as.ridge()</a></code> to extract the results for one response as a <code>"ridge"</code> object.
+This extension is experimental: its interface and results may change in future releases.</p>
+<p>A data.frame with one row for each of the HKB, LW, and GCV criteria</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

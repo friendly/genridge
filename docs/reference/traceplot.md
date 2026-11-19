@@ -7,6 +7,9 @@ trace plots for ridge regression provided in the `plot` method for
 ## Usage
 
 ``` r
+traceplot(x, ...)
+
+# S3 method for class 'ridge'
 traceplot(
   x,
   X = c("lambda", "df"),
@@ -27,6 +30,11 @@ traceplot(
 
   A `ridge` object, as fit by
   [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
+
+- ...:
+
+  Other arguments passed to
+  [`graphics::matplot()`](https://rdrr.io/r/graphics/matplot.html)
 
 - X:
 
@@ -54,11 +62,6 @@ traceplot(
 
   x, y limits for the plot. You may need to adjust these to allow for
   the variable labels.
-
-- ...:
-
-  Other arguments passed to
-  [`graphics::matplot()`](https://rdrr.io/r/graphics/matplot.html)
 
 ## Value
 

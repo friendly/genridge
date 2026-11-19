@@ -1,8 +1,9 @@
 pandoc: 3.1.2
 pkgdown: 2.2.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2026-11-19T14:53Z
+articles:
+  genridge: genridge.html
+last_built: 2026-11-19T19:30Z
 urls:
   reference: https://friendly.github.io/genridge/reference
   article: https://friendly.github.io/genridge/articles

@@ -38,7 +38,7 @@ coefficients for each value of the shrinkage factor.
 
 `best` extracts the optimal shrinkage values according to several
 criteria: HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV:
-Golub et al. (1975)
+Golub et al. (1979)
 
 ## Usage
 
@@ -48,8 +48,19 @@ ridge(y, ...)
 # S3 method for class 'formula'
 ridge(formula, data, lambda = 0, df, svd = TRUE, contrasts = NULL, ...)
 
+# S3 method for class 'lm'
+ridge(y, lambda = 0, df, svd = TRUE, ...)
+
 # Default S3 method
-ridge(y, X, lambda = 0, df, svd = TRUE, ...)
+ridge(
+  y,
+  X,
+  lambda = 0,
+  df,
+  svd = TRUE,
+  pool = c("scaled", "raw", "mahalanobis"),
+  ...
+)
 
 # S3 method for class 'ridge'
 coef(object, ...)
@@ -70,7 +81,13 @@ best(object, ...)
 
 - y:
 
-  A numeric vector containing the response variable. NAs not allowed.
+  For the default method, a numeric vector containing the response
+  variable, or a matrix of several response variables (see
+  **Multivariate response** below). NAs not allowed. For the `lm`
+  method, a linear model fitted by
+  [`stats::lm()`](https://rdrr.io/r/stats/lm.html), whose response,
+  predictors (including any factor contrasts and transformed terms) and
+  offset are used.
 
 - ...:
 
@@ -110,6 +127,16 @@ best(object, ...)
 
   A matrix of predictor variables. NA's not allowed. Should not include
   a column of 1's for the intercept.
+
+- pool:
+
+  For a multivariate response only: how the GCV criterion is pooled over
+  responses to choose a common ridge constant. `"scaled"` (the default)
+  sums each response's residual sum of squares divided by its OLS
+  residual variance, so the result does not depend on the units of the
+  responses; `"raw"` sums the residual sums of squares; `"mahalanobis"`
+  uses \\\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)\\ for the matrix \\R\\
+  of residuals.
 
 - x, object:
 
@@ -152,6 +179,36 @@ If `svd==TRUE` (the default), the following are also included:
 
 - `svd.V`: Right singular vectors of the `svd` of the scaled X matrix.
   Rows correspond to variables and columns to dimensions.
+
+**Multivariate response (experimental).** If the response is a matrix
+with more than one column (e.g., `cbind(Y1, Y2) ~ x1 + x2` in the
+formula, a multivariate [`lm()`](https://rdrr.io/r/stats/lm.html) fit,
+or a matrix `y`), all responses are fitted with the same ridge constants
+and the result is an object of class `"mlmridge"`. Its components follow
+those above, but:
+
+- `coef` is a list, with one \\p \times q\\ matrix of coefficients for
+  each value of `lambda`.
+
+- `cov` is a list of the \\p \times p\\ matrices that depend only on
+  `X`; the covariance matrix of the coefficients for response \\k\\ is
+  `Sigma[k, k] * cov[[i]]`.
+
+- `Sigma` is the residual covariance matrix of the responses, from the
+  OLS fit.
+
+- `mse` and `GCV` are matrices, with one column per response; `kHKB`,
+  `kLW` and `kGCV` are vectors, and `criteria` is a matrix, with one row
+  per response.
+
+- `GCV.pooled` and `kGCV.pooled` give the GCV criterion pooled over
+  responses (see `pool`) and the value of `lambda` minimizing it.
+
+Use
+[`as.ridge()`](https://friendly.github.io/genridge/reference/as.ridge.md)
+to extract the results for one response as a `"ridge"` object. This
+extension is experimental: its interface and results may change in
+future releases.
 
 A data.frame with one row for each of the HKB, LW, and GCV criteria
 
@@ -221,6 +278,10 @@ lridge <- ridge(longley.y, longley.X, lambda=lambda)
 lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, 
     data=longley, lambda=lambda)
 
+# same, from a fitted lm() model
+longley.lm <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator,
+    data=longley)
+lridge <- ridge(longley.lm, lambda=lambda)
 
 coef(lridge)
 #>              GNP Unemployed Armed.Forces  Population     Year GNP.deflator
