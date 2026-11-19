@@ -32,9 +32,12 @@ time (`response =`).
 by default draws all responses, one panel each. -
 `plot(x, predictor = )` draws coefficient ellipses for one or more
 predictors in the space of two responses (`responses =`), traced over
-the ridge constants. o New vignette, “Getting started with genridge”,
-introducing the main functions with the `longley` and `Detroit`
-examples. o
+the ridge constants.
+
+### New
+
+o New vignette, “Getting started with genridge”, introducing the main
+functions with the `longley` and `Detroit` examples. o
 [`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md)
 is now an S3 generic, with methods for `"ridge"` and `"mlmridge"`
 objects. o
@@ -42,14 +45,7 @@ objects. o
 and the [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method
 for `vif()` results now leave enough room for the variable labels, based
 on their width, so long names are no longer clipped at the side of the
-plot. o Bug fixes: -
-[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) with
-a formula and `svd = FALSE` failed with “variable lengths differ”. -
-[`best()`](https://friendly.github.io/genridge/reference/ridge.md) was
-documented but its generic was not exported; it now is. -
-[`best()`](https://friendly.github.io/genridge/reference/ridge.md)
-reported the same (wrong) `df` for all three criteria; each now gets its
-own equivalent degrees of freedom.
+plot.
 
 o New
 [`ridge.lm()`](https://friendly.github.io/genridge/reference/ridge.md)
@@ -63,14 +59,25 @@ from the fitted model. `glm` and weighted `lm` fits give an error; a
 multivariate [`lm()`](https://rdrr.io/r/stats/lm.html) fit gives a
 multivariate ridge regression (see above).
 
-o Replaced links to `datavis.ca`, which is offline, with DOIs
-(documentation) and `friendly.github.io/papers` (README).
-
 o Documentation converted to roxygen markdown
 (`Roxygen: list(markdown = TRUE)`): `\code{}`, `\link{}`, `\emph{}` and
 `\bold{}` replaced by markdown equivalents, and `\describe{}`,
 `\itemize{}`, `\enumerate{}` and `@return` `\item{}` lists by markdown
 lists. Also fixed a few small errors in the docs.
+
+### Bug fixes
+
+o Bug fixes: -
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) with
+a formula and `svd = FALSE` failed with “variable lengths differ”. -
+[`best()`](https://friendly.github.io/genridge/reference/ridge.md) was
+documented but its generic was not exported; it now is. -
+[`best()`](https://friendly.github.io/genridge/reference/ridge.md)
+reported the same (wrong) `df` for all three criteria; each now gets its
+own equivalent degrees of freedom.
+
+o Replaced links to `datavis.ca`, which is offline, with DOIs
+(documentation) and `friendly.github.io/papers` (README).
 
 ## genridge 0.8.0 (2024-11-30)
 
