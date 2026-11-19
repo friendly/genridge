@@ -1,3 +1,7 @@
+## genridge (development version)
+
+o Multivariate ridge regression (in progress): `ridge()` now accepts a matrix response (`cbind(Y1, Y2) ~ ...`, a multivariate `lm()` fit, or a matrix `y`), fitting all responses with common ridge constants and returning an object of class `"mlmridge"`. GCV can be pooled over responses (`pool =`). `as.ridge()` extracts the results for one response as a `"ridge"` object. Methods for `"mlmridge"` objects are still to come; see `dev/ridge_mlm-plan.md`.
+
 ## genridge 0.8.1
 
 o Bug fixes:

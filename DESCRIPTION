@@ -15,6 +15,7 @@ Imports:
 Suggests: 
   MASS, 
   bestglm, 
+  heplots, 
   vcdExtra
 Description: The genridge package introduces generalizations of the standard univariate
   ridge trace plot used in ridge regression and related methods.  These graphical methods

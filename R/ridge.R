@@ -46,7 +46,8 @@
 #' increasing from `lambda[1] = 0`, or equivalently, a vector of `df` decreasing from \eqn{p}.
 #' 
 #' 
-#' @param y For the default method, a numeric vector containing the response variable. NAs not allowed.
+#' @param y For the default method, a numeric vector containing the response variable, or a
+#'        matrix of several response variables (see **Multivariate response** below). NAs not allowed.
 #'        For the `lm` method, a linear model fitted by [stats::lm()], whose response, predictors
 #'        (including any factor contrasts and transformed terms) and offset are used.
 #' @param X A matrix of predictor variables. NA's not allowed. Should not
@@ -60,8 +61,14 @@
 #'        to `lambda`
 #' @param svd If `TRUE` the SVD of the centered and scaled `X` matrix
 #'        is returned in the `ridge` object.
-#' @param contrasts a list of contrasts to be used for some or all of factor terms in the formula. 
+#' @param contrasts a list of contrasts to be used for some or all of factor terms in the formula.
 #'        See the `contrasts.arg` of [stats::model.matrix.default()].
+#' @param pool For a multivariate response only: how the GCV criterion is pooled over responses
+#'        to choose a common ridge constant. `"scaled"` (the default) sums each response's
+#'        residual sum of squares divided by its OLS residual variance, so the result does not
+#'        depend on the units of the responses; `"raw"` sums the residual sums of squares;
+#'        `"mahalanobis"` uses \eqn{\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)}{tr(Sigma^-1 R'R)}
+#'        for the matrix \eqn{R} of residuals.
 #' @param x,object An object of class `ridge`
 #' @param ... Other arguments, passed down to methods
 #' @param digits For the `print` method, the number of digits to print.
@@ -85,6 +92,22 @@
 #'   Rows correspond to observations and columns to dimensions.
 #' * `svd.V`: Right singular vectors of the `svd` of the scaled X
 #'   matrix. Rows correspond to variables and columns to dimensions.
+#'
+#' **Multivariate response.** If the response is a matrix with more than one column (e.g.,
+#' `cbind(Y1, Y2) ~ x1 + x2` in the formula, a multivariate `lm()` fit, or a matrix `y`), all
+#' responses are fitted with the same ridge constants and the result is an object of class
+#' `"mlmridge"`. Its components follow those above, but:
+#'
+#' * `coef` is a list, with one \eqn{p \times q} matrix of coefficients for each value of `lambda`.
+#' * `cov` is a list of the \eqn{p \times p} matrices that depend only on `X`; the covariance
+#'   matrix of the coefficients for response \eqn{k} is `Sigma[k, k] * cov[[i]]`.
+#' * `Sigma` is the residual covariance matrix of the responses, from the OLS fit.
+#' * `mse` and `GCV` are matrices, with one column per response; `kHKB`, `kLW` and `kGCV` are
+#'   vectors, and `criteria` is a matrix, with one row per response.
+#' * `GCV.pooled` and `kGCV.pooled` give the GCV criterion pooled over responses (see `pool`)
+#'   and the value of `lambda` minimizing it.
+#'
+#' Use [as.ridge()] to extract the results for one response as a `"ridge"` object.
 #' @author Michael Friendly
 #' @importFrom stats coef coefficients contrasts lm.fit model.matrix model.offset model.response uniroot vcov
 #' @export
@@ -218,7 +241,7 @@ ridge.formula <- function(
 		X <- X[, -Inter] - rep(Xm, rep(n, p))
 		Y <- Y - Ym
 	}
-	ridge.default(Y, X, lambda=lambda, df=df, svd=svd)
+	ridge.default(Y, X, lambda=lambda, df=df, svd=svd, ...)
 }
 
 #' @rdname ridge
@@ -231,8 +254,6 @@ ridge.lm <- function(
     ...) {
   if (inherits(y, "glm"))
     stop("ridge() does not support glm objects; use a model fit by lm()")
-  if (inherits(y, "mlm"))
-    stop("ridge() does not (yet) support multivariate linear models")
   if (!is.null(stats::weights(y)))
     stop("ridge() does not support weighted least squares (lm() with weights)")
 
@@ -245,15 +266,111 @@ ridge.lm <- function(
   # ridge.default() centers X and Y, so the intercept column is not needed
   if (attr(stats::terms(y), "intercept"))
     X <- X[, colnames(X) != "(Intercept)", drop = FALSE]
-  ridge.default(Y, X, lambda = lambda, df = df, svd = svd)
+  ridge.default(Y, X, lambda = lambda, df = df, svd = svd, ...)
 }
 
 
 #' @rdname ridge
 #' @exportS3Method
 ridge.default <-
-		function(y, X, lambda=0, df, svd=TRUE, ...){
-	#dimensions	
+		function(y, X, lambda=0, df, svd=TRUE, pool = c("scaled", "raw", "mahalanobis"), ...){
+
+	# ---- multivariate response: Y is an n x q matrix, q > 1; returns an "mlmridge" object ----
+	# One shared lambda for all responses (see dev/ridge_mlm-plan.md). The univariate code
+	# below is unchanged; this branch mirrors it, column by column where it can.
+	if (is.matrix(y) && ncol(y) > 1) {
+		pool <- match.arg(pool)
+		n <- nrow(X)
+		p <- ncol(X)
+		q <- ncol(y)
+		if (nrow(y) != n) stop("y and X must have the same number of rows")
+		if (is.null(colnames(y))) colnames(y) <- paste0("Y", seq_len(q))
+		ynames <- colnames(y)
+		#center X and Y
+		Xm <- colMeans(X)
+		ym <- colMeans(y)
+		X <- X - rep(Xm, rep(n, p))
+		y <- y - rep(ym, rep(n, q))
+		#scale X, as in MASS::lm.ridge
+		Xscale <- drop(rep(1/n, n) %*% X^2)^0.5
+		X <- as.matrix(X/rep(Xscale, rep(n, p)))
+
+		XPX <- crossprod(X)
+		XPY <- crossprod(X, y)
+		I <- diag(p)
+		lmfit <- lm.fit(X, y)
+		# residual covariance matrix (q x q); its diagonal is the univariate MSE of each response
+		Sigma <- crossprod(lmfit$residuals) / (n-p-1)
+		dimnames(Sigma) <- list(ynames, ynames)
+		MSE <- diag(Sigma)
+		HKB <- (p - 2) * MSE/colSums(lmfit$coefficients^2)
+		LW <- (p - 2) * MSE * n/colSums(lmfit$fitted.values^2)
+		names(HKB) <- names(LW) <- ynames
+
+		svd.x <- svd(X, nu = p, nv = p)
+		dd <- svd.x$d
+		u <- svd.x$u
+		v <- svd.x$v
+		if (missing(df)) {
+			df <- sapply(lambda, function(x) sum(dd^2/(dd^2 + x)))
+		}
+		else {
+			fun <- function(df, lambda) df - sum(dd^2/(dd^2 + lambda))
+			lambda <- sapply(df, FUN = function(df) uniroot(f = function(lambda) fun(df,
+											lambda), lower = 0, upper = 1000, maxiter = 10000)$root)
+		}
+
+		nl <- length(lambda)
+		coef <- cov <- vector("list", nl)
+		mse <- rss <- matrix(0, nl, q, dimnames = list(format(lambda), ynames))
+		rss.mahal <- rep(0, nl)
+		Sinv <- if (pool == "mahalanobis") solve(Sigma) else NULL
+		for(i in seq_len(nl)) {
+			XPXI <- solve(XPX + lambda[i] * I)
+			B <- XPXI %*% XPY
+			dimnames(B) <- list(colnames(X), ynames)
+			coef[[i]] <- B
+			# X part of the covariance of the coefficients; Var(vec B) = Sigma %x% cov[[i]]
+			V <- XPXI %*% XPX %*% XPXI
+			dimnames(V) <- list(colnames(X), colnames(X))
+			cov[[i]] <- V
+			res <- y - X %*% B
+			rss[i, ] <- colSums(res^2)
+			mse[i, ] <- rss[i, ] / (n-p)
+			if (pool == "mahalanobis") rss.mahal[i] <- sum(diag(Sinv %*% crossprod(res)))
+		}
+		names(coef) <- names(cov) <- format(lambda)
+
+		# GCV, per response (as in the univariate case) and pooled over responses
+		gcv.denom <- (n - sapply(lambda, function(k) sum(dd^2/(dd^2 + k))))^2
+		GCV <- rss / gcv.denom
+		GCV.pooled <- switch(pool,
+			scaled      = drop(rss %*% (1/MSE)) / gcv.denom,
+			raw         = rowSums(rss) / gcv.denom,
+			mahalanobis = rss.mahal / gcv.denom)
+		names(GCV.pooled) <- format(lambda)
+		kGCV <- apply(GCV, 2, function(g) lambda[which.min(g)])
+		kGCV.pooled <- lambda[which.min(GCV.pooled)]
+		criteria <- cbind(kHKB = HKB, kLW = LW, kGCV = kGCV)
+
+		result <- list(lambda=lambda, df=df,
+		               coef=coef, cov=cov, Sigma=Sigma,
+		               mse=mse, scales=Xscale,
+		               kHKB=HKB, kLW=LW,
+		               GCV=GCV, kGCV=kGCV,
+		               criteria = criteria,
+		               GCV.pooled = GCV.pooled, kGCV.pooled = kGCV.pooled, pool = pool)
+		if (svd) {
+			rownames(u) <- rownames(X)
+			colnames(u) <- colnames(v) <- paste("dim", 1:p, sep="")
+			rownames(v) <- colnames(X)
+			result <- c(result, list(svd.D=dd, svd.U=u, svd.V=v))
+		}
+		class(result) <- "mlmridge"
+		return(result)
+	}
+
+	#dimensions
 	n <- nrow(X)
 	p <- ncol(X)
 	#center X and y

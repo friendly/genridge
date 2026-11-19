@@ -18,7 +18,15 @@ ridge(y, ...)
 
 \method{ridge}{lm}(y, lambda = 0, df, svd = TRUE, ...)
 
-\method{ridge}{default}(y, X, lambda = 0, df, svd = TRUE, ...)
+\method{ridge}{default}(
+  y,
+  X,
+  lambda = 0,
+  df,
+  svd = TRUE,
+  pool = c("scaled", "raw", "mahalanobis"),
+  ...
+)
 
 \method{coef}{ridge}(object, ...)
 
@@ -31,7 +39,8 @@ best(object, ...)
 \method{best}{ridge}(object, ...)
 }
 \arguments{
-\item{y}{For the default method, a numeric vector containing the response variable. NAs not allowed.
+\item{y}{For the default method, a numeric vector containing the response variable, or a
+matrix of several response variables (see \strong{Multivariate response} below). NAs not allowed.
 For the \code{lm} method, a linear model fitted by \code{\link[stats:lm]{stats::lm()}}, whose response, predictors
 (including any factor contrasts and transformed terms) and offset are used.}
 
@@ -56,6 +65,13 @@ See the \code{contrasts.arg} of \code{\link[stats:model.matrix.default]{stats::m
 
 \item{X}{A matrix of predictor variables. NA's not allowed. Should not
 include a column of 1's for the intercept.}
+
+\item{pool}{For a multivariate response only: how the GCV criterion is pooled over responses
+to choose a common ridge constant. \code{"scaled"} (the default) sums each response's
+residual sum of squares divided by its OLS residual variance, so the result does not
+depend on the units of the responses; \code{"raw"} sums the residual sums of squares;
+\code{"mahalanobis"} uses \eqn{\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)}{tr(Sigma^-1 R'R)}
+for the matrix \eqn{R} of residuals.}
 
 \item{x, object}{An object of class \code{ridge}}
 
@@ -83,6 +99,23 @@ Rows correspond to observations and columns to dimensions.
 \item \code{svd.V}: Right singular vectors of the \code{svd} of the scaled X
 matrix. Rows correspond to variables and columns to dimensions.
 }
+
+\strong{Multivariate response.} If the response is a matrix with more than one column (e.g.,
+\code{cbind(Y1, Y2) ~ x1 + x2} in the formula, a multivariate \code{lm()} fit, or a matrix \code{y}), all
+responses are fitted with the same ridge constants and the result is an object of class
+\code{"mlmridge"}. Its components follow those above, but:
+\itemize{
+\item \code{coef} is a list, with one \eqn{p \times q} matrix of coefficients for each value of \code{lambda}.
+\item \code{cov} is a list of the \eqn{p \times p} matrices that depend only on \code{X}; the covariance
+matrix of the coefficients for response \eqn{k} is \code{Sigma[k, k] * cov[[i]]}.
+\item \code{Sigma} is the residual covariance matrix of the responses, from the OLS fit.
+\item \code{mse} and \code{GCV} are matrices, with one column per response; \code{kHKB}, \code{kLW} and \code{kGCV} are
+vectors, and \code{criteria} is a matrix, with one row per response.
+\item \code{GCV.pooled} and \code{kGCV.pooled} give the GCV criterion pooled over responses (see \code{pool})
+and the value of \code{lambda} minimizing it.
+}
+
+Use \code{\link[=as.ridge]{as.ridge()}} to extract the results for one response as a \code{"ridge"} object.
 
 A data.frame with one row for each of the HKB, LW, and GCV criteria
 }
