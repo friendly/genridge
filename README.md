@@ -1,6 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
 [![DOI](https://zenodo.org/badge/105555707.svg)](https://zenodo.org/badge/latestdoi/105555707)
@@ -17,18 +16,18 @@
 
 <!-- explicit version number now dynamic -->
 
-Version 0.8.0; documentation built for `pkgdown` 2026-09-10
+Version 0.8.1; documentation built for `pkgdown` 2026-11-19
 
 ## 📝 Description
 
 ### What is ridge regression?
 
 Consider the standard linear model,
-$\mathbf{y} = \mathbf{X} \; \boldsymbol{\beta} + \boldsymbol{\epsilon}$ for $p$
-predictors in a multiple regression. In this context, high multiple
-correlations among the predictors lead to well-known problems of
-collinearity under ordinary least squares (OLS) estimation, which result
-in unstable estimates of the parameters in β: standard errors are
+$\mathbf{y} = \mathbf{X} \; \boldsymbol{\beta} + \boldsymbol{\epsilon}$
+for $p$ predictors in a multiple regression. In this context, high
+multiple correlations among the predictors lead to well-known problems
+of collinearity under ordinary least squares (OLS) estimation, which
+result in unstable estimates of the parameters in β: standard errors are
 inflated and estimated coefficients tend to be too large in absolute
 value on average.
 
@@ -40,19 +39,23 @@ some way, shrinking them, on average, toward zero, to satisfy increased
 predictive accuracy.
 
 The OLS estimates, which minimize the sum of squared residuals
-$RSS = \Sigma \boldsymbol{\epsilon}^2$ are given by:
-$$\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,$$
-with
+$RSS = \Sigma \boldsymbol{\epsilon}^2$ are given by: $$
+\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,
+$$ with
 $\widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}$.
 
 Ridge regression replaces the standard residual sum of squares criterion
 with a penalized form,
 
-$$\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top  (\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda \boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \: ,$$
+$$
+\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top  (\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda \boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \: ,
+$$
 
 whose solution is easily seen to be:
 
-$$\widehat{\boldsymbol{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  $$
+$$
+\widehat{\boldsymbol{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  
+$$
 
 where $\lambda$ is the *shrinkage factor* or *tuning constant*,
 penalizing larger coefficients. Shrinkage can also be expressed as the
@@ -127,11 +130,11 @@ useful measures and plots.
 
 ## 📂 Installation
 
-|  |  |
-|----|----|
-| CRAN version | `install.packages("genridge")` |
-| R-universe | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
-| Development version | `remotes::install_github("friendly/genridge")` |
+|                     |                                                                             |
+|---------------------|-----------------------------------------------------------------------------|
+| CRAN version        | `install.packages("genridge")`                                              |
+| R-universe          | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
+| Development version | `remotes::install_github("friendly/genridge")`                              |
 
 ## 📊 Examples
 
@@ -192,9 +195,9 @@ lridge
 The effects of collinearity can be measured by a variance inflation
 factor (VIF), the ratio of the sampling variances of the coefficients,
 relative to what they would be if all predictors were uncorrelated,
-given by
-$$\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,$$
-where “others” represents all other predictors except $X_i$.
+given by $$
+\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,
+$$ where “others” represents all other predictors except $X_i$.
 
 `vif()` for a `"ridge"` object calculates variance inflation factors for
 all values of the ridge constant. You can see that for OLS, nearly all
@@ -321,7 +324,6 @@ par(op)
 
 <img src="man/figures/README-longley-plot-ridge-1.png" alt="Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage." width="80%" />
 <p class="caption">
-
 Bivariate ridge trace plots for the coefficients of four predictors
 against the coefficient for GNP in Longley’s data, with λ = 0, 0.005,
 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven
@@ -347,7 +349,6 @@ pairs(lridge, radius=0.5, diag.cex = 2,
 
 <img src="man/figures/README-longley-pairs-1.png" alt="Scatterplot matrix of bivariate ridge trace plots" width="90%" />
 <p class="caption">
-
 Scatterplot matrix of bivariate ridge trace plots
 </p>
 
@@ -376,10 +377,10 @@ precision(lridge)
 ```
 
 `norm.beta`
-$= \lVert\boldsymbol{\beta}\rVert / \max{\lVert\boldsymbol{\beta}\rVert}$ is a
-measure of shrinkage, and `det`
-$= \log{| \text{Var}(\boldsymbol{\beta}) |}$, is a measure of variance of
-the coefficients (inverse of precision). Plotting these against each
+$= \lVert\boldsymbol{\beta}\rVert / \max{\lVert\boldsymbol{\beta}\rVert}$
+is a measure of shrinkage, and `det`
+$= \log{| \text{Var}(\boldsymbol{\beta}) |}$, is a measure of variance
+of the coefficients (inverse of precision). Plotting these against each
 other gives a direct view of the tradeoff between bias and precision.
 
 ``` r
@@ -567,8 +568,8 @@ Supp. materials:
 Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing
 Collinearity Diagnostics, *The American Statistician*, **63**(1), 56–65,
 [DOI link](https://doi.org/10.1198/tast.2009.0012), Online:
-[viscollin-tast.pdf](https://friendly.github.io/papers/viscollin-tast.pdf), Supp.
-materials: <https://friendly.github.io/papers/viscollin/>.
+[viscollin-tast.pdf](https://friendly.github.io/papers/viscollin-tast.pdf),
+Supp. materials: <https://friendly.github.io/papers/viscollin/>.
 
 Friendly, M., Monette, G., & Fox, J. (2013). Elliptical Insights:
 Understanding Statistical Methods Through Elliptical Geometry.

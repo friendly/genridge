@@ -68,7 +68,7 @@
 <strong>Generalized Ridge Trace Plots for Ridge Regression</strong><a class="anchor" aria-label="anchor" href="#generalized-ridge-trace-plots-for-ridge-regression"></a>
 </h2>
 <!-- explicit version number now dynamic -->
-<p>Version 0.8.0; documentation built for <code>pkgdown</code> 2026-09-10</p>
+<p>Version 0.8.1; documentation built for <code>pkgdown</code> 2026-11-19</p>
 </div>
 <div class="section level2">
 <h2 id="id_-description">📝 Description<a class="anchor" aria-label="anchor" href="#id_-description"></a>
@@ -78,11 +78,17 @@
 </h3>
 <p>Consider the standard linear model, <span class="math inline">\mathbf{y} = \mathbf{X} \; \boldsymbol{\beta} + \boldsymbol{\epsilon}</span> for <span class="math inline">p</span> predictors in a multiple regression. In this context, high multiple correlations among the predictors lead to well-known problems of collinearity under ordinary least squares (OLS) estimation, which result in unstable estimates of the parameters in β: standard errors are inflated and estimated coefficients tend to be too large in absolute value on average.</p>
 <p>Ridge regression is an instance of a class of techniques designed to obtain more favorable predictions at the expense of some increase in bias, compared to ordinary least squares (OLS) estimation. An essential idea behind these methods is that the OLS estimates are constrained in some way, shrinking them, on average, toward zero, to satisfy increased predictive accuracy.</p>
-<p>The OLS estimates, which minimize the sum of squared residuals <span class="math inline">RSS = \Sigma \boldsymbol{\epsilon}^2</span> are given by: <span class="math display">\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,</span> with <span class="math inline">\widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}</span>.</p>
+<p>The OLS estimates, which minimize the sum of squared residuals <span class="math inline">RSS = \Sigma \boldsymbol{\epsilon}^2</span> are given by: <span class="math display">
+\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,
+</span> with <span class="math inline">\widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}</span>.</p>
 <p>Ridge regression replaces the standard residual sum of squares criterion with a penalized form,</p>
-<p><span class="math display">\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top  (\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda \boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \: ,</span></p>
+<p><span class="math display">
+\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top  (\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda \boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \: ,
+</span></p>
 <p>whose solution is easily seen to be:</p>
-<p><span class="math display">\widehat{\boldsymbol{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  </span></p>
+<p><span class="math display">
+\widehat{\boldsymbol{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
+</span></p>
 <p>where <span class="math inline">\lambda</span> is the <em>shrinkage factor</em> or <em>tuning constant</em>, penalizing larger coefficients. Shrinkage can also be expressed as the equivalent degrees of freedom, the trace of the analog of the “hat” matrix, <span class="math inline">\text{tr}[(\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top]</span>. In general,</p>
 <ul>
 <li>The bias increases as λ increases,</li>
@@ -141,8 +147,8 @@
 </h2>
 <table class="table">
 <colgroup>
-<col width="50%">
-<col width="50%">
+<col width="21%">
+<col width="78%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -198,7 +204,9 @@
 <div class="section level3">
 <h3 id="variance-inflation-factors">Variance Inflation Factors<a class="anchor" aria-label="anchor" href="#variance-inflation-factors"></a>
 </h3>
-<p>The effects of collinearity can be measured by a variance inflation factor (VIF), the ratio of the sampling variances of the coefficients, relative to what they would be if all predictors were uncorrelated, given by <span class="math display">\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,</span> where “others” represents all other predictors except <span class="math inline">X_i</span>.</p>
+<p>The effects of collinearity can be measured by a variance inflation factor (VIF), the ratio of the sampling variances of the coefficients, relative to what they would be if all predictors were uncorrelated, given by <span class="math display">
+\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,
+</span> where “others” represents all other predictors except <span class="math inline">X_i</span>.</p>
 <p><code>vif()</code> for a <code>"ridge"</code> object calculates variance inflation factors for all values of the ridge constant. You can see that for OLS, nearly all VIF values are dangerously high. With a ridge factor of 0.04 or greater, variance inflation has been considerably reduced for a few of the predictors.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vridge</span> <span class="op">&lt;-</span> <span class="fu">vif</span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span>
