@@ -1,6 +1,9 @@
 # Reference results from the current (univariate) ridge() and its methods, saved before
 # generalizing ridge.default() to a matrix response (see dev/ridge_mlm-plan.md, §9).
 # After changing the code, run dev/check-ridge-ref.R: every result must be identical.
+#
+# Regenerated 2026-11-19 after three bug fixes (formula svd = FALSE; best() exported;
+# best()'s df column), so the reference holds the corrected behaviour.
 
 library(genridge)   # use devtools::load_all() instead when checking work in progress
 stopifnot(packageVersion("genridge") >= "0.8.1")
@@ -14,8 +17,8 @@ fits <- list(
   longley_formula = ridge(lform, data = longley, lambda = lambda),
   longley_default = ridge(longley[, "Employed"], data.matrix(longley[, c(2:6, 1)]), lambda = lambda),
   longley_lm      = ridge(lm(lform, data = longley), lambda = lambda),
-  # (default interface: ridge.formula(svd = FALSE) failed in 0.8.1, fixed afterwards)
   longley_nosvd   = ridge(longley[, "Employed"], data.matrix(longley[, c(2:6, 1)]), lambda = lambda, svd = FALSE),
+  longley_formula_nosvd = ridge(lform, data = longley, lambda = lambda, svd = FALSE),
   prostate_df     = ridge(prostate[, "lpsa"], data.matrix(prostate[, 1:8]), df = 8:1),
   manpower_df     = ridge(Hours ~ ., data = Manpower, df = seq(5, 3.75, -.25)),
   acetylene       = ridge(yield ~ temp + ratio + time + I(time^2) + temp:time, data = Acetylene,
@@ -26,7 +29,7 @@ fits <- list(
 methods <- lapply(fits, function(f) list(
   coef      = coef(f),
   vcov      = vcov(f),
-  best      = genridge:::best(f),   # best() generic is not exported in 0.8.1
+  best      = best(f),
   print     = capture.output(print(f)),
   vif       = vif(f),
   precision = precision(f),
