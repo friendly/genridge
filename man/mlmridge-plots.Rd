@@ -68,6 +68,9 @@ the horizontal and vertical axes. Default: the first two.}
 As for the corresponding method for \code{"ridge"} objects.
 }
 \description{
+\strong{Experimental.} Multivariate ridge regression (class \code{"mlmridge"}) is new in this
+version; its functions, arguments and results may change in future releases.
+
 These methods apply the plots and summaries for univariate ridge regression to one response
 of a multivariate ridge regression (class \code{"mlmridge"}). Each extracts the results for that
 response with \code{\link[=as.ridge]{as.ridge()}} and calls the corresponding method for \code{"ridge"} objects:

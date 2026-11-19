@@ -100,7 +100,7 @@ Rows correspond to observations and columns to dimensions.
 matrix. Rows correspond to variables and columns to dimensions.
 }
 
-\strong{Multivariate response.} If the response is a matrix with more than one column (e.g.,
+\strong{Multivariate response (experimental).} If the response is a matrix with more than one column (e.g.,
 \code{cbind(Y1, Y2) ~ x1 + x2} in the formula, a multivariate \code{lm()} fit, or a matrix \code{y}), all
 responses are fitted with the same ridge constants and the result is an object of class
 \code{"mlmridge"}. Its components follow those above, but:
@@ -116,6 +116,7 @@ and the value of \code{lambda} minimizing it.
 }
 
 Use \code{\link[=as.ridge]{as.ridge()}} to extract the results for one response as a \code{"ridge"} object.
+This extension is experimental: its interface and results may change in future releases.
 
 A data.frame with one row for each of the HKB, LW, and GCV criteria
 }

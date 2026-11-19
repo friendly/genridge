@@ -30,6 +30,9 @@ in the same form as for a univariate \code{"ridge"} object; see \code{\link[=as.
 \code{print()} returns \code{x}, invisibly.
 }
 \description{
+\strong{Experimental.} Multivariate ridge regression (class \code{"mlmridge"}) is new in this
+version; its functions, arguments and results may change in future releases.
+
 Basic methods for objects of class \code{"mlmridge"}, returned by \code{\link[=ridge]{ridge()}} when the response is
 a matrix.
 \itemize{

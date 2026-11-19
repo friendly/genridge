@@ -24,6 +24,9 @@ first response.}
 An object of class \code{"ridge"}; see \code{\link[=ridge]{ridge()}} for its components.
 }
 \description{
+\strong{Experimental.} Multivariate ridge regression (class \code{"mlmridge"}) is new in this
+version; its functions, arguments and results may change in future releases.
+
 \code{ridge()} with a matrix response (e.g., \code{ridge(cbind(Y1, Y2) ~ x1 + x2, data)}) returns an
 object of class \code{"mlmridge"}, fitting all responses with a common set of ridge constants.
 \code{as.ridge()} extracts the results for one response as an ordinary \code{"ridge"} object, so that

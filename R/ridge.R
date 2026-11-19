@@ -93,7 +93,7 @@
 #' * `svd.V`: Right singular vectors of the `svd` of the scaled X
 #'   matrix. Rows correspond to variables and columns to dimensions.
 #'
-#' **Multivariate response.** If the response is a matrix with more than one column (e.g.,
+#' **Multivariate response (experimental).** If the response is a matrix with more than one column (e.g.,
 #' `cbind(Y1, Y2) ~ x1 + x2` in the formula, a multivariate `lm()` fit, or a matrix `y`), all
 #' responses are fitted with the same ridge constants and the result is an object of class
 #' `"mlmridge"`. Its components follow those above, but:
@@ -108,6 +108,7 @@
 #'   and the value of `lambda` minimizing it.
 #'
 #' Use [as.ridge()] to extract the results for one response as a `"ridge"` object.
+#' This extension is experimental: its interface and results may change in future releases.
 #' @author Michael Friendly
 #' @importFrom stats coef coefficients contrasts lm.fit model.matrix model.offset model.response uniroot vcov
 #' @export

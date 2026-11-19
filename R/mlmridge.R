@@ -1,6 +1,9 @@
 #' Extract a Univariate Ridge Regression from a Multivariate One
 #'
 #' @description
+#' **Experimental.** Multivariate ridge regression (class `"mlmridge"`) is new in this
+#' version; its functions, arguments and results may change in future releases.
+#'
 #' `ridge()` with a matrix response (e.g., `ridge(cbind(Y1, Y2) ~ x1 + x2, data)`) returns an
 #' object of class `"mlmridge"`, fitting all responses with a common set of ridge constants.
 #' `as.ridge()` extracts the results for one response as an ordinary `"ridge"` object, so that
@@ -70,6 +73,9 @@ as.ridge.mlmridge <- function(x, response = 1, ...) {
 #' Methods for Multivariate Ridge Regression Objects
 #'
 #' @description
+#' **Experimental.** Multivariate ridge regression (class `"mlmridge"`) is new in this
+#' version; its functions, arguments and results may change in future releases.
+#'
 #' Basic methods for objects of class `"mlmridge"`, returned by [ridge()] when the response is
 #' a matrix.
 #'
@@ -158,6 +164,9 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #' Plot and Summary Methods for Multivariate Ridge Regression
 #'
 #' @description
+#' **Experimental.** Multivariate ridge regression (class `"mlmridge"`) is new in this
+#' version; its functions, arguments and results may change in future releases.
+#'
 #' These methods apply the plots and summaries for univariate ridge regression to one response
 #' of a multivariate ridge regression (class `"mlmridge"`). Each extracts the results for that
 #' response with [as.ridge()] and calls the corresponding method for `"ridge"` objects:
