@@ -16,7 +16,10 @@ Suggests:
   MASS, 
   bestglm, 
   heplots, 
+  knitr,
+  rmarkdown,
   vcdExtra
+VignetteBuilder: knitr
 Description: The genridge package introduces generalizations of the standard univariate
   ridge trace plot used in ridge regression and related methods.  These graphical methods
   show both bias (actually, shrinkage) and precision, by plotting the covariance ellipsoids of the estimated
