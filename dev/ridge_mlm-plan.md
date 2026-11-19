@@ -207,11 +207,30 @@ as now. HKB and LW are closed-form estimates.
 1. **Per-response delegation (cheap, do first).** `plot(x, response = "Y1")` etc. call the
    univariate methods through `as.ridge()`. A `response = NULL` default could loop over the
    responses, or make a multi-panel `traceplot`.
+   *Done 2026-11-19 (commit `3ed88a0`). Currently, omitting `response` uses the first
+   response, with a message.*
 
 2. **`traceplot.mlmridge()`.** Coefficient paths vs λ or df:
    - either one panel per response, which is the easiest to read, sharing the λ axis and the
      HKB/LW/GCV reference lines;
    - or one panel with colour = predictor and line type = response.
+
+   **What `traceplot(sridge)` with no `response` should do (MF, 2026-11-19).** Rather than
+   picking the first response with a message, it should show **all** responses.
+   - Users can already do this by hand, because the default `main` is the response name, so
+     each panel is labelled correctly:
+     - a loop: `for (r in ynames) traceplot(sridge, response = r)`, as in
+       `dev/mlmridge-plot-examples.R`;
+     - a map: `invisible(lapply(ynames, \(r) traceplot(sridge, response = r)))`.
+   - Proposal: make `response = NULL` the default for `traceplot.mlmridge()`. With `NULL`,
+     loop over all responses:
+     - set up a multi-panel layout (`par(mfrow = n2mfrow(q))`, restored on exit) unless the
+       user has already set one, or add a `layout = TRUE/FALSE` argument;
+     - draw one panel per response, each with its own HKB/LW lines;
+     - optionally mark the pooled-GCV λ in every panel.
+   - The same default may suit `plot()` and `precision()` (all responses, one panel each).
+   - `pairs()` (already a matrix of panels) and `plot3d()` (rgl) should keep a single
+     response.
 
 3. **Cross-response coefficient ellipses (new, and genuinely multivariate).** For a single
    predictor *j*, plot the q-vector $\widehat{\mathbf{b}}_{j\cdot}(\lambda)$ for two responses,
@@ -467,3 +486,83 @@ two go away.
 
 `best` comes once the criteria are settled. Multi-response `traceplot` (§5.2) and the
 cross-response ellipses (§5.3) come after that.
+
+## 11. Vignette: multivariate ridge regression (planned 2026-11-19)
+
+genridge has **no vignettes yet**. The multivariate extension is a natural first one, and the
+example gallery `dev/mlmridge-plot-examples.R` (code next to each plot) is a good start: it
+mainly needs descriptive text between the chunks.
+
+**Working title:** *Multivariate ridge regression with genridge*
+(file `vignettes/mlm-ridge.Rmd`).
+
+**Outline:**
+
+1. **Introduction.**
+   - Collinearity when there are several responses.
+   - Ridge with one λ shared by all responses:
+     $\widehat{\mathbf{B}}(\lambda) = (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{Y}$
+     (Breiman & Friedman, 1997, eq. 6.3).
+   - Each column is the univariate ridge for that response. What's new is the shared λ, the
+     pooled criteria and the cross-response covariance, $\boldsymbol\Sigma \otimes \mathbf{V}_\lambda$ (§2).
+2. **Data: `heplots::schooldata`.**
+   - VIFs (up to 86) and the near-duplicate predictors.
+   - The `lm()` MLM fit and its wrong-sign coefficients (`visit`).
+   - Possibly an HE plot of the OLS fit, to link to heplots.
+3. **Fitting.**
+   - `ridge(cbind(reading, mathematics, selfesteem) ~ ..., lambda = )`, using a fine grid at
+     the low end.
+   - `print()`.
+   - Criteria per response, the pooled GCV and the `pool =` options.
+   - The three interfaces: formula, `mlm` fit and matrices.
+4. **Coefficient paths.** `traceplot()` for all responses, via the §5.2 default or a loop/map.
+5. **Bivariate ridge traces.**
+   - `plot()` for occupation × visit, showing the sign correction.
+   - Ellipses for one response have the same shape across responses, scaled by
+     $\sigma^2_{kk}$ (the Kronecker structure).
+   - `pairs()` for one response.
+6. **PCA/SVD view.** `pca()` with `plot()`/`biplot()`: shrinkage acts mostly on the smallest
+   dimensions.
+7. **VIF and precision.**
+   - VIFs are the same for every response.
+   - `precision()` curves have the same shape and differ only in level.
+8. **Choosing λ: a teaching point (§7).**
+   - HKB, LW and GCV favour small λ (≈ 0.1–0.3).
+   - The wrong-sign coefficients only correct themselves at λ ≈ 1–5.
+   - So the λ that's best for prediction and the λ that gives interpretable coefficients
+     differ.
+9. **Simulated example with known B.**
+   - Longley X, as agreed. Choose a true **B** (2–3 responses with different coefficient
+     patterns) and Σ with moderate correlation between responses; set a seed.
+   - Show $\|\widehat{\mathbf{B}}(\lambda) - \mathbf{B}\|$ (bias, variance, MSE) against λ, and
+     where GCV/HKB/LW fall.
+   - This is the one thing a real dataset can't show.
+10. **Further directions.**
+    - Cross-response coefficient ellipses (§5.3).
+    - Ridge HE plots (§5.4), once designed.
+    - Brown & Zidek's multivariate ridge and the other methods in §6.
+
+**Infrastructure** (none exists yet):
+
+- `vignettes/` folder; `DESCRIPTION`: `VignetteBuilder: knitr`, and `knitr` and `rmarkdown`
+  in Suggests. heplots is already in Suggests (added with `as.ridge()`).
+- **Format:** R Markdown with `rmarkdown::html_vignette`, which CRAN builds with no extra
+  system dependencies. Quarto vignettes are possible but need Quarto on the CRAN machines.
+- **References:** a project-local `vignettes/references.bib`, copied from the canonical files
+  (don't edit those):
+  - Friendly (2013), from vita.bib;
+  - Brown & Zidek (1980), from statistics.bib;
+  - Breiman & Friedman (1997), not yet in statistics.bib: propose an entry to MF;
+  - Hoerl & Kennard (1970), Golub, Heath & Wahba (1979), Charnes et al. (1981) for
+    schooldata.
+- **Speed and size:** keep figures modest. Skip `plot3d()`, which needs rgl, or show a static
+  snapshot; CRAN vignette build time matters.
+- **pkgdown:** the vignette appears under *Articles*; add it to `_pkgdown.yml` if an
+  `articles:` section is used.
+- **When:** after §5.2 (the all-responses `traceplot` default) and preferably §5.3
+  (cross-response ellipses), so the vignette shows the multivariate plots, not only
+  per-response delegation. Ridge HE plots can come in a later update of the vignette.
+
+**Optional second vignette:** a univariate *Generalized ridge trace plots* article, largely
+reusing the README (longley, prostate and Manpower examples). The README is long, so moving
+its detail into a vignette would also shorten it.
