@@ -1,5 +1,9 @@
 ## genridge 0.8.1
 
+o Bug fixes:
+    - `ridge()` with a formula and `svd = FALSE` failed with "variable lengths differ".
+    - `best()` was documented but its generic was not exported; it now is.
+    - `best()` reported the same (wrong) `df` for all three criteria; each now gets its own equivalent degrees of freedom.
 o New `ridge.lm()` method: `ridge()` can now be applied directly to a model fitted by `lm()`, e.g., `ridge(lm(y ~ x1 + x2, data), lambda = ...)`. The response, model matrix (with any factor contrasts and transformed terms) and offset are taken from the fitted model. `glm`, `mlm` and weighted `lm` fits give an error.
 o Replaced links to `datavis.ca`, which is offline, with DOIs (documentation) and `friendly.github.io/papers` (README).
 o Documentation converted to roxygen markdown (`Roxygen: list(markdown = TRUE)`): `\code{}`, `\link{}`, `\emph{}` and `\bold{}` replaced by markdown equivalents, and `\describe{}`, `\itemize{}`, `\enumerate{}` and `@return` `\item{}` lists by markdown lists. Also fixed a few small errors in the docs.

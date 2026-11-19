@@ -117,7 +117,7 @@ coefficients are given in terms of \code{lambda}.
 \code{vcov} extracts the estimated \eqn{p \times p} covariance matrices of the coefficients for each value of the shrinkage factor.
 
 \code{best} extracts the optimal shrinkage values according to several criteria:
-HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV: Golub et al. (1975)
+HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV: Golub et al. (1979)
 }
 \details{
 If an intercept is present in the model, its coefficient is not penalized. (If you want to penalize

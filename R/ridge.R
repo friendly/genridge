@@ -200,7 +200,7 @@ ridge.formula <- function(
 	
 	#code from MASS:::lm.ridge
 	m <- match.call(expand.dots = FALSE)
-	m$model <- m$x <- m$y <- m$contrasts <- m$... <- m$lambda <-m$df <- NULL
+	m$model <- m$x <- m$y <- m$contrasts <- m$... <- m$lambda <-m$df <- m$svd <- NULL
 	m[[1L]] <- as.name("model.frame")
 	m <- eval.parent(m)
 	Terms <- attr(m, "terms")
@@ -366,8 +366,9 @@ vcov.ridge <- function(object,  ...) {
 
 #' @description
 #' `best` extracts the optimal shrinkage values according to several criteria: 
-#' HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV: Golub et al. (1975)
+#' HKB: Hoerl et al. (1975); LW: Lawless & Wang (1976); GCV: Golub et al. (1979)
 #' @rdname ridge
+#' @export
 best <- function(object, ...) UseMethod("best")
 
 #' @returns A data.frame with one row for each of the HKB, LW, and GCV criteria
@@ -380,7 +381,7 @@ best.ridge <- function(object, ...)
   colnames(crit) <- "k"
   if (!is.null(object$svd.D)) {
    dd <- object$svd.D
-   df <- sapply(crit, function(x) sum(dd^2/(dd^2 + x)))
+   df <- sapply(crit$k, function(k) sum(dd^2/(dd^2 + k)))
    crit <- cbind(crit, df = df)
   }
   rn <- rownames(crit)
