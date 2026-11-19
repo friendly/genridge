@@ -228,6 +228,15 @@ as now. HKB and LW are closed-form estimates.
        user has already set one, or add a `layout = TRUE/FALSE` argument;
      - draw one panel per response, each with its own HKB/LW lines;
      - optionally mark the pooled-GCV λ in every panel.
+   - *Done 2026-11-19 (commit `981867e`):*
+     - `traceplot.mlmridge(x, response = NULL, main, layout = TRUE, ...)`;
+     - `response` can be several names or numbers;
+     - layout `rev(n2mfrow(q))` (1 × 3, 2 × 2, 2 × 3, ...), restored on exit;
+     - `layout = FALSE` uses the user's own `par(mfrow)`;
+     - `main` is recycled over the panels.
+     
+     Not done: a pooled-GCV reference line in each panel. `traceplot.ridge()` draws only the
+     HKB/LW lines, not GCV.
    - The same default may suit `plot()` and `precision()` (all responses, one panel each).
    - `pairs()` (already a matrix of panels) and `plot3d()` (rgl) should keep a single
      response.
