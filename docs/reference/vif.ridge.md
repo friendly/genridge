@@ -10,7 +10,7 @@ formulation in Fox & Monette (1992).
 
 The `plot.vif.ridge` method plots variance inflation factors for a
 `"vif.ridge"` object in a similar style to what is provided by
-[`traceplot`](https://friendly.github.io/genridge/reference/traceplot.md).
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md).
 That is, it plots the VIF for each coefficient in the model against
 either the ridge \\\lambda\\ tuning constant or it's equivalent
 effective degrees of freedom.
@@ -45,7 +45,7 @@ plot(
 - mod:
 
   A `"ridge"` object computed by
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md)
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
 
 - ...:
 
@@ -54,7 +54,7 @@ plot(
 - x:
 
   A `ridge` object, as fit by
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md)
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
 
 - digits:
 
@@ -96,24 +96,17 @@ plot(
 
 `vif` returns a `"vif.ridge"` object, which is a list of four components
 
-- vif:
+- `vif`: a data frame of the same size and shape as `coef(mod)`. The
+  columns correspond to the predictors in the model and the rows
+  correspond to the values of `lambda` in ridge estimation.
 
-  a data frame of the same size and shape as `coef{mod}`. The columns
-  correspond to the predictors in the model and the rows correspond to
-  the values of `lambda` in ridge estimation.
+- `lambda`: the vector of ridge constants from the original call to
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
 
-- lambda:
+- `df`: the vector of effective degrees of freedom corresponding to
+  `lambda`
 
-  the vector of ridge constants from the original call to
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md)
-
-- df:
-
-  the vector of effective degrees of freedom corresponding to `lambda`
-
-- criteria:
-
-  the optimal values of `lambda`
+- `criteria`: the optimal values of `lambda`
 
 ## References
 
@@ -124,8 +117,8 @@ Fox, J. and Monette, G. (1992). Generalized collinearity diagnostics.
 
 ## See also
 
-[`vif`](https://rdrr.io/pkg/car/man/vif.html),
-[`precision`](https://friendly.github.io/genridge/reference/precision.md)
+[`car::vif()`](https://rdrr.io/pkg/car/man/vif.html),
+[`precision()`](https://friendly.github.io/genridge/reference/precision.md)
 
 ## Author
 
@@ -134,7 +127,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 data(longley)
 lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + 
                       Year + GNP.deflator, data=longley)

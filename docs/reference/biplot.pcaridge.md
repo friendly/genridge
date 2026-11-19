@@ -33,8 +33,8 @@ biplot(
 - x:
 
   A `pcaridge` object computed by
-  [`pca.ridge`](https://friendly.github.io/genridge/reference/pca.md) or
-  a `ridge` object.
+  [`pca.ridge()`](https://friendly.github.io/genridge/reference/pca.md)
+  or a `ridge` object.
 
 - variables:
 
@@ -94,7 +94,7 @@ biplot(
 - ...:
 
   Other arguments, passed to
-  [`plot.pcaridge`](https://friendly.github.io/genridge/reference/plot.ridge.md)
+  [`plot.pcaridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md)
 
 ## Value
 
@@ -112,7 +112,7 @@ predictors, and vectors representing the predictors projected into this
 space.
 
 `biplot.ridge` is a similar extension of
-[`plot.ridge`](https://friendly.github.io/genridge/reference/plot.ridge.md),
+[`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md),
 adding vectors showing the relation of the PCA/SVD dimensions to the
 plotted variables.
 
@@ -125,12 +125,12 @@ Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
 **22**(1), 50-68,
 [doi:10.1080/10618600.2012.681237](https://doi.org/10.1080/10618600.2012.681237)
-, <https://datavis.ca/papers/genridge-jcgs.pdf>
+.
 
 ## See also
 
-[`plot.ridge`](https://friendly.github.io/genridge/reference/plot.ridge.md),
-[`pca.ridge`](https://friendly.github.io/genridge/reference/pca.md)
+[`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md),
+[`pca.ridge()`](https://friendly.github.io/genridge/reference/pca.md)
 
 ## Author
 
@@ -139,7 +139,6 @@ Michael Friendly, with contributions by Uwe Ligges
 ## Examples
 
 ``` r
-
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
 

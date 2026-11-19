@@ -8,14 +8,14 @@ Version 0.8.0; documentation built for `pkgdown` 2026-09-10
 
 ### What is ridge regression?
 
-Consider the standard linear model,
-$`\mathbf{y} = \mathbf{X} \; \mathbf{\beta} + \mathbf{\epsilon}`$ for
-$`p`$ predictors in a multiple regression. In this context, high
-multiple correlations among the predictors lead to well-known problems
-of collinearity under ordinary least squares (OLS) estimation, which
-result in unstable estimates of the parameters in β: standard errors are
-inflated and estimated coefficients tend to be too large in absolute
-value on average.
+Consider the standard linear model, \mathbf{y} = \mathbf{X} \\
+\boldsymbol{\beta} + \boldsymbol{\epsilon} for p predictors in a
+multiple regression. In this context, high multiple correlations among
+the predictors lead to well-known problems of collinearity under
+ordinary least squares (OLS) estimation, which result in unstable
+estimates of the parameters in β: standard errors are inflated and
+estimated coefficients tend to be too large in absolute value on
+average.
 
 Ridge regression is an instance of a class of techniques designed to
 obtain more favorable predictions at the expense of some increase in
@@ -24,40 +24,38 @@ idea behind these methods is that the OLS estimates are constrained in
 some way, shrinking them, on average, toward zero, to satisfy increased
 predictive accuracy.
 
-The OLS estimates, which minimize the sum of squared residuals
-$`RSS = \Sigma \mathbf{\epsilon}^2`$ are given by:
-``` math
-\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,
-```
-with
-$`\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}`$.
+The OLS estimates, which minimize the sum of squared residuals RSS =
+\Sigma \boldsymbol{\epsilon}^2 are given by:
+\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top
+\mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \\ , with
+\widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}}) =
+\widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}.
 
 Ridge regression replaces the standard residual sum of squares criterion
 with a penalized form,
 
-``` math
-\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^\top  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^\top \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,
-```
+\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top
+(\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda
+\boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \\
+,
 
 whose solution is easily seen to be:
 
-``` math
-\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  
-```
+\widehat{\boldsymbol{\beta}}^{\mathrm{RR}}\_k = (\mathbf{X}^\top
+\mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
 
-where $`\lambda`$ is the *shrinkage factor* or *tuning constant*,
-penalizing larger coefficients. Shrinkage can also be expressed as the
-equivalent degrees of freedom, the trace of the analog of the “hat”
-matrix,
-$`\text{tr}[(\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top]`$.
-In general,
+where \lambda is the *shrinkage factor* or *tuning constant*, penalizing
+larger coefficients. Shrinkage can also be expressed as the equivalent
+degrees of freedom, the trace of the analog of the “hat” matrix,
+\text{tr}\[(\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1}
+\mathbf{X}^\top\]. In general,
 
 - The bias increases as λ increases,
 - The sampling variance decreases as λ increases.
 
 One goal of the `genridge` package is to provide visualization methods
 for these models to help understand the tradeoff between bias and
-variance and choice of a shrinkage value $`\lambda`$.
+variance and choice of a shrinkage value \lambda.
 
 ### Package overview
 
@@ -78,8 +76,8 @@ the function `ridge`, which incorporates features of
 [`MASS::lm.ridge()`](https://rdrr.io/pkg/MASS/man/lm.ridge.html) and
 `ElemStatLearn::simple.ridge()`. In particular, the shrinkage factors in
 ridge regression may be specified either in terms of the constant
-($`\lambda`$) added to the diagonal of $`X^\top X`$ matrix, or the
-equivalent number of degrees of freedom.
+(\lambda) added to the diagonal of X^\top X matrix, or the equivalent
+number of degrees of freedom.
 
 The following computational functions are provided:
 
@@ -119,8 +117,8 @@ In addition, the
 [`pca()`](https://friendly.github.io/genridge/reference/pca.md) method
 for `"ridge"` objects transforms the coefficients and covariance
 matrices of a ridge object from predictor space to the equivalent, but
-more interesting space of the PCA of $`X^\top X`$ or the SVD of $`X`$.
-The main plotting functions also work for these objects, of class
+more interesting space of the PCA of X^\top X or the SVD of X. The main
+plotting functions also work for these objects, of class
 `c("ridge", "pcaridge")`.
 
 - [`biplot.pcaridge()`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md):
@@ -135,11 +133,11 @@ provide other useful measures and plots.
 
 ## 📂 Installation
 
-|  |  |
-|----|----|
-| CRAN version | `install.packages("genridge")` |
-| R-universe | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
-| Development version | `remotes::install_github("friendly/genridge")` |
+|                     |                                                                             |
+|---------------------|-----------------------------------------------------------------------------|
+| CRAN version        | `install.packages("genridge")`                                              |
+| R-universe          | `install.packages("genridge", repos = c('https://friendly.r-universe.dev')` |
+| Development version | `remotes::install_github("friendly/genridge")`                              |
 
 ## 📊 Examples
 
@@ -160,7 +158,6 @@ squares software at the time, are (purposely) perverse, in that:
   `GNP.deflator` is a multiplicative factor to account for inflation.
 
 ``` r
-
 data(longley)
 str(longley)
 #> 'data.frame':    16 obs. of  7 variables:
@@ -173,18 +170,17 @@ str(longley)
 #>  $ Employed    : num  60.3 61.1 60.2 61.2 63.2 ...
 ```
 
-Shrinkage values, can be specified using either $`\lambda`$ (where
-$`\lambda = 0`$ corresponds to OLS), or equivalent effective degrees of
-freedom. This quantifies the tradeoff between bias and variance for
-predictive modeling, where OLS has low bias, but can have large
-predictive variance.
+Shrinkage values, can be specified using either \lambda (where \lambda =
+0 corresponds to OLS), or equivalent effective degrees of freedom. This
+quantifies the tradeoff between bias and variance for predictive
+modeling, where OLS has low bias, but can have large predictive
+variance.
 
 [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
 returns a matrix containing the coefficients for each predictor for each
 shrinkage value and other quantities.
 
 ``` r
-
 lambda <- c(0, 0.005, 0.01, 0.02, 0.04, 0.08)
 lridge <- ridge(Employed ~ GNP + Unemployed + Armed.Forces + Population + Year + GNP.deflator, 
         data=longley, lambda=lambda)
@@ -204,11 +200,8 @@ lridge
 The effects of collinearity can be measured by a variance inflation
 factor (VIF), the ratio of the sampling variances of the coefficients,
 relative to what they would be if all predictors were uncorrelated,
-given by
-``` math
-\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,
-```
-where “others” represents all other predictors except $`X_i`$.
+given by \text{VIF}(\beta_i) = \frac{1}{1 - R^2\_{i \| \text{others}}}
+\\ , where “others” represents all other predictors except X_i.
 
 `vif()` for a `"ridge"` object calculates variance inflation factors for
 all values of the ridge constant. You can see that for OLS, nearly all
@@ -217,7 +210,6 @@ variance inflation has been considerably reduced for a few of the
 predictors.
 
 ``` r
-
 vridge <- vif(lridge)
 vridge
 #> Variance inflaction factors:
@@ -233,7 +225,6 @@ vridge
 `vif()` returns a `"vif.ridge"` object for which there is a plot method:
 
 ``` r
-
 clr <-  c("black", "red", "darkgreen","blue", "cyan4", "magenta")
 pch <- c(15:18, 7, 9)
 plot(vridge, X = "df", Y="sqrt",
@@ -248,10 +239,9 @@ plot(vridge, X = "df", Y="sqrt",
 A standard, univariate,
 [`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md)
 simply plots the estimated coefficients for each predictor against the
-shrinkage factor, $`\lambda`$.
+shrinkage factor, \lambda.
 
 ``` r
-
 traceplot(lridge, xlim = c(-0.02, 0.08))
 ```
 
@@ -271,7 +261,6 @@ values (along with a generalized cross-validation value GCV) are also
 stored in the `"ridge"` object,
 
 ``` r
-
 c(HKB=lridge$kHKB, LW=lridge$kLW, GCV=lridge$kGCV)
 #>      HKB       LW      GCV 
 #> 0.004275 0.032295 0.005000
@@ -285,14 +274,13 @@ These values seem rather small, but note that the coefficients for
 ### Alternative plot
 
 It is sometimes easier to interpret the plot when coefficients are
-plotted against the equivalent degrees of freedom, where $`\lambda = 0`$
+plotted against the equivalent degrees of freedom, where \lambda = 0
 corresponds to 6 degrees of freedom in the parameter space of six
-predictors. Note that the values of $`\lambda`$ chosen here were
+predictors. Note that the values of \lambda chosen here were
 approximately chosen on a log scale. Using the scaling `X="df"` here
 makes the points more nearly equally spaced.
 
 ``` r
-
 traceplot(lridge, X="df", xlim = c(4, 6.5))
 ```
 
@@ -303,25 +291,24 @@ Univariate ridge trace plot of coefficients against effective degrees of
 freedom.
 
 **But wait: This is the wrong plot!** These plots show the trends in
-increased bias associated with larger $`\lambda`$, but they do **not**
-show the accompanying decrease in variance (increase in precision). For
-that, we need to consider the variances and covariances of the estimated
+increased bias associated with larger \lambda, but they do **not** show
+the accompanying decrease in variance (increase in precision). For that,
+we need to consider the variances and covariances of the estimated
 coefficients. The univariate trace plot is the wrong graphic form for
 what is essentially a *multivariate* problem, where we would like to
 visualize how *both* coefficients and their variances change with
-$`\lambda`$.
+\lambda.
 
 ### Bivariate trace plots
 
 The bivariate analog of the trace plot suggested by Friendly (2013)
 plots **bivariate confidence ellipses** for pairs of coefficients. Their
-centers, $`(\widehat{\beta}_i, \widehat{\beta}_j)`$ show the estimated
+centers, (\widehat{\beta}\_i, \widehat{\beta}\_j) show the estimated
 coefficients, and their size and shape indicate sampling variance,
-$`\widehat{\text{Var}} (\mathbf{\widehat{\beta}}_{ij})`$. Here, we plot
+\widehat{\text{Var}} (\mathbf{\widehat{\beta}}\_{ij}). Here, we plot
 those for `GNP` against four of the other predictors.
 
 ``` r
-
 op <- par(mfrow=c(2,2), mar=c(4, 4, 1, 1)+ 0.1)
 clr <-  c("black", "red", "darkgreen","blue", "cyan4", "magenta")
 pch <- c(15:18, 7, 9)
@@ -352,14 +339,13 @@ toward zero, but the bivariate plot also makes clear the reduction in
 variance, as well as the bivariate path of shrinkage.
 
 As can be seen, the coefficients for each pair of predictors trace a
-path generally in toward the origin $`(0, 0)`$, and the covariance
-ellipses get smaller, indicating increased precision.
+path generally in toward the origin (0, 0), and the covariance ellipses
+get smaller, indicating increased precision.
 
 The [`pairs()`](https://rdrr.io/r/graphics/pairs.html) method for
 `"ridge"` objects shows all pairwise views in scatterplot matrix form.
 
 ``` r
-
 pairs(lridge, radius=0.5, diag.cex = 2, 
       fill = TRUE, fill.alpha = 0.1)
 ```
@@ -378,14 +364,12 @@ The function
 [`precision()`](https://friendly.github.io/genridge/reference/precision.md)
 calculates a number of measures of the effect of shrinkage of the
 coefficients on the estimated sampling variance. Larger shrinkage
-$`\lambda`$ should lead to smaller
-$`\widehat{\text{Var}} (\mathbf{\widehat{\beta}})`$, indicating
-increased precision. See:
+\lambda should lead to smaller \widehat{\text{Var}}
+(\mathbf{\widehat{\beta}}), indicating increased precision. See:
 [`help(precision)`](https://friendly.github.io/genridge/reference/precision.md)
 for details.
 
 ``` r
-
 precision(lridge)
 #>       lambda    df    det   trace max.eig norm.beta norm.diff
 #> 0.000  0.000 6.000 -12.93 18.1190 15.4191    1.0000     0.000
@@ -396,15 +380,14 @@ precision(lridge)
 #> 0.080  0.080 4.128 -21.05  0.5873  0.2599    0.3373     3.027
 ```
 
-`norm.beta`
-$`= \lVert\mathbf{\beta}\rVert / \max{\lVert\mathbf{\beta}\rVert}`$ is a
-measure of shrinkage, and `det`
-$`= \log{| \text{Var}(\mathbf{\beta}) |}`$, is a measure of variance of
-the coefficients (inverse of precision). Plotting these against each
-other gives a direct view of the tradeoff between bias and precision.
+`norm.beta` = \lVert\boldsymbol{\beta}\rVert /
+\max{\lVert\boldsymbol{\beta}\rVert} is a measure of shrinkage, and
+`det` = \log{\| \text{Var}(\boldsymbol{\beta}) \|}, is a measure of
+variance of the coefficients (inverse of precision). Plotting these
+against each other gives a direct view of the tradeoff between bias and
+precision.
 
 ``` r
-
 pridge <- precision(lridge)
 op <- par(mar=c(4, 4, 1, 1) + 0.2)
 library(splines)
@@ -445,7 +428,6 @@ labeling the points with effective degrees of freedom. The shape of the
 curve is quite similar.
 
 ``` r
-
 plot(pridge, labels = "df", label.prefix="df:", criteria = criteria)
 ```
 
@@ -466,13 +448,12 @@ Just as principal components analysis gives low-dimensional views of a
 data set, PCA can be useful to understand ridge regression.
 
 The `pca` method transforms a `"ridge"` object from parameter space,
-where the estimated coefficients are $`\beta_k`$ with covariance
-matrices $`\Sigma_k`$, to the principal component space defined by the
-right singular vectors, $`V`$, of the singular value decomposition of
-the scaled predictor matrix, $`X`$.
+where the estimated coefficients are \beta_k with covariance matrices
+\Sigma_k, to the principal component space defined by the right singular
+vectors, V, of the singular value decomposition of the scaled predictor
+matrix, X.
 
 ``` r
-
 plridge <- pca(lridge)
 plridge
 #> Ridge Coefficients:
@@ -495,12 +476,11 @@ contribute most to collinearity, for which other visualization methods
 have been proposed (Friendly & Kwan 2009).
 
 The [`pairs()`](https://rdrr.io/r/graphics/pairs.html) plot illustrates
-the *joint* effects: the principal components of $`\mathbf{X}`$ are
+the *joint* effects: the principal components of \mathbf{X} are
 uncorrelated, so the ellipses are all aligned with the coordinate axes
 and the ellipses largely coincide for dimensions 1 to 4:
 
 ``` r
-
 pairs(plridge)
 ```
 
@@ -512,7 +492,6 @@ that are related to the smallest dimension (6) are shrunk quickly at
 first.
 
 ``` r
-
 plot(plridge, variables=5:6, fill = TRUE, fill.alpha=0.2)
 text(plridge$coef[, 5:6], 
        label = lambdaf, 
@@ -541,7 +520,6 @@ predictors contribute to shrinkage in ridge regression. Here, `Year` and
 `Population`) and `GNP` contributes to `dim 6`.
 
 ``` r
-
 op <- par(mar=c(4, 4, 1, 1) + 0.2)
 biplot(plridge, radius=0.5, 
        ref=FALSE, asp=1, 
@@ -565,7 +543,6 @@ The genridge package contains four data sets, each with its own
 examples; e.g., you can try `example(Acetylene)`.
 
 ``` r
-
 vcdExtra::datasets(package="genridge")
 #> Registered S3 methods overwritten by 'vcdExtra':
 #>   method      from
@@ -590,16 +567,16 @@ Slides:
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
 **22**(1), 50-68, [DOI
-link](http://dx.doi.org/10.1080/10618600.2012.681237), Online:
-[genridge-jcgs.pdf](https://www.datavis.ca/papers/genridge-jcgs.pdf),
+link](https://doi.org/10.1080/10618600.2012.681237), Online:
+[genridge-jcgs.pdf](https://friendly.github.io/papers/genridge-jcgs.pdf),
 Supp. materials:
-[genridge-supp.zip](http://datavis.ca/papers/genridge-supp.zip)
+[genridge-supp.zip](https://friendly.github.io/papers/genridge-supp.zip)
 
 Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing
 Collinearity Diagnostics, *The American Statistician*, **63**(1), 56–65,
 [DOI link](https://doi.org/10.1198/tast.2009.0012), Online:
-[viscollin-tast.pdf](http://datavis.ca/papers/viscollin-tast.pdf), Supp.
-materials: <http://datavis.ca/papers/viscollin/>.
+[viscollin-tast.pdf](https://friendly.github.io/papers/viscollin-tast.pdf),
+Supp. materials: <https://friendly.github.io/papers/viscollin/>.
 
 Friendly, M., Monette, G., & Fox, J. (2013). Elliptical Insights:
 Understanding Statistical Methods Through Elliptical Geometry.

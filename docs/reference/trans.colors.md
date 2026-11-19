@@ -35,8 +35,8 @@ one is replicated to make them of the same length.
 
 ## See also
 
-[`col2rgb`](https://rdrr.io/r/grDevices/col2rgb.html),
-[`rgb`](https://rdrr.io/r/grDevices/rgb.html),
+[`grDevices::col2rgb()`](https://rdrr.io/r/grDevices/col2rgb.html),
+[`grDevices::rgb()`](https://rdrr.io/r/grDevices/rgb.html),
 
 ## Author
 
@@ -45,7 +45,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 trans.colors(palette(), alpha=0.5)
 #> [1] "#00000080" "#DF536B80" "#61D04F80" "#2297E680" "#28E2E580" "#CD0BBC80"
 #> [7] "#F5C71080" "#9E9E9E80"

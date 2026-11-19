@@ -31,7 +31,7 @@ pairs(
 - x:
 
   A `ridge` object, as fit by
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md)
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
 
 - variables:
 
@@ -97,16 +97,17 @@ None. Used for its side effect of plotting.
 
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
-**22**(1), 50-68, doi:10.1080/10618600.2012.681237,
-<https://www.datavis.ca/papers/genridge-jcgs.pdf>
+**22**(1), 50-68,
+[doi:10.1080/10618600.2012.681237](https://doi.org/10.1080/10618600.2012.681237)
+.
 
 ## See also
 
-[`ridge`](https://friendly.github.io/genridge/reference/ridge.md) for
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) for
 details on ridge regression as implemented here
 
-[`plot.ridge`](https://friendly.github.io/genridge/reference/plot.ridge.md),
-[`traceplot`](https://friendly.github.io/genridge/reference/traceplot.md)
+[`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md),
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md)
 for other plotting methods
 
 ## Author
@@ -116,7 +117,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
 

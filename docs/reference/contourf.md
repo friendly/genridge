@@ -1,10 +1,10 @@
 # Enhanced Contour Plots
 
 This is an enhancement to
-[`contour`](https://rdrr.io/r/graphics/contour.html), written as a
-wrapper for that function. It creates a contour plot, or adds contour
-lines to an existing plot, allowing the contours to be filled and
-returning the list of contour lines.
+[`graphics::contour()`](https://rdrr.io/r/graphics/contour.html),
+written as a wrapper for that function. It creates a contour plot, or
+adds contour lines to an existing plot, allowing the contours to be
+filled and returning the list of contour lines.
 
 ## Usage
 
@@ -50,7 +50,8 @@ contourf(
 
 - zlim:
 
-  z-limits for the plot. x-limits and y-limits can be passed through ...
+  z-limits for the plot. x-limits and y-limits can be passed through
+  `...`
 
 - col:
 
@@ -81,26 +82,27 @@ contourf(
 - ...:
 
   additional arguments passed to
-  [`contour`](https://rdrr.io/r/graphics/contour.html), including all
-  arguments of
-  [`contour.default`](https://rdrr.io/r/graphics/contour.html) not
-  mentioned above, as well as additional graphical parameters passed by
-  [`contour.default`](https://rdrr.io/r/graphics/contour.html) to more
-  basic functions.
+  [`graphics::contour()`](https://rdrr.io/r/graphics/contour.html),
+  including all arguments of
+  [`graphics::contour.default()`](https://rdrr.io/r/graphics/contour.html)
+  not mentioned above, as well as additional graphical parameters passed
+  by
+  [`graphics::contour.default()`](https://rdrr.io/r/graphics/contour.html)
+  to more basic functions.
 
 ## Value
 
 Returns invisibly the list of contours lines, with components `levels`,
 `x`, `y`. See
-[`contourLines`](https://rdrr.io/r/grDevices/contourLines.html).
+[`grDevices::contourLines()`](https://rdrr.io/r/grDevices/contourLines.html).
 
 ## See also
 
-[`contour`](https://rdrr.io/r/graphics/contour.html),
-[`contourLines`](https://rdrr.io/r/grDevices/contourLines.html)
+[`graphics::contour()`](https://rdrr.io/r/graphics/contour.html),
+[`grDevices::contourLines()`](https://rdrr.io/r/grDevices/contourLines.html)
 
-[`contourplot`](https://rdrr.io/pkg/lattice/man/levelplot.html) from
-package lattice.
+[`lattice::contourplot()`](https://rdrr.io/pkg/lattice/man/levelplot.html)
+from package lattice.
 
 ## Author
 
@@ -109,7 +111,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 x <- 10*1:nrow(volcano)
 y <- 10*1:ncol(volcano)
 contourf(x,y,volcano, col="blue")

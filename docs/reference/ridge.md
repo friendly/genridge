@@ -14,7 +14,7 @@ to the diagonal elements of \\\mathbf{X}^\top\mathbf{X}\\ in the least
 squares solution to achieve a more favorable tradeoff between bias and
 variance (inverse of precision) of the coefficients.
 
-\$\$\widehat{\mathbf{\beta}}^{\text{RR}}\_k = (\mathbf{X}^\top
+\$\$\widehat{\boldsymbol{\beta}}^{\text{RR}}\_k = (\mathbf{X}^\top
 \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y} \$\$
 
 Ridge regression shrinkage can be parameterized in several ways.
@@ -104,7 +104,7 @@ best(object, ...)
 
   a list of contrasts to be used for some or all of factor terms in the
   formula. See the `contrasts.arg` of
-  [`model.matrix.default`](https://rdrr.io/r/stats/model.matrix.html).
+  [`stats::model.matrix.default()`](https://rdrr.io/r/stats/model.matrix.html).
 
 - X:
 
@@ -123,57 +123,35 @@ best(object, ...)
 
 A list with the following components:
 
-- lambda:
+- `lambda`: The vector of ridge constants
 
-  The vector of ridge constants
+- `df`: The vector of effective degrees of freedom corresponding to
+  `lambda`
 
-- df:
+- `coef`: The matrix of estimated ridge regression coefficients
 
-  The vector of effective degrees of freedom corresponding to `lambda`
+- `scales`: scalings used on the X matrix
 
-- coef:
+- `kHKB`: HKB estimate of the ridge constant
 
-  The matrix of estimated ridge regression coefficients
+- `kLW`: L-W estimate of the ridge constant
 
-- scales:
+- `GCV`: vector of GCV values
 
-  scalings used on the X matrix
+- `kGCV`: value of `lambda` with the minimum GCV
 
-- kHKB:
-
-  HKB estimate of the ridge constant
-
-- kLW:
-
-  L-W estimate of the ridge constant
-
-- GCV:
-
-  vector of GCV values
-
-- kGCV:
-
-  value of `lambda` with the minimum GCV
-
-- criteria:
-
-  Collects the criteria `kHKB`, `kLW`, and `kGCV` in a named vector
+- `criteria`: Collects the criteria `kHKB`, `kLW`, and `kGCV` in a named
+  vector
 
 If `svd==TRUE` (the default), the following are also included:
 
-- svd.D:
+- `svd.D`: Singular values of the `svd` of the scaled X matrix
 
-  Singular values of the `svd` of the scaled X matrix
+- `svd.U`: Left singular vectors of the `svd` of the scaled X matrix.
+  Rows correspond to observations and columns to dimensions.
 
-- svd.U:
-
-  Left singular vectors of the `svd` of the scaled X matrix. Rows
-  correspond to observations and columns to dimensions.
-
-- svd.V:
-
-  Right singular vectors of the `svd` of the scaled X matrix. Rows
-  correspond to variables and columns to dimensions.
+- `svd.V`: Right singular vectors of the `svd` of the scaled X matrix.
+  Rows correspond to variables and columns to dimensions.
 
 A data.frame with one row for each of the HKB, LW, and GCV criteria
 
@@ -206,21 +184,21 @@ method for choosing a good ridge parameter. *Technometrics*,
 
 ## See also
 
-[`lm.ridge`](https://rdrr.io/pkg/MASS/man/lm.ridge.html) for other
-implementations of ridge regression
+[`MASS::lm.ridge()`](https://rdrr.io/pkg/MASS/man/lm.ridge.html) for
+other implementations of ridge regression
 
-[`traceplot`](https://friendly.github.io/genridge/reference/traceplot.md),
-[`plot.ridge`](https://friendly.github.io/genridge/reference/plot.ridge.md),
-[`pairs.ridge`](https://friendly.github.io/genridge/reference/pairs.ridge.md),
-[`plot3d.ridge`](https://friendly.github.io/genridge/reference/plot3d.md),
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md),
+[`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md),
+[`pairs.ridge()`](https://friendly.github.io/genridge/reference/pairs.ridge.md),
+[`plot3d.ridge()`](https://friendly.github.io/genridge/reference/plot3d.md),
 for 1D, 2D, 3D plotting methods
 
-[`pca.ridge`](https://friendly.github.io/genridge/reference/pca.md),
-[`biplot.ridge`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md),
-[`biplot.pcaridge`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md)
+[`pca.ridge()`](https://friendly.github.io/genridge/reference/pca.md),
+[`biplot.ridge()`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md),
+[`biplot.pcaridge()`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md)
 for views in PCA/SVD space
 
-[`precision.ridge`](https://friendly.github.io/genridge/reference/precision.md)
+[`precision.ridge()`](https://friendly.github.io/genridge/reference/precision.md)
 for measures of shrinkage and precision
 
 ## Author
@@ -230,7 +208,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 
 #\donttest{
 # Longley data, using number Employed as response

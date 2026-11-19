@@ -2,7 +2,7 @@
 
 The `traceplot` function extends and simplifies the univariate ridge
 trace plots for ridge regression provided in the `plot` method for
-[`lm.ridge`](https://rdrr.io/pkg/MASS/man/lm.ridge.html)
+[`MASS::lm.ridge()`](https://rdrr.io/pkg/MASS/man/lm.ridge.html)
 
 ## Usage
 
@@ -26,7 +26,7 @@ traceplot(
 - x:
 
   A `ridge` object, as fit by
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md)
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
 
 - X:
 
@@ -58,7 +58,7 @@ traceplot(
 - ...:
 
   Other arguments passed to
-  [`matplot`](https://rdrr.io/r/graphics/matplot.html)
+  [`graphics::matplot()`](https://rdrr.io/r/graphics/matplot.html)
 
 ## Value
 
@@ -75,19 +75,20 @@ variable is extended slightly to accommodate the variable names.
 
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
-**22**(1), 50-68, doi:10.1080/10618600.2012.681237,
-<https://www.datavis.ca/papers/genridge-jcgs.pdf>
+**22**(1), 50-68,
+[doi:10.1080/10618600.2012.681237](https://doi.org/10.1080/10618600.2012.681237)
+.
 
 Hoerl, A. E. and Kennard R. W. (1970). "Ridge Regression: Applications
 to Nonorthogonal Problems", *Technometrics*, 12(1), 69-82.
 
 ## See also
 
-[`ridge`](https://friendly.github.io/genridge/reference/ridge.md) for
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) for
 details on ridge regression as implemented here
 
-[`plot.ridge`](https://friendly.github.io/genridge/reference/plot.ridge.md),
-[`pairs.ridge`](https://friendly.github.io/genridge/reference/pairs.ridge.md)
+[`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md),
+[`pairs.ridge()`](https://friendly.github.io/genridge/reference/pairs.ridge.md)
 for other plotting methods
 
 ## Author
@@ -97,7 +98,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
 

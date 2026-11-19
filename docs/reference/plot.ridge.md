@@ -51,7 +51,7 @@ plot(x, variables = (p - 1):p, labels = NULL, ...)
 - x:
 
   A `ridge` object, as fit by
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md)
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
 
 - variables:
 
@@ -63,7 +63,7 @@ plot(x, variables = (p - 1):p, labels = NULL, ...)
 - radius:
 
   Radius of the ellipse-generating circle for the covariance ellipsoids.
-  The default, `radius=1` gives a standard “unit” ellipsoid. Typically,
+  The default, `radius=1` gives a standard "unit" ellipsoid. Typically,
   values `radius<1` gives less cluttered displays.
 
 - which.lambda:
@@ -127,8 +127,8 @@ plot(x, variables = (p - 1):p, labels = NULL, ...)
 - ...:
 
   Other arguments passed down to
-  [`plot.default`](https://rdrr.io/r/graphics/plot.default.html), e.g.,
-  `xlab`, `ylab`, and other graphic parameters.
+  [`graphics::plot.default()`](https://rdrr.io/r/graphics/plot.default.html),
+  e.g., `xlab`, `ylab`, and other graphic parameters.
 
 ## Value
 
@@ -138,22 +138,23 @@ None. Used for its side effect of plotting.
 
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
-**22**(1), 50-68, doi:10.1080/10618600.2012.681237,
-<https://www.datavis.ca/papers/genridge-jcgs.pdf>
+**22**(1), 50-68,
+[doi:10.1080/10618600.2012.681237](https://doi.org/10.1080/10618600.2012.681237)
+.
 
 ## See also
 
-[`ridge`](https://friendly.github.io/genridge/reference/ridge.md) for
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) for
 details on ridge regression as implemented here;
-[`pairs.ridge`](https://friendly.github.io/genridge/reference/pairs.ridge.md),
-[`traceplot`](https://friendly.github.io/genridge/reference/traceplot.md),
+[`pairs.ridge()`](https://friendly.github.io/genridge/reference/pairs.ridge.md),
+[`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md),
 for basic plots.
 
-[`pca.ridge`](https://friendly.github.io/genridge/reference/pca.md) for
-transformation of ridge regression estimates to PCA space.
-[`biplot.pcaridge`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md)
+[`pca.ridge()`](https://friendly.github.io/genridge/reference/pca.md)
+for transformation of ridge regression estimates to PCA space.
+[`biplot.pcaridge()`](https://friendly.github.io/genridge/reference/biplot.pcaridge.md)
 and
-[`plot3d.ridge`](https://friendly.github.io/genridge/reference/plot3d.md)
+[`plot3d.ridge()`](https://friendly.github.io/genridge/reference/plot3d.md)
 for other plotting methods
 
 ## Author
@@ -163,7 +164,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
 

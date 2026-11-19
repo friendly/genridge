@@ -11,13 +11,13 @@ Source:
 [`DESCRIPTION`](https://github.com/friendly/genridge/blob/HEAD/DESCRIPTION)
 
 Friendly M (2026). *genridge: Generalized Ridge Trace Plots for Ridge
-Regression*. R package version 0.8.0,
+Regression*. R package version 0.8.1,
 <https://github.com/friendly/genridge>.
 
     @Manual{,
       title = {genridge: Generalized Ridge Trace Plots for Ridge Regression},
       author = {Michael Friendly},
       year = {2026},
-      note = {R package version 0.8.0},
+      note = {R package version 0.8.1},
       url = {https://github.com/friendly/genridge},
     }

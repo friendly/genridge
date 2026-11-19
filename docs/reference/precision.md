@@ -4,9 +4,9 @@ The goal of `precision` is to allow you to study the relationship
 between shrinkage of ridge regression coefficients and their precision
 directly by calculating measures of each.
 
-Three measures of (inverse) precision based on the “size” of the
+Three measures of (inverse) precision based on the "size" of the
 covariance matrix of the parameters are calculated. Let \\V_k \equiv
-\text{Var}(\mathbf{\beta}\_k)\\ be the covariance matrix for a given
+\text{Var}(\boldsymbol{\beta}\_k)\\ be the covariance matrix for a given
 ridge constant, and let \\\lambda_i , i= 1, \dots p\\ be its
 eigenvalues. Then the variance (= 1/precision) measures are:
 
@@ -25,15 +25,16 @@ eigenvalues. Then the variance (= 1/precision) measures are:
 Two measures of shrinkage are also calculated:
 
 - `norm.beta`: the root mean square of the coefficient vector
-  \\\lVert\mathbf{\beta}\_k \rVert\\, normalized to a maximum of 1.0 if
-  `normalize == TRUE` (the default).
+  \\\lVert\boldsymbol{\beta}\_k \rVert\\, normalized to a maximum of 1.0
+  if `normalize == TRUE` (the default).
 
 - `norm.diff`: the root mean square of the difference from the OLS
-  estimate \\\lVert \mathbf{\beta}\_{\text{OLS}} - \mathbf{\beta}\_k
-  \rVert\\. This measure is inversely related to `norm.beta`
+  estimate \\\lVert \boldsymbol{\beta}\_{\text{OLS}} -
+  \boldsymbol{\beta}\_k \rVert\\. This measure is inversely related to
+  `norm.beta`
 
 A plot method,
-[`plot.precision`](https://friendly.github.io/genridge/reference/plot.precision.md)
+[`plot.precision()`](https://friendly.github.io/genridge/reference/plot.precision.md)
 facilitates making graphs of these quantities.
 
 ## Usage
@@ -55,8 +56,8 @@ precision(object, det.fun, normalize, ...)
 
 - normalize:
 
-  If `TRUE` the length of the coefficient vector \\\mathbf{\beta}\_k\\
-  is normalized to a maximum of 1.0.
+  If `TRUE` the length of the coefficient vector
+  \\\boldsymbol{\beta}\_k\\ is normalized to a maximum of 1.0.
 
 - ...:
 
@@ -67,35 +68,22 @@ precision(object, det.fun, normalize, ...)
 An object of class `c("precision", "data.frame")` with the following
 columns:
 
-- lambda:
+- `lambda`: The ridge constant
 
-  The ridge constant
+- `df`: The equivalent effective degrees of freedom
 
-- df:
+- `det`: The `det.fun` function of the determinant of the covariance
+  matrix
 
-  The equivalent effective degrees of freedom
+- `trace`: The trace of the covariance matrix
 
-- det:
+- `max.eig`: Maximum eigen value of the covariance matrix
 
-  The `det.fun` function of the determinant of the covariance matrix
+- `norm.beta`: The root mean square of the estimated coefficients,
+  possibly normalized
 
-- trace:
-
-  The trace of the covariance matrix
-
-- max.eig:
-
-  Maximum eigen value of the covariance matrix
-
-- norm.beta:
-
-  The root mean square of the estimated coefficients, possibly
-  normalized
-
-- norm.diff:
-
-  The root mean square of the difference between the OLS solution
-  (`lambda = 0`) and ridge solutions
+- `norm.diff`: The root mean square of the difference between the OLS
+  solution (`lambda = 0`) and ridge solutions
 
 ## Note
 
@@ -105,8 +93,8 @@ correspond to those for `ridge` with ridge constant = 0.
 
 ## See also
 
-[`ridge`](https://friendly.github.io/genridge/reference/ridge.md),
-[`plot.precision`](https://friendly.github.io/genridge/reference/plot.precision.md)
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md),
+[`plot.precision()`](https://friendly.github.io/genridge/reference/plot.precision.md)
 
 ## Author
 
@@ -115,7 +103,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 longley.y <- longley[, "Employed"]
 longley.X <- data.matrix(longley[, c(2:6,1)])
 

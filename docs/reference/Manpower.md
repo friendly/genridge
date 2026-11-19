@@ -11,29 +11,17 @@ goal is to predict the required monthly man hours for staffing purposes.
 
 A data frame with 17 observations on the following 6 variables.
 
-- `Hours`:
+- `Hours`: monthly man hours (response variable)
 
-  monthly man hours (response variable)
+- `Load`: average daily patient load
 
-- `Load`:
+- `Xray`: monthly X-ray exposures
 
-  average daily patient load
+- `BedDays`: monthly occupied bed days
 
-- `Xray`:
+- `AreaPop`: eligible population in the area in thousands
 
-  monthly X-ray exposures
-
-- `BedDays`:
-
-  monthly occupied bed days
-
-- `AreaPop`:
-
-  eligible population in the area in thousands
-
-- `Stay`:
-
-  average length of patient's stay in days
+- `Stay`: average length of patient's stay in days
 
 ## Source
 
@@ -54,13 +42,12 @@ Computation*, 41 (2), 265-278.
 
 ## See also
 
-[`manpower`](https://rdrr.io/pkg/bestglm/man/manpower.html) for the same
-data, and other analyses
+[bestglm::manpower](https://rdrr.io/pkg/bestglm/man/manpower.html) for
+the same data, and other analyses
 
 ## Examples
 
 ``` r
-
 data(Manpower)
 mmod <- lm(Hours ~ ., data=Manpower)
 vif(mmod)

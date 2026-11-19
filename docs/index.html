@@ -11,7 +11,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
-<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="katex-auto.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.10/font.css" rel="stylesheet">
 <link href="deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
@@ -31,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="index.html">genridge</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,24 +71,24 @@
 <p>Version 0.8.0; documentation built for <code>pkgdown</code> 2026-09-10</p>
 </div>
 <div class="section level2">
-<h2 id="pencil-description">📝 Description<a class="anchor" aria-label="anchor" href="#pencil-description"></a>
+<h2 id="id_-description">📝 Description<a class="anchor" aria-label="anchor" href="#id_-description"></a>
 </h2>
 <div class="section level3">
 <h3 id="what-is-ridge-regression">What is ridge regression?<a class="anchor" aria-label="anchor" href="#what-is-ridge-regression"></a>
 </h3>
-<p>Consider the standard linear model, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐲</mi><mo>=</mo><mi>𝐗</mi><mspace width="0.278em"></mspace><mi>𝛃</mi><mo>+</mo><mi>𝛜</mi></mrow><annotation encoding="application/x-tex">\mathbf{y} = \mathbf{X} \; \mathbf{\beta} + \mathbf{\epsilon}</annotation></semantics></math> for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> predictors in a multiple regression. In this context, high multiple correlations among the predictors lead to well-known problems of collinearity under ordinary least squares (OLS) estimation, which result in unstable estimates of the parameters in β: standard errors are inflated and estimated coefficients tend to be too large in absolute value on average.</p>
+<p>Consider the standard linear model, <span class="math inline">\mathbf{y} = \mathbf{X} \; \boldsymbol{\beta} + \boldsymbol{\epsilon}</span> for <span class="math inline">p</span> predictors in a multiple regression. In this context, high multiple correlations among the predictors lead to well-known problems of collinearity under ordinary least squares (OLS) estimation, which result in unstable estimates of the parameters in β: standard errors are inflated and estimated coefficients tend to be too large in absolute value on average.</p>
 <p>Ridge regression is an instance of a class of techniques designed to obtain more favorable predictions at the expense of some increase in bias, compared to ordinary least squares (OLS) estimation. An essential idea behind these methods is that the OLS estimates are constrained in some way, shrinking them, on average, toward zero, to satisfy increased predictive accuracy.</p>
-<p>The OLS estimates, which minimize the sum of squared residuals <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi>S</mi><mi>S</mi><mo>=</mo><mi mathvariant="normal">Σ</mi><msup><mi>𝛜</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">RSS = \Sigma \mathbf{\epsilon}^2</annotation></semantics></math> are given by: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msup><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>𝐗</mi><mi>⊤</mi></msup><mi>𝐗</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>𝐗</mi><mi>⊤</mi></msup><mi>𝐲</mi><mspace width="0.278em"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">\widehat{\mathbf{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,</annotation></semantics></math> with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mtext mathvariant="normal">Var</mtext><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">(</mo><msup><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">S</mi></mrow></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mover><mi>σ</mi><mo accent="true">̂</mo></mover><mn>2</mn></msup><mo stretchy="false" form="prefix">(</mo><msup><mi>𝐗</mi><mi>⊤</mi></msup><mi>𝐗</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\widehat{\text{Var}} (\widehat{\mathbf{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}</annotation></semantics></math>.</p>
+<p>The OLS estimates, which minimize the sum of squared residuals <span class="math inline">RSS = \Sigma \boldsymbol{\epsilon}^2</span> are given by: <span class="math display">\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \; ,</span> with <span class="math inline">\widehat{\text{Var}} (\widehat{\boldsymbol{\beta}}^{\mathrm{OLS}}) = \widehat{\sigma}^2 (\mathbf{X}^\top \mathbf{X})^{-1}</span>.</p>
 <p>Ridge regression replaces the standard residual sum of squares criterion with a penalized form,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">R</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">S</mi></mrow><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>𝐲</mi><mo>−</mo><mi>𝐗</mi><mi>𝛃</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><mo stretchy="false" form="prefix">(</mo><mi>𝐲</mi><mo>−</mo><mi>𝐗</mi><mi>𝛃</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>λ</mi><msup><mi>𝛃</mi><mi>⊤</mi></msup><mi>𝛃</mi><mspace width="1.0em"></mspace><mspace width="1.0em"></mspace><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo>≥</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mspace width="0.222em"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \mathbf{\beta})^\top  (\mathbf{y}-\mathbf{X} \mathbf{\beta}) + \lambda \mathbf{\beta}^\top \mathbf{\beta} \quad\quad (\lambda \ge 0) \: ,</annotation></semantics></math></p>
+<p><span class="math display">\mathrm{RSS}(\lambda) = (\mathbf{y}-\mathbf{X} \boldsymbol{\beta})^\top  (\mathbf{y}-\mathbf{X} \boldsymbol{\beta}) + \lambda \boldsymbol{\beta}^\top \boldsymbol{\beta} \quad\quad (\lambda \ge 0) \: ,</span></p>
 <p>whose solution is easily seen to be:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><mi>k</mi><mrow><mi mathvariant="normal">R</mi><mi mathvariant="normal">R</mi></mrow></msubsup><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>𝐗</mi><mi>⊤</mi></msup><mi>𝐗</mi><mo>+</mo><mi>λ</mi><mi>𝐈</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>𝐗</mi><mi>⊤</mi></msup><mi>𝐲</mi></mrow><annotation encoding="application/x-tex">\widehat{\mathbf{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  </annotation></semantics></math></p>
-<p>where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> is the <em>shrinkage factor</em> or <em>tuning constant</em>, penalizing larger coefficients. Shrinkage can also be expressed as the equivalent degrees of freedom, the trace of the analog of the “hat” matrix, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">tr</mtext><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>𝐗</mi><mi>⊤</mi></msup><mi>𝐗</mi><mo>+</mo><mi>λ</mi><mi>𝐈</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>𝐗</mi><mi>⊤</mi></msup><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\text{tr}[(\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top]</annotation></semantics></math>. In general,</p>
+<p><span class="math display">\widehat{\boldsymbol{\beta}}^{\mathrm{RR}}_k  = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}  </span></p>
+<p>where <span class="math inline">\lambda</span> is the <em>shrinkage factor</em> or <em>tuning constant</em>, penalizing larger coefficients. Shrinkage can also be expressed as the equivalent degrees of freedom, the trace of the analog of the “hat” matrix, <span class="math inline">\text{tr}[(\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top]</span>. In general,</p>
 <ul>
 <li>The bias increases as λ increases,</li>
 <li>The sampling variance decreases as λ increases.</li>
 </ul>
-<p>One goal of the <code>genridge</code> package is to provide visualization methods for these models to help understand the tradeoff between bias and variance and choice of a shrinkage value <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.</p>
+<p>One goal of the <code>genridge</code> package is to provide visualization methods for these models to help understand the tradeoff between bias and variance and choice of a shrinkage value <span class="math inline">\lambda</span>.</p>
 </div>
 <div class="section level3">
 <h3 id="package-overview">Package overview<a class="anchor" aria-label="anchor" href="#package-overview"></a>
@@ -97,7 +98,7 @@
 <div class="section level3">
 <h3 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
 </h3>
-<p>This package provides computational support for the graphical methods described in Friendly (2013). Ridge regression models may be fit using the function <code>ridge</code>, which incorporates features of <code><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html" class="external-link">MASS::lm.ridge()</a></code> and <code>ElemStatLearn::simple.ridge()</code>. In particular, the shrinkage factors in ridge regression may be specified either in terms of the constant (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>) added to the diagonal of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi></mrow><annotation encoding="application/x-tex">X^\top X</annotation></semantics></math> matrix, or the equivalent number of degrees of freedom.</p>
+<p>This package provides computational support for the graphical methods described in Friendly (2013). Ridge regression models may be fit using the function <code>ridge</code>, which incorporates features of <code><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html" class="external-link">MASS::lm.ridge()</a></code> and <code>ElemStatLearn::simple.ridge()</code>. In particular, the shrinkage factors in ridge regression may be specified either in terms of the constant (<span class="math inline">\lambda</span>) added to the diagonal of <span class="math inline">X^\top X</span> matrix, or the equivalent number of degrees of freedom.</p>
 <p>The following computational functions are provided:</p>
 <ul>
 <li>
@@ -127,7 +128,7 @@
 <li>
 <code><a href="reference/vif.ridge.html">plot.vif.ridge()</a></code>: Plots variance inflation factors</li>
 </ul>
-<p>In addition, the <code><a href="reference/pca.html">pca()</a></code> method for <code>"ridge"</code> objects transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi></mrow><annotation encoding="application/x-tex">X^\top X</annotation></semantics></math> or the SVD of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>. The main plotting functions also work for these objects, of class <code>c("ridge", "pcaridge")</code>.</p>
+<p>In addition, the <code><a href="reference/pca.html">pca()</a></code> method for <code>"ridge"</code> objects transforms the coefficients and covariance matrices of a ridge object from predictor space to the equivalent, but more interesting space of the PCA of <span class="math inline">X^\top X</span> or the SVD of <span class="math inline">X</span>. The main plotting functions also work for these objects, of class <code>c("ridge", "pcaridge")</code>.</p>
 <ul>
 <li>
 <code><a href="reference/biplot.pcaridge.html">biplot.pcaridge()</a></code>: Adds variable vectors to the bivariate plots of coefficients in PCA space</li>
@@ -136,7 +137,7 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="open_file_folder-installation">📂 Installation<a class="anchor" aria-label="anchor" href="#open_file_folder-installation"></a>
+<h2 id="id_-installation">📂 Installation<a class="anchor" aria-label="anchor" href="#id_-installation"></a>
 </h2>
 <table class="table">
 <colgroup>
@@ -144,15 +145,15 @@
 <col width="50%">
 </colgroup>
 <tbody>
-<tr>
+<tr class="odd">
 <td>CRAN version</td>
 <td><code>install.packages("genridge")</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td>R-universe</td>
 <td><code>install.packages("genridge", repos = c('https://friendly.r-universe.dev')</code></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Development version</td>
 <td><code>remotes::install_github("friendly/genridge")</code></td>
 </tr>
@@ -160,7 +161,7 @@
 </table>
 </div>
 <div class="section level2">
-<h2 id="bar_chart-examples">📊 Examples<a class="anchor" aria-label="anchor" href="#bar_chart-examples"></a>
+<h2 id="id_-examples">📊 Examples<a class="anchor" aria-label="anchor" href="#id_-examples"></a>
 </h2>
 <p>The classic example for ridge regression is Longley’s (1967) data, consisting of 7 economic variables, observed yearly from 1947 to 1962 (n=16), in the data frame <code><a href="https://rdrr.io/r/datasets/longley.html" class="external-link">datasets::longley</a></code>. The goal is to predict <code>Employed</code> from <code>GNP</code>, <code>Unemployed</code>, <code>Armed.Forces</code>, <code>Population</code>, <code>Year</code>, <code>GNP.deflator</code>.</p>
 <p>These data, constructed to illustrate numerical problems in least squares software at the time, are (purposely) perverse, in that:</p>
@@ -179,7 +180,7 @@
 <span><span class="co">#&gt;  $ Population  : num  108 109 110 111 112 ...</span></span>
 <span><span class="co">#&gt;  $ Year        : int  1947 1948 1949 1950 1951 1952 1953 1954 1955 1956 ...</span></span>
 <span><span class="co">#&gt;  $ Employed    : num  60.3 61.1 60.2 61.2 63.2 ...</span></span></code></pre></div>
-<p>Shrinkage values, can be specified using either <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> (where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 0</annotation></semantics></math> corresponds to OLS), or equivalent effective degrees of freedom. This quantifies the tradeoff between bias and variance for predictive modeling, where OLS has low bias, but can have large predictive variance.</p>
+<p>Shrinkage values, can be specified using either <span class="math inline">\lambda</span> (where <span class="math inline">\lambda = 0</span> corresponds to OLS), or equivalent effective degrees of freedom. This quantifies the tradeoff between bias and variance for predictive modeling, where OLS has low bias, but can have large predictive variance.</p>
 <p><code><a href="reference/ridge.html">ridge()</a></code> returns a matrix containing the coefficients for each predictor for each shrinkage value and other quantities.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.02</span>, <span class="fl">0.04</span>, <span class="fl">0.08</span><span class="op">)</span></span>
@@ -197,7 +198,7 @@
 <div class="section level3">
 <h3 id="variance-inflation-factors">Variance Inflation Factors<a class="anchor" aria-label="anchor" href="#variance-inflation-factors"></a>
 </h3>
-<p>The effects of collinearity can be measured by a variance inflation factor (VIF), the ratio of the sampling variances of the coefficients, relative to what they would be if all predictors were uncorrelated, given by <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">VIF</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>β</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msubsup><mi>R</mi><mrow><mi>i</mi><mo stretchy="false" form="prefix">|</mo><mtext mathvariant="normal">others</mtext></mrow><mn>2</mn></msubsup></mrow></mfrac><mspace width="0.278em"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,</annotation></semantics></math> where “others” represents all other predictors except <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mi>i</mi></msub><annotation encoding="application/x-tex">X_i</annotation></semantics></math>.</p>
+<p>The effects of collinearity can be measured by a variance inflation factor (VIF), the ratio of the sampling variances of the coefficients, relative to what they would be if all predictors were uncorrelated, given by <span class="math display">\text{VIF}(\beta_i) = \frac{1}{1 - R^2_{i | \text{others}}} \; ,</span> where “others” represents all other predictors except <span class="math inline">X_i</span>.</p>
 <p><code>vif()</code> for a <code>"ridge"</code> object calculates variance inflation factors for all values of the ridge constant. You can see that for OLS, nearly all VIF values are dangerously high. With a ridge factor of 0.04 or greater, variance inflation has been considerably reduced for a few of the predictors.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vridge</span> <span class="op">&lt;-</span> <span class="fu">vif</span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span>
@@ -222,7 +223,7 @@
 <div class="section level3">
 <h3 id="univariate-trace-plots">Univariate trace plots<a class="anchor" aria-label="anchor" href="#univariate-trace-plots"></a>
 </h3>
-<p>A standard, univariate, <code><a href="reference/traceplot.html">traceplot()</a></code> simply plots the estimated coefficients for each predictor against the shrinkage factor, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.</p>
+<p>A standard, univariate, <code><a href="reference/traceplot.html">traceplot()</a></code> simply plots the estimated coefficients for each predictor against the shrinkage factor, <span class="math inline">\lambda</span>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">lridge</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.08</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <figure><img src="reference/figures/README-longley-tp1-1.png" alt="Univariate ridge trace plot for the coefficients of predictors of Employment in Longley’s data via ridge regression, with ridge constants k = 0, 0.005, 0.01, 0.02, 0.04, 0.08."><figcaption aria-hidden="true">
@@ -239,17 +240,17 @@ Univariate ridge trace plot for the coefficients of predictors of Employment in 
 <div class="section level3">
 <h3 id="alternative-plot">Alternative plot<a class="anchor" aria-label="anchor" href="#alternative-plot"></a>
 </h3>
-<p>It is sometimes easier to interpret the plot when coefficients are plotted against the equivalent degrees of freedom, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 0</annotation></semantics></math> corresponds to 6 degrees of freedom in the parameter space of six predictors. Note that the values of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> chosen here were approximately chosen on a log scale. Using the scaling <code>X="df"</code> here makes the points more nearly equally spaced.</p>
+<p>It is sometimes easier to interpret the plot when coefficients are plotted against the equivalent degrees of freedom, where <span class="math inline">\lambda = 0</span> corresponds to 6 degrees of freedom in the parameter space of six predictors. Note that the values of <span class="math inline">\lambda</span> chosen here were approximately chosen on a log scale. Using the scaling <code>X="df"</code> here makes the points more nearly equally spaced.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">lridge</span>, X<span class="op">=</span><span class="st">"df"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <figure><img src="reference/figures/README-longley-tp2-1.png" alt="Univariate ridge trace plot of coefficients against effective degrees of freedom."><figcaption aria-hidden="true">
 Univariate ridge trace plot of coefficients against effective degrees of freedom.
-</figcaption></figure><p><strong>But wait: This is the wrong plot!</strong> These plots show the trends in increased bias associated with larger <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>, but they do <strong>not</strong> show the accompanying decrease in variance (increase in precision). For that, we need to consider the variances and covariances of the estimated coefficients. The univariate trace plot is the wrong graphic form for what is essentially a <em>multivariate</em> problem, where we would like to visualize how <em>both</em> coefficients and their variances change with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.</p>
+</figcaption></figure><p><strong>But wait: This is the wrong plot!</strong> These plots show the trends in increased bias associated with larger <span class="math inline">\lambda</span>, but they do <strong>not</strong> show the accompanying decrease in variance (increase in precision). For that, we need to consider the variances and covariances of the estimated coefficients. The univariate trace plot is the wrong graphic form for what is essentially a <em>multivariate</em> problem, where we would like to visualize how <em>both</em> coefficients and their variances change with <span class="math inline">\lambda</span>.</p>
 </div>
 <div class="section level3">
 <h3 id="bivariate-trace-plots">Bivariate trace plots<a class="anchor" aria-label="anchor" href="#bivariate-trace-plots"></a>
 </h3>
-<p>The bivariate analog of the trace plot suggested by Friendly (2013) plots <strong>bivariate confidence ellipses</strong> for pairs of coefficients. Their centers, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mover><mi>β</mi><mo accent="true">̂</mo></mover><mi>i</mi></msub><mo>,</mo><msub><mover><mi>β</mi><mo accent="true">̂</mo></mover><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\widehat{\beta}_i, \widehat{\beta}_j)</annotation></semantics></math> show the estimated coefficients, and their size and shape indicate sampling variance, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mtext mathvariant="normal">Var</mtext><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">(</mo><msub><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\widehat{\text{Var}} (\mathbf{\widehat{\beta}}_{ij})</annotation></semantics></math>. Here, we plot those for <code>GNP</code> against four of the other predictors.</p>
+<p>The bivariate analog of the trace plot suggested by Friendly (2013) plots <strong>bivariate confidence ellipses</strong> for pairs of coefficients. Their centers, <span class="math inline">(\widehat{\beta}_i, \widehat{\beta}_j)</span> show the estimated coefficients, and their size and shape indicate sampling variance, <span class="math inline">\widehat{\text{Var}} (\mathbf{\widehat{\beta}}_{ij})</span>. Here, we plot those for <code>GNP</code> against four of the other predictors.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">clr</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"darkgreen"</span>,<span class="st">"blue"</span>, <span class="st">"cyan4"</span>, <span class="st">"magenta"</span><span class="op">)</span></span>
@@ -270,7 +271,7 @@ Univariate ridge trace plot of coefficients against effective degrees of freedom
 Bivariate ridge trace plots for the coefficients of four predictors against the coefficient for GNP in Longley’s data, with λ = 0, 0.005, 0.01, 0.02, 0.04, 0.08. In most cases, the coefficients are driven toward zero, but the bivariate plot also makes clear the reduction in variance, as well as the bivariate path of shrinkage.
 </p>
 </div>
-<p>As can be seen, the coefficients for each pair of predictors trace a path generally in toward the origin <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0, 0)</annotation></semantics></math>, and the covariance ellipses get smaller, indicating increased precision.</p>
+<p>As can be seen, the coefficients for each pair of predictors trace a path generally in toward the origin <span class="math inline">(0, 0)</span>, and the covariance ellipses get smaller, indicating increased precision.</p>
 <p>The <code><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs()</a></code> method for <code>"ridge"</code> objects shows all pairwise views in scatterplot matrix form.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs</a></span><span class="op">(</span><span class="va">lridge</span>, radius<span class="op">=</span><span class="fl">0.5</span>, diag.cex <span class="op">=</span> <span class="fl">2</span>, </span>
@@ -285,7 +286,7 @@ Scatterplot matrix of bivariate ridge trace plots
 <div class="section level3">
 <h3 id="visualizing-the-bias-variance-tradeoff">Visualizing the bias-variance tradeoff<a class="anchor" aria-label="anchor" href="#visualizing-the-bias-variance-tradeoff"></a>
 </h3>
-<p>The function <code><a href="reference/precision.html">precision()</a></code> calculates a number of measures of the effect of shrinkage of the coefficients on the estimated sampling variance. Larger shrinkage <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> should lead to smaller <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mtext mathvariant="normal">Var</mtext><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">(</mo><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\widehat{\text{Var}} (\mathbf{\widehat{\beta}})</annotation></semantics></math>, indicating increased precision. See: <code><a href="reference/precision.html">help(precision)</a></code> for details.</p>
+<p>The function <code><a href="reference/precision.html">precision()</a></code> calculates a number of measures of the effect of shrinkage of the coefficients on the estimated sampling variance. Larger shrinkage <span class="math inline">\lambda</span> should lead to smaller <span class="math inline">\widehat{\text{Var}} (\mathbf{\widehat{\beta}})</span>, indicating increased precision. See: <code><a href="reference/precision.html">help(precision)</a></code> for details.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/precision.html">precision</a></span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       lambda    df    det   trace max.eig norm.beta norm.diff</span></span>
@@ -295,7 +296,7 @@ Scatterplot matrix of bivariate ridge trace plots
 <span><span class="co">#&gt; 0.020  0.020 4.818 -16.83  2.2180  1.0255    0.5282     2.262</span></span>
 <span><span class="co">#&gt; 0.040  0.040 4.478 -18.70  1.1647  0.5808    0.4233     2.679</span></span>
 <span><span class="co">#&gt; 0.080  0.080 4.128 -21.05  0.5873  0.2599    0.3373     3.027</span></span></code></pre></div>
-<p><code>norm.beta</code> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">‖</mo><mi>𝛃</mi><mo stretchy="true" form="postfix">‖</mo></mrow><mi>/</mi><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">‖</mo><mi>𝛃</mi><mo stretchy="true" form="postfix">‖</mo></mrow></mrow><annotation encoding="application/x-tex">= \lVert\mathbf{\beta}\rVert / \max{\lVert\mathbf{\beta}\rVert}</annotation></semantics></math> is a measure of shrinkage, and <code>det</code> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mrow><mo stretchy="false" form="prefix">|</mo><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><mi>𝛃</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">|</mo></mrow></mrow><annotation encoding="application/x-tex">= \log{| \text{Var}(\mathbf{\beta}) |}</annotation></semantics></math>, is a measure of variance of the coefficients (inverse of precision). Plotting these against each other gives a direct view of the tradeoff between bias and precision.</p>
+<p><code>norm.beta</code> <span class="math inline">= \lVert\boldsymbol{\beta}\rVert / \max{\lVert\boldsymbol{\beta}\rVert}</span> is a measure of shrinkage, and <code>det</code> <span class="math inline">= \log{| \text{Var}(\boldsymbol{\beta}) |}</span>, is a measure of variance of the coefficients (inverse of precision). Plotting these against each other gives a direct view of the tradeoff between bias and precision.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/precision.html">precision</a></span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span>
 <span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.2</span><span class="op">)</span></span>
@@ -326,10 +327,10 @@ Plot of det(Variance) vs. shrinkage (<code>norm.beta</code>) to show the tradeo
 </div>
 </div>
 <div class="section level2">
-<h2 id="mag-low-rank-views">🔍 Low-rank views<a class="anchor" aria-label="anchor" href="#mag-low-rank-views"></a>
+<h2 id="id_-low-rank-views">🔍 Low-rank views<a class="anchor" aria-label="anchor" href="#id_-low-rank-views"></a>
 </h2>
 <p>Just as principal components analysis gives low-dimensional views of a data set, PCA can be useful to understand ridge regression.</p>
-<p>The <code>pca</code> method transforms a <code>"ridge"</code> object from parameter space, where the estimated coefficients are <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\beta_k</annotation></semantics></math> with covariance matrices <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Σ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Sigma_k</annotation></semantics></math>, to the principal component space defined by the right singular vectors, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>, of the singular value decomposition of the scaled predictor matrix, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+<p>The <code>pca</code> method transforms a <code>"ridge"</code> object from parameter space, where the estimated coefficients are <span class="math inline">\beta_k</span> with covariance matrices <span class="math inline">\Sigma_k</span>, to the principal component space defined by the right singular vectors, <span class="math inline">V</span>, of the singular value decomposition of the scaled predictor matrix, <span class="math inline">X</span>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pca.html">pca</a></span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span>
 <span><span class="va">plridge</span></span>
@@ -344,7 +345,7 @@ Plot of det(Variance) vs. shrinkage (<code>norm.beta</code>) to show the tradeo
 <span><span class="fu"><a href="reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">plridge</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-pca-traceplot-1.png"><!-- --></p>
 <p>What is perhaps surprising is that the coefficients for the first 4 components are not shrunk at all. Rather, the effect of shrinkage is seen only on the <em>last two dimensions</em>. These are the directions that contribute most to collinearity, for which other visualization methods have been proposed (Friendly &amp; Kwan 2009).</p>
-<p>The <code><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs()</a></code> plot illustrates the <em>joint</em> effects: the principal components of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐗</mi><annotation encoding="application/x-tex">\mathbf{X}</annotation></semantics></math> are uncorrelated, so the ellipses are all aligned with the coordinate axes and the ellipses largely coincide for dimensions 1 to 4:</p>
+<p>The <code><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs()</a></code> plot illustrates the <em>joint</em> effects: the principal components of <span class="math inline">\mathbf{X}</span> are uncorrelated, so the ellipses are all aligned with the coordinate axes and the ellipses largely coincide for dimensions 1 to 4:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs</a></span><span class="op">(</span><span class="va">plridge</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-pca-pairs-1.png" alt="" width="80%"></p>
@@ -376,7 +377,7 @@ Biplot view of the ridge trace plot for the smallest two dimensions, where the e
 </div>
 </div>
 <div class="section level2">
-<h2 id="card_file_box-other-examples">🗃️ Other examples<a class="anchor" aria-label="anchor" href="#card_file_box-other-examples"></a>
+<h2 id="id_️-other-examples">🗃️ Other examples<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-other-examples"></a>
 </h2>
 <p>The genridge package contains four data sets, each with its own examples; e.g., you can try <code>example(Acetylene)</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -393,11 +394,11 @@ Biplot view of the ridge trace plot for the smallest two dimensions, where the e
 <span><span class="co">#&gt; 5  prostate data.frame  97x10                Prostate Cancer Data</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="books-references">📚 References<a class="anchor" aria-label="anchor" href="#books-references"></a>
+<h2 id="id_-references">📚 References<a class="anchor" aria-label="anchor" href="#id_-references"></a>
 </h2>
 <p>Friendly, M. (2011). Generalized Ridge Trace Plots: Visualizing Bias <em>and</em> Precision with the <code>genridge</code> R package. SCS Seminar, Jan., 2011. Slides: <a href="http://euclid.psych.yorku.ca/datavis/papers/gentalk.pdf" class="external-link">gentalk.pdf</a>; <a href="http://euclid.psych.yorku.ca/datavis/papers/gentalk-2x2.pdf" class="external-link">gentalk-2x2.pdf</a></p>
-<p>Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias <em>and</em> Precision. <em>Journal of Computational and Graphical Statistics</em>, <strong>22</strong>(1), 50-68, <a href="http://dx.doi.org/10.1080/10618600.2012.681237" class="external-link">DOI link</a>, Online: <a href="https://www.datavis.ca/papers/genridge-jcgs.pdf" class="external-link">genridge-jcgs.pdf</a>, Supp. materials: <a href="http://datavis.ca/papers/genridge-supp.zip" class="external-link">genridge-supp.zip</a></p>
-<p>Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing Collinearity Diagnostics, <em>The American Statistician</em>, <strong>63</strong>(1), 56–65, <a href="https://doi.org/10.1198/tast.2009.0012" class="external-link">DOI link</a>, Online: <a href="http://datavis.ca/papers/viscollin-tast.pdf" class="external-link">viscollin-tast.pdf</a>, Supp. materials: <a href="http://datavis.ca/papers/viscollin/" class="external-link uri">http://datavis.ca/papers/viscollin/</a>.</p>
+<p>Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias <em>and</em> Precision. <em>Journal of Computational and Graphical Statistics</em>, <strong>22</strong>(1), 50-68, <a href="https://doi.org/10.1080/10618600.2012.681237" class="external-link">DOI link</a>, Online: <a href="https://friendly.github.io/papers/genridge-jcgs.pdf" class="external-link">genridge-jcgs.pdf</a>, Supp. materials: <a href="https://friendly.github.io/papers/genridge-supp.zip" class="external-link">genridge-supp.zip</a></p>
+<p>Friendly, M., and Kwan, E. (2009), Where’s Waldo: Visualizing Collinearity Diagnostics, <em>The American Statistician</em>, <strong>63</strong>(1), 56–65, <a href="https://doi.org/10.1198/tast.2009.0012" class="external-link">DOI link</a>, Online: <a href="https://friendly.github.io/papers/viscollin-tast.pdf" class="external-link">viscollin-tast.pdf</a>, Supp. materials: <a href="https://friendly.github.io/papers/viscollin/" class="external-link uri">https://friendly.github.io/papers/viscollin/</a>.</p>
 <p>Friendly, M., Monette, G., &amp; Fox, J. (2013). Elliptical Insights: Understanding Statistical Methods Through Elliptical Geometry. <em>Statistical Science</em>, <strong>28</strong>(1), 1–39. <a href="https://doi.org/10.1214/12-STS402" class="external-link uri">https://doi.org/10.1214/12-STS402</a></p>
 <p>Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. <em>Technometrics</em>, <strong>21</strong>:215–223. <a href="https://doi.org/10.2307/1268518" class="external-link uri">https://doi.org/10.2307/1268518</a>.</p>
 <p>Hoerl, A. E., Kennard, R. W., and Baldwin, K. F. (1975), Ridge Regression: Some Simulations, <em>Communications in Statistics</em>, <strong>4</strong>, 105–123.</p>
@@ -444,7 +445,7 @@ Biplot view of the ridge trace plot for the smallest two dimensions, where the e
 <li><a href="https://cran.r-project.org/package=genridge" class="external-link"><img src="http://www.r-pkg.org/badges/version/genridge" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://friendly.r-universe.dev" class="external-link"><img src="https://friendly.r-universe.dev/badges/genridge" alt="R-universe"></a></li>
 <li><a href="https://cran.r-project.org/package=genridge" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/genridge" alt="downloads"></a></li>
-<li><a href="https://friendly.github.io/genridge"><img src="https://img.shields.io/badge/pkgdown%20site-blue" alt="pkgdown"></a></li>
+<li><a href="https://friendly.github.io/genridge/"><img src="https://img.shields.io/badge/pkgdown%20site-blue" alt="pkgdown"></a></li>
 </ul>
 </div>
 

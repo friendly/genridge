@@ -16,61 +16,33 @@ in multivariate views.
 
 A data frame with 13 observations on the following 14 variables.
 
-- `Police`:
+- `Police`: Full-time police per 100,000 population
 
-  Full-time police per 100,000 population
+- `Unemp`: Percent unemployed in the population
 
-- `Unemp`:
+- `MfgWrk`: Number of manufacturing workers in thousands
 
-  Percent unemployed in the population
+- `GunLic`: Number of handgun licences per 100,000 population
 
-- `MfgWrk`:
+- `GunReg`: Number of handgun registrations per 100,000 population
 
-  Number of manufacturing workers in thousands
+- `HClear`: Percent of homicides cleared by arrests
 
-- `GunLic`:
+- `WhMale`: Number of white males in the population
 
-  Number of handgun licences per 100,000 population
+- `NmfgWrk`: Number of non-manufacturing workers in thousands
 
-- `GunReg`:
+- `GovWrk`: Number of government workers in thousands
 
-  Number of handgun registrations per 100,000 population
+- `HrEarn`: Average hourly earnings
 
-- `HClear`:
+- `WkEarn`: Average weekly earnings
 
-  Percent of homicides cleared by arrests
+- `Accident`: Death rate in accidents per 100,000 population
 
-- `WhMale`:
+- `Assaults`: Number of assaults per 100,000 population
 
-  Number of white males in the population
-
-- `NmfgWrk`:
-
-  Number of non-manufacturing workers in thousands
-
-- `GovWrk`:
-
-  Number of government workers in thousands
-
-- `HrEarn`:
-
-  Average hourly earnings
-
-- `WkEarn`:
-
-  Average weekly earnings
-
-- `Accident`:
-
-  Death rate in accidents per 100,000 population
-
-- `Assaults`:
-
-  Number of assaults per 100,000 population
-
-- `Homicide`:
-
-  Number of homicides per 100,000 of population
+- `Homicide`: Number of homicides per 100,000 of population
 
 ## Source
 
@@ -103,7 +75,6 @@ Miller, A. J. (2002). *Subset Selection in Regression*. 2nd Ed. Chapman
 ## Examples
 
 ``` r
-
 data(Detroit)
 
 # Work with a subset of predictors, from Miller (2002, Table 3.14),

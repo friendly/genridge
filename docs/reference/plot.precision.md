@@ -1,7 +1,7 @@
 # Plot Shrinkage vs. Variance for Ridge Precision
 
 This function uses the results of
-[`precision`](https://friendly.github.io/genridge/reference/precision.md)
+[`precision()`](https://friendly.github.io/genridge/reference/precision.md)
 to plot a measure of shrinkage of the coefficients in ridge regression
 against a selected measure of their estimated sampling variance, so as
 to provide a direct visualization of the tradeoff between bias and
@@ -34,9 +34,9 @@ plot(
 - x:
 
   A data frame of class `"precision"` resulting from
-  [`precision`](https://friendly.github.io/genridge/reference/precision.md)
+  [`precision()`](https://friendly.github.io/genridge/reference/precision.md)
   called on a `"ridge"` object. Named `x` only to conform with the
-  [`plot`](https://rdrr.io/r/graphics/plot.default.html) generic.
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) generic.
 
 - xvar:
 
@@ -48,7 +48,7 @@ plot(
 
   The character name of the column to be used for the vertical axis. One
   of `c("det", "trace", "max.eig")`. See
-  [`precision`](https://friendly.github.io/genridge/reference/precision.md)
+  [`precision()`](https://friendly.github.io/genridge/reference/precision.md)
   for definitions of these measures.
 
 - labels:
@@ -67,8 +67,8 @@ plot(
 - criteria:
 
   The vector of optimal shrinkage criteria from the
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md) call
-  to be added as points in the plot.
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
+  call to be added as points in the plot.
 
 - pch:
 
@@ -97,17 +97,17 @@ plot(
 - ...:
 
   Other arguments passed to
-  [`plot`](https://rdrr.io/r/graphics/plot.default.html).
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html).
 
 ## Value
 
-Returns nothing. Used for the side effect of plotting.
+    Returns nothing. Used for the side effect of plotting.
 
 ## See also
 
-[`ridge`](https://friendly.github.io/genridge/reference/ridge.md) for
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) for
 details on ridge regression as implemented here.
-[`precision`](https://friendly.github.io/genridge/reference/precision.md)
+[`precision()`](https://friendly.github.io/genridge/reference/precision.md)
 for definitions of the measures
 
 ## Author

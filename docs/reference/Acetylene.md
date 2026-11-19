@@ -7,21 +7,13 @@ process for acetylene in relation to numeric parameters.
 
 A data frame with 16 observations on the following 4 variables.
 
-- `yield`:
+- `yield`: conversion percentage yield of acetylene
 
-  conversion percentage yield of acetylene
+- `temp`: reactor temperature (celsius)
 
-- `temp`:
+- `ratio`: H2 to N-heptone ratio
 
-  reactor temperature (celsius)
-
-- `ratio`:
-
-  H2 to N-heptone ratio
-
-- `time`:
-
-  contact time (sec)
+- `time`: contact time (sec)
 
 ## Source
 
@@ -49,7 +41,6 @@ No. 369 (Mar., 1980), pp. 87-91
 ## Examples
 
 ``` r
-
 data(Acetylene)
 
 # naive model, not using centering

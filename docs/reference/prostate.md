@@ -8,45 +8,25 @@ receive a radical prostatectomy.
 
 A data frame with 97 observations on the following 10 variables.
 
-- lcavol:
+- `lcavol`: log cancer volume
 
-  log cancer volume
+- `lweight`: log prostate weight
 
-- lweight:
+- `age`: in years
 
-  log prostate weight
+- `lbph`: log of the amount of benign prostatic hyperplasia
 
-- age:
+- `svi`: seminal vesicle invasion
 
-  in years
+- `lcp`: log of capsular penetration
 
-- lbph:
+- `gleason`: a numeric vector
 
-  log of the amount of benign prostatic hyperplasia
+- `pgg45`: percent of Gleason score 4 or 5
 
-- svi:
+- `lpsa`: response
 
-  seminal vesicle invasion
-
-- lcp:
-
-  log of capsular penetration
-
-- gleason:
-
-  a numeric vector
-
-- pgg45:
-
-  percent of Gleason score 4 or 5
-
-- lpsa:
-
-  response
-
-- train:
-
-  a logical vector
+- `train`: a logical vector
 
 ## Source
 
@@ -73,7 +53,6 @@ As of version 2012.04-0 this was corrected.
 ## Examples
 
 ``` r
-
 data(prostate)
 str( prostate )
 #> 'data.frame':    97 obs. of  10 variables:

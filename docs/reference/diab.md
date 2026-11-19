@@ -17,51 +17,29 @@ data("diab")
 
 A data frame with 442 observations on the following 11 variables.
 
-- `prog`:
+- `prog`: disease progression, a numeric vector
 
-  disease progression, a numeric vector
+- `age`: age, a numeric vector
 
-- `age`:
+- `sex`: integer, a numeric vector
 
-  age, a numeric vector
+- `bmi`: body mass index, a numeric vector
 
-- `sex`:
+- `map`: mean arterial blood pressure, a numeric vector
 
-  integer, a numeric vector
+- `tc`: blood serum TC, a numeric vector
 
-- `bmi`:
+- `ldl`: blood serum low-density lipoprotein ("bad cholesterol"), a
+  numeric vector
 
-  body mass index, a numeric vector
+- `hdl`: blood serum high-density lipoprotein ("good cholesterol"), a
+  numeric vector
 
-- `map`:
+- `tch`: blood serum TCH, a numeric vector
 
-  mean arterial blood pressure, a numeric vector
+- `ltg`: blood serum lamotrigine, a numeric vector
 
-- `tc`:
-
-  blood serum TC, a numeric vector
-
-- `ldl`:
-
-  blood serum low-density lipoprotein ("bad cholersterol"), a numeric
-  vector
-
-- `hdl`:
-
-  blood serum high-density lipoprotein ("good cholersterol"), a numeric
-  vector
-
-- `tch`:
-
-  blood serum TCH, a numeric vector
-
-- `ltg`:
-
-  blood serum lamotrigine, a numeric vector
-
-- `glu`:
-
-  blood serum glucose, a numeric vector
+- `glu`: blood serum glucose, a numeric vector
 
 ## Source
 
@@ -73,7 +51,7 @@ The dataset was taken from the web site for Efron & Hastie (2021),
 
 Efron & Hastie describe their analysis using the centered predictor
 variables standardized to unit L2 norm.
-[`ridge`](https://friendly.github.io/genridge/reference/ridge.md) does
+[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) does
 not (yet) provide this scaling.
 
 ## References

@@ -57,9 +57,9 @@ plot3d(
 - x:
 
   A `ridge` object, as fit by
-  [`ridge`](https://friendly.github.io/genridge/reference/ridge.md) or a
-  `pcaridge` object as transformed by
-  [`pca.ridge`](https://friendly.github.io/genridge/reference/pca.md)
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) or
+  a `pcaridge` object as transformed by
+  [`pca.ridge()`](https://friendly.github.io/genridge/reference/pca.md)
 
 - ...:
 
@@ -75,7 +75,7 @@ plot3d(
 - radius:
 
   Radius of the ellipse-generating circle for the covariance ellipsoids.
-  The default, `radius=1` gives a standard “unit” ellipsoid. Typically,
+  The default, `radius=1` gives a standard "unit" ellipsoid. Typically,
   `radius<1` gives less cluttered displays.
 
 - which.lambda:
@@ -127,12 +127,12 @@ plot3d(
 
   a logical scalar or vector, indicating whether the ellipsoids should
   be rendered with
-  [`shade3d`](https://dmurdoch.github.io/rgl/dev/reference/shade3d.html).
+  [`rgl::shade3d()`](https://dmurdoch.github.io/rgl/dev/reference/shade3d.html).
   Recycled as necessary.
 
 - shade.alpha:
 
-  a numeric value in the range \[0,1\], or a vector of such values,
+  a numeric value in the range \[0, 1\], or a vector of such values,
   giving the alpha transparency for ellipsoids rendered with
   `shade=TRUE`.
 
@@ -140,7 +140,7 @@ plot3d(
 
   a logical scalar or vector, indicating whether the ellipsoids should
   be rendered with
-  [`wire3d`](https://dmurdoch.github.io/rgl/dev/reference/shade3d.html).
+  [`rgl::wire3d()`](https://dmurdoch.github.io/rgl/dev/reference/shade3d.html).
   Recycled as necessary.
 
 - aspect:
@@ -149,7 +149,7 @@ plot3d(
   indicating the ratios of the x, y, and z axes of the bounding box. The
   default, `aspect=1` makes the bounding box display as a cube
   approximately filling the display. See
-  [`aspect3d`](https://dmurdoch.github.io/rgl/dev/reference/aspect3d.html)
+  [`rgl::aspect3d()`](https://dmurdoch.github.io/rgl/dev/reference/aspect3d.html)
   for details.
 
 - add:
@@ -169,14 +169,15 @@ to change.
 
 Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias
 *and* Precision. *Journal of Computational and Graphical Statistics*,
-**22**(1), 50-68, doi:10.1080/10618600.2012.681237,
-<https://www.datavis.ca/papers/genridge-jcgs.pdf>
+**22**(1), 50-68,
+[doi:10.1080/10618600.2012.681237](https://doi.org/10.1080/10618600.2012.681237)
+.
 
 ## See also
 
-[`plot.ridge`](https://friendly.github.io/genridge/reference/plot.ridge.md),
-[`pairs.ridge`](https://friendly.github.io/genridge/reference/pairs.ridge.md),
-[`pca.ridge`](https://friendly.github.io/genridge/reference/pca.md)
+[`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md),
+[`pairs.ridge()`](https://friendly.github.io/genridge/reference/pairs.ridge.md),
+[`pca.ridge()`](https://friendly.github.io/genridge/reference/pca.md)
 
 ## Author
 
@@ -185,7 +186,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 lmod <- lm(Employed ~ GNP + Unemployed + Armed.Forces + Population + 
                       Year + GNP.deflator, data=longley)
 longley.y <- longley[, "Employed"]
