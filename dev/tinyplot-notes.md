@@ -65,6 +65,10 @@
 - tinyplot is base graphics underneath, so a tinyplot `traceplot.mlmridge()` still combines
   with base annotations.
 
+**Decision (MF, 2026-11-19): option C is the direction**, using tinyplot for the new
+multivariate plots, but **not yet**. Finish the multivariate work in base graphics first, as
+now. Take up the tinyplot versions as a separate step, after reviewing the pilot images.
+
 ## Questions to settle
 
 1. **Dependency:** should tinyplot be in Imports, which is cheap since it only uses base R, or
