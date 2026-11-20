@@ -77,8 +77,7 @@ TODOs:
   written (commit `20238f8`, pushed). 2026-11-20: HKB/LW `NA` change; NEWS bug-fix list
   tidied. Re-checked after the HKB/LW change, all clean (2026-11-20): local `--as-cran` (R 4.6.2),
   win-builder release + devel, R-hub linux/macos-arm64/windows (new `.github/workflows/rhub.yaml`).
-  DESCRIPTION Date bumped to 2026-11-20. Remaining: review `cran-comments.md`,
-  `devtools::submit_cran()` (bump Date again if not submitted today). After acceptance: GitHub release tagged `0.8.1`.
+  DESCRIPTION Date bumped to 2026-11-20. **Submitted to CRAN 2026-11-20** (commit `6731542`; `CRAN-SUBMISSION`); awaiting acceptance. After acceptance: GitHub release tagged `0.8.1`.
   - Note for myutil: `release_cran_comments()` matches only `## Version x.y.z` NEWS headings
     (genridge uses `## genridge x.y.z`, so it took the whole NEWS) and `trimws()` flattens
     nested NEWS lists; Comments section was fixed by hand.
