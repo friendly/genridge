@@ -4,12 +4,15 @@
 \alias{mlmridge-methods}
 \alias{coef.mlmridge}
 \alias{vcov.mlmridge}
+\alias{best.mlmridge}
 \alias{print.mlmridge}
 \title{Methods for Multivariate Ridge Regression Objects}
 \usage{
 \method{coef}{mlmridge}(object, response = NULL, type = c("list", "array"), ...)
 
 \method{vcov}{mlmridge}(object, response = NULL, ...)
+
+\method{best}{mlmridge}(object, response = NULL, ...)
 
 \method{print}{mlmridge}(x, digits = max(5, getOption("digits") - 5), ...)
 }
@@ -28,6 +31,11 @@ in the same form as for a univariate \code{"ridge"} object; see \code{\link[=as.
 \value{
 \code{coef()} and \code{vcov()} return a list, array or matrix, as described above;
 \code{print()} returns \code{x}, invisibly.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{   `best()` returns a data frame with columns `response` and `criterion` (factors), `k`
+   (the optimal ridge constant) and, if the object contains the singular values of the
+   predictors (`svd = TRUE`, the default), `df` (the equivalent degrees of freedom).
+}\if{html}{\out{</div>}}
 }
 \description{
 \strong{Experimental.} Multivariate ridge regression (class \code{"mlmridge"}) is new in this
@@ -45,7 +53,14 @@ ridge constant, the \eqn{pq \times pq} covariance matrix of the stacked coeffici
 \eqn{p \times p} matrices for one response.
 \item \code{print()} shows the coefficients for each response and the optimal ridge constants given by
 the HKB, LW and GCV criteria, for each response and pooled over responses.
+\item \code{best()} returns the optimal ridge constants as a data frame, with one row for each response
+and criterion (HKB, LW, GCV), followed by a row for GCV pooled over responses
+(\code{response = "(pooled)"}; the pooling method is \code{object$pool}, see \code{\link[=ridge]{ridge()}}); with
+\code{response}, the univariate result for one response, as from \code{\link[=best]{best()}} for a \code{"ridge"} object.
 }
+
+As for a \code{"ridge"} object, the HKB and LW values are closed-form estimates, while the GCV values
+(per response and pooled) are the best among the ridge constants supplied in \code{lambda} (or \code{df}).
 }
 \examples{
 if (requireNamespace("heplots", quietly = TRUE)) {
@@ -58,6 +73,8 @@ if (requireNamespace("heplots", quietly = TRUE)) {
   coef(sridge, response = "reading")      # lambda x p, for one response
   dim(coef(sridge, type = "array"))
   dim(vcov(sridge)[[1]])                  # pq x pq
+  best(sridge)                            # optimal ridge constants, all responses
+  best(sridge, response = "selfesteem")   # one response
 }
 }
 \seealso{

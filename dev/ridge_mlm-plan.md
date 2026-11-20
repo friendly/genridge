@@ -6,7 +6,8 @@
 > `ridge()` with a matrix response → `mlmridge`; `as.ridge()`; `coef`/`vcov`/`print`;
 > per-response `plot`, `pairs`, `plot3d`, `pca`, `biplot`, `precision`, `vif`; all-responses
 > `traceplot()` (§5.2); cross-response ellipses (§5.3); pkgdown article (§11).
-> **Still open:** `best.mlmridge()` (§4a, specified but not written); a pooled-GCV line in
+> `best.mlmridge()` (§4a; added later the same day, with a `response =` argument).
+> **Still open:** a pooled-GCV line in
 > `traceplot.mlmridge()` (§5.2); citing VARshrink in the docs (§1); tests (§8.4); the held
 > plot ideas (§5.3 several-predictor display, §5.4 HE plots, §5.5 coefficient biplot,
 > `heplots::coefplot` method); whether `plot()`/`precision()` should also default to all
@@ -201,8 +202,9 @@ no theoretical basis. The principled multivariate analogue is Brown & Zidek's (1
 multivariate Hoerl–Kennard rule, which belongs to §6 (later extensions).
 
 **How the methods use the criteria:**
-- **`best.mlmridge()`** *(not yet written; `best(sridge)` currently gives "no applicable
-  method")* returns a long data frame with columns `response`, `criterion`
+- **`best.mlmridge()`** *(done 2026-11-19: `response` and `criterion` are factors; the pooled row
+  has `response = "(pooled)"`; `best(x, response = )` returns the univariate `best()` table)*
+  returns a long data frame with columns `response`, `criterion`
   (HKB, LW, GCV), `k` and `df`:
   - one row per response and criterion;
   - a final `(pooled)` row for GCV.

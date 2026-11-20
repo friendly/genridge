@@ -8,6 +8,8 @@ o **Experimental: multivariate ridge regression.** These functions are new in th
       (`pool = "scaled"`, `"raw"` or `"mahalanobis"`) to choose a common ridge constant.
     - `as.ridge()` extracts the results for one response as an ordinary `"ridge"` object.
     - `coef()`, `vcov()` and `print()` methods for `"mlmridge"` objects.
+    - `best()` method for `"mlmridge"` objects: the optimal ridge constants for each response and criterion,
+      plus GCV pooled over responses, as a data frame; `best(x, response = )` gives one response.
     - `traceplot()`, `plot()`, `pairs()`, `plot3d()`, `biplot()`, `pca()`, `precision()` and `vif()` methods
       apply the univariate methods to one response at a time (`response =`). `traceplot()` by default draws
       all responses, one panel each.

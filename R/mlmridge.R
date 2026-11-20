@@ -88,6 +88,13 @@ as.ridge.mlmridge <- function(x, response = 1, ...) {
 #'   \eqn{p \times p} matrices for one response.
 #' * `print()` shows the coefficients for each response and the optimal ridge constants given by
 #'   the HKB, LW and GCV criteria, for each response and pooled over responses.
+#' * `best()` returns the optimal ridge constants as a data frame, with one row for each response
+#'   and criterion (HKB, LW, GCV), followed by a row for GCV pooled over responses
+#'   (`response = "(pooled)"`; the pooling method is `object$pool`, see [ridge()]); with
+#'   `response`, the univariate result for one response, as from [best()] for a `"ridge"` object.
+#'
+#' As for a `"ridge"` object, the HKB and LW values are closed-form estimates, while the GCV values
+#' (per response and pooled) are the best among the ridge constants supplied in `lambda` (or `df`).
 #'
 #' @name mlmridge-methods
 #' @param object,x An object of class `"mlmridge"`
@@ -98,6 +105,10 @@ as.ridge.mlmridge <- function(x, response = 1, ...) {
 #' @param ... Other arguments, not used.
 #' @return `coef()` and `vcov()` return a list, array or matrix, as described above;
 #'        `print()` returns `x`, invisibly.
+#'
+#'        `best()` returns a data frame with columns `response` and `criterion` (factors), `k`
+#'        (the optimal ridge constant) and, if the object contains the singular values of the
+#'        predictors (`svd = TRUE`, the default), `df` (the equivalent degrees of freedom).
 #' @seealso [ridge()], [as.ridge()]
 #' @examples
 #' if (requireNamespace("heplots", quietly = TRUE)) {
@@ -110,6 +121,8 @@ as.ridge.mlmridge <- function(x, response = 1, ...) {
 #'   coef(sridge, response = "reading")      # lambda x p, for one response
 #'   dim(coef(sridge, type = "array"))
 #'   dim(vcov(sridge)[[1]])                  # pq x pq
+#'   best(sridge)                            # optimal ridge constants, all responses
+#'   best(sridge, response = "selfesteem")   # one response
 #' }
 NULL
 
@@ -140,6 +153,25 @@ vcov.mlmridge <- function(object, response = NULL, ...) {
     dimnames(K) <- list(vnames, vnames)
     K
   })
+}
+
+#' @rdname mlmridge-methods
+#' @exportS3Method best mlmridge
+best.mlmridge <- function(object, response = NULL, ...) {
+  if (!is.null(response)) return(best(as.ridge(object, response)))
+  crit <- object$criteria                         # q x 3: responses x (kHKB, kLW, kGCV)
+  ynames <- rownames(crit)
+  cnames <- sub("^k", "", colnames(crit))
+  res <- data.frame(response  = c(rep(ynames, each = length(cnames)), "(pooled)"),
+                    criterion = c(rep(cnames, times = length(ynames)), "GCV"),
+                    k         = c(as.vector(t(crit)), object$kGCV.pooled))
+  if (!is.null(object$svd.D)) {
+    dd <- object$svd.D
+    res$df <- sapply(res$k, function(k) sum(dd^2/(dd^2 + k)))
+  }
+  res$response  <- factor(res$response, levels = c(ynames, "(pooled)"))
+  res$criterion <- factor(res$criterion, levels = cnames)
+  res
 }
 
 #' @rdname mlmridge-methods

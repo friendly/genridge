@@ -2,6 +2,7 @@
 
 S3method(as.ridge,mlmridge)
 S3method(as.ridge,ridge)
+S3method(best,mlmridge)
 S3method(best,ridge)
 S3method(biplot,mlmridge)
 S3method(biplot,pcaridge)
