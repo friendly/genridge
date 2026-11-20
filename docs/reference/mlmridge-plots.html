@@ -162,8 +162,8 @@ have set up yourself, e.g., with <code>par(mfrow = )</code>.</p></dd>
 
 <dt id="arg-gcv">GCV<a class="anchor" aria-label="anchor" href="#arg-gcv"></a></dt>
 <dd><p>For <code><a href="traceplot.html">traceplot()</a></code>: if <code>TRUE</code> (the default), mark the ridge constant chosen by GCV
-pooled over responses (<code>x$kGCV.pooled</code>) with a vertical line labelled "GCV" above
-each panel, in addition to the HKB and LW lines for each response (labelled at the
+pooled over responses (<code>x$kGCV.pooled</code>) with a vertical line labeled "GCV" above
+each panel, in addition to the HKB and LW lines for each response (labeled at the
 bottom). As for those, this is drawn only when plotting against <code>lambda</code>, not <code>df</code>.</p></dd>
 
 
@@ -177,7 +177,7 @@ predictor, or several predictors (names or numbers), instead of the within-respo
 plot; see <strong>Details</strong>. Further arguments to control the plot (<code>radius</code>, <code>which.lambda</code>,
 <code>labels</code>, <code>col</code>, <code>fill</code>, <code>fill.alpha</code>, <code>lwd</code>, <code>lty</code>, <code>center.pch</code>, <code>center.cex</code>, <code>ref</code>,
 <code>ref.col</code>, <code>xlim</code>, <code>ylim</code>, <code>xlab</code>, <code>ylab</code>) have the same meaning as in <code><a href="plot.ridge.html">plot.ridge()</a></code>.
-By default, the centres are labelled with the values of \(\lambda\) for one predictor,
+By default, the centers are labeled with the values of \(\lambda\) for one predictor,
 and with the predictor names for several.</p></dd>
 
 
@@ -202,15 +202,15 @@ different displays, depending on whether <code>predictor</code> is given:</p><ul
 variability of their coefficients for that response, at one value of \(\lambda\).</p></li>
 <li><p><strong>Across responses</strong> (<code>predictor =</code>): the axes are two <em>responses</em> (<code>responses =</code>), and each
 ellipse shows the joint variability of one predictor's coefficients for those two responses,
-at one value of \(\lambda\). The path of the centres traces how the predictor's effects on
+at one value of \(\lambda\). The path of the centers traces how the predictor's effects on
 both responses change together as \(\lambda\) increases. With several predictors, each has
-its own path, labelled with its name.</p></li>
+its own path, labeled with its name.</p></li>
 </ul><p>For predictor \(j\), the coefficients for all responses (row \(j\) of \(\mathbf{B}(\lambda)\))
 have covariance matrix \([\mathbf{V}_\lambda]_{jj} \, \boldsymbol{\Sigma}\), where
 \(\boldsymbol{\Sigma}\) is the residual covariance matrix of the responses (<code>x$Sigma</code>) and
 \(\mathbf{V}_\lambda\) depends only on the predictors (<code>x$cov</code>). So in the across-responses
 plot, all the ellipses have the <strong>same shape and orientation</strong>, that of the residual
-covariance of the two responses: only their centres and sizes change with \(\lambda\) and
+covariance of the two responses: only their centers and sizes change with \(\lambda\) and
 between predictors.</p>
 <p>The across-responses display is the ridge analogue of <code><a href="https://friendly.github.io/heplots/reference/coefplot.html" class="external-link">heplots::coefplot()</a></code> for a
 multivariate linear model, which draws confidence ellipses for the coefficients of each
