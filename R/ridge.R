@@ -55,9 +55,9 @@
 #' (Golub et al., 1979) is the value of `lambda` (among those supplied) that minimizes the
 #' generalized cross-validation criterion.
 #'
-#' Because of the factor \eqn{p - 2}, the HKB and LW estimates are meaningful only for
-#' \eqn{p \ge 3} predictors: they are 0 when \eqn{p = 2} and negative when \eqn{p = 1}, and
-#' should be ignored in those cases.
+#' Because of the factor \eqn{p - 2}, the HKB and LW estimates are defined only for
+#' \eqn{p \ge 3} predictors (they would be 0 when \eqn{p = 2} and negative when \eqn{p = 1}).
+#' For \eqn{p < 3}, `kHKB` and `kLW` are `NA`, and the plot methods do not mark them.
 #'
 #' 
 #' @param y For the default method, a numeric vector containing the response variable, or a
@@ -337,6 +337,7 @@ ridge.default <-
 		MSE <- diag(Sigma)
 		HKB <- (p - 2) * MSE/colSums(lmfit$coefficients^2)
 		LW <- (p - 2) * MSE * n/colSums(lmfit$fitted.values^2)
+		if (p < 3) HKB[] <- LW[] <- NA_real_    # factor (p - 2): not defined for p < 3
 		names(HKB) <- names(LW) <- ynames
 
 		svd.x <- svd(X, nu = p, nv = p)
@@ -424,6 +425,7 @@ ridge.default <-
 	MSE <- sum(lmfit$residuals^2) / (n-p-1)
 	HKB <- (p - 2) * MSE/sum(lmfit$coefficients^2)
 	LW <- (p - 2) * MSE * n/sum(lmfit$fitted.values^2)
+	if (p < 3) HKB <- LW <- NA_real_         # factor (p - 2): not defined for p < 3
 	
 	# from ElemStatLearn:::simple.ridge
 	svd.x <- svd(X, nu = p, nv = p)

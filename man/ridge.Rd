@@ -177,9 +177,9 @@ residual mean square, so they need not be among the values of \code{lambda}. The
 (Golub et al., 1979) is the value of \code{lambda} (among those supplied) that minimizes the
 generalized cross-validation criterion.
 
-Because of the factor \eqn{p - 2}, the HKB and LW estimates are meaningful only for
-\eqn{p \ge 3} predictors: they are 0 when \eqn{p = 2} and negative when \eqn{p = 1}, and
-should be ignored in those cases.
+Because of the factor \eqn{p - 2}, the HKB and LW estimates are defined only for
+\eqn{p \ge 3} predictors (they would be 0 when \eqn{p = 2} and negative when \eqn{p = 1}).
+For \eqn{p < 3}, \code{kHKB} and \code{kLW} are \code{NA}, and the plot methods do not mark them.
 }
 \examples{
 

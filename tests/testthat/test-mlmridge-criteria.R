@@ -82,3 +82,35 @@ test_that("best() for 'mlmridge' has no df column when svd = FALSE", {
   b <- best(mt_fit(svd = FALSE))
   expect_identical(names(b), c("response", "criterion", "k"))
 })
+
+test_that("HKB and LW are NA for fewer than 3 predictors; GCV is still given", {
+  for (f in list(mpg ~ wt, mpg ~ wt + hp)) {
+    u <- ridge(f, data = mtcars, lambda = mt_lambda)
+    expect_true(is.na(u$kHKB))
+    expect_true(is.na(u$kLW))
+    expect_false(is.na(u$kGCV))
+    expect_identical(names(u$criteria), c("kHKB", "kLW", "kGCV"))
+    b <- best(u)
+    expect_true(all(is.na(b[c("HKB", "LW"), ])))
+    expect_false(anyNA(b["GCV", ]))
+  }
+  m <- ridge(cbind(mpg, qsec) ~ wt + hp, data = mtcars, lambda = mt_lambda)
+  expect_true(all(is.na(m$kHKB)))
+  expect_true(all(is.na(m$kLW)))
+  expect_identical(names(m$kHKB), c("mpg", "qsec"))
+  expect_false(anyNA(m$kGCV))
+  # three predictors: still computed
+  u3 <- ridge(mpg ~ wt + hp + disp, data = mtcars, lambda = mt_lambda)
+  expect_gt(u3$kHKB, 0)
+  expect_gt(u3$kLW, 0)
+})
+
+test_that("plot methods do not fail when HKB and LW are NA", {
+  u <- ridge(mpg ~ wt + hp, data = mtcars, lambda = mt_lambda)
+  m <- ridge(cbind(mpg, qsec) ~ wt + hp, data = mtcars, lambda = mt_lambda)
+  pdf(NULL); on.exit(dev.off())
+  expect_no_error(traceplot(u))
+  expect_no_error(traceplot(m))
+  expect_no_error(plot(vif(u)))
+  expect_no_error(plot(precision(u), criteria = u$criteria))
+})

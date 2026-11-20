@@ -16,6 +16,7 @@ o **Experimental: multivariate ridge regression.** These functions are new in th
       all responses, one panel each, marking the ridge constant chosen by pooled GCV (`GCV = TRUE`).
     - `plot(x, predictor = )` draws coefficient ellipses for one or more predictors in the space of two
       responses (`responses =`), traced over the ridge constants.
+    - A one-column matrix response (e.g., `cbind(y) ~ ...`) gives an ordinary `"ridge"` result.
 
 ### New
 o New vignette, "Getting started with genridge", introducing the main functions with the `longley` and
@@ -28,13 +29,13 @@ o New `ridge.lm()` method: `ridge()` can now be applied directly to a model fitt
 o Documentation converted to roxygen markdown (`Roxygen: list(markdown = TRUE)`): `\code{}`, `\link{}`, `\emph{}` and `\bold{}` replaced by markdown equivalents, and `\describe{}`, `\itemize{}`, `\enumerate{}` and `@return` `\item{}` lists by markdown lists. Also fixed a few small errors in the docs.
 
 ### Bug fixes
-o Bug fixes:
-    - `ridge()` with a formula and `svd = FALSE` failed with "variable lengths differ".
-    - `ridge()` with a formula failed when the model had only one predictor; `vif()` failed for such a model.
-    - `ridge()` with a one-column matrix response (e.g., `cbind(y) ~ ...`) failed for more than one value of `lambda`.
-    - `best()` was documented but its generic was not exported; it now is.
-    - `best()` reported the same (wrong) `df` for all three criteria; each now gets its own equivalent degrees of freedom.
-    
+o `ridge()` with a formula and `svd = FALSE` failed with "variable lengths differ".
+o `ridge()` with a formula failed when the model had only one predictor; `vif()` failed for such a model.
+o The HKB and LW criteria, which have the factor (p - 2), are now `NA` for fewer than three predictors
+  (they were 0 for p = 2 and negative for p = 1), and the plot methods no longer mark them.
+o `best()` was documented but its generic was not exported; it now is.
+o `best()` reported the same (wrong) `df` for all three criteria; each now gets its own equivalent degrees of freedom.
+
 o Replaced links to `datavis.ca`, which is offline, with DOIs (documentation) and `friendly.github.io/papers` (README).
 
 ### Tests
