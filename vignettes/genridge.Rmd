@@ -404,7 +404,16 @@ _Computer Age Statistical Inference_). Try, e.g., `example(Manpower)`.
 
 `ridge()` also accepts a _matrix_ of several responses, e.g.,
 `ridge(cbind(Y1, Y2) ~ x1 + x2, data)`, fitting all responses with the same ridge constants.
-This extension is **experimental** in this version, and will be described in a separate
-vignette. See `help("as.ridge")` and `help("mlmridge-plots")`.
+This extension is **experimental** in this version. It is described in the article
+"Multivariate ridge regression" on the package website; see also `help("as.ridge")` and
+`help("mlmridge-plots")`.
+
+## Related packages
+
+Other R packages fit ridge regression models: `MASS::lm.ridge()`, **glmnet** (ridge as the
+$\alpha = 0$ case of the elastic net) and **lmridge**. genridge focuses on _visualizing_ the
+bias (shrinkage) and precision of the estimates. **lmridge** [@ImdadUllah-etal:2018] is the
+place to go for a long list of estimators of the ridge constant, tests, and other ridge
+statistics.
 
 ## References

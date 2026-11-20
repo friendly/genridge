@@ -112,7 +112,9 @@
 #' @author Michael Friendly
 #' @importFrom stats coef coefficients contrasts lm.fit model.matrix model.offset model.response uniroot vcov
 #' @export
-#' @seealso [MASS::lm.ridge()] for other implementations of ridge regression
+#' @seealso [MASS::lm.ridge()] for other implementations of ridge regression.
+#' The **lmridge** package (Imdad Ullah et al., 2018) provides many estimators of the
+#' ridge constant and other ridge statistics.
 #' 
 #' [traceplot()], [plot.ridge()],
 #' [pairs.ridge()], [plot3d.ridge()], for 1D, 2D, 3D plotting methods
@@ -131,6 +133,9 @@
 #' 
 #' Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. 
 #' *Technometrics*, **21**:215–223. \doi{10.2307/1268518}
+#' 
+#' Imdad Ullah, M., Aslam, M., and Altaf, S. (2018). lmridge: A Comprehensive R Package for
+#' Ridge Regression. *The R Journal*, **10**(2), 326–343. \doi{10.32614/RJ-2018-060}
 #' @keywords models regression
 #' @examples
 #' 

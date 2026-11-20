@@ -247,9 +247,14 @@ Regression Estimators," \emph{Communications in Statistics}, 5, 307-323.
 
 Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter.
 \emph{Technometrics}, \strong{21}:215–223. \doi{10.2307/1268518}
+
+Imdad Ullah, M., Aslam, M., and Altaf, S. (2018). lmridge: A Comprehensive R Package for
+Ridge Regression. \emph{The R Journal}, \strong{10}(2), 326–343. \doi{10.32614/RJ-2018-060}
 }
 \seealso{
-\code{\link[MASS:lm.ridge]{MASS::lm.ridge()}} for other implementations of ridge regression
+\code{\link[MASS:lm.ridge]{MASS::lm.ridge()}} for other implementations of ridge regression.
+The \strong{lmridge} package (Imdad Ullah et al., 2018) provides many estimators of the
+ridge constant and other ridge statistics.
 
 \code{\link[=traceplot]{traceplot()}}, \code{\link[=plot.ridge]{plot.ridge()}},
 \code{\link[=pairs.ridge]{pairs.ridge()}}, \code{\link[=plot3d.ridge]{plot3d.ridge()}}, for 1D, 2D, 3D plotting methods
