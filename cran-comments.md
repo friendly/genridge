@@ -1,6 +1,11 @@
 ## Test environments
-* local Windows 11 x64 install, R version 4.6.1 (2026-06-24 ucrt)
-* win-builder: R Under development (unstable) (2026-11-17 r90926 ucrt)
+* local Windows 11 x64 install, R version 4.6.2 (2026-10-29 ucrt)
+* win-builder: R version 4.6.2 (2026-10-29 ucrt) -- Status: OK (2026-11-20)
+* win-builder: R Under development (unstable) (2026-11-17 r90926 ucrt) -- Status: OK (2026-11-20)
+* R-hub (GitHub Actions), R-devel, all Status: OK (2026-11-20):
+  - linux (x86_64-pc-linux-gnu), R-devel 2026-11-19 r90939
+  - macos-arm64 (aarch64-apple-darwin23), R-devel 2026-11-20 r90940
+  - windows (x86_64-w64-mingw32), R-devel 2026-11-17 r90926
 
 ## R CMD check results
 0 error(s) | 0 warning(s) | 0 note(s)
