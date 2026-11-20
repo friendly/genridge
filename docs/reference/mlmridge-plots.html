@@ -104,7 +104,7 @@ response's residual variance) and the HKB, LW and GCV criteria differ.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'mlmridge'</span></span>
-<span><span class="fu"><a href="traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">x</span>, response <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">main</span>, layout <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu"><a href="traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">x</span>, response <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">main</span>, layout <span class="op">=</span> <span class="cn">TRUE</span>, GCV <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'mlmridge'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, response <span class="op">=</span> <span class="fl">1</span>, predictor <span class="op">=</span> <span class="cn">NULL</span>, responses <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="va">main</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -158,6 +158,13 @@ with several responses, recycled over the panels.</p></dd>
 multi-panel layout with one panel per response, side by side where possible, and
 restore the previous layout afterwards. Use <code>layout = FALSE</code> to draw into a layout you
 have set up yourself, e.g., with <code>par(mfrow = )</code>.</p></dd>
+
+
+<dt id="arg-gcv">GCV<a class="anchor" aria-label="anchor" href="#arg-gcv"></a></dt>
+<dd><p>For <code><a href="traceplot.html">traceplot()</a></code>: if <code>TRUE</code> (the default), mark the ridge constant chosen by GCV
+pooled over responses (<code>x$kGCV.pooled</code>) with a vertical line labelled "GCV" above
+each panel, in addition to the HKB and LW lines for each response (labelled at the
+bottom). As for those, this is drawn only when plotting against <code>lambda</code>, not <code>df</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

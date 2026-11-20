@@ -119,17 +119,23 @@ the residual covariance matrix of the responses. That is, <span class="math inli
 \boldsymbol{\Sigma} \otimes \mathbf{V}_\lambda</span>.</li>
 </ul>
 <p>genridge fits these models with <code><a href="../reference/ridge.html">ridge()</a></code>, given a matrix
-response, and provides plots of both kinds: within one response, as for
-univariate ridge regression <span class="citation">(<a href="#ref-Friendly:genridge:2013">Friendly 2013</a>)</span>, and across
+response. The implementation was adapted from
+<code>lm_multiv_ridge()</code> in the <strong>VARshrink</strong> package
+<span class="citation">(<a href="#ref-R-VARshrink">Lee and Kim
+2026</a>)</span>, extended to give the covariance matrices of the
+coefficients and the HKB and LW criteria; note that, for the same
+scaling of the predictors, genridge’s <span class="math inline">\lambda</span> is <span class="math inline">n</span>
+times VARshrink’s. genridge provides plots of both kinds: within one
+response, as for univariate ridge regression <span class="citation">(<a href="#ref-Friendly:genridge:2013">Friendly 2013</a>)</span>, and across
 responses.</p>
 </div>
 <div class="section level2">
 <h2 id="example-school-data">Example: school data<a class="anchor" aria-label="anchor" href="#example-school-data"></a>
 </h2>
 <p>The <code>schooldata</code> data set in the <strong>heplots</strong>
-package comes from an evaluation of Program Follow Through <span class="citation">(<a href="#ref-Charnes-etal-1981">Charnes, Cooper, and
-Rhodes 1981</a>)</span>. For 70 schools, three measures of student
-achievement, <code>reading</code>, <code>mathematics</code> and
+package comes from an evaluation of Program Follow Through <span class="citation">(<a href="#ref-Charnes-etal-1981">Charnes et al.
+1981</a>)</span>. For 70 schools, three measures of student achievement,
+<code>reading</code>, <code>mathematics</code> and
 <code>selfesteem</code>, are to be predicted from five measures of the
 schools’ resources: <code>education</code> and <code>occupation</code>
 (of the parents), <code>visit</code> (parental visits to the school),
@@ -234,7 +240,9 @@ the grid of ridge constants is fine at the low end.</p>
 <p>The HKB, LW and GCV criteria are calculated for each response. GCV is
 also pooled over responses (by default, scaling each response by its
 residual variance, so the result does not depend on the units of the
-responses) to give a common value:</p>
+responses) to give a common value. <code>pool = "raw"</code> instead
+sums the residual sums of squares, as in <strong>VARshrink</strong>, so
+the response with the largest variance dominates:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sridge</span><span class="op">$</span><span class="va">criteria</span></span>
 <span><span class="co">#&gt;                kHKB     kLW kGCV</span></span>
@@ -252,8 +260,10 @@ each response, one panel each:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">sridge</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="mlm-ridge_files/figure-html/school-traceplot-1.png" class="r-plt" alt="Ridge trace plots for the three responses in the school data." width="100%"><p class="caption">
-Ridge trace plots for the three responses in the school data.
+<img src="mlm-ridge_files/figure-html/school-traceplot-1.png" class="r-plt" alt="Ridge trace plots for the three responses in the school data. Gray lines mark the HKB and LW estimates for each response; the blue line, the common value chosen by pooled GCV." width="100%"><p class="caption">
+Ridge trace plots for the three responses in the school data. Gray lines
+mark the HKB and LW estimates for each response; the blue line, the
+common value chosen by pooled GCV.
 </p>
 </div>
 <p>All three responses show the same pattern: <code>occupation</code>’s
@@ -473,6 +483,10 @@ Analysis to Program Follow Through.”</span> <em>Management Science</em>
 Friendly, Michael. 2013. <span>“The Generalized Ridge Trace Plot:
 Visualizing Bias <em>and</em> Precision.”</span> <em>Journal of
 Computational and Graphical Statistics</em> 22 (1): 50–68. <a href="https://doi.org/10.1080/10618600.2012.681237" class="external-link">https://doi.org/10.1080/10618600.2012.681237</a>.
+</div>
+<div id="ref-R-VARshrink" class="csl-entry">
+Lee, Namgil, and Sung-Ho Kim. 2026. <em><span>VARshrink</span>:
+Shrinkage Estimation Methods for Vector Autoregressive Models</em>. <a href="https://doi.org/10.32614/CRAN.package.VARshrink" class="external-link">https://doi.org/10.32614/CRAN.package.VARshrink</a>.
 </div>
 </div>
 </div>
