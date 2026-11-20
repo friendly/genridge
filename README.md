@@ -117,7 +117,7 @@ package:
   ellipse of the estimated coefficients.
 - `pairs.ridge()`: All pairwise bivariate ridge trace plots
 - `plot3d.ridge()`: 3D ridge trace plots with ellipsoids
-- `plot.precision()`: Plots a measure of precsion vs. one of shrinkage
+- `plot.precision()`: Plots a measure of precision vs. one of shrinkage
 - `plot.vif.ridge()`: Plots variance inflation factors
 
 In addition, the `pca()` method for `"ridge"` objects transforms the

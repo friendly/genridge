@@ -34,3 +34,6 @@ vignettes/*.pdf
 .Rproj.user
 genridge.Rproj
 
+
+# myutil::release_check() output
+.release_check_result.rds

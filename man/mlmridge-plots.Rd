@@ -50,8 +50,8 @@ restore the previous layout afterwards. Use \code{layout = FALSE} to draw into a
 have set up yourself, e.g., with \code{par(mfrow = )}.}
 
 \item{GCV}{For \code{traceplot()}: if \code{TRUE} (the default), mark the ridge constant chosen by GCV
-pooled over responses (\code{x$kGCV.pooled}) with a vertical line labelled "GCV" above
-each panel, in addition to the HKB and LW lines for each response (labelled at the
+pooled over responses (\code{x$kGCV.pooled}) with a vertical line labeled "GCV" above
+each panel, in addition to the HKB and LW lines for each response (labeled at the
 bottom). As for those, this is drawn only when plotting against \code{lambda}, not \code{df}.}
 
 \item{...}{Other arguments, passed to the method for \code{"ridge"} objects.}
@@ -61,7 +61,7 @@ predictor, or several predictors (names or numbers), instead of the within-respo
 plot; see \strong{Details}. Further arguments to control the plot (\code{radius}, \code{which.lambda},
 \code{labels}, \code{col}, \code{fill}, \code{fill.alpha}, \code{lwd}, \code{lty}, \code{center.pch}, \code{center.cex}, \code{ref},
 \code{ref.col}, \code{xlim}, \code{ylim}, \code{xlab}, \code{ylab}) have the same meaning as in \code{\link[=plot.ridge]{plot.ridge()}}.
-By default, the centres are labelled with the values of \eqn{\lambda} for one predictor,
+By default, the centers are labeled with the values of \eqn{\lambda} for one predictor,
 and with the predictor names for several.}
 
 \item{responses}{For \code{plot()} with \code{predictor}: the two responses (names or numbers) giving
@@ -107,9 +107,9 @@ different displays, depending on whether \code{predictor} is given:
 variability of their coefficients for that response, at one value of \eqn{\lambda}.
 \item \strong{Across responses} (\verb{predictor =}): the axes are two \emph{responses} (\verb{responses =}), and each
 ellipse shows the joint variability of one predictor's coefficients for those two responses,
-at one value of \eqn{\lambda}. The path of the centres traces how the predictor's effects on
+at one value of \eqn{\lambda}. The path of the centers traces how the predictor's effects on
 both responses change together as \eqn{\lambda} increases. With several predictors, each has
-its own path, labelled with its name.
+its own path, labeled with its name.
 }
 
 For predictor \eqn{j}, the coefficients for all responses (row \eqn{j} of \eqn{\mathbf{B}(\lambda)})
@@ -117,7 +117,7 @@ have covariance matrix \eqn{[\mathbf{V}_\lambda]_{jj} \, \boldsymbol{\Sigma}}, w
 \eqn{\boldsymbol{\Sigma}} is the residual covariance matrix of the responses (\code{x$Sigma}) and
 \eqn{\mathbf{V}_\lambda} depends only on the predictors (\code{x$cov}). So in the across-responses
 plot, all the ellipses have the \strong{same shape and orientation}, that of the residual
-covariance of the two responses: only their centres and sizes change with \eqn{\lambda} and
+covariance of the two responses: only their centers and sizes change with \eqn{\lambda} and
 between predictors.
 
 The across-responses display is the ridge analogue of \code{\link[heplots:coefplot]{heplots::coefplot()}} for a
