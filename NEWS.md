@@ -29,6 +29,7 @@ o Documentation converted to roxygen markdown (`Roxygen: list(markdown = TRUE)`)
 ### Bug fixes
 o Bug fixes:
     - `ridge()` with a formula and `svd = FALSE` failed with "variable lengths differ".
+    - `ridge()` with a formula failed when the model had only one predictor; `vif()` failed for such a model.
     - `best()` was documented but its generic was not exported; it now is.
     - `best()` reported the same (wrong) `df` for all three criteria; each now gets its own equivalent degrees of freedom.
     

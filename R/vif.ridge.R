@@ -65,7 +65,7 @@ vif.ridge <- function(mod, ...) {
 
 #	if(!require("car")) stop("Requires the car package for the vif generic")
 	V <- vcov(mod)
-	res <- t(sapply(V, Vif))
+	res <- do.call(rbind, lapply(V, Vif))     # lambda x p, also when p = 1
 	colnames(res) <- colnames(coef(mod))
 	rownames(res) <- rownames(coef(mod))
 	res <- as.data.frame(res)

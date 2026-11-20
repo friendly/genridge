@@ -241,10 +241,10 @@ ridge.formula <- function(
 	if (!is.null(offset)) 
 		Y <- Y - offset
 	if (Inter <- attr(Terms, "intercept")) {
-		Xm <- colMeans(X[, -Inter])
+		Xm <- colMeans(X[, -Inter, drop = FALSE])
 		Ym <- mean(Y)
 		p <- p - 1
-		X <- X[, -Inter] - rep(Xm, rep(n, p))
+		X <- X[, -Inter, drop = FALSE] - rep(Xm, rep(n, p))
 		Y <- Y - Ym
 	}
 	ridge.default(Y, X, lambda=lambda, df=df, svd=svd, ...)
