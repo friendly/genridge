@@ -38,8 +38,13 @@ for that response. What the multivariate view adds is:
 
 genridge fits these models with
 [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md),
-given a matrix response, and provides plots of both kinds: within one
-response, as for univariate ridge regression ([Friendly
+given a matrix response. The implementation was adapted from
+`lm_multiv_ridge()` in the **VARshrink** package ([Lee and Kim
+2026](#ref-R-VARshrink)), extended to give the covariance matrices of
+the coefficients and the HKB and LW criteria; note that, for the same
+scaling of the predictors, genridge’s \lambda is n times VARshrink’s.
+genridge provides plots of both kinds: within one response, as for
+univariate ridge regression ([Friendly
 2013](#ref-Friendly:genridge:2013)), and across responses.
 
 ## Example: school data
@@ -162,7 +167,9 @@ sridge
 The HKB, LW and GCV criteria are calculated for each response. GCV is
 also pooled over responses (by default, scaling each response by its
 residual variance, so the result does not depend on the units of the
-responses) to give a common value:
+responses) to give a common value. `pool = "raw"` instead sums the
+residual sums of squares, as in **VARshrink**, so the response with the
+largest variance dominates:
 
 ``` r
 sridge$criteria
@@ -183,10 +190,14 @@ shows the univariate ridge trace plot for each response, one panel each:
 traceplot(sridge)
 ```
 
-![Ridge trace plots for the three responses in the school
-data.](mlm-ridge_files/figure-html/school-traceplot-1.png)
+![Ridge trace plots for the three responses in the school data. Gray
+lines mark the HKB and LW estimates for each response; the blue line,
+the common value chosen by pooled
+GCV.](mlm-ridge_files/figure-html/school-traceplot-1.png)
 
-Ridge trace plots for the three responses in the school data.
+Ridge trace plots for the three responses in the school data. Gray lines
+mark the HKB and LW estimates for each response; the blue line, the
+common value chosen by pooled GCV.
 
 All three responses show the same pattern: `occupation`’s large
 coefficient shrinks quickly, and `visit`’s negative coefficients for
@@ -416,3 +427,7 @@ Friendly, Michael. 2013. “The Generalized Ridge Trace Plot: Visualizing
 Bias *and* Precision.” *Journal of Computational and Graphical
 Statistics* 22 (1): 50–68.
 <https://doi.org/10.1080/10618600.2012.681237>.
+
+Lee, Namgil, and Sung-Ho Kim. 2026. *VARshrink: Shrinkage Estimation
+Methods for Vector Autoregressive Models*.
+<https://doi.org/10.32614/CRAN.package.VARshrink>.

@@ -258,9 +258,9 @@ where \(s^2\) is the
 residual mean square, so they need not be among the values of <code>lambda</code>. The GCV value
 (Golub et al., 1979) is the value of <code>lambda</code> (among those supplied) that minimizes the
 generalized cross-validation criterion.</p>
-<p>Because of the factor \(p - 2\), the HKB and LW estimates are meaningful only for
-\(p \ge 3\) predictors: they are 0 when \(p = 2\) and negative when \(p = 1\), and
-should be ignored in those cases.</p>
+<p>Because of the factor \(p - 2\), the HKB and LW estimates are defined only for
+\(p \ge 3\) predictors (they would be 0 when \(p = 2\) and negative when \(p = 1\)).
+For \(p &lt; 3\), <code>kHKB</code> and <code>kLW</code> are <code>NA</code>, and the plot methods do not mark them.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

@@ -60,6 +60,7 @@ a matrix response returns an `"mlmridge"` object.
   : Extract a Univariate Ridge Regression from a Multivariate One
 - [`coef(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-methods.md)
   [`vcov(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-methods.md)
+  [`best(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-methods.md)
   [`print(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-methods.md)
   : Methods for Multivariate Ridge Regression Objects
 - [`traceplot(`*`<mlmridge>`*`)`](https://friendly.github.io/genridge/reference/mlmridge-plots.md)

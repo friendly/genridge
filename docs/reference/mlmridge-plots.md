@@ -55,7 +55,7 @@ response's residual variance) and the HKB, LW and GCV criteria differ.
 
 ``` r
 # S3 method for class 'mlmridge'
-traceplot(x, response = NULL, main, layout = TRUE, ...)
+traceplot(x, response = NULL, main, layout = TRUE, GCV = TRUE, ...)
 
 # S3 method for class 'mlmridge'
 plot(x, response = 1, predictor = NULL, responses = 1:2, main, ...)
@@ -114,6 +114,16 @@ vif(mod, response = 1, ...)
   restore the previous layout afterwards. Use `layout = FALSE` to draw
   into a layout you have set up yourself, e.g., with `par(mfrow = )`.
 
+- GCV:
+
+  For
+  [`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md):
+  if `TRUE` (the default), mark the ridge constant chosen by GCV pooled
+  over responses (`x$kGCV.pooled`) with a vertical line labeled "GCV"
+  above each panel, in addition to the HKB and LW lines for each
+  response (labeled at the bottom). As for those, this is drawn only
+  when plotting against `lambda`, not `df`.
+
 - ...:
 
   Other arguments, passed to the method for `"ridge"` objects.
@@ -128,8 +138,8 @@ vif(mod, response = 1, ...)
   `fill.alpha`, `lwd`, `lty`, `center.pch`, `center.cex`, `ref`,
   `ref.col`, `xlim`, `ylim`, `xlab`, `ylab`) have the same meaning as in
   [`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md).
-  By default, the centres are labelled with the values of \\\lambda\\
-  for one predictor, and with the predictor names for several.
+  By default, the centers are labeled with the values of \\\lambda\\ for
+  one predictor, and with the predictor names for several.
 
 - responses:
 
@@ -164,10 +174,9 @@ whether `predictor` is given:
 - **Across responses** (`predictor =`): the axes are two *responses*
   (`responses =`), and each ellipse shows the joint variability of one
   predictor's coefficients for those two responses, at one value of
-  \\\lambda\\. The path of the centres traces how the predictor's
+  \\\lambda\\. The path of the centers traces how the predictor's
   effects on both responses change together as \\\lambda\\ increases.
-  With several predictors, each has its own path, labelled with its
-  name.
+  With several predictors, each has its own path, labeled with its name.
 
 For predictor \\j\\, the coefficients for all responses (row \\j\\ of
 \\\mathbf{B}(\lambda)\\) have covariance matrix
@@ -176,7 +185,7 @@ For predictor \\j\\, the coefficients for all responses (row \\j\\ of
 responses (`x$Sigma`) and \\\mathbf{V}\_\lambda\\ depends only on the
 predictors (`x$cov`). So in the across-responses plot, all the ellipses
 have the **same shape and orientation**, that of the residual covariance
-of the two responses: only their centres and sizes change with
+of the two responses: only their centers and sizes change with
 \\\lambda\\ and between predictors.
 
 The across-responses display is the ridge analogue of

@@ -78,7 +78,7 @@
 <p>Version 0.8.1; documentation built for <code>pkgdown</code> 2026-11-19</p>
 </div>
 <div class="section level2">
-<h2 id="pencil-description">📝 Description<a class="anchor" aria-label="anchor" href="#pencil-description"></a>
+<h2 id="id_-description">📝 Description<a class="anchor" aria-label="anchor" href="#id_-description"></a>
 </h2>
 <div class="section level3">
 <h3 id="what-is-ridge-regression">What is ridge regression?<a class="anchor" aria-label="anchor" href="#what-is-ridge-regression"></a>
@@ -152,7 +152,7 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="open_file_folder-installation">📂 Installation<a class="anchor" aria-label="anchor" href="#open_file_folder-installation"></a>
+<h2 id="id_-installation">📂 Installation<a class="anchor" aria-label="anchor" href="#id_-installation"></a>
 </h2>
 <table class="table">
 <colgroup>
@@ -160,15 +160,15 @@
 <col width="78%">
 </colgroup>
 <tbody>
-<tr>
+<tr class="odd">
 <td>CRAN version</td>
 <td><code>install.packages("genridge")</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td>R-universe</td>
 <td><code>install.packages("genridge", repos = c('https://friendly.r-universe.dev')</code></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Development version</td>
 <td><code>remotes::install_github("friendly/genridge")</code></td>
 </tr>
@@ -176,7 +176,7 @@
 </table>
 </div>
 <div class="section level2">
-<h2 id="bar_chart-examples">📊 Examples<a class="anchor" aria-label="anchor" href="#bar_chart-examples"></a>
+<h2 id="id_-examples">📊 Examples<a class="anchor" aria-label="anchor" href="#id_-examples"></a>
 </h2>
 <p>The classic example for ridge regression is Longley’s (1967) data, consisting of 7 economic variables, observed yearly from 1947 to 1962 (n=16), in the data frame <code><a href="https://rdrr.io/r/datasets/longley.html" class="external-link">datasets::longley</a></code>. The goal is to predict <code>Employed</code> from <code>GNP</code>, <code>Unemployed</code>, <code>Armed.Forces</code>, <code>Population</code>, <code>Year</code>, <code>GNP.deflator</code>.</p>
 <p>These data, constructed to illustrate numerical problems in least squares software at the time, are (purposely) perverse, in that:</p>
@@ -346,7 +346,7 @@ Plot of det(Variance) vs. shrinkage (<code>norm.beta</code>) to show the tradeo
 </div>
 </div>
 <div class="section level2">
-<h2 id="mag-low-rank-views">🔍 Low-rank views<a class="anchor" aria-label="anchor" href="#mag-low-rank-views"></a>
+<h2 id="id_-low-rank-views">🔍 Low-rank views<a class="anchor" aria-label="anchor" href="#id_-low-rank-views"></a>
 </h2>
 <p>Just as principal components analysis gives low-dimensional views of a data set, PCA can be useful to understand ridge regression.</p>
 <p>The <code>pca</code> method transforms a <code>"ridge"</code> object from parameter space, where the estimated coefficients are <span class="math inline">\beta_k</span> with covariance matrices <span class="math inline">\Sigma_k</span>, to the principal component space defined by the right singular vectors, <span class="math inline">V</span>, of the singular value decomposition of the scaled predictor matrix, <span class="math inline">X</span>.</p>
@@ -396,7 +396,7 @@ Biplot view of the ridge trace plot for the smallest two dimensions, where the e
 </div>
 </div>
 <div class="section level2">
-<h2 id="card_file_box-other-examples">🗃️ Other examples<a class="anchor" aria-label="anchor" href="#card_file_box-other-examples"></a>
+<h2 id="id_️-other-examples">🗃️ Other examples<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-other-examples"></a>
 </h2>
 <p>The genridge package contains four data sets, each with its own examples; e.g., you can try <code>example(Acetylene)</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -413,7 +413,7 @@ Biplot view of the ridge trace plot for the smallest two dimensions, where the e
 <span><span class="co">#&gt; 5  prostate data.frame  97x10                Prostate Cancer Data</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="books-references">📚 References<a class="anchor" aria-label="anchor" href="#books-references"></a>
+<h2 id="id_-references">📚 References<a class="anchor" aria-label="anchor" href="#id_-references"></a>
 </h2>
 <p>Friendly, M. (2011). Generalized Ridge Trace Plots: Visualizing Bias <em>and</em> Precision with the <code>genridge</code> R package. SCS Seminar, Jan., 2011. Slides: <a href="http://euclid.psych.yorku.ca/datavis/papers/gentalk.pdf" class="external-link">gentalk.pdf</a>; <a href="http://euclid.psych.yorku.ca/datavis/papers/gentalk-2x2.pdf" class="external-link">gentalk-2x2.pdf</a></p>
 <p>Friendly, M. (2013). The Generalized Ridge Trace Plot: Visualizing Bias <em>and</em> Precision. <em>Journal of Computational and Graphical Statistics</em>, <strong>22</strong>(1), 50-68, <a href="https://doi.org/10.1080/10618600.2012.681237" class="external-link">DOI link</a>, Online: <a href="https://friendly.github.io/papers/genridge-jcgs.pdf" class="external-link">genridge-jcgs.pdf</a>, Supp. materials: <a href="https://friendly.github.io/papers/genridge-supp.zip" class="external-link">genridge-supp.zip</a></p>

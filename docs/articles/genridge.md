@@ -339,10 +339,19 @@ Scatterplot matrix of bivariate ridge trace plots.
 
 [`plot3d()`](https://friendly.github.io/genridge/reference/plot3d.md)
 extends this to three dimensions, drawing covariance ellipsoids for
-three predictors in an interactive **rgl** window:
+three predictors with **rgl**. Here we choose `GNP`, `Year` and
+`Population`, the predictors with the largest VIFs. Because they are
+nearly collinear, the OLS ellipsoid is long and thin, pointing in a
+direction where the data say little about the separate coefficients;
+ridge regression shrinks it most along that direction. In an R session,
+[`plot3d()`](https://friendly.github.io/genridge/reference/plot3d.md)
+opens an interactive window; here,
+[`rgl::rglwidget()`](https://dmurdoch.github.io/rgl/dev/reference/rglwidget.html)
+embeds the scene in the page. Drag to rotate it, and scroll to zoom.
 
 ``` r
 plot3d(lridge, variables = c("GNP", "Year", "Population"), radius = 0.5)
+rgl::rglwidget(width = 700, height = 650)
 ```
 
 ### Visualizing the bias-variance tradeoff
@@ -529,10 +538,21 @@ Learning*), and `diab` (diabetes progression, from Efron and Hastie’s
 accepts a *matrix* of several responses, e.g.,
 `ridge(cbind(Y1, Y2) ~ x1 + x2, data)`, fitting all responses with the
 same ridge constants. This extension is **experimental** in this
-version, and will be described in a separate vignette. See
+version. It is described in the article “Multivariate ridge regression”
+on the package website; see also
 [`help("as.ridge")`](https://friendly.github.io/genridge/reference/as.ridge.md)
 and
 [`help("mlmridge-plots")`](https://friendly.github.io/genridge/reference/mlmridge-plots.md).
+
+## Related packages
+
+Other R packages fit ridge regression models:
+[`MASS::lm.ridge()`](https://rdrr.io/pkg/MASS/man/lm.ridge.html),
+**glmnet** (ridge as the \alpha = 0 case of the elastic net) and
+**lmridge**. genridge focuses on *visualizing* the bias (shrinkage) and
+precision of the estimates. **lmridge** ([Imdad Ullah, Aslam, and Altaf
+2018](#ref-ImdadUllah-etal:2018)) is the place to go for a long list of
+estimators of the ridge constant, tests, and other ridge statistics.
 
 ## References
 
@@ -561,6 +581,10 @@ Estimation for Nonorthogonal Problems.” *Technometrics* 12: 55–67.
 Hoerl, Arthur E., Robert W. Kennard, and Kent F. Baldwin. 1975. “Ridge
 Regression: Some Simulations.” *Communications in Statistics* 4 (2):
 105–23. <https://doi.org/10.1080/03610927508827232>.
+
+Imdad Ullah, Muhammad, Muhammad Aslam, and Saima Altaf. 2018. “lmridge:
+A Comprehensive R Package for Ridge Regression.” *The R Journal* 10 (2):
+326–43. <https://doi.org/10.32614/RJ-2018-060>.
 
 Lawless, Jerald F., and P. Wang. 1976. “A Simulation Study of Ridge and
 Other Regression Estimators.” *Communications in Statistics* 5: 307–23.

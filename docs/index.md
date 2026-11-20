@@ -111,7 +111,7 @@ package:
 - [`plot3d.ridge()`](https://friendly.github.io/genridge/reference/plot3d.md):
   3D ridge trace plots with ellipsoids
 - [`plot.precision()`](https://friendly.github.io/genridge/reference/plot.precision.md):
-  Plots a measure of precsion vs. one of shrinkage
+  Plots a measure of precision vs. one of shrinkage
 - [`plot.vif.ridge()`](https://friendly.github.io/genridge/reference/vif.ridge.md):
   Plots variance inflation factors
 

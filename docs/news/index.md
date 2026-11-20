@@ -9,16 +9,21 @@ releases. -
 accepts a matrix response: `cbind(Y1, Y2) ~ ...` in a formula, a
 multivariate [`lm()`](https://rdrr.io/r/stats/lm.html) fit, or a matrix
 `y`. All responses are fitted with common ridge constants, and the
-result has class `"mlmridge"`. - The HKB, LW and GCV criteria are given
-for each response; GCV can also be pooled over responses
-(`pool = "scaled"`, `"raw"` or `"mahalanobis"`) to choose a common ridge
-constant. -
+result has class `"mlmridge"`. The implementation was adapted from
+`lm_multiv_ridge()` in the **VARshrink** package. - The HKB, LW and GCV
+criteria are given for each response; GCV can also be pooled over
+responses (`pool = "scaled"`, `"raw"` or `"mahalanobis"`) to choose a
+common ridge constant. -
 [`as.ridge()`](https://friendly.github.io/genridge/reference/as.ridge.md)
 extracts the results for one response as an ordinary `"ridge"` object. -
 [`coef()`](https://rdrr.io/r/stats/coef.html),
 [`vcov()`](https://rdrr.io/r/stats/vcov.html) and
 [`print()`](https://rdrr.io/r/base/print.html) methods for `"mlmridge"`
 objects. -
+[`best()`](https://friendly.github.io/genridge/reference/ridge.md)
+method for `"mlmridge"` objects: the optimal ridge constants for each
+response and criterion, plus GCV pooled over responses, as a data frame;
+`best(x, response = )` gives one response. -
 [`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md),
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html),
 [`pairs()`](https://rdrr.io/r/graphics/pairs.html),
@@ -29,10 +34,12 @@ objects. -
 and `vif()` methods apply the univariate methods to one response at a
 time (`response =`).
 [`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md)
-by default draws all responses, one panel each. -
-`plot(x, predictor = )` draws coefficient ellipses for one or more
-predictors in the space of two responses (`responses =`), traced over
-the ridge constants.
+by default draws all responses, one panel each, marking the ridge
+constant chosen by pooled GCV (`GCV = TRUE`). - `plot(x, predictor = )`
+draws coefficient ellipses for one or more predictors in the space of
+two responses (`responses =`), traced over the ridge constants. - A
+one-column matrix response (e.g., `cbind(y) ~ ...`) gives an ordinary
+`"ridge"` result.
 
 ### New
 
@@ -67,17 +74,35 @@ lists. Also fixed a few small errors in the docs.
 
 ### Bug fixes
 
-o Bug fixes: -
-[`ridge()`](https://friendly.github.io/genridge/reference/ridge.md) with
-a formula and `svd = FALSE` failed with “variable lengths differ”. -
+o [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
+with a formula and `svd = FALSE` failed with “variable lengths differ”.
+o [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md)
+with a formula failed when the model had only one predictor; `vif()`
+failed for such a model. o The HKB and LW criteria, which have the
+factor (p - 2), are now `NA` for fewer than three predictors (they were
+0 for p = 2 and negative for p = 1), and the plot methods no longer mark
+them. o
 [`best()`](https://friendly.github.io/genridge/reference/ridge.md) was
-documented but its generic was not exported; it now is. -
+documented but its generic was not exported; it now is. o
 [`best()`](https://friendly.github.io/genridge/reference/ridge.md)
 reported the same (wrong) `df` for all three criteria; each now gets its
 own equivalent degrees of freedom.
 
 o Replaced links to `datavis.ca`, which is offline, with DOIs
 (documentation) and `friendly.github.io/papers` (README).
+
+### Tests
+
+o Added a testthat test suite: the multivariate fit against the
+univariate fits and the closed-form estimator, its covariance structure,
+the pooled GCV criteria,
+[`best()`](https://friendly.github.io/genridge/reference/ridge.md), the
+methods for `"mlmridge"` objects, and the univariate results against
+saved reference values from 0.8.1.
+
+### Other
+
+o genridge now requires R \>= 4.1.0 (for the native pipe, `|>`).
 
 ## genridge 0.8.0 (2024-11-30)
 

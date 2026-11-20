@@ -25,6 +25,20 @@ the response is a matrix.
   for each response and the optimal ridge constants given by the HKB, LW
   and GCV criteria, for each response and pooled over responses.
 
+- [`best()`](https://friendly.github.io/genridge/reference/ridge.md)
+  returns the optimal ridge constants as a data frame, with one row for
+  each response and criterion (HKB, LW, GCV), followed by a row for GCV
+  pooled over responses (`response = "(pooled)"`; the pooling method is
+  `object$pool`, see
+  [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md));
+  with `response`, the univariate result for one response, as from
+  [`best()`](https://friendly.github.io/genridge/reference/ridge.md) for
+  a `"ridge"` object.
+
+As for a `"ridge"` object, the HKB and LW values are closed-form
+estimates, while the GCV values (per response and pooled) are the best
+among the ridge constants supplied in `lambda` (or `df`).
+
 ## Usage
 
 ``` r
@@ -33,6 +47,9 @@ coef(object, response = NULL, type = c("list", "array"), ...)
 
 # S3 method for class 'mlmridge'
 vcov(object, response = NULL, ...)
+
+# S3 method for class 'mlmridge'
+best(object, response = NULL, ...)
 
 # S3 method for class 'mlmridge'
 print(x, digits = max(5, getOption("digits") - 5), ...)
@@ -70,6 +87,10 @@ print(x, digits = max(5, getOption("digits") - 5), ...)
 matrix, as described above;
 [`print()`](https://rdrr.io/r/base/print.html) returns `x`, invisibly.
 
+       `best()` returns a data frame with columns `response` and `criterion` (factors), `k`
+       (the optimal ridge constant) and, if the object contains the singular values of the
+       predictors (`svd = TRUE`, the default), `df` (the equivalent degrees of freedom).
+
 ## See also
 
 [`ridge()`](https://friendly.github.io/genridge/reference/ridge.md),
@@ -88,6 +109,11 @@ if (requireNamespace("heplots", quietly = TRUE)) {
   coef(sridge, response = "reading")      # lambda x p, for one response
   dim(coef(sridge, type = "array"))
   dim(vcov(sridge)[[1]])                  # pq x pq
+  best(sridge)                            # optimal ridge constants, all responses
+  best(sridge, response = "selfesteem")   # one response
 }
-#> [1] 15 15
+#>              k       df
+#> HKB 0.02679366 4.922545
+#> LW  0.02268283 4.934046
+#> GCV 0.00000000 5.000000
 ```

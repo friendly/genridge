@@ -134,9 +134,10 @@ best(object, ...)
   responses to choose a common ridge constant. `"scaled"` (the default)
   sums each response's residual sum of squares divided by its OLS
   residual variance, so the result does not depend on the units of the
-  responses; `"raw"` sums the residual sums of squares; `"mahalanobis"`
-  uses \\\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)\\ for the matrix \\R\\
-  of residuals.
+  responses; `"raw"` sums the residual sums of squares, as in
+  `lm_multiv_ridge()` in the **VARshrink** package (Lee & Kim);
+  `"mahalanobis"` uses \\\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)\\ for
+  the matrix \\R\\ of residuals.
 
 - x, object:
 
@@ -206,9 +207,13 @@ those above, but:
 
 Use
 [`as.ridge()`](https://friendly.github.io/genridge/reference/as.ridge.md)
-to extract the results for one response as a `"ridge"` object. This
-extension is experimental: its interface and results may change in
-future releases.
+to extract the results for one response as a `"ridge"` object. The
+estimator, \\(\mathbf{X}^\top\mathbf{X} + \lambda \mathbf{I})^{-1}
+\mathbf{X}^\top \mathbf{Y}\\, is that of Breiman & Friedman (1997, eq.
+6.3); the implementation was adapted from `lm_multiv_ridge()` in the
+**VARshrink** package (Lee & Kim). For the same scaling of `X`, `lambda`
+here is \\n\\ times the `lambda` used there. This extension is
+experimental: its interface and results may change in future releases.
 
 A data.frame with one row for each of the HKB, LW, and GCV criteria
 
@@ -218,12 +223,29 @@ If an intercept is present in the model, its coefficient is not
 penalized. (If you want to penalize an intercept, put in your own
 constant term and remove the intercept.)
 
-The predictors are centered, but not (yet) scaled in this
-implementation.
+The predictors are centered and scaled to unit mean square (dividing by
+\\n\\), as in
+[`MASS::lm.ridge()`](https://rdrr.io/pkg/MASS/man/lm.ridge.html), so the
+coefficients are on the scale of the standardized predictors.
 
 A number of the methods in the package assume that `lambda` is a vector
 of shrinkage constants increasing from `lambda[1] = 0`, or equivalently,
 a vector of `df` decreasing from \\p\\.
+
+**Choosing the ridge constant.** Three criteria are computed. The HKB
+(Hoerl et al., 1975) and LW (Lawless & Wang, 1976) values are
+closed-form estimates from the OLS fit, \\k\_{HKB} = (p-2)\\ s^2 /
+\hat{\boldsymbol{\beta}}^\top \hat{\boldsymbol{\beta}}\\ and \\k\_{LW} =
+(p-2)\\ s^2\\ n / \hat{\mathbf{y}}^\top \hat{\mathbf{y}}\\, where
+\\s^2\\ is the residual mean square, so they need not be among the
+values of `lambda`. The GCV value (Golub et al., 1979) is the value of
+`lambda` (among those supplied) that minimizes the generalized
+cross-validation criterion.
+
+Because of the factor \\p - 2\\, the HKB and LW estimates are defined
+only for \\p \ge 3\\ predictors (they would be 0 when \\p = 2\\ and
+negative when \\p = 1\\). For \\p \< 3\\, `kHKB` and `kLW` are `NA`, and
+the plot methods do not mark them.
 
 ## References
 
@@ -239,10 +261,26 @@ Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a
 method for choosing a good ridge parameter. *Technometrics*,
 **21**:215–223. [doi:10.2307/1268518](https://doi.org/10.2307/1268518)
 
+Breiman, L. and Friedman, J. H. (1997). Predicting Multivariate
+Responses in Multiple Linear Regression. *Journal of the Royal
+Statistical Society, Series B*, **59**(1), 3-54.
+[doi:10.1111/1467-9868.00054](https://doi.org/10.1111/1467-9868.00054)
+
+Lee, N. and Kim, S.-H. VARshrink: Shrinkage Estimation Methods for
+Vector Autoregressive Models. R package.
+[doi:10.32614/CRAN.package.VARshrink](https://doi.org/10.32614/CRAN.package.VARshrink)
+
+Imdad Ullah, M., Aslam, M., and Altaf, S. (2018). lmridge: A
+Comprehensive R Package for Ridge Regression. *The R Journal*,
+**10**(2), 326–343.
+[doi:10.32614/RJ-2018-060](https://doi.org/10.32614/RJ-2018-060)
+
 ## See also
 
 [`MASS::lm.ridge()`](https://rdrr.io/pkg/MASS/man/lm.ridge.html) for
-other implementations of ridge regression
+other implementations of ridge regression. The **lmridge** package
+(Imdad Ullah et al., 2018) provides many estimators of the ridge
+constant and other ridge statistics.
 
 [`traceplot()`](https://friendly.github.io/genridge/reference/traceplot.md),
 [`plot.ridge()`](https://friendly.github.io/genridge/reference/plot.ridge.md),
