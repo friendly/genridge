@@ -7,8 +7,8 @@
 > per-response `plot`, `pairs`, `plot3d`, `pca`, `biplot`, `precision`, `vif`; all-responses
 > `traceplot()` (§5.2); cross-response ellipses (§5.3); pkgdown article (§11).
 > `best.mlmridge()` (§4a; added later the same day, with a `response =` argument).
-> **Still open:** a pooled-GCV line in
-> `traceplot.mlmridge()` (§5.2); citing VARshrink in the docs (§1); tests (§8.4); the held
+> Pooled-GCV line in `traceplot.mlmridge()` (§5.2) and the VARshrink citation (§1) added later too.
+> **Still open:** tests (§8.4); the held
 > plot ideas (§5.3 several-predictor display, §5.4 HE plots, §5.5 coefficient biplot,
 > `heplots::coefplot` method); whether `plot()`/`precision()` should also default to all
 > responses, like `traceplot()`.
@@ -43,7 +43,9 @@ What it lacks compared with genridge's `ridge.default()`:
 **Licence.** VARshrink is GPL (>= 3); genridge is GPL (>= 2). The arithmetic is short and
 standard, so I recommend **reimplementing it in genridge's own style** (reusing the
 `ridge.default()` code), not copying the code. Cite VARshrink and Golub, Heath & Wahba (1979)
-for the GCV formula in the docs.
+for the GCV formula in the docs. *(Done 2026-11-19: `?ridge` (Details of the multivariate
+case, `pool`, References) and the MLM article, citing the package by its CRAN DOI; VARshrink
+has no paper.)*
 
 ## 2. Facts that shape the design (verified numerically, 2026-11-19)
 
@@ -250,8 +252,10 @@ as now. HKB and LW are closed-form estimates.
      - `layout = FALSE` uses the user's own `par(mfrow)`;
      - `main` is recycled over the panels.
      
-     Not done: a pooled-GCV reference line in each panel. `traceplot.ridge()` draws only the
-     HKB/LW lines, not GCV.
+     *Pooled-GCV line done 2026-11-19:* `GCV = TRUE` (default) draws a blue dot-dash line at
+     `kGCV.pooled` in each panel, labelled in the top margin (clear of the variable labels at
+     the first λ); against λ only, like the HKB/LW lines. `traceplot.ridge()` still draws no
+     per-response GCV line.
    - The same default may suit `plot()` and `precision()` (all responses, one panel each).
    - `pairs()` (already a matrix of panels) and `plot3d()` (rgl) should keep a single
      response.
