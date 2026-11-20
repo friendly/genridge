@@ -272,16 +272,15 @@ values to more shrinkage.</p>
 them, with the corresponding effective degrees of freedom:</p>
 <ul>
 <li>
-<strong>HKB</strong>: <span class="citation">Hoerl, Kennard, and
-Baldwin (<a href="#ref-Hoerl-etal:1972">1975</a>)</span>
+<strong>HKB</strong>: <span class="citation">Hoerl et al. (<a href="#ref-Hoerl-etal:1972">1975</a>)</span>
 </li>
 <li>
 <strong>LW</strong>: <span class="citation">Lawless and Wang (<a href="#ref-LawlessWang:1976">1976</a>)</span>
 </li>
 <li>
 <strong>GCV</strong>: the value of <code>lambda</code> minimizing
-generalized cross-validation <span class="citation">(<a href="#ref-GolubHeathWahba:1979">Golub, Heath, and Wahba
-1979</a>)</span>, among those supplied</li>
+generalized cross-validation <span class="citation">(<a href="#ref-GolubHeathWahba:1979">Golub et al. 1979</a>)</span>, among
+those supplied</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ridge.html">best</a></span><span class="op">(</span><span class="va">lridge</span><span class="op">)</span></span>
@@ -396,7 +395,7 @@ toward the origin, <span class="math inline">(0, 0)</span>, and the
 covariance ellipses become smaller, showing the increase in precision.
 These plots also show the <em>bivariate</em> path of shrinkage, which is
 often far from a straight line toward the origin. For the ideas behind
-such “elliptical thinking” in statistics, see <span class="citation">Friendly, Monette, and Fox (<a href="#ref-Friendly-etal:ellipses:2012">2013</a>)</span>.</p>
+such “elliptical thinking” in statistics, see <span class="citation">Friendly et al. (<a href="#ref-Friendly-etal:ellipses:2012">2013</a>)</span>.</p>
 <p>The <code><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs()</a></code> method shows all pairwise views in a
 scatterplot matrix:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -579,9 +578,22 @@ Statistical Inference</em>). Try, e.g.,
 <p><code><a href="../reference/ridge.html">ridge()</a></code> also accepts a <em>matrix</em> of several
 responses, e.g., <code>ridge(cbind(Y1, Y2) ~ x1 + x2, data)</code>,
 fitting all responses with the same ridge constants. This extension is
-<strong>experimental</strong> in this version, and will be described in
-a separate vignette. See <code><a href="../reference/as.ridge.html">help("as.ridge")</a></code> and
+<strong>experimental</strong> in this version. It is described in the
+article “Multivariate ridge regression” on the package website; see also
+<code><a href="../reference/as.ridge.html">help("as.ridge")</a></code> and
 <code><a href="../reference/mlmridge-plots.html">help("mlmridge-plots")</a></code>.</p>
+</div>
+<div class="section level2">
+<h2 id="related-packages">Related packages<a class="anchor" aria-label="anchor" href="#related-packages"></a>
+</h2>
+<p>Other R packages fit ridge regression models:
+<code><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html" class="external-link">MASS::lm.ridge()</a></code>, <strong>glmnet</strong> (ridge as the
+<span class="math inline">\alpha = 0</span> case of the elastic net) and
+<strong>lmridge</strong>. genridge focuses on <em>visualizing</em> the
+bias (shrinkage) and precision of the estimates.
+<strong>lmridge</strong> <span class="citation">(<a href="#ref-ImdadUllah-etal:2018">Imdad Ullah et al. 2018</a>)</span> is
+the place to go for a long list of estimators of the ridge constant,
+tests, and other ridge statistics.</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -618,6 +630,12 @@ Hoerl, Arthur E., Robert W. Kennard, and Kent F. Baldwin. 1975.
 <span>“Ridge Regression: Some Simulations.”</span> <em>Communications in
 Statistics</em> 4 (2): 105–23. <a href="https://doi.org/10.1080/03610927508827232" class="external-link">https://doi.org/10.1080/03610927508827232</a>.
 </div>
+<div id="ref-ImdadUllah-etal:2018" class="csl-entry">
+Imdad Ullah, Muhammad, Muhammad Aslam, and Saima Altaf. 2018.
+<span>“<span class="nocase">lmridge</span>: A Comprehensive
+<span>R</span> Package for Ridge Regression.”</span> <em>The R
+Journal</em> 10 (2): 326–43. <a href="https://doi.org/10.32614/RJ-2018-060" class="external-link">https://doi.org/10.32614/RJ-2018-060</a>.
+</div>
 <div id="ref-LawlessWang:1976" class="csl-entry">
 Lawless, Jerald F., and P. Wang. 1976. <span>“A Simulation Study of
 Ridge and Other Regression Estimators.”</span> <em>Communications in
@@ -630,7 +648,7 @@ for the Electronic Computer from the Point of View of the User.”</span>
 </div>
 <div id="ref-Miller:2002" class="csl-entry">
 Miller, Alan J. 2002. <em>Subset Selection in Regression</em>. 2nd ed.
-Boca Raton, FL: Chapman &amp; Hall/CRC.
+Chapman &amp; Hall/CRC.
 </div>
 </div>
 </div>
