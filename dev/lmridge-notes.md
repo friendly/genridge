@@ -1,6 +1,9 @@
 # Notes on lmridge (Imdad Ullah, Aslam & Altaf, 2018)
 
-Source: `dev/lmridge-RJ-2018-060.pdf`. Notes only (2026-11-19); nothing implemented.
+Source: `dev/lmridge-RJ-2018-060.pdf`. Notes 2026-11-19. Done: the citation (§2): "Related
+packages" paragraph in the Getting started vignette, `@seealso` and `@references` in `?ridge`
+(plain text, no Suggests dependency). Bib entry is in `statistics.bib` and
+`vignettes/references.bib`. The ideas in §3 are not implemented.
 
 Imdad Ullah, M., Aslam, M. & Altaf, S. (2018). lmridge: A Comprehensive R Package for Ridge
 Regression. *The R Journal*, 10(2), 326--343. doi:10.32614/RJ-2018-060 (verified with Crossref).
@@ -29,8 +32,7 @@ visualization of the *coefficients' precision* (no ellipses, no PCA/biplot view)
   - Optionally `@seealso` in `?ridge`: `lmridge::lmridge()` (would need lmridge in Suggests, or a
     plain-text mention without a link; plain text avoids the dependency).
   - README "related packages", when the README is revised.
-- **Bib entry** (not yet in `statistics.bib`; only `R-lmridge` package entries exist in the
-  `Rpackages-*.bib` files). Proposed, for statistics.bib when you OK it:
+- **Bib entry** (now in `statistics.bib` and `vignettes/references.bib`):
 
 ```bibtex
 @Article{ImdadUllah-etal:2018,

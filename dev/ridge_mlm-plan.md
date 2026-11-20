@@ -2,6 +2,16 @@
 
 *Started 2026-11-19. Source draft: `dev/ridge_mlm.R` (adapted from `VARshrink::lm_multiv_ridge()`).*
 
+> **Status (end of 2026-11-19).** Shipped on master in 0.8.1, marked *experimental*:
+> `ridge()` with a matrix response → `mlmridge`; `as.ridge()`; `coef`/`vcov`/`print`;
+> per-response `plot`, `pairs`, `plot3d`, `pca`, `biplot`, `precision`, `vif`; all-responses
+> `traceplot()` (§5.2); cross-response ellipses (§5.3); pkgdown article (§11).
+> **Still open:** `best.mlmridge()` (§4a, specified but not written); a pooled-GCV line in
+> `traceplot.mlmridge()` (§5.2); citing VARshrink in the docs (§1); tests (§8.4); the held
+> plot ideas (§5.3 several-predictor display, §5.4 HE plots, §5.5 coefficient biplot,
+> `heplots::coefplot` method); whether `plot()`/`precision()` should also default to all
+> responses, like `traceplot()`.
+
 The goal is to extend `ridge()` from a single response `y` to a matrix of responses `Y`
 (a multivariate linear model, MLM), in a way that fits genridge's existing design: the `ridge`
 object, its methods (`coef`, `vcov`, `print`, `best`) and, above all, its graphical methods
@@ -92,6 +102,8 @@ currently *stops* for `mlm` objects. The natural extension:
 All three call one internal workhorse. The simplest version is to generalize `ridge.default()`
 to accept a matrix `y` and have the univariate case be q = 1. Alternatively, keep it as is and
 add `ridge_mlm_fit()`; that is lower risk for existing users.
+*Resolved: `ridge.default()` was generalized (decision 3, §9); there is no `ridge_mlm_fit()`.
+`ridge.lm()` no longer stops for `mlm` fits.*
 
 **λ:** one shared λ (or `df`) for all responses, as in the draft. Response-specific λ would
 just be q separate univariate ridges, and users can already do that.
@@ -189,7 +201,8 @@ no theoretical basis. The principled multivariate analogue is Brown & Zidek's (1
 multivariate Hoerl–Kennard rule, which belongs to §6 (later extensions).
 
 **How the methods use the criteria:**
-- **`best.mlmridge()`** returns a long data frame with columns `response`, `criterion`
+- **`best.mlmridge()`** *(not yet written; `best(sridge)` currently gives "no applicable
+  method")* returns a long data frame with columns `response`, `criterion`
   (HKB, LW, GCV), `k` and `df`:
   - one row per response and criterion;
   - a final `(pooled)` row for GCV.
@@ -368,7 +381,8 @@ Open: is there a natural dataset in heplots, candisc or mvinfluence with high VI
 
 **Search results (2026-11-19).** A web search plus checks in R found these. The full report,
 which will be lost if the temp folder is cleared, is
-`scratchpad/mlm-dataset-candidates.md`. The key numbers for `schooldata` were re-checked with
+`scratchpad/mlm-dataset-candidates.md` *(a session temp file, now probably gone: this section is
+the only record)*. The key numbers for `schooldata` were re-checked with
 genridge's `ridge()`.
 
 1. **`heplots::schooldata` (recommended main example).**
@@ -411,7 +425,11 @@ genridge's `ridge()`.
 
 ## 8. Suggested implementation steps
 
-1. Write `ridge_mlm_fit(Y, X, lambda, df, svd)` in `R/`, reusing `ridge.default()`'s
+*Status: steps 1–3 and 5 (except HE plots) done; step 4 deferred; step 6 done as a pkgdown
+article and NEWS for 0.8.1.*
+
+1. Write `ridge_mlm_fit(Y, X, lambda, df, svd)` in `R/` *(done instead by generalizing
+   `ridge.default()`)*, reusing `ridge.default()`'s
    centering, scaling, df ↔ λ solving, `V_λ` and criteria code. Add pooled GCV from the draft,
    converted to genridge's λ scale.
 2. Choose the object structure (§4), with `print`, `coef` and `vcov` methods, and `as.ridge()`.
@@ -428,7 +446,8 @@ genridge's `ridge()`.
    - roxygen in markdown;
    - an example using Rohwer or a better dataset;
    - possibly a short vignette, *Multivariate ridge regression*;
-   - NEWS; version 0.9.0, since this is a new feature set.
+   - NEWS; version 0.9.0, since this is a new feature set. *(Actually released in 0.8.1, marked
+     experimental; 0.9.0 is a natural point to drop the "experimental" label.)*
 7. Optionally, a section in Vis-MLM-book ch. 9.
 
 ## 9. Decisions (MF, 2026-11-19)
@@ -547,7 +566,8 @@ two go away.
 2. `coef`, `vcov` and `print` methods for `mlmridge`.
 3. `traceplot`, `plot`, `pairs`, `plot3d`, `precision`, `pca` and `biplot` methods for
    `mlmridge`, each with a `response=` argument (defaulting to the first response, with a
-   message) and delegating through `as.ridge()`.
+   message) and delegating through `as.ridge()`. *(Done; `traceplot()` was later changed to
+   default to all responses, §5.2.)*
 4. A `vif.mlmridge()` that returns the shared VIFs, with predictor and λ names.
 
 `best` comes once the criteria are settled. Multi-response `traceplot` (§5.2) and the
@@ -555,12 +575,19 @@ cross-response ellipses (§5.3) come after that.
 
 ## 11. Vignette: multivariate ridge regression (planned 2026-11-19)
 
-genridge has **no vignettes yet**. The multivariate extension is a natural first one, and the
+*Status: done as a **pkgdown-only article**, `vignettes/articles/mlm-ridge.Rmd` (Rbuildignored,
+so not built on CRAN), commit `c1069cd`. A separate CRAN vignette, "Getting started with
+genridge" (`vignettes/genridge.Rmd`), was added first, so the infrastructure below
+(VignetteBuilder, knitr/rmarkdown in Suggests, `references.bib`) now exists. The outline below
+is the plan as written; the article follows it, with the simulation (item 9) done.
+Breiman & Friedman (1997) is in `statistics.bib`.*
+
+At the time of planning, genridge had **no vignettes**. The multivariate extension is a natural first one, and the
 example gallery `dev/mlmridge-plot-examples.R` (code next to each plot) is a good start: it
 mainly needs descriptive text between the chunks.
 
 **Working title:** *Multivariate ridge regression with genridge*
-(file `vignettes/mlm-ridge.Rmd`).
+(planned as `vignettes/mlm-ridge.Rmd`; became `vignettes/articles/mlm-ridge.Rmd`).
 
 **Outline:**
 
@@ -629,6 +656,6 @@ mainly needs descriptive text between the chunks.
   (cross-response ellipses), so the vignette shows the multivariate plots, not only
   per-response delegation. Ridge HE plots can come in a later update of the vignette.
 
-**Optional second vignette:** a univariate *Generalized ridge trace plots* article, largely
+**Optional second vignette:** *(partly done: "Getting started" covers longley and Detroit)* a univariate *Generalized ridge trace plots* article, largely
 reusing the README (longley, prostate and Manpower examples). The README is long, so moving
 its detail into a vignette would also shorten it.
