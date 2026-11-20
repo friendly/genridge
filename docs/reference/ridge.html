@@ -241,9 +241,21 @@ This extension is experimental: its interface and results may change in future r
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>If an intercept is present in the model, its coefficient is not penalized. (If you want to penalize
 an intercept, put in your own constant term and remove the intercept.)</p>
-<p>The predictors are centered, but not (yet) scaled in this implementation.</p>
+<p>The predictors are centered and scaled to unit mean square (dividing by \(n\)), as in
+<code><a href="https://rdrr.io/pkg/MASS/man/lm.ridge.html" class="external-link">MASS::lm.ridge()</a></code>, so the coefficients are on the scale of the standardized predictors.</p>
 <p>A number of the methods in the package assume that <code>lambda</code> is a vector of shrinkage constants
 increasing from <code>lambda[1] = 0</code>, or equivalently, a vector of <code>df</code> decreasing from \(p\).</p>
+<p><strong>Choosing the ridge constant.</strong> Three criteria are computed. The HKB (Hoerl et al., 1975)
+and LW (Lawless &amp; Wang, 1976) values are closed-form estimates from the OLS fit,
+\(k_{HKB} = (p-2)\, s^2 / \hat{\boldsymbol{\beta}}^\top \hat{\boldsymbol{\beta}}\) and
+\(k_{LW} = (p-2)\, s^2\, n / \hat{\mathbf{y}}^\top \hat{\mathbf{y}}\),
+where \(s^2\) is the
+residual mean square, so they need not be among the values of <code>lambda</code>. The GCV value
+(Golub et al., 1979) is the value of <code>lambda</code> (among those supplied) that minimizes the
+generalized cross-validation criterion.</p>
+<p>Because of the factor \(p - 2\), the HKB and LW estimates are meaningful only for
+\(p \ge 3\) predictors: they are 0 when \(p = 2\) and negative when \(p = 1\), and
+should be ignored in those cases.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
