@@ -10,13 +10,13 @@
 
 <!-- badges: end -->
 
-# genridge <img src="man/figures/logo.png" style="float:right; height:200px;" />
+# genridge <img src="man/figures/logo.png" alt="genridge logo" style="float:right; height:200px;" />
 
 ## **Generalized Ridge Trace Plots for Ridge Regression**
 
 <!-- explicit version number now dynamic -->
 
-Version 0.8.1; documentation built for `pkgdown` 2026-11-19
+Version 0.8.1; documentation built for `pkgdown` 2026-11-20
 
 ## 📝 Description
 
@@ -236,7 +236,7 @@ plot(vridge, X = "df", Y="sqrt",
      xlim = c(4, 6.5))
 ```
 
-![](man/figures/README-plot-vif-1.png)<!-- -->
+<img src="man/figures/README-plot-vif-1.png" alt="Plot of the square root of the variance inflation factor for each predictor in the Longley data against effective degrees of freedom; the VIFs decrease as the ridge constant increases (fewer df)."  />
 
 ### Univariate trace plots
 
@@ -468,7 +468,7 @@ plridge
 traceplot(plridge)
 ```
 
-![](man/figures/README-pca-traceplot-1.png)<!-- -->
+<img src="man/figures/README-pca-traceplot-1.png" alt="Ridge trace plot of the coefficients for the six principal component dimensions against the ridge constant; only dimensions 5 and 6 are shrunk."  />
 
 What is perhaps surprising is that the coefficients for the first 4
 components are not shrunk at all. Rather, the effect of shrinkage is
@@ -485,7 +485,7 @@ dimensions 1 to 4:
 pairs(plridge)
 ```
 
-<img src="man/figures/README-pca-pairs-1.png" alt="" width="80%" />
+<img src="man/figures/README-pca-pairs-1.png" alt="Scatterplot matrix of bivariate ridge trace plots in PCA space; the ellipses are aligned with the axes and coincide for dimensions 1 to 4." width="80%" />
 
 If we focus on the plot of dimensions `5:6`, we can see where all the
 shrinkage action is in this representation. Generally, the predictors
@@ -499,7 +499,7 @@ text(plridge$coef[, 5:6],
      cex=1.5, pos=4, offset=.1)
 ```
 
-![](man/figures/README-pca-dim56-1.png)<!-- -->
+<img src="man/figures/README-pca-dim56-1.png" alt="Bivariate ridge trace plot for PCA dimensions 5 and 6, with filled covariance ellipses that shrink toward the origin as the ridge constant increases, labeled by ridge constant."  />
 
 ### Biplot view
 

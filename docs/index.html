@@ -75,7 +75,7 @@
 <strong>Generalized Ridge Trace Plots for Ridge Regression</strong><a class="anchor" aria-label="anchor" href="#generalized-ridge-trace-plots-for-ridge-regression"></a>
 </h2>
 <!-- explicit version number now dynamic -->
-<p>Version 0.8.1; documentation built for <code>pkgdown</code> 2026-11-19</p>
+<p>Version 0.8.1; documentation built for <code>pkgdown</code> 2026-11-20</p>
 </div>
 <div class="section level2">
 <h2 id="id_-description">📝 Description<a class="anchor" aria-label="anchor" href="#id_-description"></a>
@@ -237,7 +237,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">vridge</span>, X <span class="op">=</span> <span class="st">"df"</span>, Y<span class="op">=</span><span class="st">"sqrt"</span>,</span>
 <span>     col<span class="op">=</span><span class="va">clr</span>, pch<span class="op">=</span><span class="va">pch</span>, cex <span class="op">=</span> <span class="fl">1.2</span>,</span>
 <span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot-vif-1.png"><!-- --></p>
+<p><img src="reference/figures/README-plot-vif-1.png" alt="Plot of the square root of the variance inflation factor for each predictor in the Longley data against effective degrees of freedom; the VIFs decrease as the ridge constant increases (fewer df)."></p>
 </div>
 <div class="section level3">
 <h3 id="univariate-trace-plots">Univariate trace plots<a class="anchor" aria-label="anchor" href="#univariate-trace-plots"></a>
@@ -362,19 +362,19 @@ Plot of det(Variance) vs. shrinkage (<code>norm.beta</code>) to show the tradeo
 <span><span class="co">#&gt; 0.040  1.51459  0.37858  1.77944  0.29633  3.01774  0.88291</span></span>
 <span><span class="co">#&gt; 0.080  1.51377  0.37778  1.75810  0.25915  2.01876  0.47238</span></span>
 <span><span class="fu"><a href="reference/traceplot.html">traceplot</a></span><span class="op">(</span><span class="va">plridge</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-pca-traceplot-1.png"><!-- --></p>
+<p><img src="reference/figures/README-pca-traceplot-1.png" alt="Ridge trace plot of the coefficients for the six principal component dimensions against the ridge constant; only dimensions 5 and 6 are shrunk."></p>
 <p>What is perhaps surprising is that the coefficients for the first 4 components are not shrunk at all. Rather, the effect of shrinkage is seen only on the <em>last two dimensions</em>. These are the directions that contribute most to collinearity, for which other visualization methods have been proposed (Friendly &amp; Kwan 2009).</p>
 <p>The <code><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs()</a></code> plot illustrates the <em>joint</em> effects: the principal components of <span class="math inline">\mathbf{X}</span> are uncorrelated, so the ellipses are all aligned with the coordinate axes and the ellipses largely coincide for dimensions 1 to 4:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs</a></span><span class="op">(</span><span class="va">plridge</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-pca-pairs-1.png" alt="" width="80%"></p>
+<p><img src="reference/figures/README-pca-pairs-1.png" alt="Scatterplot matrix of bivariate ridge trace plots in PCA space; the ellipses are aligned with the axes and coincide for dimensions 1 to 4." width="80%"></p>
 <p>If we focus on the plot of dimensions <code>5:6</code>, we can see where all the shrinkage action is in this representation. Generally, the predictors that are related to the smallest dimension (6) are shrunk quickly at first.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">plridge</span>, variables<span class="op">=</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, fill <span class="op">=</span> <span class="cn">TRUE</span>, fill.alpha<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">plridge</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, </span>
 <span>       label <span class="op">=</span> <span class="va">lambdaf</span>, </span>
 <span>     cex<span class="op">=</span><span class="fl">1.5</span>, pos<span class="op">=</span><span class="fl">4</span>, offset<span class="op">=</span><span class="fl">.1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-pca-dim56-1.png"><!-- --></p>
+<p><img src="reference/figures/README-pca-dim56-1.png" alt="Bivariate ridge trace plot for PCA dimensions 5 and 6, with filled covariance ellipses that shrink toward the origin as the ridge constant increases, labeled by ridge constant."></p>
 <div class="section level3">
 <h3 id="biplot-view">Biplot view<a class="anchor" aria-label="anchor" href="#biplot-view"></a>
 </h3>

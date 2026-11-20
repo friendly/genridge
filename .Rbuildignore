@@ -13,3 +13,5 @@ dev/
 ^data-raw$
 ^vignettes/articles$
 ^\.release_check_result\.rds$
+^\.github$
+^\.build-steps\.R$

@@ -29,7 +29,7 @@ library(genridge)
 
 <!-- badges: end -->
 
-# genridge <img src="man/figures/logo.png" style="float:right; height:200px;" />
+# genridge <img src="man/figures/logo.png" alt="genridge logo" style="float:right; height:200px;" />
 
 ## **Generalized Ridge Trace Plots for Ridge Regression**
 
@@ -197,6 +197,7 @@ vridge
 `vif()` returns a `"vif.ridge"` object for which there is a plot method:
 
 ```{r plot-vif}
+#| fig.alt = "Plot of the square root of the variance inflation factor for each predictor in the Longley data against effective degrees of freedom; the VIFs decrease as the ridge constant increases (fewer df)."
 clr <-  c("black", "red", "darkgreen","blue", "cyan4", "magenta")
 pch <- c(15:18, 7, 9)
 plot(vridge, X = "df", Y="sqrt",
@@ -366,7 +367,8 @@ principal component space defined by the right singular vectors, $V$,
 of the singular value decomposition of the scaled predictor matrix, $X$.
 
 ```{r pca-traceplot}
-#| echo = -1
+#| echo = -1,
+#| fig.alt = "Ridge trace plot of the coefficients for the six principal component dimensions against the ridge constant; only dimensions 5 and 6 are shrunk."
 par(mar=c(4, 4, 1, 1)+ 0.1)
 plridge <- pca(lridge)
 plridge
@@ -383,7 +385,8 @@ The `pairs()` plot illustrates the _joint_ effects: the principal components of
 $\mathbf{X}$ are uncorrelated, so the ellipses are all aligned with the coordinate axes
 and the ellipses largely coincide for dimensions 1 to 4:
 ```{r pca-pairs}
-#| out.width = "80%"
+#| out.width = "80%",
+#| fig.alt = "Scatterplot matrix of bivariate ridge trace plots in PCA space; the ellipses are aligned with the axes and coincide for dimensions 1 to 4."
 pairs(plridge)
 ```
 
@@ -391,7 +394,8 @@ If we focus on the plot of dimensions `5:6`, we can see where all the shrinkage 
 is in this representation. Generally, the predictors that are related to the smallest
 dimension (6) are shrunk quickly at first.
 ```{r pca-dim56}
-#| echo = -1
+#| echo = -1,
+#| fig.alt = "Bivariate ridge trace plot for PCA dimensions 5 and 6, with filled covariance ellipses that shrink toward the origin as the ridge constant increases, labeled by ridge constant."
 par(mar=c(4, 4, 1, 1)+ 0.1)
 plot(plridge, variables=5:6, fill = TRUE, fill.alpha=0.2)
 text(plridge$coef[, 5:6], 
