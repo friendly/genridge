@@ -8,7 +8,9 @@
 > `traceplot()` (§5.2); cross-response ellipses (§5.3); pkgdown article (§11).
 > `best.mlmridge()` (§4a; added later the same day, with a `response =` argument).
 > Pooled-GCV line in `traceplot.mlmridge()` (§5.2) and the VARshrink citation (§1) added later too.
-> **Still open:** tests (§8.4); the held
+> Tests (§8.4): testthat suite added (`tests/testthat/`, 214 expectations), which found one more
+> bug (one-column matrix response with several λ).
+> **Still open:** the held
 > plot ideas (§5.3 several-predictor display, §5.4 HE plots, §5.5 coefficient biplot,
 > `heplots::coefplot` method); whether `plot()`/`precision()` should also default to all
 > responses, like `traceplot()`.
@@ -441,7 +443,9 @@ article and NEWS for 0.8.1.*
 2. Choose the object structure (§4), with `print`, `coef` and `vcov` methods, and `as.ridge()`.
 3. Interface: `ridge.mlm()`, plus a matrix-response branch in `ridge.formula()` and
    `ridge.default()` (§3). Remove the `mlm` stop in `ridge.lm()`.
-4. Tests (the package has no `tests/` yet; add testthat?):
+4. Tests *(done 2026-11-19: `tests/testthat/`; `dev/check-mlmridge.R` and `dev/check-ridge-ref.R`
+   are now covered by `test-mlmridge-*.R` and `test-ridge-univariate.R`, the latter using a copy
+   of the reference results in `tests/testthat/fixtures/`)*:
    - each response column equals the univariate `ridge()`;
    - `kronecker(Sigma, V_λ)` diagonal blocks equal the univariate `cov`;
    - λ ↔ VARshrink mapping (λ_g = n λ_v) on a fixed example;

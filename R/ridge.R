@@ -402,6 +402,8 @@ ridge.default <-
 		return(result)
 	}
 
+	# a one-column matrix response is univariate
+	if (is.matrix(y)) y <- y[, 1]
 	#dimensions
 	n <- nrow(X)
 	p <- ncol(X)

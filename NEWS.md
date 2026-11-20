@@ -31,6 +31,12 @@ o Documentation converted to roxygen markdown (`Roxygen: list(markdown = TRUE)`)
 o Bug fixes:
     - `ridge()` with a formula and `svd = FALSE` failed with "variable lengths differ".
     - `ridge()` with a formula failed when the model had only one predictor; `vif()` failed for such a model.
+    - `ridge()` with a one-column matrix response (e.g., `cbind(y) ~ ...`) failed for more than one value of `lambda`.
+
+### Tests
+o Added a testthat test suite: the multivariate fit against the univariate fits and the closed-form estimator, its
+  covariance structure, the pooled GCV criteria, `best()`, the methods for `"mlmridge"` objects, and the univariate
+  results against saved reference values from 0.8.1.
     - `best()` was documented but its generic was not exported; it now is.
     - `best()` reported the same (wrong) `df` for all three criteria; each now gets its own equivalent degrees of freedom.
     

@@ -281,7 +281,7 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #' @param ... Other arguments, passed to the method for `"ridge"` objects.
 #' @return As for the corresponding method for `"ridge"` objects.
 #' @seealso [ridge()], [as.ridge()], [mlmridge-methods]
-#' @importFrom graphics pairs lines polygon points text abline
+#' @importFrom graphics pairs lines polygon points text abline mtext
 #' @importFrom stats biplot
 #' @examples
 #' if (requireNamespace("heplots", quietly = TRUE)) {
