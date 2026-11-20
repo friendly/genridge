@@ -25,6 +25,7 @@ knitr::opts_chunk$set(
   out.width = "70%"
 )
 options(digits = 4)
+options(rgl.useNULL = TRUE)   # rgl: draw off-screen, embed with rglwidget()
 library(genridge)
 ```
 
@@ -269,10 +270,15 @@ pairs(lridge, radius = 0.5, diag.cex = 2, fill = TRUE, fill.alpha = 0.1)
 ```
 
 `plot3d()` extends this to three dimensions, drawing covariance ellipsoids for three
-predictors in an interactive **rgl** window:
+predictors with **rgl**. Here we choose `GNP`, `Year` and `Population`, the predictors with the
+largest VIFs. Because they are nearly collinear, the OLS ellipsoid is long and thin, pointing
+in a direction where the data say little about the separate coefficients; ridge regression
+shrinks it most along that direction. In an R session, `plot3d()` opens an interactive window;
+here, `rgl::rglwidget()` embeds the scene in the page. Drag to rotate it, and scroll to zoom.
 
-```{r longley-plot3d, eval = FALSE}
+```{r longley-plot3d}
 plot3d(lridge, variables = c("GNP", "Year", "Population"), radius = 0.5)
+rgl::rglwidget(width = 700, height = 650)
 ```
 
 ### Visualizing the bias-variance tradeoff
