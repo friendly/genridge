@@ -69,7 +69,8 @@ include a column of 1's for the intercept.}
 \item{pool}{For a multivariate response only: how the GCV criterion is pooled over responses
 to choose a common ridge constant. \code{"scaled"} (the default) sums each response's
 residual sum of squares divided by its OLS residual variance, so the result does not
-depend on the units of the responses; \code{"raw"} sums the residual sums of squares;
+depend on the units of the responses; \code{"raw"} sums the residual sums of squares, as
+in \code{lm_multiv_ridge()} in the \strong{VARshrink} package (Lee & Kim);
 \code{"mahalanobis"} uses \eqn{\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)}{tr(Sigma^-1 R'R)}
 for the matrix \eqn{R} of residuals.}
 
@@ -116,6 +117,10 @@ and the value of \code{lambda} minimizing it.
 }
 
 Use \code{\link[=as.ridge]{as.ridge()}} to extract the results for one response as a \code{"ridge"} object.
+The estimator, \eqn{(\mathbf{X}^\top\mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{Y}}{(X'X + lambda I)^-1 X'Y},
+is that of Breiman & Friedman (1997, eq. 6.3); the implementation was adapted from
+\code{lm_multiv_ridge()} in the \strong{VARshrink} package (Lee & Kim). For the same scaling of \code{X},
+\code{lambda} here is \eqn{n} times the \code{lambda} used there.
 This extension is experimental: its interface and results may change in future releases.
 
 A data.frame with one row for each of the HKB, LW, and GCV criteria
@@ -261,6 +266,13 @@ Regression Estimators," \emph{Communications in Statistics}, 5, 307-323.
 
 Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter.
 \emph{Technometrics}, \strong{21}:215–223. \doi{10.2307/1268518}
+
+Breiman, L. and Friedman, J. H. (1997). Predicting Multivariate Responses in Multiple Linear
+Regression. \emph{Journal of the Royal Statistical Society, Series B}, \strong{59}(1), 3-54.
+\doi{10.1111/1467-9868.00054}
+
+Lee, N. and Kim, S.-H. VARshrink: Shrinkage Estimation Methods for Vector Autoregressive
+Models. R package. \doi{10.32614/CRAN.package.VARshrink}
 
 Imdad Ullah, M., Aslam, M., and Altaf, S. (2018). lmridge: A Comprehensive R Package for
 Ridge Regression. \emph{The R Journal}, \strong{10}(2), 326–343. \doi{10.32614/RJ-2018-060}

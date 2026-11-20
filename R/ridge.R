@@ -80,7 +80,8 @@
 #' @param pool For a multivariate response only: how the GCV criterion is pooled over responses
 #'        to choose a common ridge constant. `"scaled"` (the default) sums each response's
 #'        residual sum of squares divided by its OLS residual variance, so the result does not
-#'        depend on the units of the responses; `"raw"` sums the residual sums of squares;
+#'        depend on the units of the responses; `"raw"` sums the residual sums of squares, as
+#'        in `lm_multiv_ridge()` in the **VARshrink** package (Lee & Kim);
 #'        `"mahalanobis"` uses \eqn{\mathrm{tr}(\hat{\Sigma}^{-1} R^\top R)}{tr(Sigma^-1 R'R)}
 #'        for the matrix \eqn{R} of residuals.
 #' @param x,object An object of class `ridge`
@@ -122,6 +123,10 @@
 #'   and the value of `lambda` minimizing it.
 #'
 #' Use [as.ridge()] to extract the results for one response as a `"ridge"` object.
+#' The estimator, \eqn{(\mathbf{X}^\top\mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{Y}}{(X'X + lambda I)^-1 X'Y},
+#' is that of Breiman & Friedman (1997, eq. 6.3); the implementation was adapted from
+#' `lm_multiv_ridge()` in the **VARshrink** package (Lee & Kim). For the same scaling of `X`,
+#' `lambda` here is \eqn{n} times the `lambda` used there.
 #' This extension is experimental: its interface and results may change in future releases.
 #' @author Michael Friendly
 #' @importFrom stats coef coefficients contrasts lm.fit model.matrix model.offset model.response uniroot vcov
@@ -147,6 +152,13 @@
 #' 
 #' Golub G.H., Heath M., Wahba G. (1979) Generalized cross-validation as a method for choosing a good ridge parameter. 
 #' *Technometrics*, **21**:215–223. \doi{10.2307/1268518}
+#' 
+#' Breiman, L. and Friedman, J. H. (1997). Predicting Multivariate Responses in Multiple Linear
+#' Regression. *Journal of the Royal Statistical Society, Series B*, **59**(1), 3-54.
+#' \doi{10.1111/1467-9868.00054}
+#' 
+#' Lee, N. and Kim, S.-H. VARshrink: Shrinkage Estimation Methods for Vector Autoregressive
+#' Models. R package. \doi{10.32614/CRAN.package.VARshrink}
 #' 
 #' Imdad Ullah, M., Aslam, M., and Altaf, S. (2018). lmridge: A Comprehensive R Package for
 #' Ridge Regression. *The R Journal*, **10**(2), 326–343. \doi{10.32614/RJ-2018-060}

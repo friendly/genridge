@@ -264,6 +264,10 @@ print.mlmridge <- function(x, digits = max(5, getOption("digits") - 5), ...) {
 #'        multi-panel layout with one panel per response, side by side where possible, and
 #'        restore the previous layout afterwards. Use `layout = FALSE` to draw into a layout you
 #'        have set up yourself, e.g., with `par(mfrow = )`.
+#' @param GCV For `traceplot()`: if `TRUE` (the default), mark the ridge constant chosen by GCV
+#'        pooled over responses (`x$kGCV.pooled`) with a vertical line labelled "GCV" above
+#'        each panel, in addition to the HKB and LW lines for each response (labelled at the
+#'        bottom). As for those, this is drawn only when plotting against `lambda`, not `df`.
 #' @param predictor For `plot()`: if given, plot coefficient ellipses across responses for this
 #'        predictor, or several predictors (names or numbers), instead of the within-response
 #'        plot; see **Details**. Further arguments to control the plot (`radius`, `which.lambda`,
@@ -322,7 +326,7 @@ select_response <- function(x, response, missing_response) {
 
 #' @rdname mlmridge-plots
 #' @exportS3Method traceplot mlmridge
-traceplot.mlmridge <- function(x, response = NULL, main, layout = TRUE, ...) {
+traceplot.mlmridge <- function(x, response = NULL, main, layout = TRUE, GCV = TRUE, ...) {
   ynames <- colnames(x$Sigma)
   if (is.null(response)) response <- ynames
   if (is.numeric(response)) response <- ynames[response]
@@ -336,8 +340,17 @@ traceplot.mlmridge <- function(x, response = NULL, main, layout = TRUE, ...) {
     op <- par(mfrow = rev(grDevices::n2mfrow(nr)))   # side by side: 1 x 3, 2 x 2, 2 x 3, ...
     on.exit(par(op))
   }
-  for (i in seq_len(nr))
+  # pooled-GCV line: drawn, like the HKB and LW lines of traceplot.ridge(), only against lambda
+  dots <- list(...)
+  X <- if (is.null(dots$X)) "lambda" else match.arg(dots$X, c("lambda", "df"))
+  for (i in seq_len(nr)) {
     traceplot(as.ridge(x, response[i]), main = main[i], ...)
+    if (GCV && X == "lambda" && !is.null(x$kGCV.pooled)) {
+      abline(v = x$kGCV.pooled, col = "blue", lty = 4)
+      # label in the top margin, clear of the variable labels drawn at the first lambda
+      mtext("GCV", side = 3, at = x$kGCV.pooled, line = 0.1, col = "blue", cex = 0.8)
+    }
+  }
   invisible(NULL)
 }
 

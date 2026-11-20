@@ -49,7 +49,10 @@ is exactly the univariate ridge estimate for that response. What the multivariat
   of the responses. That is,
   $\text{Var}(\text{vec}\, \widehat{\mathbf{B}}) = \boldsymbol{\Sigma} \otimes \mathbf{V}_\lambda$.
 
-genridge fits these models with `ridge()`, given a matrix response, and provides plots of both
+genridge fits these models with `ridge()`, given a matrix response. The implementation was
+adapted from `lm_multiv_ridge()` in the **VARshrink** package [@R-VARshrink], extended to give
+the covariance matrices of the coefficients and the HKB and LW criteria; note that, for the same scaling of the
+predictors, genridge's $\lambda$ is $n$ times VARshrink's. genridge provides plots of both
 kinds: within one response, as for univariate ridge regression [@Friendly:genridge:2013], and
 across responses.
 
@@ -100,7 +103,9 @@ sridge
 
 The HKB, LW and GCV criteria are calculated for each response. GCV is also pooled over
 responses (by default, scaling each response by its residual variance, so the result does not
-depend on the units of the responses) to give a common value:
+depend on the units of the responses) to give a common value. `pool = "raw"` instead sums the
+residual sums of squares, as in **VARshrink**, so the response with the largest variance
+dominates:
 
 ```{r school-criteria}
 sridge$criteria
@@ -113,7 +118,7 @@ sridge$kGCV.pooled
 
 ```{r school-traceplot}
 #| fig.width = 10, fig.height = 4, out.width = "100%",
-#| fig.cap = "Ridge trace plots for the three responses in the school data."
+#| fig.cap = "Ridge trace plots for the three responses in the school data. Gray lines mark the HKB and LW estimates for each response; the blue line, the common value chosen by pooled GCV."
 traceplot(sridge)
 ```
 

@@ -4,6 +4,7 @@ o **Experimental: multivariate ridge regression.** These functions are new in th
   arguments and results may change in future releases.
     - `ridge()` now accepts a matrix response: `cbind(Y1, Y2) ~ ...` in a formula, a multivariate `lm()` fit,
       or a matrix `y`. All responses are fitted with common ridge constants, and the result has class `"mlmridge"`.
+      The implementation was adapted from `lm_multiv_ridge()` in the **VARshrink** package.
     - The HKB, LW and GCV criteria are given for each response; GCV can also be pooled over responses
       (`pool = "scaled"`, `"raw"` or `"mahalanobis"`) to choose a common ridge constant.
     - `as.ridge()` extracts the results for one response as an ordinary `"ridge"` object.
@@ -12,7 +13,7 @@ o **Experimental: multivariate ridge regression.** These functions are new in th
       plus GCV pooled over responses, as a data frame; `best(x, response = )` gives one response.
     - `traceplot()`, `plot()`, `pairs()`, `plot3d()`, `biplot()`, `pca()`, `precision()` and `vif()` methods
       apply the univariate methods to one response at a time (`response =`). `traceplot()` by default draws
-      all responses, one panel each.
+      all responses, one panel each, marking the ridge constant chosen by pooled GCV (`GCV = TRUE`).
     - `plot(x, predictor = )` draws coefficient ellipses for one or more predictors in the space of two
       responses (`responses =`), traced over the ridge constants.
 

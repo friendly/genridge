@@ -12,7 +12,7 @@
 \alias{vif.mlmridge}
 \title{Plot and Summary Methods for Multivariate Ridge Regression}
 \usage{
-\method{traceplot}{mlmridge}(x, response = NULL, main, layout = TRUE, ...)
+\method{traceplot}{mlmridge}(x, response = NULL, main, layout = TRUE, GCV = TRUE, ...)
 
 \method{plot}{mlmridge}(x, response = 1, predictor = NULL, responses = 1:2, main, ...)
 
@@ -48,6 +48,11 @@ with several responses, recycled over the panels.}
 multi-panel layout with one panel per response, side by side where possible, and
 restore the previous layout afterwards. Use \code{layout = FALSE} to draw into a layout you
 have set up yourself, e.g., with \code{par(mfrow = )}.}
+
+\item{GCV}{For \code{traceplot()}: if \code{TRUE} (the default), mark the ridge constant chosen by GCV
+pooled over responses (\code{x$kGCV.pooled}) with a vertical line labelled "GCV" above
+each panel, in addition to the HKB and LW lines for each response (labelled at the
+bottom). As for those, this is drawn only when plotting against \code{lambda}, not \code{df}.}
 
 \item{...}{Other arguments, passed to the method for \code{"ridge"} objects.}
 
