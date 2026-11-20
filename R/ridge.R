@@ -40,11 +40,25 @@
 #' If an intercept is present in the model, its coefficient is not penalized. (If you want to penalize 
 #' an intercept, put in your own constant term and remove the intercept.)
 #' 
-#' The predictors are centered, but not (yet) scaled in this implementation. 
-#' 
+#' The predictors are centered and scaled to unit mean square (dividing by \eqn{n}), as in
+#' [MASS::lm.ridge()], so the coefficients are on the scale of the standardized predictors.
+#'
 #' A number of the methods in the package assume that `lambda` is a vector of shrinkage constants
 #' increasing from `lambda[1] = 0`, or equivalently, a vector of `df` decreasing from \eqn{p}.
-#' 
+#'
+#' **Choosing the ridge constant.** Three criteria are computed. The HKB (Hoerl et al., 1975)
+#' and LW (Lawless & Wang, 1976) values are closed-form estimates from the OLS fit,
+#' \eqn{k_{HKB} = (p-2)\, s^2 / \hat{\boldsymbol{\beta}}^\top \hat{\boldsymbol{\beta}}}{k_HKB = (p-2) s^2 / b'b} and
+#' \eqn{k_{LW} = (p-2)\, s^2\, n / \hat{\mathbf{y}}^\top \hat{\mathbf{y}}}{k_LW = (p-2) s^2 n / yhat'yhat},
+#' where \eqn{s^2} is the
+#' residual mean square, so they need not be among the values of `lambda`. The GCV value
+#' (Golub et al., 1979) is the value of `lambda` (among those supplied) that minimizes the
+#' generalized cross-validation criterion.
+#'
+#' Because of the factor \eqn{p - 2}, the HKB and LW estimates are meaningful only for
+#' \eqn{p \ge 3} predictors: they are 0 when \eqn{p = 2} and negative when \eqn{p = 1}, and
+#' should be ignored in those cases.
+#'
 #' 
 #' @param y For the default method, a numeric vector containing the response variable, or a
 #'        matrix of several response variables (see **Multivariate response** below). NAs not allowed.
